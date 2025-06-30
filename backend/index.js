@@ -23,3 +23,7 @@ mongoose.connect(process.env.DB_URL)
 app.get("/", async(request, response) => {
     response.json("Backend is working....")
 })
+
+app.get("/Sahil", async(request, response) => {
+    response.json("Sahil Wadhwani")
+})
