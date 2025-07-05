@@ -1,0 +1,35 @@
+import React from "react";
+
+const Navbar = () => {
+  return(
+    <React.Fragment>
+      <nav className="w-screen flex justify-center fixed top-0 mt-4">
+
+        <div className="flex items-center w-[95%] bg-white shadow-md justify-between rounded-full px-6 py-2">
+
+          <div className="flex items-center gap-2">
+            <img src="./logo.svg" alt="Logo" className="size-14"/>
+            <h1 className="text-2xl font-serif capitalize text-[#0BAFA6]">My Therapy Space</h1>
+          </div>
+
+          <div className="flex items-center gap-8">
+            <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer">
+              <li className="hover:text-[#0BAFA6]">Home</li>
+              <li className="hover:text-[#0BAFA6]">About us</li>
+              <li className="hover:text-[#0BAFA6]">blogs</li>
+              <li className="hover:text-[#0BAFA6]">workshops</li>
+              <li className="hover:text-[#0BAFA6]">booking</li>
+              <li className="hover:text-[#0BAFA6]">shop</li>
+              <li className="hover:text-[#0BAFA6]">contract</li>
+            </ul>
+            <button className="bg-[#0BAFA6] text-white px-6 py-2 font-serif text-base rounded-full">Login</button>
+          </div>
+
+        </div>
+
+      </nav>
+    </React.Fragment>
+  )
+}
+
+export default Navbar
