@@ -13,7 +13,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-8">
-            <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer">
+            <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-black">
               <li className="hover:text-[#0BAFA6]">Home</li>
               <li className="hover:text-[#0BAFA6]">About us</li>
               <li className="hover:text-[#0BAFA6]">blogs</li>
