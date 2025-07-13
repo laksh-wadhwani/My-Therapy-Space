@@ -1,0 +1,21 @@
+import React from "react";
+
+const Footer = () => {
+    return(
+        <React.Fragment>
+            <div className="w-full bg-[#3A3A3A] border-box flex flex-col items-center gap-12 py-20">
+
+                <p className="font-serif text-white text-2xl">Cpoyright &copy; 2025 My Therapy Space</p>
+
+                <div className="flex flex-col items-center italic text-center">
+                    <span className="font-serif text-base text-white">reception@mytherapyspace.com.au</span>
+                    <p className="font-serif text-base text-white">Suite 3AB/2 Classic Way, Bulreigh Waters, QLD <br/> 12 Halcyon Way Hope Island Qld 4212</p>
+                    <span className="font-serif text-base text-white">+07 5559 9888</span>
+                </div>
+
+            </div>
+        </React.Fragment>
+    )
+}
+
+export default Footer

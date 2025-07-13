@@ -1,4 +1,5 @@
 import React from "react";
+import RButton from "./Reusable_Button";
 
 const Navbar = () => {
   return(
@@ -13,16 +14,16 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-8">
-            <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-black">
+            <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979]">
               <li className="hover:text-[#0BAFA6]">Home</li>
               <li className="hover:text-[#0BAFA6]">About us</li>
               <li className="hover:text-[#0BAFA6]">blogs</li>
               <li className="hover:text-[#0BAFA6]">workshops</li>
               <li className="hover:text-[#0BAFA6]">booking</li>
               <li className="hover:text-[#0BAFA6]">shop</li>
-              <li className="hover:text-[#0BAFA6]">contract</li>
+              <li className="hover:text-[#0BAFA6]">contact</li>
             </ul>
-            <button className="bg-[#0BAFA6] text-white px-6 py-2 font-serif text-base rounded-full">Login</button>
+            <RButton className="px-6 py-2">Login</RButton>
           </div>
 
         </div>
