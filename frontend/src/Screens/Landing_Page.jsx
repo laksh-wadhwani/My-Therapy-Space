@@ -81,7 +81,7 @@ const LandingPage = () => {
                             <div className="size-[80px] rounded-full bg-[#00B2A9]/10 flex justify-center items-center">
                                 <div className="w-[35%] h-[35%] bg-[#00B2A9]"/>
                             </div>
-                            <h3 className="font-serif text-lg capitalize font-bold">speech therapy</h3>
+                            <h3 className="font-serif text-lg capitalize font-bold text-black">speech therapy</h3>
                             <p className="font-serif text-[#666666] text-center text-sm">Helping children communicate effectively and build language skills for life</p>
 
                         </div>
@@ -91,7 +91,7 @@ const LandingPage = () => {
                             <div className="size-[80px] rounded-full bg-[#92278F]/10 flex justify-center items-center">
                                 <div className="w-[35%] h-[35%] bg-[#92278F]"/>
                             </div>
-                            <h3 className="font-serif text-lg capitalize font-bold text-center">occupational therapy</h3>
+                            <h3 className="font-serif text-lg capitalize font-bold text-center text-black">occupational therapy</h3>
                             <p className="font-serif text-[#666666] text-center text-sm">Supporting children in daily activities, sensory processing and motor skills development.</p>
                             
                         </div>
@@ -101,7 +101,7 @@ const LandingPage = () => {
                             <div className="size-[80px] rounded-full bg-[#F8971D]/10 flex justify-center items-center">
                                 <div className="w-[35%] h-[35%] bg-[#F8971D]"/>
                             </div>
-                            <h3 className="font-serif text-lg capitalize font-bold">dietician services</h3>
+                            <h3 className="font-serif text-lg capitalize font-bold text-black">dietician services</h3>
                             <p className="font-serif text-[#666666] text-center text-sm">Expert nutrition guidance for children with feeding difficulties and special dietary needs.</p>
                             
                         </div>
@@ -111,7 +111,7 @@ const LandingPage = () => {
                             <div className="size-[80px] rounded-full bg-[#1B75BC]/10 flex justify-center items-center">
                                 <div className="w-[35%] h-[35%] bg-[#1B75BC]"/>
                             </div>
-                            <h3 className="font-serif text-lg capitalize font-bold">audiology</h3>
+                            <h3 className="font-serif text-lg capitalize font-bold text-black">audiology</h3>
                             <p className="font-serif text-[#666666] text-center text-sm">Comprehensive hearing assessments and interventions for children of all ages.</p>
                             
                         </div>
@@ -131,7 +131,7 @@ const LandingPage = () => {
                             <article className="flex flex-col">
                                 <div className="flex items-center gap-2">
                                     <div className="size-[22px] bg-[#333333]"/>
-                                    <h3 className="font-serif text-base capitalize text-xl font-semibold">collaborative approach</h3>
+                                    <h3 className="font-serif text-base capitalize text-xl font-semibold text-black">collaborative approach</h3>
                                 </div>
                                 <p className="font-serif text-base text-[#666666] text-justify w-[50%]">Our specialists work together to provide comprehensive care across disciplines.</p>
                             </article>
@@ -139,7 +139,7 @@ const LandingPage = () => {
                              <article className="flex flex-col">
                                 <div className="flex items-center gap-2">
                                     <div className="size-[22px] bg-[#333333]"/>
-                                    <h3 className="font-serif text-base capitalize text-xl font-semibold">expert specialists</h3>
+                                    <h3 className="font-serif text-base capitalize text-xl font-semibold text-black">expert specialists</h3>
                                 </div>
                                 <p className="font-serif text-base text-[#666666] text-justify w-[50%]">Highly qualified professionals with years of experience in pediatric therapy</p>
                             </article>
@@ -147,7 +147,7 @@ const LandingPage = () => {
                              <article className="flex flex-col">
                                 <div className="flex items-center gap-2">
                                     <div className="size-[22px] bg-[#333333]"/>
-                                    <h3 className="font-serif text-base capitalize text-xl font-semibold">Child-Centered Focus</h3>
+                                    <h3 className="font-serif text-base capitalize text-xl font-semibold text-black">Child-Centered Focus</h3>
                                 </div>
                                 <p className="font-serif text-base text-[#666666] text-justify w-[50%]">Personalized therapy plans tailored to each child's unique needs and goals.</p>
                             </article>
