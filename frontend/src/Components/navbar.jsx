@@ -1,5 +1,6 @@
 import React from "react";
 import RButton from "./Reusable_Button";
+import { Link } from "react-router";
 
 const Navbar = () => {
   return(
@@ -16,7 +17,7 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979]">
               <li className="hover:text-[#0BAFA6]">Home</li>
-              <li className="hover:text-[#0BAFA6]">About us</li>
+              <Link to="/AboutUs" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">About us</li></Link>
               <li className="hover:text-[#0BAFA6]">blogs</li>
               <li className="hover:text-[#0BAFA6]">workshops</li>
               <li className="hover:text-[#0BAFA6]">booking</li>
