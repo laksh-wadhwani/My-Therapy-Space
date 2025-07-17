@@ -32,6 +32,36 @@ const AboutUs = () => {
                         <span className="sections-description capitalize">happy families</span>
                     </div>
                 </div>
+
+                <div className="sections flex-col gap-10">
+                    <h2 className="another-sections-tittle font-black self-start">Our Core Values</h2>
+                    <div className="w-full grid grid-cols-4 border border-[#EAEAEA] rounded-xl box-border p-8">
+                        <div className="flex flex-col items-center">
+                            <div className="size-[50px] bg-[#38B6FF]/20 rounded-full font-serif text-[#38B6FF] text-3xl flex justify-center items-center mb-6">1</div>
+                            <h3 className="font-bold text-xl font-serif capitalize text-center italic">family-centered</h3>
+                            <p className="text-base font-serif text-[#666666] text-center">Involving families in every step</p>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="size-[50px] bg-[#FF7F50]/20 rounded-full font-serif text-[#FF7F50] text-3xl flex justify-center items-center mb-6">2</div>
+                            <h3 className="font-bold text-xl font-serif capitalize text-center italic">play-based</h3>
+                            <p className="text-base font-serif text-[#666666] text-center">Learning through fun</p>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="size-[50px] bg-[#66CC99]/20 rounded-full font-serif text-[#66CC99] text-3xl flex justify-center items-center mb-6">3</div>
+                            <h3 className="font-bold text-xl font-serif capitalize text-center italic">safe approach</h3>
+                            <p className="text-base font-serif text-[#666666] text-center">Creating secure environments</p>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="size-[50px] bg-[#AA88DD]/20 rounded-full font-serif text-[#AA88DD] text-3xl flex justify-center items-center mb-6">4</div>
+                            <h3 className="font-bold text-xl font-serif capitalize text-center italic">neurodiversity affirming</h3>
+                            <p className="text-base font-serif text-[#666666] text-center">Celeberating differences</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="sections flex-col gap-10">
+                    <h2 className="another-sections-tittle font-black">Our Clinic Space Burleigh Waters</h2>
+                </div>
                 <Footer/>
             </div>
         </React.Fragment>
