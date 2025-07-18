@@ -9,14 +9,14 @@ const Navbar = () => {
 
         <div className="flex items-center w-[95%] bg-white shadow-md justify-between rounded-full px-6 py-2">
 
-          <div className="flex items-center gap-2">
+          <Link to="/"><div className="flex items-center gap-2">
             <img src="./logo.svg" alt="Logo" className="size-14"/>
             <span className="text-2xl font-serif capitalize text-[#0BAFA6]">My Therapy Space</span>
-          </div>
+          </div></Link>
 
           <div className="flex items-center gap-8">
             <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979]">
-              <li className="hover:text-[#0BAFA6]">Home</li>
+              <Link to="/" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">Home</li></Link>
               <Link to="/AboutUs" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">About us</li></Link>
               <li className="hover:text-[#0BAFA6]">blogs</li>
               <li className="hover:text-[#0BAFA6]">workshops</li>
