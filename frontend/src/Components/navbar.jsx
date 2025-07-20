@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import RButton from "./Reusable_Button";
 import { Link } from "react-router";
 
 const Navbar = () => {
+
+  const aboutUsToggle = useState(false)
+
   return(
     <React.Fragment>
       <nav className="w-screen flex justify-center fixed top-0 mt-4 z-50">
@@ -17,7 +20,12 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979]">
               <Link to="/" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">Home</li></Link>
-              <Link to="/AboutUs" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">About us</li></Link>
+              <div className="flex items-center gap-2">
+                <Link to="/AboutUs" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">About us</li></Link>
+                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </div>
               <li className="hover:text-[#0BAFA6]">blogs</li>
               <li className="hover:text-[#0BAFA6]">workshops</li>
               <li className="hover:text-[#0BAFA6]">booking</li>

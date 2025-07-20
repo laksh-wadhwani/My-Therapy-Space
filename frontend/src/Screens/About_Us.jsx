@@ -101,9 +101,9 @@ const AboutUs = () => {
 
                 <div className="sections flex-col gap-10">
                     <h2 className="another-sections-tittle font-black">Our Clinic Space Burleigh Waters</h2>
-                    <div className="w-[80%] box-border flex flex-wrap gap-8">
+                    <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
                         {BurleighSpace.map(space => (
-                            <div className="w-fit flex flex-col items-start w-[30%] gap-2">
+                            <div className="flex flex-col items-start w-[30%] gap-2">
                                 <img src={space.picture} alt="Burleigh Space Picture" />
                                 <span className="text-[#557271] text-lg font-serif capitalize">{space.room}</span>
                             </div>
@@ -113,9 +113,9 @@ const AboutUs = () => {
 
                 <div className="sections flex-col gap-10">
                     <h2 className="another-sections-tittle font-black">Our Clinic Space Hope Island</h2>
-                    <div className="w-[80%] box-border flex flex-wrap gap-8">
+                    <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
                         {HopeIsland.map(space => (
-                            <div className="w-fit flex flex-col items-start w-[30%] gap-2">
+                            <div className="flex flex-col items-start w-[30%] gap-2">
                                 <img src={space.picture} alt="Burleigh Space Picture" />
                                 <span className="text-[#557271] text-lg font-serif capitalize">{space.room}</span>
                             </div>
