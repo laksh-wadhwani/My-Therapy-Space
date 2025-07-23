@@ -6,6 +6,7 @@ import AboutUs from "./Screens/About_Us";
 import Services from "./Screens/Services"
 import Fees from "./Screens/Fees";
 import Team from "./Screens/Team";
+import ContactUs from "./Screens/Contact_Us";
 
 const App = () => {
   return(
@@ -17,6 +18,7 @@ const App = () => {
         <Route exact path="Services" element={<Services/>}/>
         <Route exact path="Fees" element={<Fees/>}/>
         <Route exact path="/Team" element={<Team/>}/>
+        <Route exact path="/contact" element={<ContactUs/>}/>
       </Routes>
     </Router>
   )

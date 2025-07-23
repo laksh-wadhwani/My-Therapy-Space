@@ -30,7 +30,7 @@ const Navbar = () => {
               <li className="hover:text-[#0BAFA6]">workshops</li>
               <li className="hover:text-[#0BAFA6]">booking</li>
               <li className="hover:text-[#0BAFA6]">shop</li>
-              <li className="hover:text-[#0BAFA6]">contact</li>
+              <Link to="/contact" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">contact</li></Link>
             </ul>
             <RButton className="px-6 py-2">Login</RButton>
           </div>
