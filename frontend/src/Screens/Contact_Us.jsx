@@ -10,7 +10,7 @@ const ContactUs = () => {
                     <p className="font-serif text-center text-black text-xl">If you would like to refer your child for services, please enter your details below or give us a call or come and see us and one of our lovely receptionists will be able to talk you through the referral process for your child.</p>
                 </div>
 
-                <div className="w-[80%] px-16 flex flex-col items-center gap-6 border border-black-100 py-10 rounded-xl shadow-md">
+                <div className="w-[90%] px-16 flex flex-col items-center gap-6 border border-black-100 py-10 rounded-xl shadow-md">
                     <h2 className="font-serif text-[#0BAFA6] capitalize text-4xl text-center">our system for new referrals is as follows</h2>
                     <ol className="list-decimal pl-5 font-serif text-xl text-center flex flex-col items-center gap-4">
                         <li>Referral received via website, phone, or in person</li>

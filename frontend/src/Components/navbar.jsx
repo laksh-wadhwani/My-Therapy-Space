@@ -26,7 +26,7 @@ const Navbar = () => {
                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                 </svg>
               </div>
-              <li className="hover:text-[#0BAFA6]">blogs</li>
+              <Link to="/blogs" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">blogs</li></Link>
               <li className="hover:text-[#0BAFA6]">workshops</li>
               <li className="hover:text-[#0BAFA6]">booking</li>
               <li className="hover:text-[#0BAFA6]">shop</li>
