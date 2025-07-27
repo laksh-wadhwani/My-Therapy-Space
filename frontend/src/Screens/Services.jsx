@@ -7,8 +7,8 @@ import Footer from "../Components/footer";
 const Services = () => {
     return(
         <React.Fragment>
-            <div className="main-box bg-white gap-16">
-                <h1 className="font-serif font-normal text-4xl text-[#0BAFA6] px-14 mt-28">Services</h1>
+            <div className="main-box bg-white gap-10">
+                <h1 className="font-serif font-normal text-4xl text-[#0BAFA6] px-14 mt-32">Services</h1>
 
                 <div className="w-full flex flex-col gap-4 px-14">
                     <h2 className="font-serif text-2xl font-normal capitalize">speech pathology</h2>

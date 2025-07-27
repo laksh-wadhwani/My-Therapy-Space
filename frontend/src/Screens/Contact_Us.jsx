@@ -5,7 +5,7 @@ const ContactUs = () => {
         <React.Fragment>
             <div className="main-box bg-white gap-12 items-center">
 
-                <div className="w-full px-16 flex flex-col gap-4">
+                <div className="w-full px-16 flex flex-col gap-4 mt-32">
                     <h2 className="font-serif text-[#0BAFA6] text-4xl capitalize">contact us</h2>
                     <p className="font-serif text-center text-black text-xl">If you would like to refer your child for services, please enter your details below or give us a call or come and see us and one of our lovely receptionists will be able to talk you through the referral process for your child.</p>
                 </div>

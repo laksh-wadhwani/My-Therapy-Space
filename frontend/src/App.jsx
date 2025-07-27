@@ -7,6 +7,7 @@ import Services from "./Screens/Services"
 import Fees from "./Screens/Fees";
 import Team from "./Screens/Team";
 import ContactUs from "./Screens/Contact_Us";
+import AlsoOffer from "./Screens/Also_Offer"
 
 const App = () => {
   return(
@@ -19,6 +20,7 @@ const App = () => {
         <Route exact path="Fees" element={<Fees/>}/>
         <Route exact path="/Team" element={<Team/>}/>
         <Route exact path="/contact" element={<ContactUs/>}/>
+        <Route exact path="/alsooffer" element={<AlsoOffer/>}/>
       </Routes>
     </Router>
   )
