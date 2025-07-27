@@ -8,6 +8,7 @@ import Fees from "./Screens/Fees";
 import Team from "./Screens/Team";
 import ContactUs from "./Screens/Contact_Us";
 import AlsoOffer from "./Screens/Also_Offer"
+import CurrentWorkshops from "./Screens/Current_Workshops";
 
 const App = () => {
   return(
@@ -21,6 +22,7 @@ const App = () => {
         <Route exact path="/Team" element={<Team/>}/>
         <Route exact path="/contact" element={<ContactUs/>}/>
         <Route exact path="/alsooffer" element={<AlsoOffer/>}/>
+        <Route exact path="currentworkshops" element={<CurrentWorkshops/>}/>
       </Routes>
     </Router>
   )
