@@ -10,6 +10,7 @@ import ContactUs from "./Screens/Contact_Us";
 import AlsoOffer from "./Screens/Also_Offer"
 import CurrentWorkshops from "./Screens/Current_Workshops";
 import Blogs from "./Screens/Blogs";
+import Workshop from "./Screens/Workshop";
 
 const App = () => {
   return(
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path="/alsooffer" element={<AlsoOffer/>}/>
         <Route exact path="/currentworkshops" element={<CurrentWorkshops/>}/>
         <Route exact path="/blogs" element={<Blogs/>}/>
+        <Route exact path="/workshop" element={<Workshop/>}/>
       </Routes>
     </Router>
   )
