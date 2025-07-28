@@ -39,9 +39,8 @@ const Blogs = () => {
                             <div className="flex flex-col gap-2">
                                 <h5 className="font-serif text-lg text-black font-semibold line-clamp-2">{data.title}</h5>
                                 <p className="font-serif font-light text-black text-base">{data.uploadDate}</p>
-                                <p className="font-serif font-light text-base text-gray-400 line-clamp-3">{data.description}
-                                    <Link>read more</Link>
-                                </p>
+                                <p className="font-serif font-light text-base text-gray-400 line-clamp-3">{data.description}</p>
+                                <a className="text-[#0BAFA6] font--light text-base font-serif uppercase cursor-pointer">Read More</a>
                             </div>
                         </div>
                     ))}
