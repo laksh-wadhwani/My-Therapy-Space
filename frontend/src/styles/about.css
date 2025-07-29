@@ -1,0 +1,3 @@
+.contact-inputs{
+    @apply w-[45%] py-2 capitalize font-serif border-b-2 border-gray-400
+}
