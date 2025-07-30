@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/about.css"
+import Footer from "../Components/footer"
 import RButton from "../Components/Reusable_Button";
 import PhoneIcon from "../assets/phone icon.svg"
 import LocationIcon from "../assets/location icon.svg"
@@ -87,6 +88,8 @@ const ContactUs = () => {
                         <li>Goals reviewed every 6–12 months to track progress</li>
                     </ol>
                 </div>
+
+                <Footer/>
 
             </div>
         </React.Fragment>
