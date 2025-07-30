@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/about.css"
 import RButton from "../Components/Reusable_Button";
+import PhoneIcon from "../assets/phone icon.svg"
+import LocationIcon from "../assets/location icon.svg"
 
 const ContactUs = () => {
     return(
@@ -12,8 +14,41 @@ const ContactUs = () => {
                     <p className="font-serif text-center text-black text-xl">If you would like to refer your child for services, please enter your details below or give us a call or come and see us and one of our lovely receptionists will be able to talk you through the referral process for your child.</p>
                 </div>
 
-                <div className="w-[90%] px-16 flex justify-center border border-black-100 shadow-md rounded-xl py-4">
-                    <div className="w-[50%]"></div>
+                <div className="w-[90%] px-16 flex justify-between items-center border border-black-100 shadow-md rounded-xl py-4">
+                    <div className="w-[50%] px-16">
+
+                        {/* <div className="w-full flex flex-col border border-black-100 shadow-md p-8 rounded-xl">
+                            <span className="font-serif text-2xl uppercase text-black border-b border-black pb-1">contact information</span>
+
+                            <div className="w-full flex flex-wrap">
+
+                                <div className="flex items-center">
+                                    <img src={PhoneIcon} alt="Phone Icon" className="w-8 h-8" />
+                                    <div className="">
+                                        <span className="font-serif text-lg text-black">Phone</span>
+                                        <span className="font-serif text-lg text-gray-400">07 5559 9888</span>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center">
+                                    <img src={LocationIcon} alt="Phone Icon" />
+                                    <div className="flex flex-col">
+                                        <span className="font-serif text-base text-black">Burleigh Waters</span>
+                                        <span className="font-serif text-base text-gray-400">Suite 3AB/2 Classic Way, Burleigh Waters, QLD 4220</span>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center">
+                                    <img src={LocationIcon} alt="Phone Icon" />
+                                    <div className="flex flex-col">
+                                        <span className="font-serif text-lg text-black">Hope Island</span>
+                                        <span className="font-serif text-lg text-gray-400">12 Halcyon Way Hope Island Qld 4212</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div> */}
+                    </div>
                     <div className="w-[50%] flex flex-col gap-12 px-16 py-8 border-4 border-black rounded-xl">
                         <span className="font-serif uppercase text-2xl">contact details</span>
 
