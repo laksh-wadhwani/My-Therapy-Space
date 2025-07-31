@@ -37,7 +37,7 @@ const Products = () => {
 
                 <div className="w-full flex flex-wrap px-16 gap-16">
                     {productsData.map(product => (
-                        <div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center gap-4 pb-4">
+                        <div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-center pb-4 cursor-pointer hover:scale-105">
                             <img src={product.picture} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
                             <div className="flex flex-col items center">
                                 <h5 className="font-serif text-black text-lg text-center">{product.title}</h5>
