@@ -13,6 +13,8 @@ import Blogs from "./Screens/Blogs";
 import Workshop from "./Screens/Workshop";
 import Shop from "./Screens/Shop";
 import SpecificBlog from "./Screens/Specific_Blog";
+import Products from "./Screens/Products";
+import PaidVideos from "./Screens/PaidVideos";
 
 const App = () => {
   return(
@@ -31,6 +33,8 @@ const App = () => {
         <Route exact path="/blog/:id" element={<SpecificBlog/>}/>
         <Route exact path="/workshop" element={<Workshop/>}/>
         <Route exact path="/shop" element={<Shop/>}/>
+        <Route exact path="/products" element={<Products/>}/>
+        <Route exact path="/videos" element={<PaidVideos/>}/>
       </Routes>
     </Router>
   )

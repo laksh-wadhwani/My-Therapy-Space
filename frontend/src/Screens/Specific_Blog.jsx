@@ -14,7 +14,7 @@ const SpecificBlog = () => {
         <React.Fragment>
             <div className="main-box bg-white items-center gap-10">
 
-                <div className="w-full flex flex-col items-center mt-32 px-32 gap-12">
+                <div className="w-full flex flex-col items-center mt-32 px-32 gap-10">
                     <h2 className="font-serif text-4xl capitalize text-[#0BAFA6]">What Is Neurodiversity Affirming Practice?</h2>
                     <p className="font-serif text-center text-black text-xl">Since 2022, our team at My Therapy Space has been shifting the way we work to better support neurodivergent children and families.Being neurodiversity affirming simply means we recognize and value all types of brains — and we’re committed to providing therapy that celebrates differences and builds on each child’s strengths.</p>
                     <img src={blog_picture} alt="Blog Picture" className="rounded-xl" />

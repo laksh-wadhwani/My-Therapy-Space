@@ -3,6 +3,7 @@ import Footer from "../Components/footer";
 import ShopProducts from "../assets/shop products.png"
 import ShopVideos from "../assets/shop videos.png"
 import RButton from "../Components/Reusable_Button";
+import { Link } from "react-router";
 
 const Shop = () => {
     return(
@@ -22,7 +23,7 @@ const Shop = () => {
                             <h3 className="font-serif text-xl text-black capitalize">shop products</h3>
                             <p className="text-lg font-serif text-gray-500 capitalize text-center">visual time tables, song boards, and therapy-related tools</p>
                         </div>
-                        <RButton className="px-8 py-2">View Products</RButton>
+                        <Link to="/products" style={{color:"unset"}}><RButton className="px-8 py-2">View Products</RButton></Link>
                     </div>
 
                     <div className="max-w-[30rem] max-h-[34rem] box-border p-6 border border-black-100 bg-white shadow-xl rounded-t-[3rem] flex flex-col items-center gap-6">
@@ -31,7 +32,7 @@ const Shop = () => {
                             <h3 className="font-serif text-xl text-black capitalize">Shop Course Videos</h3>
                             <p className="text-lg font-serif text-gray-500 capitalize text-center">Online Course Videos, Guided-therapy related videos</p>
                         </div>
-                        <RButton className="px-8 py-2">View Courses</RButton>
+                        <Link to="/videos" style={{color:"unset"}}><RButton className="px-8 py-2">View Courses</RButton></Link>
                     </div>
 
                 </div>
