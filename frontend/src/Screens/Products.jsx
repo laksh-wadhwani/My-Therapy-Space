@@ -21,7 +21,7 @@ const Products = () => {
         <React.Fragment>
             <div className="main-box bg-white gap-10 items-center">
                 
-                <div className="w-full flex justify-between px-16 mt-32">
+                <div className="w-full flex justify-between px-16 mt-32 items-center">
                     <h2 className="font-serif text-[#0BAFA6] text-4xl capitalize">products</h2>
                     <div className="w-[25%] flex">
                         <input
