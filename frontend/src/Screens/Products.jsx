@@ -5,6 +5,7 @@ import Product1 from "../assets/product1.svg"
 import Product2 from "../assets/product2.svg"
 import Product3 from "../assets/product3.svg"
 import RButton from "../Components/Reusable_Button";
+import { Link } from "react-router";
 
 const Products = () => {
 
@@ -37,14 +38,14 @@ const Products = () => {
 
                 <div className="w-full flex flex-wrap px-16 gap-16">
                     {productsData.map(product => (
-                        <div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-center pb-4 cursor-pointer hover:scale-105">
+                        <Link to={`/specificProduct/${product.id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-center pb-4 cursor-pointer hover:scale-105">
                             <img src={product.picture} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
                             <div className="flex flex-col items center">
                                 <h5 className="font-serif text-black text-lg text-center">{product.title}</h5>
                                 <p className="font-serif text-gray-400 text-center">{product.price}</p>
                             </div>
                             <RButton className="px-10">Add to Cart</RButton>
-                        </div>
+                        </div></Link>
                     ))}
                 </div>
 

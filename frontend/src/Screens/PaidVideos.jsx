@@ -41,14 +41,14 @@ const PaidVideos = () => {
 
                 <div className="w-full flex flex-wrap px-16 gap-16">
                     {productsData.map(product => (
-                        <div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
+                        <Link to={`/specificVideo/${product.id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
                             <img src={product.picture} alt="Product Picture" className="w-full max-h-[70%] object-cover rounded-t-xl" />
                             <div className="flex flex-col items center px-6">
                                 <h5 className="font-serif text-black text-lg text-center">{product.title}</h5>
                                 <p className="font-serif text-gray-400 text-center">{product.price}</p>
                             </div>
                             <RButton className="px-10">Add to Cart</RButton>
-                        </div>
+                        </div></Link>
                     ))}
                 </div>
 
