@@ -34,7 +34,7 @@ const Navbar = () => {
                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                 </svg>
                 {aboutUsToggle && 
-                <ul className="font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979] fixed top-16 right-[35.75rem] bg-white py-4 px-6 rounded-xl">
+                <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] fixed top-16 right-[35.75rem] bg-white py-4 px-6 rounded-xl">
                   <Link to="/Team" style={{color:"unset"}} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">team</li></Link>
                   <Link to="/Services" style={{color:"unset"}} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">services</li></Link>
                   <Link to="/Fees" style={{color:"unset"}} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">fees</li></Link>
@@ -50,7 +50,7 @@ const Navbar = () => {
                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                 </svg>
                 {workshopToggle && 
-                <ul className="font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979] fixed top-16 right-[19rem] bg-white py-4 px-6 rounded-xl">
+                <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] fixed top-16 right-[19rem] bg-white py-4 px-6 rounded-xl">
                   <Link to="/currentworkshops" style={{color:"unset"}} onClick={() => setWorkshopToggle(!workshopToggle)}><li className="hover:text-[#0BAFA6]">Current Workshops</li></Link>
                   <Link to="/alsooffer" style={{color:"unset"}} onClick={() => setWorkshopToggle(!workshopToggle)}><li className="hover:text-[#0BAFA6]">We Also Offer</li></Link>
                 </ul>

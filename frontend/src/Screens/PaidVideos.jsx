@@ -9,10 +9,11 @@ import Video5 from "../assets/video5.png"
 import Video6 from "../assets/video6.png"
 
 import RButton from "../Components/Reusable_Button";
+import { Link } from "react-router";
 
 const PaidVideos = () => {
 
-    const productsData = [
+    const coursesData = [
         {id: 1, title: "Speech Therapy Short Course Video", price: "$78.99", picture: Video1},
         {id: 2, title: "Occupational Therapy Course Video", price: "$50.00", picture: Video2},
         {id: 3, title: "Disable Children Tutorial Course Video", price: "$45.00", picture: Video3},
@@ -40,12 +41,12 @@ const PaidVideos = () => {
                 </div>
 
                 <div className="w-full flex flex-wrap px-16 gap-16">
-                    {productsData.map(product => (
-                        <Link to={`/specificVideo/${product.id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
-                            <img src={product.picture} alt="Product Picture" className="w-full max-h-[70%] object-cover rounded-t-xl" />
+                    {coursesData.map(course => (
+                        <Link to={`/specificVideo/${course.id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
+                            <img src={course.picture} alt="Product Picture" className="w-full max-h-[70%] object-cover rounded-t-xl" />
                             <div className="flex flex-col items center px-6">
-                                <h5 className="font-serif text-black text-lg text-center">{product.title}</h5>
-                                <p className="font-serif text-gray-400 text-center">{product.price}</p>
+                                <h5 className="font-serif text-black text-lg text-center">{course.title}</h5>
+                                <p className="font-serif text-gray-400 text-center">{course.price}</p>
                             </div>
                             <RButton className="px-10">Add to Cart</RButton>
                         </div></Link>
