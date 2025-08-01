@@ -40,7 +40,7 @@ const PaidVideos = () => {
                     </div>
                 </div>
 
-                <div className="w-full flex flex-wrap px-16 gap-16">
+                <div className="w-full flex flex-wrap px-16 gap-16 justify-center">
                     {coursesData.map(course => (
                         <Link to={`/specificVideo/${course.id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
                             <img src={course.picture} alt="Product Picture" className="w-full max-h-[70%] object-cover rounded-t-xl" />

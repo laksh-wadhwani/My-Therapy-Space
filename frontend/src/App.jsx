@@ -17,6 +17,7 @@ import Products from "./Screens/Products";
 import PaidVideos from "./Screens/PaidVideos";
 import SpecificProduct from "./Screens/Specific_Product";
 import SpecificVideo from "./Screens/specific_video";
+import Booking from "./Screens/Booking";
 
 const App = () => {
   return(
@@ -39,6 +40,7 @@ const App = () => {
         <Route exact path="/videos" element={<PaidVideos/>}/>
         <Route exact path="/specificProduct/:id" element={<SpecificProduct/>}/>
         <Route exact path="/specificVideo/:id" element={<SpecificVideo/>}/>
+        <Route exact path="/booking" element={<Booking/>}/>
       </Routes>
     </Router>
   )

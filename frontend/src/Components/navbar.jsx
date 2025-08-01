@@ -57,7 +57,7 @@ const Navbar = () => {
                 }
               </div>
 
-              <li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>booking</li>
+              <Link to="/booking" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>booking</li></Link>
               <Link to="/shop" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>shop</li></Link>
               <Link to="/contact" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>contact</li></Link>
             </ul>
