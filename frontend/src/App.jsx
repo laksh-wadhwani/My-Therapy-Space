@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "./Components/navbar";
 import LandingPage from "./Screens/Landing_Page";
 import {BrowserRouter as Router, Routes, Route} from "react-router"
