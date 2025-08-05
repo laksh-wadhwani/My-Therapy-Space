@@ -106,7 +106,7 @@ const Booking = () => {
                         </div>
 
                     </div>
-                    <img src={BookingGirl} alt="Booking Girl Picture" />
+                    <img src={BookingGirl} alt="Booking Girl Picture" loading="lazy" />
                 </div>
 
                 <Footer/>
