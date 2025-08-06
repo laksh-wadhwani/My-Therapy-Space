@@ -6,9 +6,9 @@ import Login from "./Screens/Login"
 const App = () => {
   return(
     <Router>
-      <Login/>
+      <Sidebar/>
       <Routes>
-        {/* <Route exact path="/dashboard" element={<Dashboard/>}/> */}
+        <Route exact path="/dashboard" element={<Dashboard/>}/>
       </Routes>
     </Router>
   )
