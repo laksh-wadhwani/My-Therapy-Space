@@ -1,9 +1,16 @@
-import { Search } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import CustomButton from "../Components/CustomButton";
 import CustomTable from "../Components/CustomTable";
+import { Modal } from 'react-responsive-modal';
+import CustomInput from "../Components/CustomInput";
+import "../index.css"
 
 const Workshops = ({ isSidebarHovered }) => {
+
+  const [open, setOpen] = useState(false)
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
 
   const columns = [
         { key: "title", label: "Title" },
@@ -39,12 +46,36 @@ const Workshops = ({ isSidebarHovered }) => {
         </div>
 
         <div className="w-full px-4 flex justify-between">
-          <CustomButton>add new workshop</CustomButton>
+          <CustomButton onClick={onOpenModal}>add new workshop</CustomButton>
         </div>
 
         <CustomTable title="Workshops" columns={columns} data={workshops} statusStyles={workshopStatusStyles} />
 
       </div>
+
+      <Modal open={open} onClose={onCloseModal} center
+      styles={{closeButton:{display:'none'}, modal:{padding:'0', borderRadius: ".8rem"}}}
+      >
+
+        <div className="w-full flex flex-col gap-6 w-sm box-border pb-10">
+
+          <h5 className="font-serif text-xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6">add new workshop</h5>
+
+          <div className="w-full flex flex-col gap-4 px-6">
+            <CustomInput label="workshop title" placeholder="Title" type="text"/>
+            <CustomInput label="facilitator" placeholder="Name" type="text"/>
+            <CustomInput label="Date" type="date"/>
+            <CustomInput label="Workshop Image" type="file"/>
+          </div>
+
+          <div className="w-full px-6 flex justify-center gap-2">
+            <CustomButton>save as draft</CustomButton>
+            <CustomButton>create Workshop</CustomButton>
+          </div>
+
+        </div>
+
+      </Modal>
     </React.Fragment>
   );
 };
