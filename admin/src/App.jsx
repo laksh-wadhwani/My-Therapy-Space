@@ -1,7 +1,8 @@
-import Sidebar from "./Components/Sidebar"
+import { useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Sidebar from "./Components/Sidebar"
 import Dashboard from "./Screens/Dashboard"
-import React, { useState } from "react"
+import Workshops from "./Screens/Workshops.jsx";
 
 const App = () => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
@@ -12,6 +13,7 @@ const App = () => {
         <Sidebar onHoverChange={setIsSidebarHovered} />
         <Routes>
           <Route exact path="/dashboard" element={<Dashboard isSidebarHovered={isSidebarHovered} />} />
+          <Route exact path="/manage-workshops" element={<Workshops isSidebarHovered={isSidebarHovered}/>}/>
         </Routes>
       </div>
     </Router>

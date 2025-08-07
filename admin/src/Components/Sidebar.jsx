@@ -27,10 +27,10 @@ const Sidebar = ({ onHoverChange }) => {
 
                     </button>
 
-                    <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
+                    <Link to="/manage-workshops"><button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
                         <Store className="size-6" />
                         <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Manage Workshops</span>
-                    </button>
+                    </button></Link>
 
                     <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
                         <Box className="size-6" />

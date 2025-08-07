@@ -11,6 +11,14 @@ const Dashboard = ({ isSidebarHovered }) => {
         { key: "status", label: "Status" },
     ];
 
+    const dashboardStatusStyles = {
+        Confirmed: "bg-green-100 text-green-700",
+        Paid: "bg-blue-100 text-blue-700",
+        Pending: "bg-yellow-100 text-yellow-700",
+        Shipped: "bg-indigo-100 text-indigo-700",
+        Rescheduled: "bg-red-100 text-red-700",
+    };
+
     const dummyData = [
         { type: "Booking", user: "Mubeen Ahmed", date: "2025-04-30", status: "Confirmed" },
         { type: "Course", user: "Sahil Kumar", date: "2025-04-29", status: "Paid" },
@@ -35,7 +43,7 @@ const Dashboard = ({ isSidebarHovered }) => {
                     <p className="font-serif text-gray-500 text-base">Here's what's happening with your site today.</p>
                 </div>
 
-                <CustomTable title="Recent Activity" columns={columns} data={dummyData} showActions={false} />
+                <CustomTable title="Recent Activity" columns={columns} data={dummyData} showActions={false} statusStyles={dashboardStatusStyles} />
 
                 <div className="w-full flex gap-8">
                     <CustomButton>add new blog</CustomButton>

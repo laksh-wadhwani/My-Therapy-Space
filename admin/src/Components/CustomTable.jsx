@@ -2,12 +2,10 @@ import { useMemo, useState } from "react";
 import { Search, ArrowUp, ArrowDown, Edit, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
 
 
-const statusColors = {
-  Confirmed: "bg-green-100 text-green-700",
-  Paid: "bg-blue-100 text-blue-700",
-  Pending: "bg-yellow-100 text-yellow-700",
-  Shipped: "bg-indigo-100 text-indigo-700",
-  Rescheduled: "bg-red-100 text-red-700",
+const defaultStatusStyles = {
+  Active: "bg-green-100 text-green-700",
+  Draft: "bg-yellow-100 text-yellow-700",
+  Cancelled: "bg-red-100 text-red-700",
 };
 
 const CustomTable = ({
@@ -16,6 +14,7 @@ const CustomTable = ({
   data = [],
   showActions = true,
   rowsPerPage = 5,
+  statusStyles = defaultStatusStyles
 }) => {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
@@ -105,7 +104,7 @@ const CustomTable = ({
                     <td key={col.key} className="px-6 py-4 text-sm text-gray-700">
                       {col.key === "status" ? (
                         <span
-                          className={`text-sm font-medium px-3 py-1 rounded-full ${statusColors[row[col.key]] || "bg-gray-200 text-black"
+                          className={`text-sm font-medium px-3 py-1 rounded-full ${statusStyles[row[col.key]] || "bg-gray-200 text-black"}
                             }`}
                         >
                           {row[col.key]}
