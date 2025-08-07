@@ -6,7 +6,7 @@ import { LayoutDashboard, Logs, Store, FileUser, LogOut, MonitorStop, Box  } fro
 const Sidebar = () => {
     return(
         <React.Fragment>
-            <div className="group fixed top-0 left-0 h-dvw bg-white shadow-md transition-all duration-300 ease-in-out w-[5%] hover:w-[17%] flex flex-col gap-10 box-border py-12 px-4 overflow-hidden">
+            <div className="group fixed top-0 left-0 h-dvh bg-white shadow-md transition-all duration-300 ease-in-out w-[5%] hover:w-[17%] flex flex-col gap-10 box-border py-12 px-4 overflow-hidden border border-gray-100 rounded-r-xl">
 
                 <div className="flex items-center gap-2">
                     <img src="./logo.svg" alt="Company Logo" className="size-10 group-hover:size-14 transition-all duration-300" />
