@@ -1,17 +1,21 @@
 import Sidebar from "./Components/Sidebar"
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Dashboard from "./Screens/Dashboard"
-import Login from "./Screens/Login"
+import React, { useState } from "react"
 
 const App = () => {
-  return(
-    <Router>
-      <Sidebar/>
-      <Routes>
-        <Route exact path="/dashboard" element={<Dashboard/>}/>
-      </Routes>
-    </Router>
-  )
-}
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
-export default App
+  return (
+    <Router>
+      <div className="flex justify-between">
+        <Sidebar onHoverChange={setIsSidebarHovered} />
+        <Routes>
+          <Route exact path="/dashboard" element={<Dashboard isSidebarHovered={isSidebarHovered} />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
+
+export default App;
