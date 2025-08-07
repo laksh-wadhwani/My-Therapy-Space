@@ -6,8 +6,7 @@ import { LayoutDashboard, Logs, Store, FileUser, LogOut, MonitorStop, Box } from
 const Sidebar = ({ onHoverChange }) => {
     return (
         <React.Fragment>
-            <div className={`h-dvh bg-white shadow-md transition-all duration-300 ease-in-out ${true ? 'w-[5%] hover:w-[17%]' : ''
-                } flex flex-col gap-10 box-border py-12 px-4 overflow-hidden border border-gray-100 rounded-r-xl`}
+            <div className={`group fixed top-0 left-0 h-dvw bg-white shadow-md transition-all duration-300 ease-in-out w-[5%] hover:w-[17%] flex flex-col gap-10 box-border py-12 px-4 overflow-hidden`}
                 onMouseEnter={() => onHoverChange(true)}
                 onMouseLeave={() => onHoverChange(false)}>
 

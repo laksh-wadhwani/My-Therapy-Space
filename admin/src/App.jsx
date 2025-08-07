@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="flex justify-between">
+      <div className="flex flex-row-reverse justify-between">
         <Sidebar onHoverChange={setIsSidebarHovered} />
         <Routes>
           <Route exact path="/dashboard" element={<Dashboard isSidebarHovered={isSidebarHovered} />} />
