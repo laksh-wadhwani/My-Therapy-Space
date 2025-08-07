@@ -42,10 +42,10 @@ const Sidebar = ({ onHoverChange }) => {
                         <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Manage Courses</span>
                     </button>
 
-                    <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
+                    <Link to="/manage-user-queries"><button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
                         <FileUser className="size-6" />
                         <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Manage User Queries</span>
-                    </button>
+                    </button></Link>
 
                     <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-red-100 hover:scale-105 hover:text-red-500">
                         <LogOut className="size-6" />

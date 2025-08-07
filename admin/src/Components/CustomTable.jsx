@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Search, ArrowUp, ArrowDown, Edit, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, ArrowUp, ArrowDown, Edit, Trash2, Eye, ChevronLeft, ChevronRight } from "lucide-react";
 
 
 const defaultStatusStyles = {
@@ -14,7 +14,8 @@ const CustomTable = ({
   data = [],
   showActions = true,
   rowsPerPage = 5,
-  statusStyles = defaultStatusStyles
+  statusStyles = defaultStatusStyles,
+  onView, onEdit, onDelete
 }) => {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
@@ -118,10 +119,13 @@ const CustomTable = ({
                   {showActions && (
                     <td className="px-6 py-4">
                       <div className="flex gap-2">
-                        <button className="text-blue-600 hover:text-blue-800">
+                        <button className="text-green-600 hover:text-green-800" onClick={() => onView(row)}>
+                          <Eye className="w-4 h-4" />
+                        </button>
+                        <button className="text-blue-600 hover:text-blue-800" onClick={() => onEdit(row)}>
                           <Edit className="w-4 h-4" />
                         </button>
-                        <button className="text-red-600 hover:text-red-800">
+                        <button className="text-red-600 hover:text-red-800" onClick={() => onDelete(row)}>
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>

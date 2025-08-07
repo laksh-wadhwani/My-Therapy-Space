@@ -1,6 +1,7 @@
 import React from "react";
 import CustomTable from "../Components/CustomTable";
 import CustomButton from "../Components/CustomButton";
+import { Link } from "react-router-dom";
 
 const Dashboard = ({ isSidebarHovered }) => {
 
@@ -36,7 +37,7 @@ const Dashboard = ({ isSidebarHovered }) => {
         <React.Fragment>
             <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col gap-8 pb-12`}>
 
-                <h1 className="font-serf text-4xl font-bold text-black capitalize italic mt-12 border-b border-gray-200 p-4">Dashboard</h1>
+                <h1 className="font-serf text-4xl font-bold text-black capitalize italic mt-6 border-b border-gray-200 p-4">Dashboard</h1>
 
                 <div className="w-full flex flex-col px-4">
                     <h3 className="font-serif text-black text-xl">Welcome back, Sahil</h3>
@@ -46,10 +47,10 @@ const Dashboard = ({ isSidebarHovered }) => {
                 <CustomTable title="Recent Activity" columns={columns} data={dummyData} showActions={false} statusStyles={dashboardStatusStyles} />
 
                 <div className="w-full flex gap-8">
-                    <CustomButton>add new blog</CustomButton>
-                    <CustomButton>add workshop</CustomButton>
+                    <Link><CustomButton>add new blog</CustomButton></Link>
+                    <Link to="/manage-workshops"><CustomButton>add workshop</CustomButton></Link>
                     <CustomButton>add product</CustomButton>
-                    <CustomButton>add cost</CustomButton>
+                    <CustomButton>add course</CustomButton>
 
                 </div>
 

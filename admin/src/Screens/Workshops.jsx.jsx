@@ -13,10 +13,10 @@ const Workshops = ({ isSidebarHovered }) => {
   const onCloseModal = () => setOpen(false);
 
   const columns = [
-        { key: "title", label: "Title" },
-        { key: "facilitator", label: "Facilitator" },
-        { key: "date", label: "Date" },
-        { key: "status", label: "Status" },
+    { key: "title", label: "Title" },
+    { key: "facilitator", label: "Facilitator" },
+    { key: "date", label: "Date" },
+    { key: "status", label: "Status" },
   ];
 
   const workshopStatusStyles = {
@@ -36,11 +36,23 @@ const Workshops = ({ isSidebarHovered }) => {
     {title: "Parent Training workshop", facilitator: "Ziaul-Haq", date: "2025-05-28", status: "Cancelled"}
   ];
 
+  const handleView = (row) => {
+  console.log("View called:", row);
+};
+
+const handleEdit = (row) => {
+  console.log("Edit called:", row);
+};
+
+const handleDelete = (row) => {
+  console.log("Delete called:", row);
+};
+
   return (
     <React.Fragment>
       <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 pb-12`}>
 
-        <div className="w-full p-4 mt-12 border-b border-gray-200 flex flex-col gap-2">
+        <div className="w-full p-4 mt-6 border-b border-gray-200 flex flex-col gap-2">
           <h1 className="font-serf text-4xl font-bold text-black capitalize italic">manage workshops</h1>
           <p className="font-serif text-gray-500 text-base italic">create, edit and manage workshop listings for your websites</p>
         </div>
