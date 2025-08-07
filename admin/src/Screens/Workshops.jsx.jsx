@@ -36,18 +36,6 @@ const Workshops = ({ isSidebarHovered }) => {
     {title: "Parent Training workshop", facilitator: "Ziaul-Haq", date: "2025-05-28", status: "Cancelled"}
   ];
 
-  const handleView = (row) => {
-  console.log("View called:", row);
-};
-
-const handleEdit = (row) => {
-  console.log("Edit called:", row);
-};
-
-const handleDelete = (row) => {
-  console.log("Delete called:", row);
-};
-
   return (
     <React.Fragment>
       <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 pb-12`}>
