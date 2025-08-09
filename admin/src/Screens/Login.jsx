@@ -37,7 +37,7 @@ const Login = () => {
 
                         <div className="flex flex-col gap-2">
                             <CustomButton>Login</CustomButton>
-                            <p className="font-serif text-base text-black self-center">Don't have an account? <a href="/" className="text-[#00C7BE] font-bold">Create</a></p>
+                            <p className="font-serif text-base text-black self-center">Don't have an account? <a href="/signup" className="text-[#00C7BE] font-bold">Create</a></p>
                         </div>
                         </>
                     )
