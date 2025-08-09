@@ -5,6 +5,7 @@ import CustomInput from "../Components/CustomInput";
 import Product1 from "../assets/product1.svg"
 import Product2 from "../assets/product2.svg"
 import Product3 from "../assets/product3.svg"
+import CustomSearchBar from "../Components/CustomSearchBar";
 
 const Products = ({isSidebarHovered}) => {
 
@@ -32,8 +33,9 @@ const Products = ({isSidebarHovered}) => {
                     <p className="font-serif text-gray-500 text-base italic">Create, edit and manage product listings for your website</p>
                 </div>
 
-                <div className="w-full px-4 flex justify-between">
+                <div className="w-full px-4 pr-16 flex justify-between">
                     <CustomButton onClick={onOpenModal}>add new product</CustomButton>
+                    <CustomSearchBar placeholder="Search"/>
                 </div>
 
                 <div className="w-full px-4 flex flex-wrap gap-16">

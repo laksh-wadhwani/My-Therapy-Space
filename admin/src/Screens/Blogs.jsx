@@ -4,6 +4,7 @@ import blog_picture from "../assets/blog.png"
 import { Modal } from 'react-responsive-modal';
 import CustomInput from "../Components/CustomInput";
 import MDEditor from '@uiw/react-md-editor'
+import CustomSearchBar from "../Components/CustomSearchBar";
 
 const Blogs = ({isSidebarHovered}) => {
 
@@ -39,8 +40,9 @@ const Blogs = ({isSidebarHovered}) => {
                     <p className="font-serif text-gray-500 text-base italic">Create, edit and manage blog posts for your website</p>
                 </div>
 
-                <div className="w-full px-4 flex justify-between">
+                <div className="w-full px-10 flex justify-between">
                     <CustomButton onClick={onOpenModal}>add new blog</CustomButton>
+                    <CustomSearchBar placeholder="Search"/>
                 </div>
 
                 <div className="w-full px-4 flex flex-wrap gap-8">

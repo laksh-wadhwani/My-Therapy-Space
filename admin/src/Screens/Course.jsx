@@ -8,6 +8,9 @@ import Video3 from "../assets/video3.png"
 import Video4 from "../assets/video4.png"
 import Video5 from "../assets/video5.png"
 import Video6 from "../assets/video6.png"
+import { Search} from "lucide-react";
+import CustomSearchBar from "../Components/CustomSearchBar";
+
 
 const Courses = ({isSidebarHovered}) => {
 
@@ -31,12 +34,13 @@ const Courses = ({isSidebarHovered}) => {
             <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 pb-12`}>
 
                 <div className="w-full p-4 mt-6 border-b border-gray-200 flex flex-col gap-2">
-                    <h1 className="font-serf text-4xl font-bold text-black capitalize italic">Manage Corses</h1>
+                    <h1 className="font-serf text-4xl font-bold text-black capitalize italic">Manage Courses</h1>
                     <p className="font-serif text-gray-500 text-base italic">Create, edit and manage course listings for your website</p>
                 </div>
 
-                <div className="w-full px-4 flex justify-between">
+                <div className="w-full px-4 pr-16 flex justify-between">
                     <CustomButton onClick={onOpenModal}>add new course</CustomButton>
+                     <CustomSearchBar placeholder="Search"/>
                 </div>
 
                 <div className="w-full px-4 flex flex-wrap gap-16">
