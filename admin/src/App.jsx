@@ -27,6 +27,12 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+     // <Router>
+    //   <Routes>
+    //     <Route exact path="/" element={<Login/>}/>
+    //     <Route exact path="/signup" element={<Signup/>}/>
+    //   </Routes>
+    // </Router>
   );
 };
 
