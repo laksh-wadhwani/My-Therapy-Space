@@ -1,7 +1,7 @@
-const express = require("express")
-const cors = require("cors")
-const mongoose = require("mongoose")
-const dotenv = require("dotenv")
+import express from "express"
+import cors from "cors"
+import mongoose from "mongoose"
+import dotenv from "dotenv"
 
 //Configuration
 const app = express();
@@ -24,6 +24,6 @@ app.get("/", async(request, response) => {
     response.json("Backend is working....")
 })
 
-app.get("/Sahil", async(request, response) => {
-    response.json("Sahil Wadhwani")
-})
+//Admin Routes
+import adminRoutes from "./routes/admin.routes.js"
+app.use("/api/admin", adminRoutes)

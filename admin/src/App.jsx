@@ -14,25 +14,25 @@ const App = () => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
   return (
-    <Router>
-      <div className="flex flex-row-reverse justify-between">
-        <Sidebar onHoverChange={setIsSidebarHovered} />
-        <Routes>
-          <Route exact path="/dashboard" element={<Dashboard isSidebarHovered={isSidebarHovered} />} />
-          <Route exact path="/manage-workshops" element={<Workshops isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="/manage-user-queries" element={<UserQueries isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="/manage-blogs" element={<Blogs isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="/manage-products" element={<Products isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
-        </Routes>
-      </div>
-    </Router>
-     // <Router>
-    //   <Routes>
-    //     <Route exact path="/" element={<Login/>}/>
-    //     <Route exact path="/signup" element={<Signup/>}/>
-    //   </Routes>
+    // <Router>
+    //   <div className="flex flex-row-reverse justify-between">
+    //     <Sidebar onHoverChange={setIsSidebarHovered} />
+    //     <Routes>
+    //       <Route exact path="/dashboard" element={<Dashboard isSidebarHovered={isSidebarHovered} />} />
+    //       <Route exact path="/manage-workshops" element={<Workshops isSidebarHovered={isSidebarHovered}/>}/>
+    //       <Route exact path="/manage-user-queries" element={<UserQueries isSidebarHovered={isSidebarHovered}/>}/>
+    //       <Route exact path="/manage-blogs" element={<Blogs isSidebarHovered={isSidebarHovered}/>}/>
+    //       <Route exact path="/manage-products" element={<Products isSidebarHovered={isSidebarHovered}/>}/>
+    //       <Route exact path="manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
+    //     </Routes>
+    //   </div>
     // </Router>
+     <Router>
+      <Routes>
+        <Route exact path="/" element={<Login/>}/>
+        <Route exact path="/signup" element={<Signup/>}/>
+      </Routes>
+    </Router>
   );
 };
 
