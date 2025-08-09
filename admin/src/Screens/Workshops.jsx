@@ -3,7 +3,6 @@ import CustomButton from "../Components/CustomButton";
 import CustomTable from "../Components/CustomTable";
 import { Modal } from 'react-responsive-modal';
 import CustomInput from "../Components/CustomInput";
-import "../index.css"
 
 const Workshops = ({ isSidebarHovered }) => {
 
