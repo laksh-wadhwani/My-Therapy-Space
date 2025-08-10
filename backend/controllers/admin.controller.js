@@ -2,8 +2,9 @@ import jwt from "jsonwebtoken"
 import AdminModel from "../Models/Admin.js"
 import GenerateOTP from "../utils/OtpGenerator.js"
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js"
-import transporter from "../config/mailer.js"
+
 import { otpEmailTemplate } from "../utils/emailTemplates.js"
+import { transporter } from "../config/mailer.js"
 
 export const SignUp = async (request, response) => {
     try {
@@ -32,12 +33,12 @@ export const SignUp = async (request, response) => {
                 otp_expiry
             });
             await super_admin.save();
-            await transporter.sendMail({
-                from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
-                to: email,
-                subject: "Your OTP for My Therapy Space as a Super Admin",
-                html: otpEmailTemplate(fullname, otp)
-            })
+            // await transporter.sendMail({
+            //     from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
+            //     to: email,
+            //     subject: "Your OTP for My Therapy Space as a Super Admin",
+            //     html: otpEmailTemplate(fullname, otp)
+            // })
             return response.status(200).json({
                 message: "OTP Sent. Please verify to complete registration. You are going to be a Super Admin",
                 superAdmin: super_admin
@@ -52,12 +53,12 @@ export const SignUp = async (request, response) => {
             otp_expiry
         });
         await newAdmin.save();
-        await transporter.sendMail({
-                from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
-                to: email,
-                subject: "Your OTP for My Therapy Space as a Admin",
-                html: otpEmailTemplate(fullname, otp)
-        })
+        // await transporter.sendMail({
+        //         from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
+        //         to: email,
+        //         subject: "Your OTP for My Therapy Space as a Admin",
+        //         html: otpEmailTemplate(fullname, otp)
+        // })
         return response.status(200).json({
             message: "OTP Sent. Please verify to complete registration",
             newAdmin
@@ -83,7 +84,7 @@ export const verifyOtp = async(request, response) => {
             check.otp_expiry = null
             check.isVerified = true
             await check.save()
-            return response.status(200).json({message: "Account verified successfully as Super Admin"})
+            return response.status(200).json({message: "Account verified successfully"})
         }
 
         return response.status(400).json({error: "Invalid OTP"})
@@ -105,6 +106,10 @@ export const Login = async(request, response) => {
 
         if(!isMatch)
             return response.status(401).json({error: "Invalid Credentials"})
+
+        if(userCheck.isSuperAdminVerified===false){
+            return response.status(401).json({error: "Please wait for Super Admin's Approval"})
+        }
 
         const token = jwt.sign(
             {id: userCheck.id, role: userCheck.role},
