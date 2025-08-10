@@ -13,7 +13,7 @@ const Login = () => {
 
             <Navbar/>
 
-            <div className="w-full h-dvh bg-left bg-no-repeat [background-size:120%] absolute flex items-center px-52" style={{ backgroundImage: `url(${LoginBg})` }}>
+            <div className="w-full h-dvh bg-left bg-no-repeat [background-size:100%] absolute flex items-center px-52" style={{ backgroundImage: `url(${LoginBg})` }}>
 
                 <div className="w-100 p-12 bg-white border border-gray-200 shadow-md rounded-xl flex flex-col gap-14 mt-16">
 

@@ -67,6 +67,7 @@ const Courses = ({isSidebarHovered}) => {
             <div className="w-full flex flex-col gap-4 px-6">
                 <CustomInput label="course name" placeholder="Name" type="text"/>
                 <CustomInput label="price" type="number" placeholder="Price"/>
+                <CustomInput label="course description" placeholder="Description" type="text"/>
                 <CustomInput label="course thumbnail" type="file"/>
                 <CustomInput label="course video" type="file"/>
             </div>

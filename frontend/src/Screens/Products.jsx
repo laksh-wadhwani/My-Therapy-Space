@@ -36,7 +36,7 @@ const Products = () => {
                     </div>
                 </div>
 
-                <div className="w-full flex flex-wrap px-16 gap-16">
+                <div className="w-full flex flex-wrap px-16 gap-16 justify-center">
                     {productsData.map(product => (
                         <Link to={`/specificProduct/${product.id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-center pb-4 cursor-pointer hover:scale-105">
                             <img src={product.picture} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />

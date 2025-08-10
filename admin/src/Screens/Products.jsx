@@ -62,7 +62,8 @@ const Products = ({isSidebarHovered}) => {
             <div className="w-full flex flex-col gap-4 px-6">
                 <CustomInput label="product name" placeholder="Name" type="text"/>
                 <CustomInput label="price" type="number" placeholder="Price"/>
-                <CustomInput label="prodict picture" type="file"/>
+                <CustomInput label="product picture" type="file"/>
+                <CustomInput label="product description" placeholder="Description" type="text"/>
             </div>
 
             <div className="w-full px-6 flex justify-center gap-2">

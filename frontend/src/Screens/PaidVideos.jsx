@@ -31,7 +31,7 @@ const PaidVideos = () => {
                     <div className="w-[25%] flex">
                         <input
                             type="text"
-                            placeholder="search for products"
+                            placeholder="search for courses"
                             className="w-full border border-gray-300 rounded-md font-serif text-base capitalize p-3 focus:outline-none "
                         />
                         <button className="relative right-16 bg-[#0BAFA6] rounded-r-md rounded-none hover:border-[#0BAFA6] focus:outline-none hover:bg-transparent">
