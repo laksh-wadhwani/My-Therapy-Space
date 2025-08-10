@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken"
 import AdminModel from "../Models/Admin.js"
 import GenerateOTP from "../utils/OtpGenerator.js"
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js"
+import transporter from "../config/mailer.js"
+import { otpEmailTemplate } from "../utils/emailTemplates.js"
 
 export const SignUp = async (request, response) => {
     try {
@@ -30,6 +32,12 @@ export const SignUp = async (request, response) => {
                 otp_expiry
             });
             await super_admin.save();
+            await transporter.sendMail({
+                from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
+                to: email,
+                subject: "Your OTP for My Therapy Space as a Super Admin",
+                html: otpEmailTemplate(fullname, otp)
+            })
             return response.status(200).json({
                 message: "OTP Sent. Please verify to complete registration. You are going to be a Super Admin",
                 superAdmin: super_admin
@@ -44,6 +52,12 @@ export const SignUp = async (request, response) => {
             otp_expiry
         });
         await newAdmin.save();
+        await transporter.sendMail({
+                from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
+                to: email,
+                subject: "Your OTP for My Therapy Space as a Admin",
+                html: otpEmailTemplate(fullname, otp)
+        })
         return response.status(200).json({
             message: "OTP Sent. Please verify to complete registration",
             newAdmin
