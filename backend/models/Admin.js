@@ -4,6 +4,7 @@ const AdminSchema = mongoose.Schema({
     fullname: String,
     email: String,
     password: String,
+    profile: String,
     role: {type: String, enum: ["super_admin", "admin"], default: "admin"},
     isVerified: {type: Boolean, default: false},
     isSuperAdminVerified: {type: Boolean, default: false},

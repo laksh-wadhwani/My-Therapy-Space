@@ -6,11 +6,13 @@ import Navbar from "../Components/navbar";
 import { BackendURL } from "../BackendContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-const Login = () => {
+const Login = ({setLoginUser}) => {
     
     const URL = BackendURL();
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [forgetPassToggle, setForgetPassToggle] = useState(false)
     const [user, setUser] = useState({
@@ -31,7 +33,11 @@ const Login = () => {
         axios.post(`${URL}/api/admin/login`, user)
         .then(response => {
             toast.success(response.data.message)
-            sessionStorage.setItem("token", response.data.token)
+            const token = response.data.token
+            sessionStorage.setItem("token", token)
+            const decoded = jwtDecode(token)
+            setLoginUser(decoded)
+            navigate("/dashboard")
         })
         .catch(error => {
             console.error(error)

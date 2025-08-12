@@ -3,7 +3,7 @@ import CustomTable from "../Components/CustomTable";
 import CustomButton from "../Components/CustomButton";
 import { Link } from "react-router-dom";
 
-const Dashboard = ({ isSidebarHovered }) => {
+const Dashboard = ({ isSidebarHovered, user }) => {
 
     const columns = [
         { key: "type", label: "Type" },
@@ -40,7 +40,7 @@ const Dashboard = ({ isSidebarHovered }) => {
                 <h1 className="font-serf text-4xl font-bold text-black capitalize italic mt-6 border-b border-gray-200 p-4">Dashboard</h1>
 
                 <div className="w-full flex flex-col px-4">
-                    <h3 className="font-serif text-black text-xl">Welcome back, Sahil</h3>
+                    <h3 className="font-serif text-black text-xl">Welcome back, {user.fullname}</h3>
                     <p className="font-serif text-gray-500 text-base">Here's what's happening with your site today.</p>
                 </div>
 

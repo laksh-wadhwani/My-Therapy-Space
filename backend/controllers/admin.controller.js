@@ -1,14 +1,16 @@
 import jwt from "jsonwebtoken"
-import AdminModel from "../Models/Admin.js"
 import GenerateOTP from "../utils/OtpGenerator.js"
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js"
 
 import { otpEmailTemplate } from "../utils/emailTemplates.js"
 import { transporter } from "../config/mailer.js"
+import uploadToCloudinary from "../config/cloudinary.js"
+import AdminModel from "../models/Admin.js"
 
 export const SignUp = async (request, response) => {
     try {
         const { fullname, email, password, secretKey } = request.body
+        const profile = await uploadToCloudinary(request.file.buffer)
         const secret = secretKey === process.env.SECRET_KEY
         const otp = GenerateOTP();
         const otp_expiry = new Date(Date.now() + 2 * 60 * 1000)
@@ -27,6 +29,7 @@ export const SignUp = async (request, response) => {
                 fullname,
                 email,
                 password: hashPassword,
+                profile,
                 role: "super_admin",
                 isSuperAdminVerified: true,
                 otp,
@@ -52,6 +55,7 @@ export const SignUp = async (request, response) => {
             fullname,
             email,
             password: hashPassword,
+            profile,
             otp,
             otp_expiry
         });
@@ -118,7 +122,12 @@ export const Login = async(request, response) => {
         }
 
         const token = jwt.sign(
-            {id: userCheck.id, role: userCheck.role},
+            {
+                id: userCheck.id, 
+                role: userCheck.role, 
+                fullname: userCheck.fullname, 
+                profile: userCheck.profile
+            },
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES_IN || "1d"}
         )
