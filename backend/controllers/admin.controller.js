@@ -32,13 +32,16 @@ export const SignUp = async (request, response) => {
                 otp,
                 otp_expiry
             });
+
+            await transporter.sendMail({
+                from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
+                to: email,
+                subject: "Your OTP for My Therapy Space as a Super Admin",
+                html: otpEmailTemplate(fullname, otp)
+            })
+
             await super_admin.save();
-            // await transporter.sendMail({
-            //     from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
-            //     to: email,
-            //     subject: "Your OTP for My Therapy Space as a Super Admin",
-            //     html: otpEmailTemplate(fullname, otp)
-            // })
+
             return response.status(200).json({
                 message: "OTP Sent. Please verify to complete registration. You are going to be a Super Admin",
                 superAdmin: super_admin
@@ -52,13 +55,16 @@ export const SignUp = async (request, response) => {
             otp,
             otp_expiry
         });
+
+        await transporter.sendMail({
+            from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
+            to: email,
+            subject: "Your OTP for My Therapy Space as a Admin",
+            html: otpEmailTemplate(fullname, otp)
+        })
+
         await newAdmin.save();
-        // await transporter.sendMail({
-        //         from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
-        //         to: email,
-        //         subject: "Your OTP for My Therapy Space as a Admin",
-        //         html: otpEmailTemplate(fullname, otp)
-        // })
+    
         return response.status(200).json({
             message: "OTP Sent. Please verify to complete registration",
             newAdmin

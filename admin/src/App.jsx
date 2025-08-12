@@ -9,30 +9,35 @@ import Login from "./Screens/Login.jsx";
 import Signup from "./Screens/Signup.jsx"
 import Products from "./Screens/Products.jsx";
 import Courses from "./Screens/Course.jsx";
+import { BackendProvider } from "./BackendContext.jsx";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
   return (
-    <Router>
-      <div className="flex flex-row-reverse justify-between">
-        <Sidebar onHoverChange={setIsSidebarHovered} />
-        <Routes>
-          <Route exact path="/dashboard" element={<Dashboard isSidebarHovered={isSidebarHovered} />} />
-          <Route exact path="/manage-workshops" element={<Workshops isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="/manage-user-queries" element={<UserQueries isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="/manage-blogs" element={<Blogs isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="/manage-products" element={<Products isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
-        </Routes>
-      </div>
-    </Router>
-    //  <Router>
-    //   <Routes>
-    //     <Route exact path="/" element={<Login/>}/>
-    //     <Route exact path="/signup" element={<Signup/>}/>
-    //   </Routes>
+    // <Router>
+    //   <div className="flex flex-row-reverse justify-between">
+    //     <Sidebar onHoverChange={setIsSidebarHovered} />
+    //     <Routes>
+    //       <Route exact path="/dashboard" element={<Dashboard isSidebarHovered={isSidebarHovered} />} />
+    //       <Route exact path="/manage-workshops" element={<Workshops isSidebarHovered={isSidebarHovered}/>}/>
+    //       <Route exact path="/manage-user-queries" element={<UserQueries isSidebarHovered={isSidebarHovered}/>}/>
+    //       <Route exact path="/manage-blogs" element={<Blogs isSidebarHovered={isSidebarHovered}/>}/>
+    //       <Route exact path="/manage-products" element={<Products isSidebarHovered={isSidebarHovered}/>}/>
+    //       <Route exact path="manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
+    //     </Routes>
+    //   </div>
     // </Router>
+    <BackendProvider>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Login/>}/>
+          <Route exact path="/signup" element={<Signup/>}/>
+        </Routes>
+        <ToastContainer position="top-right" autoClose={2500}/>
+      </Router>
+    </BackendProvider>
   );
 };
 

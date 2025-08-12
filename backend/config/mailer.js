@@ -1,3 +1,6 @@
+import dotenv from "dotenv"
+dotenv.config()
+
 import nodemailer from "nodemailer";
 
 export const transporter = nodemailer.createTransport({
@@ -8,6 +11,5 @@ export const transporter = nodemailer.createTransport({
         user: process.env.SMTP_MAIL,
         pass: process.env.SMTP_PASSWORD,
     },
-    
+    tls: {rejectUnauthorized: false} 
 });
-

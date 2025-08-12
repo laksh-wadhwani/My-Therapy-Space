@@ -2,12 +2,12 @@ export const otpEmailTemplate = (fullname, otp) => {
     return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
         <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-            <h2 style="text-align: center; color: #0077b6;">My Therapy Space</h2>
+            <h2 style="text-align: center; color: #0BAFA6;">My Therapy Space</h2>
             <p>Hi <strong>${fullname}</strong>,</p>
-            <p>Welcome to <a href="https://mytherapyspace.com.au" style="color: #0077b6; text-decoration: none;">My Therapy Space</a>! We're excited to have you on board.</p>
+            <p>Welcome to <a href="https://mytherapyspace.com.au" style="color: #0BAFA6; text-decoration: none;">My Therapy Space</a>! We're excited to have you on board.</p>
             <p>Your One-Time Password (OTP) to verify your account is:</p>
             <div style="text-align: center; margin: 20px 0;">
-                <span style="display: inline-block; background: #0077b6; color: white; font-size: 24px; padding: 10px 20px; border-radius: 5px; letter-spacing: 4px;">
+                <span style="display: inline-block; background: #0BAFA6; color: white; font-size: 24px; padding: 10px 20px; border-radius: 5px; letter-spacing: 4px;">
                     ${otp}
                 </span>
             </div>

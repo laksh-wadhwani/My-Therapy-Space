@@ -1,13 +1,13 @@
+import dotenv from "dotenv"
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
-import dotenv from "dotenv"
 
 //Configuration
+dotenv.config();
 const app = express();
 app.use(express.json())
 app.use(cors())
-dotenv.config();
 
 //DB Connection
 mongoose.connect(process.env.DB_URL)
