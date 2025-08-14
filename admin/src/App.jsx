@@ -10,8 +10,9 @@ import Signup from "./Screens/Signup.jsx"
 import Products from "./Screens/Products.jsx";
 import Courses from "./Screens/Course.jsx";
 import { BackendProvider } from "./BackendContext.jsx";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import {jwtDecode} from "jwt-decode"
+import SpecificBlog from "./Screens/SpecificBlog.jsx";
 
 const App = () => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
@@ -42,6 +43,7 @@ const App = () => {
           <Route exact path="/manage-workshops" element={<Workshops isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-user-queries" element={<UserQueries isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-blogs" element={<Blogs isSidebarHovered={isSidebarHovered}/>}/>
+          <Route exact path="/specific-blog/:id" element={<SpecificBlog isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-products" element={<Products isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
         </Routes>
@@ -52,7 +54,7 @@ const App = () => {
         <Route exact path="/signup" element={<Signup/>}/>
       </Routes>)}
     </Router>
-    <ToastContainer position="top-left" autoClose={2500}/>
+    <ToastContainer position="top-right" autoClose={2500}/>
    </BackendProvider>
   );
 };

@@ -75,7 +75,7 @@ const Login = ({setLoginUser}) => {
 
                         <div className="flex flex-col gap-2">
                             <CustomButton onClick={Login} disabled={loading}>
-                                {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"/> : "Login"}
+                                {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin"/> : "Login"}
                             </CustomButton>
                             <p className="font-serif text-base text-black self-center">Don't have an account? 
                                 <Link to="/signup"><span className="text-[#00C7BE] font-bold">Create</span></Link>

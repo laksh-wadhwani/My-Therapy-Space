@@ -122,7 +122,7 @@ const Signup = () => {
 
                             <div className="flex flex-col gap-2">
                                 <CustomButton onClick={CreateAccount} disabled={loading}>
-                                    {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin" /> : "Create Account"}
+                                    {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Create Account"}
                                 </CustomButton>
                                 <p className="font-serif text-base text-black self-center">Already have an account?
                                     <Link to="/"><span className="text-[#00C7BE] font-bold">Login</span></Link>

@@ -27,3 +27,7 @@ app.get("/", async(request, response) => {
 //Admin Routes
 import adminRoutes from "./routes/admin.routes.js"
 app.use("/api/admin", adminRoutes)
+
+//Blog Routes
+import blogRoutes from "./routes/blogs.routes.js"
+app.use("/api/blogs", blogRoutes)
