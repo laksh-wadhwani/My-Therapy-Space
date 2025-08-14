@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import blog_picture from "../assets/blog.png"
 import SampleBlog from "../assets/sample blog.png"
 import LinkedIn from "../assets/linkedin.svg"
@@ -8,19 +8,51 @@ import Pintrest from "../assets/pintrest.svg"
 import Facebook from "../assets/facebook.svg"
 import Footer from "../Components/footer";
 import RButton from "../Components/Reusable_Button";
+import { useParams } from "react-router";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import { BackendURL } from "../BackendContext.jsx"
+import axios from "axios"
 
 const SpecificBlog = () => {
+
+    const { id } = useParams()
+    const URL = BackendURL();
+    const [blog, setBlog] = useState(null)
+
+    useEffect(() => {
+        axios.get(`${URL}/api/blogs/specific-blog/${id}`)
+        .then(response => setBlog(response.data))
+    },[id])
+
+    if(!blog) return (<p className="font-serif text-4xl text-center mt-32">No Blog Found</p>)
+
     return(
         <React.Fragment>
             <div className="main-box bg-white items-center gap-10">
 
                 <div className="w-full flex flex-col items-center mt-32 px-32 gap-10">
-                    <h2 className="font-serif text-4xl capitalize text-[#0BAFA6]">What Is Neurodiversity Affirming Practice?</h2>
-                    <p className="font-serif text-center text-black text-xl">Since 2022, our team at My Therapy Space has been shifting the way we work to better support neurodivergent children and families.Being neurodiversity affirming simply means we recognize and value all types of brains — and we’re committed to providing therapy that celebrates differences and builds on each child’s strengths.</p>
-                    <img src={blog_picture} alt="Blog Picture" className="rounded-xl" />
+                    <h2 className="font-serif text-4xl capitalize text-[#0BAFA6]">{blog.title}</h2>
+                    {blog && (
+                        <img src={blog.thumbnail} alt={blog.title} className="rounded-xl" />
+                    )}
                 </div>
 
-                <img src={SampleBlog} alt="Sample Blog" />
+                <div className="w-full px-32">
+                    <ReactMarkdown 
+                    rehypePlugins={[rehypeRaw]}
+                    components={{
+                        h1: ({node, ...props}) => <h1 className="text-3xl font-bold text-[#0BAFA6]" {...props} />,
+                        h2: ({node, ...props}) => <h2 className="text-2xl font-semibold text-[#15b7ac]" {...props} />,
+                        h3: ({node, ...props}) => <h3 className="text-xl font-medium text-[#01b7ac]" {...props} />,
+                        ul: ({node, ...props}) => <ul className="list-disc ml-6" {...props} />,
+                        li: ({node, ...props}) => <li className="mb-1" {...props} />,
+                        span: ({node, style, ...props}) => <span style={style} {...props} />
+                    }}
+                    >
+                        {blog.content}
+                    </ReactMarkdown>
+                </div>
 
                 <div className="w-[80%] box-border px-10 py-4 bg-white border border-black-100 shadow-md rounded-xl flex justify-between items-center">
                     <span className="font-serif text-2xl text-black uppercase">share this post</span>

@@ -18,10 +18,12 @@ import SpecificProduct from "./Screens/Specific_Product";
 import SpecificVideo from "./Screens/specific_video";
 import Booking from "./Screens/Booking";
 import Cart from "./Screens/Cart";
+import { BackendProvider } from "./BackendContext";
 
 const App = () => {
   return(
-    <Router>
+    <BackendProvider>
+      <Router>
       <Navbar/>
       <Routes>
         <Route exact path="/" element={<LandingPage/>}/>
@@ -44,6 +46,7 @@ const App = () => {
         <Route exact path="/cart" element={<Cart/>}/>
       </Routes>
     </Router>
+    </BackendProvider>
   )
 }
 
