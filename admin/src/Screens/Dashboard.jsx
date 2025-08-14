@@ -44,13 +44,24 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                     <p className="font-serif text-gray-500 text-base">Here's what's happening with your site today.</p>
                 </div>
 
+                <div className="w-full flex flex-col px-4">
+                    <h3 className="font-serif text-black text-xl font-semibold">Admin Approvals</h3>
+                    <div className="w-full h-20 bg-white border border-gray-200 rounded-xl shadow-md flex items-center">
+
+                        <div className="flex">
+                            <CustomButton>Approve</CustomButton>
+                            <CustomButton>Reject</CustomButton>
+                        </div>
+                    </div>
+                </div>
+
                 <CustomTable title="Recent Activity" columns={columns} data={dummyData} showActions={false} statusStyles={dashboardStatusStyles} />
 
                 <div className="w-full flex gap-8">
-                    <Link><CustomButton>add new blog</CustomButton></Link>
+                    <Link to="/manage-blogs"><CustomButton>add new blog</CustomButton></Link>
                     <Link to="/manage-workshops"><CustomButton>add workshop</CustomButton></Link>
-                    <CustomButton>add product</CustomButton>
-                    <CustomButton>add course</CustomButton>
+                    <Link to="/manage-products"><CustomButton>add product</CustomButton></Link>
+                    <Link to="/manage-courses"><CustomButton>add course</CustomButton></Link>
 
                 </div>
 

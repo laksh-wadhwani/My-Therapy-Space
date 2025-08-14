@@ -45,7 +45,7 @@ const App = () => {
           <Route exact path="/manage-blogs" element={<Blogs isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/specific-blog/:id" element={<SpecificBlog isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-products" element={<Products isSidebarHovered={isSidebarHovered}/>}/>
-          <Route exact path="manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
+          <Route exact path="/manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
         </Routes>
       </div>)
       :
