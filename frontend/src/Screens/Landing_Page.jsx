@@ -3,6 +3,7 @@ import "../styles/landing.css";
 import RButton from "../Components/Reusable_Button"
 import ChooseUs from "../assets/section4.svg"
 import Footer from "../Components/footer"
+import work2 from "../assets/work2.jpg"
 
 const LandingPage = () => {
     return(
@@ -13,7 +14,7 @@ const LandingPage = () => {
                          <div className="flex flex-col gap-6">
                             <h1 className="hero-heading">Specialized therapy for <span className="text-[#01B2A9]">every child</span></h1>
                             <div className="bg-[#92278F] w-20 h-1 rounded-xl" />
-                            <p className="sections-description text-lg">A team of specialized therapists working together to help your child to thrive in Burleigh Waters and Hope Island.</p>
+                            <p className="sections-description text-lg">My Therapy Space is a team of experienced, enthusiastic, Speech Language Pathologists, Occupational Therapists, Dietitians and Therapy Assistants all working together to support your child and family.</p>
                         </div>
                         <RButton className="px-7 py-3">Book a Call</RButton>
                     </div>
@@ -33,7 +34,10 @@ const LandingPage = () => {
 
                         <div className="sections-box gap-20 mt-6">
 
-                            <p className="sections-description text-base text-justify">My Therapy Space is a multidisciplinary allied health clinic based in the Gold Coast, Australia, offering a family-centered approach to therapy. Established in 2020 as a multi-speciality pediatric practice, our vision is to provide care with a nurturing environment. Our teams works collaboratively with families to ensure the best outcomes.</p>
+                            <p className="sections-description text-base text-justify"><b>My Therapy Space</b> is a multidisciplinary allied health clinic on the Gold Coast, offering Speech Pathology, Occupational Therapy, Psychology, Dietetics, and Audiology services.
+                            Since 2001, we've grown from a single Speech Pathologist into a collaborative team known for our warm, inclusive, and family-centred approach.
+
+                            </p>
 
                             <div className="section-2-description-box">
                             
@@ -64,6 +68,32 @@ const LandingPage = () => {
                     </div>
 
                 </div>
+            {/* Workshop Fun Section */}
+        <div className="sections flex-col gap-10 bg-[#F9FAFB]">
+             <div className="flex flex-col gap-4 items-center">
+                 <span className="sections-tittle">Therapy Fun</span>
+                <h2 className="hero-heading text-center">
+                         Moments from Our Workshops
+                </h2>
+             </div>
+
+             <div className="w-full overflow-x-auto">
+                 <div className="flex md:grid md:grid-cols-5 gap-6 px-4">
+                     {["work1.jpg", "work2.jpg", "work3.jpg", "work4.jpg", "work5.jpg"].map((img, i) => (
+            <div 
+                key={i} 
+                className="w-64 h-64 flex-shrink-0 rounded-lg bg-white shadow-md overflow-hidden border border-gray-200"
+            >
+                    <img 
+                     src={`/src/assets/${img}`} 
+                    alt={`Workshop ${i + 1}`} 
+                    className="w-full h-full object-cover"
+                     />
+                </div>
+             ))}
+        </div>
+    </div>
+</div>
 
                 <div className="sections flex-col gap-10">
 
@@ -90,11 +120,46 @@ const LandingPage = () => {
                         </div>
                         <div className="services-cards rotate-[3deg]">
                             <div className="bg-[#1B75BC]/10"><div className="bg-[#1B75BC]"/></div>
-                            <h3>audiology</h3>
-                            <p className="sections-description text-center text-sm">Comprehensive hearing assessments and interventions for children of all ages.</p>
+                            <h3>Therapy Assistance</h3>
+                            <p className="sections-description text-center text-sm">Support families to meet their therapy goals by working with their child in their natural environments of home, childcare or out in the community. .</p>
                         </div>
                     </div>
 
+                </div>
+
+                
+                
+             <div className="bg-[#F9FAFB] py-12">
+                <div className="flex flex-col gap-4 items-center">
+                 <span className="sections-tittle">Our Space</span>
+                <h2 className="hero-heading text-center">
+                         Glimpse from Our Clinics
+                </h2>
+             </div>
+
+                    <div className="max-w-6xl mx-auto px-4">
+                        <div className="relative w-full h-[400px] overflow-hidden rounded-xl shadow-lg">
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
+                        >
+                            <source src="/src/assets/video.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+
+                    <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4">
+                        <h1 className="text-3xl md:text-4xl font-bold mb-3">
+                        Welcome to Our Space
+                        </h1>
+                        <p className="max-w-2xl">
+                        Experience therapy, workshops, and courses like never before.
+                        </p>
+                    </div>
+                    </div>
+                </div>
                 </div>
 
                 <div className="sections flex-col gap-14 bg-white">
@@ -133,24 +198,6 @@ const LandingPage = () => {
                         <img src={ChooseUs} alt="" />
                     </div>
 
-                </div>
- 
-                <div className="sections bg-white">
-                    <div className="section-5">
-                        <h2 className="font-semibold another-sections-tittle">parent testimonials</h2>
-                        <div>
-
-                            <p className="text-lg text-justify sections-description">The team at My Therapy Space has been incredible for our daughter. Their collaborative approach meant that all her needs were addressed historically, and we've seen remarkable progress in just a few months!</p>
-
-                            <div className="flex items-center gap-2">
-                                <div className="size-[20px] rounded-full bg-black"/>
-                                <label className="font-serif text-base font-medium capitalize">Sahil Wadhwani</label>
-                                <span className="font-serif text-sm text-[#666666]">(Parent of Olivia)</span>
-                            </div>
-
-                        </div>
-
-                    </div>
                 </div>
 
                 <Footer/>

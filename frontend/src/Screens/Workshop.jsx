@@ -48,7 +48,95 @@ const Workshop = () => {
                     <img src={Group3} className="border-8 border-gray-300" />
                     <img src={Group4} className="border-8 border-gray-300" />
                 </div>
+            {/* Current Groups */}
+<div className="w-[90%] px-16 mt-16" id="current-groups">
+  <h2 className="font-serif text-3xl text-[#0BAFA6] mb-3">Current Groups</h2>
 
+  {/* Term-Time Therapy Groups */}
+  <div className="space-y-4">
+    <h3 className="font-serif text-2xl text-[#0BAFA6]">Term-Time Therapy Groups</h3>
+    <p className="font-serif text-lg text-gray-600">
+      Our therapy groups provide children with fun, structured opportunities to work on their goals while
+      building social skills with peers. Groups support development in communication, motor skills,
+      emotional regulation, and school readiness.
+    </p>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Seabridges</h4>
+        <p className="text-gray-700">
+          A neurodiversity affirming group for children with Autism to learn about themselves and social interaction.
+        </p>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Fine Motor Group</h4>
+        <p className="text-gray-700">Focuses on skills like cutting and handwriting.</p>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Let’s Communicate Together</h4>
+        <p className="text-gray-700">
+          Supports toddlers (18 months to 2.5 years) showing signs of delayed language development.
+        </p>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Chatterbox Group</h4>
+        <p className="text-gray-700">Helps 4–5-year-olds improve language skills.</p>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Prep Readiness</h4>
+        <p className="text-gray-700">
+          Prepares children for a smooth transition to school with combined Speech Pathology and Occupational Therapy support.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  
+  <div className="space-y-4 mt-10">
+    <h3 className="font-serif text-2xl text-[#0BAFA6]">School Holiday Groups</h3>
+    <p className="font-serif text-lg text-gray-600">
+      Our holiday groups combine therapy goals with engaging, fun activities to keep children connected and learning
+      outside school terms. These groups also encourage new friendships and reduce screen time.
+    </p>
+     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Cooking Classes</h4>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Scavenger hunts</h4>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Movement, dance, boxing or yoga sessions</h4>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Lego Masters</h4>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Teen outings</h4>
+      </div>
+
+      <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+        <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Paint and sip sessions</h4>
+      </div>              
+    </div>                
+   
+    <div className="mt-6 bg-[#F5FBFB] border border-[#E0F4F5] rounded-xl p-4">
+      <p className="font-serif text-gray-700">
+        We love hearing your ideas for new workshops or groups! If there’s something you think would benefit your child and family,
+        please get in touch — we’re here to create meaningful, enjoyable learning experiences together.
+      </p>
+    </div>
+  </div>
+</div>
+            
                 <RButton className="px-8 py-4" onClick={() => navigate("/currentworkshops")}>View Current Groups</RButton>
 
                 <Footer/>

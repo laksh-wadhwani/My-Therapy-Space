@@ -1,8 +1,15 @@
 import React from "react";
 import Footer from "../Components/footer"
-import Team1 from "../assets/team1.png"
+import Team1 from "../assets/team1.jpg"
 import Team2 from "../assets/team2.png"
 import Team3 from "../assets/team3.png"
+import Team4 from "../assets/team4.jpg"
+import Team5 from "../assets/team5.png"
+import Team6 from "../assets/team6.jpg"
+import Team7 from "../assets/team7.jpg"
+import Team8 from "../assets/team8.jpg"
+import Team9 from "../assets/team9.jpg"
+import Team10 from "../assets/team10.jpg"
 import TeamMember from "../assets/Team Member.png";
 import RButton from "../Components/Reusable_Button";
 
@@ -61,6 +68,19 @@ const Team = () => {
 
                 </div>
 
+                            <div className="w-full px-14 mt-20">
+                    <p className="font-serif text-2xl text-[#0BAFA6] capitalize mb-6">Meet Our Team</p>
+                    <div className="flex gap-4 overflow-x-auto pb-4">
+                    <img src={Team4} alt="Team Member 1" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" />
+                    <img src={Team5} alt="Team Member 2" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" />
+                    <img src={Team6} alt="Team Member 3" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" />
+                    <img src={Team7} alt="Team Member 4" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" />
+                    <img src={Team8} alt="Team Member 5" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" />
+                    <img src={Team9} alt="Team Member 6" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" />
+                    <img src={Team10} alt="Team Member 7" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" />
+                    </div>
+                </div>
+
                 <div className="w-full flex flex-col gap-8 px-14">
                     <h2 className="font-serif text-3xl text-[#0BAFA6] capitalize">join our team</h2>
 
@@ -69,7 +89,13 @@ const Team = () => {
                             <p className="font-serif text-xl text-justify text-black font-light leading-[3.25rem]">If you are an allied health professional who is passionate about working with children and teenagers then My Therapy Space is for you.  We provide a flexible, supportive, multi disciplinary team experience.  We are driven to provide the best possible service for families that is family centred, and driven by families.  Staff are offered a flexible working environment, with regular supervision/mentoring and professional development. If this resonates with you, then please contact us to discuss further.</p>
                             <RButton className="px-7 py-3">Apply Now</RButton>
                         </div>
-                        <img src={Team1} alt="" className="object-cover rounded-xl" />
+                      <div className="flex-shrink-0 w-[60%] md:w-[55%] lg:w-[50%] h-[500px] overflow-hidden rounded-xl shadow-lg">
+                        <img
+                        src={Team1}
+                        alt="Team Image 2"
+                        className="w-full h-full object-cover"
+                        />
+                    </div> 
                     </div>
 
                     <div className="w-full flex gap-16 mt-8 max-h-[643px]">
@@ -90,25 +116,70 @@ const Team = () => {
 
                 </div>
 
-                <div className="w-full flex flex-col gap-8 px-14 pb-12 items-center">
-                    <p className="font-serif text-3xl text-black self-start">Benefits and Perks for All Staff</p>
-                    <ul className="list-disc pl-5 font-serif text-lg text-black flex flex-col gap-4 text-justify">
-                        <li>A wonderful, supportive and fun team of 17 therapists who genuinely care for each other.</li>
-                        <li>6 senior clinicians with over 20 years experience each.</li>
-                        <li>A detailed onboarding program where you will be allowed the time to fully understand the clinic and our process. Depending on experience, each clinician will gradually build up your client caseload while you build confidence in working with our procedures.</li>
-                        <li>Realistic expectations for billable hours for all staff (at 20 hours per week for staff in first two years of graduating, building up to a maximum of 25 hours after 10 years experience). This includes direct sessions with clients, report writing and travel.</li>
-                        <li>Fortnightly staff meetings and interaction with your team to brainstorm ideas.</li>
-                        <li>Shared multi disciplinary sessions and observation sessions to learn from each other.</li>
-                        <li>Beautiful brand new offices with extensive resources, equipment and toys.</li>
-                        <li>Next door to shops, restaurants and public transport.</li>
-                        <li>Flexible working hours, we know you and your family come first. There are options for 8am-4pm days, or 10am-6pm days and all the options in between! Some staff work slightly longer each day and have an RDO once a month.</li>
-                        <li>Above award pay rates and bonuses</li>
-                        <li>Free access to an “employee assistance program” which provides Psychology counselling for work or life challenges.</li>
-                        <li>A generous Professional Development allowance including 3 paid days annually to attend training.</li>
-                        <li>Regular social events as a team</li>
-                    </ul>
-                    <RButton className="px-7 py-3">Join Now</RButton>
-                </div>
+                        <div className="w-full flex flex-col gap-12 px-14 pb-12 items-center bg-[#f9fdfd]">
+  {/* Section Title */}
+  <p className="font-serif text-3xl text-black self-start">Benefits and Perks for All Staff</p>
+
+  {/* Grid of benefits cards */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+    {/* Example Card */}
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Supportive Team</h3>
+      <p>A wonderful, supportive and fun team of 17 therapists who genuinely care for each other.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Experienced Clinicians</h3>
+      <p>6 senior clinicians with over 20 years experience each.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Detailed Onboarding</h3>
+      <p>A structured onboarding program gradually builds your caseload while increasing confidence in clinic procedures.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Realistic Billable Hours</h3>
+      <p>Direct sessions, report writing, and travel with clear expectations for each stage of your career.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Staff Meetings & Collaboration</h3>
+      <p>Fortnightly meetings, multi-disciplinary sessions, and observation opportunities to learn from each other.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Beautiful Offices & Location</h3>
+      <p>Brand new offices with extensive resources, equipment, toys, and next to shops, restaurants, and public transport.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Flexible Working Hours</h3>
+      <p>Options like 8am-4pm, 10am-6pm, or RDO arrangements for work-life balance.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Above Award Pay & Bonuses</h3>
+      <p>Competitive pay rates and performance bonuses.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Employee Assistance Program</h3>
+      <p>Free access to psychology counselling for work or life challenges.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Professional Development</h3>
+      <p>Generous allowance including 3 paid days annually for training and development.</p>
+    </div>
+
+    <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
+      <h3 className="font-bold text-lg">Regular Social Events</h3>
+      <p>Team-building events to foster a fun and collaborative culture.</p>
+    </div>
+  </div>
+  <RButton className="px-7 py-3 mt-6">Join Now</RButton>
+</div>
 
                 <Footer/>
 

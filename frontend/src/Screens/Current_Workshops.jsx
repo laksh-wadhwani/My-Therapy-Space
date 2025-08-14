@@ -5,6 +5,7 @@ import CurrentGroup3 from "../assets/current workshop3.png"
 import CurrentGroup4 from "../assets/current workshop4.png"
 import RButton from "../Components/Reusable_Button";
 import Footer from "../Components/footer";
+import Workshop from './Workshop';
 
 const CurrentWorkshops = () => {
 
@@ -20,7 +21,7 @@ const CurrentWorkshops = () => {
             <div className="main-box bg-white gap-12">
 
                 <div className="w-full px-16 mt-32">
-                    <h2 className="font-serif text-4xl capitalize text-[#0BAFA6]">current groups</h2>
+                    <h2 className="font-serif text-4xl capitalize text-[#0BAFA6]">Current Workshops</h2>
                     <p className="font-serif text-black text-xl">Following are the details for our current workshop groups:</p>
                 </div>
 
