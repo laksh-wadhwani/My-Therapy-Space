@@ -101,6 +101,10 @@ const AboutUs = () => {
 
                 <div className="sections flex-col gap-10">
                     <h2 className="another-sections-tittle font-black">Our Clinic Space Burleigh Waters</h2>
+                     <p className="text-[#557271] text-md font-serif text-center">
+                       Our multidisciplinary team works collaboratively from our spacious, purpose-built office in Burleigh Waters. The clinic features 11 therapy rooms, including a large gym and a dedicated group therapy room with a fully equipped kitchen.
+                    <br/>You’ll find us conveniently located opposite Treetops Plaza at Burleigh Waters, in Suite 3, Treetops Square, 2 Classic Way
+                    </p>
                     <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
                         {BurleighSpace.map(space => (
                             <div className="flex flex-col items-start w-[30%] gap-2">
@@ -113,6 +117,10 @@ const AboutUs = () => {
 
                 <div className="sections flex-col gap-10">
                     <h2 className="another-sections-tittle font-black">Our Clinic Space Hope Island</h2>
+                    <p className="text-[#557271] text-md font-serif text-center">
+                       Our Hope Island clinic is located at 12 Halcyon Way, right next door to Rackleys Swimming School. This beautiful, welcoming space features
+                       three dedicated therapy rooms designed to provide a comfortable and effective environment for your child’s therapy sessions.
+                    </p>
                     <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
                         {HopeIsland.map(space => (
                             <div className="flex flex-col items-start w-[30%] gap-2">
