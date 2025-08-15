@@ -2,8 +2,33 @@ import React from "react";
 import CustomTable from "../Components/CustomTable";
 import CustomButton from "../Components/CustomButton";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios"
+import { BackendURL } from "../BackendContext";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Dashboard = ({ isSidebarHovered, user }) => {
+
+    const URL = BackendURL()
+    const [loading, setLoading] = useState(false)
+    const [admins, setAdmins] = useState([])
+
+    useEffect(() => {
+        axios.get(`${URL}/api/admin/get-admins`)
+        .then(response => setAdmins(response.data))
+    },[admins])
+
+    const ApproveAdmin = adminId => {
+        setLoading(true)
+        axios.put(`${URL}/api/admin/approve-admin/${adminId}`)
+        .then(response => toast.success(response.data.message))
+        .catch(error => {
+            console.error(error)
+            return toast.error(error.response?.data?.error)
+        })
+        .finally(() => { setLoading(false) })
+    }
 
     const columns = [
         { key: "type", label: "Type" },
@@ -44,16 +69,25 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                     <p className="font-serif text-gray-500 text-base">Here's what's happening with your site today.</p>
                 </div>
 
-                <div className="w-full flex flex-col px-4">
-                    <h3 className="font-serif text-black text-xl font-semibold">Admin Approvals</h3>
-                    <div className="w-full h-20 bg-white border border-gray-200 rounded-xl shadow-md flex items-center">
-
-                        <div className="flex">
-                            <CustomButton>Approve</CustomButton>
-                            <CustomButton>Reject</CustomButton>
+                {(user.role === "super admin")?  (
+                    <div className="w-full flex flex-col gap-4 px-4">
+                        <h3 className="font-serif text-black text-xl font-semibold capitalize">{admins.length===0? `no admin approvals`:`admin approvals`}</h3>
+                        {admins.map(data => (
+                        <div className="w-full h-20 bg-white border border-gray-200 rounded-xl shadow-md flex items-center justify-between px-12 py-2 box-border">
+                            <div className="flex gap-2 items-center">
+                                {data.profile && <img src={data.profile} alt="User Profile Picture" className="size-16 object-cover rounded-full" />}
+                                <span className="font-serif text-xl text-black font-semibold">{data.fullname}</span>
+                            </div>
+                            <div className="flex gap-4">
+                                <CustomButton onClick={() => ApproveAdmin(data._id)}>
+                                    {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Approve"}
+                                </CustomButton>
+                                <CustomButton>Reject</CustomButton>
+                            </div>
                         </div>
+                        ))}
                     </div>
-                </div>
+                ):null}
 
                 <CustomTable title="Recent Activity" columns={columns} data={dummyData} showActions={false} statusStyles={dashboardStatusStyles} />
 

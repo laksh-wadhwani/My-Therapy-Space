@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 import GenerateOTP from "../utils/OtpGenerator.js"
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js"
 
-import { otpEmailTemplate } from "../utils/emailTemplates.js"
+import { adminApprovalEmailTemplate, otpEmailTemplate } from "../utils/emailTemplates.js"
 import { transporter } from "../config/mailer.js"
 import uploadToCloudinary from "../config/cloudinary.js"
 import AdminModel from "../models/Admin.js"
@@ -10,7 +10,9 @@ import AdminModel from "../models/Admin.js"
 export const SignUp = async (request, response) => {
     try {
         const { fullname, email, password, secretKey } = request.body
-        const profile = await uploadToCloudinary(request.file.buffer)
+        let profile = null
+        if(request.file)
+            profile = await uploadToCloudinary(request.file?.buffer)
         const secret = secretKey === process.env.SECRET_KEY
         const otp = GenerateOTP();
         const otp_expiry = new Date(Date.now() + 2 * 60 * 1000)
@@ -30,7 +32,7 @@ export const SignUp = async (request, response) => {
                 email,
                 password: hashPassword,
                 profile,
-                role: "super_admin",
+                role: "super admin",
                 isSuperAdminVerified: true,
                 otp,
                 otp_expiry
@@ -141,6 +143,41 @@ export const Login = async(request, response) => {
 
     } catch (error) {
         console.log("Getting error in logging in admin: ",error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
+export const GetAdmins = async(request, response) => {
+    try {
+        const admins = await AdminModel.find({role: "admin", isSuperAdminVerified: false})
+        if(!admins) 
+            return response.json({message: "No Approvals Pending"})
+        return response.status(200).json(admins)
+    } catch (error) {
+        console.log("Getting error in admins data")
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
+export const ApproveAdmin = async(request, response) => {
+    try {
+        const { id } = request.params;
+        const admin = await AdminModel.findById(id)
+
+        if(!admin)
+            return response.status(404).json({error: "User not found"})
+
+        await transporter.sendMail({
+            from: `"My Therapy Space" <no-reply@mytherapyspace.com.au>`,
+            to: admin.email,
+            subject: "Your Admin Account Has Been Approved 🎉",
+            html: adminApprovalEmailTemplate(admin.fullname)
+        })
+        admin.isSuperAdminVerified=true
+        await admin.save();
+        return response.status(200).json({message: "Admin has been approved"})
+    } catch (error) {
+        console.log("Getting error in approving admins request", error)
         return response.status(500).json({error: "Internal Server Error"})
     }
 }

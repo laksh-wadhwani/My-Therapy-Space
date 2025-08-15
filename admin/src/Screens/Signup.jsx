@@ -114,8 +114,8 @@ const Signup = () => {
                         <>
                             <div className="w-full flex flex-col gap-3">
                                 <CustomInput label="Name" type="text" placeholder="Name" name="fullname" value={user.fullname} onChange={handleChange} />
-                                <CustomInput label="Email" type="email" placeholder="Email" name="email" value={user.email} onChange={handleChange} />
-                                <CustomInput label="Password" type="password" placeholder="Password" name="password" value={user.password} onChange={handleChange} />
+                                <CustomInput label="Email" type="email" placeholder="Email" name="email" value={user.email} onChange={handleChange}  />
+                                <CustomInput label="Password" type="password" placeholder="Password" name="password" value={user.password} onChange={handleChange} showPasswordRules={true} />
                                 <CustomInput label="Secret Key" type="password" placeholder="Secret Key" name="secretKey" value={user.secretKey} onChange={handleChange} />
                                 <CustomInput label="Profile Picture" type="file" name="profile" onChange={handleChange} />
                             </div>
