@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CustomButton from "../Components/CustomButton";
-import blog_picture from "../assets/blog.png"
 import { Modal } from 'react-responsive-modal';
 import CustomInput from "../Components/CustomInput";
 import CustomSearchBar from "../Components/CustomSearchBar";
@@ -17,7 +16,8 @@ const Blogs = ({ isSidebarHovered }) => {
     const URL = BackendURL();
     const naviagte = useNavigate()
     const [open, setOpen] = useState(false)
-    const [loading, setLoading] = useState(false);
+    const [uploading, setUploading] = useState(false);
+    const [drafting, setDrafting] = useState(false)
     const [blogsData, setBlogsData] = useState([])
     const [blogsContent, setBlogsContent] = useState({
         title: "",
@@ -32,7 +32,6 @@ const Blogs = ({ isSidebarHovered }) => {
         }) 
         .catch(error => {
             console.error(error)
-            return toast.error(error.response?.data?.error)
         })
     },[blogsData])
 
@@ -63,14 +62,13 @@ const Blogs = ({ isSidebarHovered }) => {
         }
     };
 
+    const BlogsData = new FormData();
+    Object.entries(blogsContent).forEach(([key, value]) => {
+        BlogsData.append(key, value)
+    })
 
-    const UploadBlog = () => {
-        const BlogsData = new FormData();
-        Object.entries(blogsContent).forEach(([key, value]) => {
-            BlogsData.append(key, value)
-        })
-        
-        setLoading(true);
+    const UploadBlog = () => {        
+        setUploading(true);
         axios.post(`${URL}/api/blogs/upload`, BlogsData)
         .then(response => {
             toast.success(response.data.message)
@@ -80,13 +78,25 @@ const Blogs = ({ isSidebarHovered }) => {
             console.error(error)
             return toast.error(error.response?.data?.message)
         })
-        .finally(() => { setLoading(false) })
+        .finally(() => { setUploading(false) })
+    }
+
+    const SaveAsDraft = () => {        
+        setDrafting(true);
+        axios.post(`${URL}/api/blogs/save-as-draft`, BlogsData)
+        .then(response => {
+            toast.success(response.data.message)
+            setTimeout(() => {naviagte(0)},2500)
+        })
+        .catch(error => {
+            console.error(error)
+            return toast.error(error.response?.data?.message)
+        })
+        .finally(() => { setDrafting(false) })
     }
 
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
-
-    if(!blogsData) return (<p>No blogs have been uploaded</p>)
 
     return (
         <React.Fragment>
@@ -102,23 +112,27 @@ const Blogs = ({ isSidebarHovered }) => {
                     <CustomSearchBar placeholder="Search" />
                 </div>
 
+                { (blogsData.length===0)? (<p className="font-serif text-black text-2xl font-semibold italic px-12">No Blogs has been uploaded</p>)
+                :
+                (
                 <div className="w-full px-4 flex flex-wrap gap-8">
                     {blogsData.map(data => (
-                        <Link to={`/specific-blog/${data._id}`}><div className="max-w-80 max-h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-gray-200 box-border">
+                        <Link to={`/specific-blog/${data._id}`}><div className="max-w-80 max-h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-gray-200 box-border" key={data._id}>
                             <img src={data.thumbnail} alt="" className="w-full h-[75%] object-cover rounded-xl" />
                             <div className="flex flex-col gap-2">
                                 <h5 className="font-serif text-lg text-black font-semibold line-clamp-2">{data.title}</h5>
-                                {/* <p className="font-serif font-light text-black text-base">{data.uploadDate}</p> */}
-                                    <p className="font-serif font-light text-base text-gray-400 line-clamp-3 prose max-w-none">
-                                        <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                                            {data.content}
-                                        </ReactMarkdown>
-                                    </p>
-                                {/* <span className={`p-2 rounded-lg text-sm w-fit font-medium ${data.status === "Published" ? "bg-blue-50 text-blue-600" : "bg-yellow-100 text-yellow-600"}`}>{data.status}</span> */}
+                                <p className="font-serif font-light text-black text-sm text-gray-400">{new Date(data.updatedAt).toLocaleDateString("en-GB")}</p>
+                                <div className="font-serif font-light text-base text-gray-400 line-clamp-3 prose max-w-none">
+                                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                                        {data.content}
+                                    </ReactMarkdown>
+                                </div>
+                                <span className={`p-2 rounded-lg text-sm w-fit font-medium ${data.status === "Published" ? "bg-blue-50 text-blue-600" : "bg-yellow-100 text-yellow-600"}`}>{data.status}</span>
                             </div>
                         </div></Link>
                     ))}
                 </div>
+                )}
 
             </div>
 
@@ -136,9 +150,11 @@ const Blogs = ({ isSidebarHovered }) => {
                     </div>
 
                     <div className="w-full px-6 flex justify-center gap-2">
-                        <CustomButton>save as draft</CustomButton>
-                        <CustomButton onClick={UploadBlog} disabled={loading}>
-                            {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "upload blog"}
+                        <CustomButton onClick={SaveAsDraft} disabled={drafting}>
+                            {drafting ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "save as draft"}
+                        </CustomButton>
+                        <CustomButton onClick={UploadBlog} disabled={uploading}>
+                            {uploading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "upload blog"}
                         </CustomButton>
                     </div>
 

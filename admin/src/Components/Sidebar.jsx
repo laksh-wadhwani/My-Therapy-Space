@@ -23,7 +23,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                 onMouseLeave={() => onHoverChange(false)}>
 
                 <div className="flex items-center gap-2">
-                    <img src="./logo.svg" alt="Company Logo" className="size-10 group-hover:size-14 transition-all duration-300" />
+                    <img src="../logo.svg" alt="Company Logo" className="size-10 group-hover:size-14 transition-all duration-300" />
                     <span className="font-serif capitalize text-lg text-[#0BAFA6] italic whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">my therapy space</span>
                 </div>
 
