@@ -123,3 +123,28 @@ export const DeleteBlog = async(request, response) => {
         return response.status(500).json({error: "Internal Server Error"})
     }
 }
+
+export const ChangeStatus = async(request, response) => {
+    try {
+        const { id } = request.params
+        const blog = await BlogsModel.findById(id)
+
+        if(!blog)
+            return response.status(400).json({error: "Blog Not Found"})
+
+        if(blog.status==="Draft"){
+            blog.status = "Published"
+            await blog.save();
+            return response.status(201).json({message: "Blog have been successfully published"})
+        }
+
+        if(blog.status==="Published"){
+            blog.status = "Draft"
+            await blog.save();
+            return response.status(201).json({message: "Blog have been moved to draft"})
+        }
+    } catch (error) {
+        console.log("Getting error in changing status: ",error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}

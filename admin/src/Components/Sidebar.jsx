@@ -76,7 +76,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                     </button>
                 </div>
 
-                <div className="group/menu flex items-center gap-2 bg-[#0BAFA6] p-2 box-border rounded-lg font-serif w-fit self-center group-hover:self-start">
+                <Link to={`/profile`}><div className="group/menu flex items-center gap-2 bg-[#0BAFA6] p-2 box-border rounded-lg font-serif w-fit self-center group-hover:self-start">
 
                     {user.profile? 
                     (<img src={user.profile} alt="User Profile" className="w-10 h-10 object-cover rounded-full flex-shrink-0" />):
@@ -88,7 +88,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                     <span className="text-lg text-white hidden transition-display duration-100 ease-in-out group-hover:contents">
                        {user.role.toUpperCase()}
                     </span>
-                </div>
+                </div></Link>
 
             </div>
         </React.Fragment>

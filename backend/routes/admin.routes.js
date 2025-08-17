@@ -1,5 +1,5 @@
 import express from "express"
-import {ApproveAdmin, GetAdmins, Login, SignUp, verifyOtp} from "../controllers/admin.controller.js";
+import {ApproveAdmin, ForgetPassword, GetAdmins, Login, SignUp, Update, verifyOtp} from "../controllers/admin.controller.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
 import upload from "../middlewares/multer.js";
 import { signupValidation } from "../middlewares/signupValidations.js";
@@ -11,5 +11,7 @@ router.put("/verify-otp/:email", verifyOtp)
 router.post("/login", Login)
 router.get("/get-admins", GetAdmins)
 router.put("/approve-admin/:id", ApproveAdmin)
+router.put("/forget-password", ForgetPassword)
+router.put("/update/:id", upload.single("profile"), Update)
 
 export default router

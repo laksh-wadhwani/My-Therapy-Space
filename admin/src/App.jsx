@@ -13,6 +13,7 @@ import { BackendProvider } from "./BackendContext.jsx";
 import { ToastContainer } from "react-toastify";
 import {jwtDecode} from "jwt-decode"
 import SpecificBlog from "./Screens/SpecificBlog.jsx";
+import Profile from "./Screens/Profile.jsx";
 
 const App = () => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
@@ -39,6 +40,7 @@ const App = () => {
      
         <Sidebar onHoverChange={setIsSidebarHovered} user={user} setLoginUser={setLoginUser}/>
         <Routes>
+          <Route path="/profile" element={<Profile isSidebarHovered={isSidebarHovered} user={user} />} />
           <Route path="/dashboard" element={<Dashboard isSidebarHovered={isSidebarHovered} user={user} />} />
           <Route exact path="/manage-workshops" element={<Workshops isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-user-queries" element={<UserQueries isSidebarHovered={isSidebarHovered}/>}/>

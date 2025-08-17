@@ -64,6 +64,18 @@ const SpecificBlog = ({isSidebarHovered}) => {
     })
   }
 
+  const ChangeStatus = blogId => {
+    axios.put(`${URL}/api/blogs/change-status/${blogId}`)
+    .then(response => {
+      toast.success(response.data.message)
+      setTimeout(() => {naviagte("/manage-blogs")},2500)
+    })
+    .catch(error => {
+      console.error("Getting error in changing status: ",error)
+      return toast.error(error?.response?.data?.error)
+    })
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -126,6 +138,7 @@ const SpecificBlog = ({isSidebarHovered}) => {
           <div className="w-full flex justify-evenly">
             <CustomButton className="w-[30%]" onClick={() => setEditBlog(true)}>Edit Blog</CustomButton>
             <CustomButton className="w-[30%]" onClick={() => DeleteBlog(id)}>Delete Blog</CustomButton>
+            <CustomButton className="w-[30%]" onClick={() => ChangeStatus(id)}>Change Status</CustomButton>
           </div>
         )}
        

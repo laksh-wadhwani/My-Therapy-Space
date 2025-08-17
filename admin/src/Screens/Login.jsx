@@ -46,6 +46,19 @@ const Login = ({setLoginUser}) => {
         .finally(() => {setLoading(false)})
     }
 
+    const ForgetPassword = () => {
+        const {email} = user
+        axios.put(`${URL}/api/admin/forget-password`, {email})
+        .then(response => {
+            toast.success(response.data.message)
+            setTimeout(() => {navigate(0)},2500)
+        })
+        .catch(error => {
+            console.error("Getting error in forgetting password")
+            return toast.error(error?.response?.data?.error)
+        })
+    }
+
     return (
         <React.Fragment>
 
@@ -60,8 +73,8 @@ const Login = ({setLoginUser}) => {
                     {forgetPassToggle? 
                     (
                     <>
-                        <CustomInput label="Enter registered email" type="email" placeholder="Email"/>
-                        <CustomButton>Forget Password</CustomButton>
+                        <CustomInput label="Enter registered email" type="email" placeholder="Email" name="email" value={user.email} onChange={handleChange}/>
+                        <CustomButton onClick={ForgetPassword}>Forget Password</CustomButton>
                     </>
                     )
                     :

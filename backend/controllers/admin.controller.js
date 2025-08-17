@@ -2,10 +2,11 @@ import jwt from "jsonwebtoken"
 import GenerateOTP from "../utils/OtpGenerator.js"
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js"
 
-import { adminApprovalEmailTemplate, otpEmailTemplate } from "../utils/emailTemplates.js"
+import { adminApprovalEmailTemplate, forgotPasswordWithNewPasswordTemplate, otpEmailTemplate } from "../utils/emailTemplates.js"
 import { transporter } from "../config/mailer.js"
 import uploadToCloudinary from "../config/cloudinary.js"
 import AdminModel from "../models/Admin.js"
+import { generateTempPassword } from "../utils/passwordGenerator.js"
 
 export const SignUp = async (request, response) => {
     try {
@@ -178,6 +179,65 @@ export const ApproveAdmin = async(request, response) => {
         return response.status(200).json({message: "Admin has been approved"})
     } catch (error) {
         console.log("Getting error in approving admins request", error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
+export const ForgetPassword = async(request, response) => {
+    try {
+        const { email } = request.body
+        const user = await AdminModel.findOne({email})
+        
+
+        if(!user)
+            return response.status(400).json({error: "User not found"})
+
+        const tempPassword = generateTempPassword();
+        const hashPass = await encryptPassword(tempPassword)
+        user.password = hashPass
+        await user.save();
+
+        await transporter.sendMail({
+            from: `"My Therapy Space" <no-reply@mytherapyspace.com.au>`,
+            to: email,
+            subject: "Your New Temporary Password 🔑",
+            html: forgotPasswordWithNewPasswordTemplate(user.fullname, tempPassword)
+        })
+
+        return response.status(201).json({message: "New Password sent to your email"})
+
+    } catch (error) {
+        console.log("Getting error in forgetting password: ",error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
+export const Update = async(request, response) => {
+    try {
+        const { id } = request.params
+        const {fullname, email, password, newPass} = request.body
+        let profile = null
+        if(request.file)
+            profile = await uploadToCloudinary(request.file.buffer)
+
+        const admin = await AdminModel.findById(id)
+
+        const isPassMatch = await decryptPassword(password, admin.password)
+        const newHashPass = await encryptPassword(newPass)
+
+
+        if(!admin)
+            return response.status.json({error: "User not found"})
+
+        if(fullname) admin.fullname = fullname;
+        if(email) admin.email = email
+        if(profile) admin.profile = profile
+        if(isPassMatch) admin.password = newHashPass
+        await admin.save();
+        return response.status(201).json({message: "Basic details have been updated"})
+        
+    } catch (error) {
+        console.log("Getting error in updating user: ",error)
         return response.status(500).json({error: "Internal Server Error"})
     }
 }
