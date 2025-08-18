@@ -31,3 +31,7 @@ app.use("/api/admin", adminRoutes)
 //Blog Routes
 import blogRoutes from "./routes/blogs.routes.js"
 app.use("/api/blogs", blogRoutes)
+
+//Workshop Routes
+import workshopRoutes from "./routes/workshop.routes.js"
+app.use("/api/workshops", workshopRoutes)
