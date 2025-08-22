@@ -1,29 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomButton from "../Components/CustomButton";
 import { Modal } from 'react-responsive-modal';
 import CustomInput from "../Components/CustomInput";
-import Product1 from "../assets/product1.svg"
-import Product2 from "../assets/product2.svg"
-import Product3 from "../assets/product3.svg"
 import CustomSearchBar from "../Components/CustomSearchBar";
+import CustomTextArea from "../Components/CustomTextArea";
+import CustomEditor from "../Components/CustomEditor";
+import { BackendURL } from "../BackendContext";
+import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify";
+import CustomFileUpload from "../Components/CustomFileUpload";
+import axios from "axios";
 
-const Products = ({isSidebarHovered}) => {
+const Products = ({ isSidebarHovered }) => {
 
+    const URL = BackendURL();
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [products, setProducts] = useState([])
+    const [productDetails, setProductDetails] = useState({
+        name: "",
+        price: 0,
+        thumbnail: null,
+        pictures: [],
+        description: "",
+        features: ""
+    })
 
-    const onOpenModal = () => setOpen(true);
-    const onCloseModal = () => setOpen(false);
+    useEffect(() => {
+        axios.get(`${URL}/api/products/get-all-products`)
+            .then(response => setProducts(response.data))
+            .catch(error => console.error("Getting error in fetching product details: ", error))
+    })
 
-    const productsData = [
-            {id: 1, title: "Visual Routine Chart Blank", price: "$8.99", picture: Product1},
-            {id: 2, title: "2 Year Old Circle Time Board", price: "$8.82", picture: Product2},
-            {id: 3, title: "10 Interactive Song Boards", price: "$7.00", picture: Product3},
-            {id: 4, title: "Visual Routine Chart Blank", price: "$8.99", picture: Product1},
-            {id: 5, title: "2 Year Old Circle Time Board", price: "$8.82", picture: Product2},
-            {id: 6, title: "10 Interactive Song Boards", price: "$7.00", picture: Product3}
-    ]
+    const handleChange = (name, value) => {
+        setProductDetails(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
 
-    return(
+    const AddProduct = () => {
+        const ProductsData = new FormData();
+        Object.entries(productDetails).forEach(([key, value]) => {
+            if (Array.isArray(value))
+                value.forEach((file) => ProductsData.append(key, file)); // Handles multiple image files
+            else if (value instanceof File)
+                ProductsData.append(key, value); //Handles single upload
+            else
+                ProductsData.append(key, value); //Handles text fields
+        });
+        setLoading(true)
+        axios.post(`${URL}/api/products/add-product`, ProductsData)
+            .then(response => {
+                toast.success(response.data.message)
+                setTimeout(() => { navigate(0) }, 2500)
+            })
+            .catch(error => {
+                console.error("Getting error in adding product: ", error)
+                return toast.error(error.response?.data?.error)
+            })
+            .finally(() => { setLoading(false) })
+    }
+
+    return (
         <React.Fragment>
 
             <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 pb-12`}>
@@ -34,45 +74,52 @@ const Products = ({isSidebarHovered}) => {
                 </div>
 
                 <div className="w-full px-4 pr-16 flex justify-between">
-                    <CustomButton onClick={onOpenModal}>add new product</CustomButton>
-                    <CustomSearchBar placeholder="Search"/>
+                    <CustomButton onClick={() => setOpen(true)}>add new product</CustomButton>
+                    <CustomSearchBar placeholder="Search" />
                 </div>
 
-                <div className="w-full px-4 flex flex-wrap gap-16">
-                   {productsData.map(product => (
-                       <div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
-                            <img src={product.picture} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
-                            <div className="flex flex-col items center">
-                                <h5 className="font-serif text-black text-lg text-center">{product.title}</h5>
-                                <p className="font-serif text-gray-400 text-center">{product.price}</p>
-                            </div>
+                {(products.length === 0) ? (<p className="font-serif text-3xl italic capitalize text-center font-semibold">no products has been uploaded</p>) :
+                    (
+                        <div className="w-full px-4 flex flex-wrap gap-16">
+                            {products.map(product => (
+                                <Link to={`/product/${product._id}`}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105" key={product._id}>
+                                    <img src={product.thumbnail} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
+                                    <div className="flex flex-col items center">
+                                        <h5 className="font-serif text-black text-xl font-semibold text-center">{product.name}</h5>
+                                        <p className="font-serif text-gray-500 text-center text-base">${product.price}</p>
+                                    </div>
+                                </div></Link>
+                            ))}
                         </div>
-                    ))}
+                    )}
+
+            </div>
+
+            <Modal open={open} onClose={() => setOpen(false)} center
+                styles={{ closeButton: { display: 'none' }, modal: { padding: '0', borderRadius: ".8rem" } }}>
+
+                <div className="w-full flex flex-col gap-4 w-3xl box-border pb-6">
+
+                    <h5 className="font-serif text-xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6">add new product</h5>
+
+                    <div className="w-full flex flex-col gap-4 px-6">
+                        <CustomInput label="product name" placeholder="Name" type="text" value={productDetails.name} onChange={e => handleChange("name", e.target.value)} />
+                        <CustomInput label="price" type="number" placeholder="Price" value={productDetails.price} onChange={e => handleChange("price", e.target.value)} />
+                        <CustomFileUpload label="Thumbnail" value={productDetails.thumbnail} onChange={file => handleChange("thumbnail", file)} />
+                        <CustomFileUpload label="Product Pictures" multiple value={productDetails.pictures} onChange={files => handleChange("pictures", files)} />
+                        <CustomTextArea label="description" placeholder="Enter Short Description for Product" maxWords={100} value={productDetails.description} onChange={e => handleChange("description", e.target.value)} />
+                        <CustomEditor value={productDetails.features} onChange={value => handleChange("features", value)} />
+                    </div>
+
+                    <div className="w-full px-6 flex justify-center gap-2">
+                        <CustomButton onClick={AddProduct} disabled={loading}>
+                            {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "add product"}
+                        </CustomButton>
+                    </div>
+
                 </div>
 
-            </div> 
-
-        <Modal open={open} onClose={onCloseModal} center 
-        styles={{closeButton:{display:'none'}, modal:{padding:'0', borderRadius: ".8rem"}}}>
-
-            <div className="w-full flex flex-col gap-6 w-sm box-border pb-10">
-
-            <h5 className="font-serif text-xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6">add new product</h5>
-
-            <div className="w-full flex flex-col gap-4 px-6">
-                <CustomInput label="product name" placeholder="Name" type="text"/>
-                <CustomInput label="price" type="number" placeholder="Price"/>
-                <CustomInput label="product picture" type="file"/>
-                <CustomInput label="product description" placeholder="Description" type="text"/>
-            </div>
-
-            <div className="w-full px-6 flex justify-center gap-2">
-                <CustomButton>Add Product</CustomButton>
-            </div>
-
-            </div>
-
-        </Modal>
+            </Modal>
 
         </React.Fragment>
     )

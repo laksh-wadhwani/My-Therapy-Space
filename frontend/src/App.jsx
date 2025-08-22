@@ -19,6 +19,7 @@ import SpecificVideo from "./Screens/specific_video";
 import Booking from "./Screens/Booking";
 import Cart from "./Screens/Cart";
 import { BackendProvider } from "./BackendContext";
+import { ToastContainer } from "react-toastify"
 
 const App = () => {
   return(
@@ -46,6 +47,7 @@ const App = () => {
         <Route exact path="/cart" element={<Cart/>}/>
       </Routes>
     </Router>
+    <ToastContainer position="top-right" autoClose={2500}/>
     </BackendProvider>
   )
 }

@@ -35,3 +35,14 @@ app.use("/api/blogs", blogRoutes)
 //Workshop Routes
 import workshopRoutes from "./routes/workshop.routes.js"
 app.use("/api/workshops", workshopRoutes)
+
+//Products Routes
+import productRoutes from "./routes/products.routes.js"
+app.use("/api/products", productRoutes)
+
+// User Queries Routes
+import queryRoutes from "./routes/query.routes.js"
+app.use("/api/queries", queryRoutes)
+
+import bookingRoutes from "./routes/booking.routes.js"
+app.use("/api/bookings", bookingRoutes)

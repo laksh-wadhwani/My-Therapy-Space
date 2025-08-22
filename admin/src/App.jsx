@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import {jwtDecode} from "jwt-decode"
 import SpecificBlog from "./Screens/SpecificBlog.jsx";
 import Profile from "./Screens/Profile.jsx";
+import SpecificProduct from "./Screens/SpecificProduct.jsx";
 
 const App = () => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
@@ -47,6 +48,7 @@ const App = () => {
           <Route exact path="/manage-blogs" element={<Blogs isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/specific-blog/:id" element={<SpecificBlog isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-products" element={<Products isSidebarHovered={isSidebarHovered}/>}/>
+          <Route exact path="/product/:id" element={<SpecificProduct isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
         </Routes>
       </div>)

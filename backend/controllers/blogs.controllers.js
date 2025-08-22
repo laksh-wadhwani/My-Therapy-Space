@@ -70,6 +70,18 @@ export const GetAllBlogs = async(request, response) => {
     }
 }
 
+export const GetPublishedBlogs = async(request, response) => {
+    try {
+        const blogs = await BlogsModel.find({status: "Published"})
+        if(!blogs)
+            return response.status(400).json({error: "Blogs not found"})
+        return response.status(200).json(blogs)
+    } catch (error) {
+        console.log("Getting error in fetching published blogs: ",error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
 export const GetSpecificBlog = async(request, response) => {
     const { id } = request.params
     const blog = await BlogsModel.findById(id)

@@ -195,7 +195,6 @@ const Workshops = ({ isSidebarHovered }) => {
         <div className="w-full box-border">
           {workshop && <img src={workshop.workshopImage}/>}
         </div>
-
       </Modal>
 
       <Modal open={editDetails} onClose={() => setEditDetails(false)} center

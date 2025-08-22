@@ -70,3 +70,32 @@ export const forgotPasswordWithNewPasswordTemplate = (fullname, newPassword) => 
     </div>
     `;
 };
+
+export const queryReplyEmailTemplate = (fullname, adminReply) => {
+  return `
+  <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+      <h2 style="text-align: center; color: #0BAFA6;">My Therapy Space</h2>
+      <p>Hi <strong>${fullname}</strong>,</p>
+      <p>Thank you for reaching out to us. Our team has reviewed your query and here is the response:</p>
+
+      <div style="background: #f9f9f9; border-left: 4px solid #0BAFA6; padding: 15px; margin: 20px 0; border-radius: 5px;">
+        <p style="margin: 0; color: #333; font-size: 15px;">
+          ${adminReply}
+        </p>
+      </div>
+
+      <p>If you have any further questions, feel free to reply to this email.  
+      We’re always here to help!</p>
+
+      <p>Best regards,<br>
+      The My Therapy Space Team</p>
+
+      <hr style="border: none; border-top: 1px solid #eee; margin-top: 20px;">
+      <small style="display: block; text-align: center; color: #777;">
+        This is a response to your query submitted via our Contact Us form.
+      </small>
+    </div>
+  </div>
+  `;
+};

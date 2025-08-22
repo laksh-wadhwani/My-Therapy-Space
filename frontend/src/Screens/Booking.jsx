@@ -2,8 +2,45 @@ import React from "react";
 import BookingGirl from "../assets/booking girl.svg"
 import Footer from "../Components/footer";
 import RButton from "../Components/Reusable_Button";
+import { BackendURL } from "../BackendContext";
+import { useNavigate } from "react-router"
+import { useState } from "react";
+import axios from "axios"
+import { toast } from "react-toastify"
 
 const Booking = () => {
+
+    const URL = BackendURL();
+    const navigate = useNavigate();
+    const [bookingDetails, setBookingDetails] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNo: "",
+        date: Date.now(),
+        timing: Date.now()
+    })
+
+    const handleChange = eventTriggered => {
+        const { name, value } = eventTriggered.target
+        setBookingDetails({
+            ...bookingDetails,
+            [name] : value
+        })
+    }
+
+    const BookACall = () => {
+        axios.post(`${URL}/api/bookings/book-a-call`, bookingDetails)
+        .then(response => {
+            toast.success(response.data.message)
+            setTimeout(() => {navigate("/")}, 2500)
+        })
+        .catch(error => {
+            console.log("Getting error in booking a call: ",error)
+            return toast.error(error?.response?.data?.error)
+        })
+    }
+
     return(
         <React.Fragment>
             <div className="main-box bg-white">
@@ -19,36 +56,36 @@ const Booking = () => {
                             <div className="w-full flex justify-between">
                                 <div className="w-[47.5%] font-serif text-black">
                                     <label className="text-base capitalize">first name</label>
-                                    <input type="text" className="booking-inputs" />
+                                    <input type="text" className="booking-inputs" name="firstName" value={bookingDetails.firstName} onChange={handleChange} />
                                 </div>
 
                                 <div className="w-[47.5%] font-serif text-black">
                                     <label className="text-base capitalize">last name</label>
-                                    <input type="text" className="booking-inputs" />
+                                    <input type="text" className="booking-inputs" name="lastName" value={bookingDetails.lastName} onChange={handleChange} />
                                 </div>
                             </div>
 
                             <div className="w-full flex justify-between">
                                 <div className="w-[47.5%] font-serif text-black">
                                     <label className="text-base capitalize">email</label>
-                                    <input type="email" className="booking-inputs" />
+                                    <input type="email" className="booking-inputs" name="email" value={bookingDetails.email} onChange={handleChange} />
                                 </div>
 
                                 <div className="w-[47.5%] font-serif text-black">
                                     <label className="text-base capitalize">phone no</label>
-                                    <input type="tel" className="booking-inputs" />
+                                    <input type="tel" className="booking-inputs" name="phoneNo" value={bookingDetails.phoneNo} onChange={handleChange} />
                                 </div>
                             </div>
 
                             <div className="w-full flex justify-between">
                                 <div className="w-[47.5%] font-serif text-black">
                                     <label className="text-base capitalize">date</label>
-                                    <input type="date" className="booking-inputs" />
+                                    <input type="date" className="booking-inputs" name="date" value={bookingDetails.date} onChange={handleChange} />
                                 </div>
 
                                 <div className="w-[47.5%] font-serif text-black">
                                     <label className="text-base capitalize">available timings</label>
-                                    <input type="time" className="booking-inputs" />
+                                    <input type="time" className="booking-inputs" name="timing" value={bookingDetails.timing} onChange={handleChange} />
                                 </div>
                             </div>
 
@@ -57,7 +94,7 @@ const Booking = () => {
                                 <p> One of our client care team members will call the number you have provided at the appointment time.<br/>Please advise at least 1hr prior if you wish to cancel or reschedule your phone appointment.<br/>Upon confirming, your personal details will be sent securely to My Therapy Space. Please review and accept the privacy policy of My Therapy Space and click I reviewed and I accept.</p>
                             </div>
 
-                            <RButton className="px-8 py-2">Submit</RButton>
+                            <RButton className="px-8 py-2" onClick={BookACall}>Submit</RButton>
 
                         </div>
 

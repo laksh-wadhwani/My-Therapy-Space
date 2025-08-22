@@ -1,11 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/about.css"
 import Footer from "../Components/footer"
 import RButton from "../Components/Reusable_Button";
 import PhoneIcon from "../assets/phone icon.svg"
 import LocationIcon from "../assets/location icon.svg"
+import axios from "axios"
+import { BackendURL } from "../BackendContext";
+import { toast } from "react-toastify"
+import {useNavigate} from "react-router"
 
 const ContactUs = () => {
+    
+    const URL = BackendURL();
+    const navigate = useNavigate();
+    const [query, setQuery] = useState({
+        guardianName: "",
+        childName: "",
+        phoneNo: "",
+        email: "",
+        message: ""
+    })
+
+    const handleChange = eventTriggered => {
+        const {name, value} = eventTriggered.target
+        setQuery({
+            ...query,
+            [name]: value
+        })
+    }
+
+    const SendQuery = () => {
+        axios.post(`${URL}/api/queries/send-query`, query)
+        .then(response => {
+           toast.success(response.data.message)
+           setTimeout(() => {navigate("/")},2500)
+        })
+        .catch(error => {
+            console.error("Getting error in sending query: ",error)
+            return toast.error(error?.response?.data?.error)
+        })
+    }
+
     return(
         <React.Fragment>
             <div className="main-box bg-white gap-12 items-center">
@@ -54,25 +89,21 @@ const ContactUs = () => {
                         <span className="font-serif uppercase text-2xl">contact details</span>
 
                         <div className="w-full flex justify-between">
-                            <input className="contact-inputs" type="text" placeholder="guardian name" />
-                            <input className="contact-inputs" type="text" placeholder="child name" />
+                            <input className="contact-inputs" type="text" placeholder="Guardian Name" name="guardianName" value={query.guardianName} onChange={handleChange} />
+                            <input className="contact-inputs" type="text" placeholder="Child Name" name="childName" value={query.childName} onChange={handleChange} />
                         </div>
 
                         <div className="w-full flex justify-between">
-                            <input className="contact-inputs" type="text" placeholder="date of birth" />
-                            <input className="contact-inputs" type="text" placeholder="email" />
-                        </div>
-
-                        <div className="w-full flex justify-between">
-                            <input className="contact-inputs" type="text" placeholder="phone" />
+                            <input className="contact-inputs" type="text" placeholder="Phone" name="phoneNo" value={query.phoneNo} onChange={handleChange} />
+                            <input className="contact-inputs" type="email" placeholder="Email" name="email" value={query.email} onChange={handleChange} />
                         </div>
 
                         <div className="flex flex-col gap-2">
                             <label className="font-serif text-gray-400 text-base capitalize">message</label>
-                            <textarea className="w-full h-40 border-2 border-gray-400 rounded-xl"/>
+                            <textarea className="w-full h-40 border-2 border-gray-400 rounded-xl p-4" name="message" value={query.message} onChange={handleChange}/>
                         </div>
 
-                        <RButton className="px-6 py-4">Send Message</RButton>
+                        <RButton className="px-6 py-4" onClick={SendQuery}>Send Message</RButton>
                     </div>
                 </div>
 

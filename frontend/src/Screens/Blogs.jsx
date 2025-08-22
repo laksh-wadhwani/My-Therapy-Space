@@ -13,7 +13,7 @@ const Blogs = () => {
     const [blogsData, setBlogData] = useState([])
 
     useEffect(() => {
-        axios.get(`${URL}/api/blogs/get-all-blogs`)
+        axios.get(`${URL}/api/blogs/get-published-blogs`)
         .then(response => setBlogData(response.data))
     },[blogsData])
 
@@ -32,7 +32,7 @@ const Blogs = () => {
                             <img src={data.thumbnail} alt="" className="w-full h-[75%] object-cover rounded-xl" />
                             <div className="flex flex-col gap-2">
                                 <h5 className="font-serif text-lg text-black font-semibold line-clamp-2">{data.title}</h5>
-                                {/* <p className="font-serif font-light text-black text-base">{data.uploadDate}</p> */}
+                                <p className="font-serif font-light text-black text-base">{data.updatedAt}</p>
                                 <p className="font-serif font-light text-base text-gray-400 line-clamp-3">
                                     <ReactMarkdown rehypePlugins={[rehypeRaw]}>
                                         {data.content}
