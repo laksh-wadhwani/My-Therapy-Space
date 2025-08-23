@@ -48,25 +48,25 @@ const SpecificCourse = ({ isSidebarHovered }) => {
         }))
     }
 
-    // const UpdateCourse = productId => {
-    //     const CourseData = new FormData();
-    //     Object.entries(courseDetail).forEach(([key, value]) => {
-    //         CourseData.append(key, value)
-    //     })
-    //     CourseData.append("courseIncludes", courseIncludes) 
+    const UpdateCourse = courseId => {
+        const CourseData = new FormData();
+        Object.entries(courseDetails).forEach(([key, value]) => {
+            CourseData.append(key, value)
+        })
+        CourseData.append("courseIncludes", courseIncludes) 
         
-    //     setUpdating(true)
-    //     axios.put(`${URL}/api/courses/update-product/${productId}`, ProductsData)
-    //         .then(response => {
-    //             toast.success(response.data.message)
-    //             setTimeout(() => { navigate(0) }, 2500)
-    //         })
-    //         .catch(error => {
-    //             console.error("Getting error in adding product: ", error)
-    //             return toast.error(error.response?.data?.error)
-    //         })
-    //         .finally(() => { setUpdating(false) })
-    // }
+        setUpdating(true)
+        axios.put(`${URL}/api/courses/update-course/${courseId}`, CourseData)
+            .then(response => {
+                toast.success(response.data.message)
+                setTimeout(() => { navigate(0) }, 2500)
+            })
+            .catch(error => {
+                console.error("Getting error in updating course details: ", error)
+                return toast.error(error.response?.data?.error)
+            })
+            .finally(() => { setUpdating(false) })
+    }
 
     const DeleteCourse = courseId => {
         axios.delete(`${URL}/api/courses/delete-course/${courseId}`)
@@ -105,7 +105,7 @@ const SpecificCourse = ({ isSidebarHovered }) => {
                         <CustomEditor value={courseIncludes} onChange={value => setCourseIncludes(value)}/>
 
                         <div className="w-full flex justify-around" disabled={updating}>
-                            <CustomButton className="w-[30%] bg-blue-500" onClick={() => UpdateProduct(course._id)}>
+                            <CustomButton className="w-[30%] bg-blue-500" onClick={() => UpdateCourse(course._id)}>
                                 {updating ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "save"}
                             </CustomButton>
                             <CustomButton className="w-[30%] bg-red-500" onClick={() => setIsUpdate(false)}>Cancel</CustomButton>
@@ -116,7 +116,7 @@ const SpecificCourse = ({ isSidebarHovered }) => {
                 (
                     <>
                     <div className="w-full flex justify-around mt-16">
-                        <img  src={thumbnailImage} alt="Main Course"  className="w-[47.5%] max-h-[400px] rounded-xl shadow-md object-cover" />
+                        <video src={course.video} alt="Main Course" controls className="w-[47.5%] max-h-[400px] rounded-xl shadow-md object-cover" />
 
                         <div className="w-[50%] flex flex-col justify-between p-6 border border-gray-300 rounded-xl shadow-xl">
                             <div className="w-full flex flex-col font-serif text-black capitalize">

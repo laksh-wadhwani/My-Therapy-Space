@@ -3,12 +3,6 @@ import CustomButton from "../Components/CustomButton";
 import { Modal } from 'react-responsive-modal';
 import CustomInput from "../Components/CustomInput";
 import CustomTextArea from "../Components/CustomTextArea"
-import Video1 from "../assets/video1.png"
-import Video2 from "../assets/video2.png"
-import Video3 from "../assets/video3.png"
-import Video4 from "../assets/video4.png"
-import Video5 from "../assets/video5.png"
-import Video6 from "../assets/video6.png"
 import CustomSearchBar from "../Components/CustomSearchBar";
 import CustomFileUpload from "../Components/CustomFileUpload";
 import CustomEditor from "../Components/CustomEditor";
