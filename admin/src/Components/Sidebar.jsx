@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Logs, Store, FileUser, LogOut, MonitorStop, Box } from 'lucide-react';
+import { LayoutDashboard, Logs, Store, FileUser, LogOut, MonitorStop, Box, PhoneCall } from 'lucide-react';
 
 
 const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
@@ -27,7 +27,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                     <span className="font-serif capitalize text-lg text-[#0BAFA6] italic whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">my therapy space</span>
                 </div>
 
-                <div className="w-full flex flex-col gap-6">
+                <div className="w-full flex flex-col gap-4">
                     <Link to="/dashboard">
                         <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
                             <LayoutDashboard className="size-6" />
@@ -67,6 +67,13 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                         <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
                             <FileUser className="size-6" />
                             <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Manage User Queries</span>
+                        </button>
+                    </Link>
+
+                    <Link to="/manage-bookings">
+                        <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
+                            <PhoneCall className="size-6" />
+                            <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Manage Bookings</span>
                         </button>
                     </Link>
 

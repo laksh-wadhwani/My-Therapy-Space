@@ -15,6 +15,8 @@ import {jwtDecode} from "jwt-decode"
 import SpecificBlog from "./Screens/SpecificBlog.jsx";
 import Profile from "./Screens/Profile.jsx";
 import SpecificProduct from "./Screens/SpecificProduct.jsx";
+import SpecificCourse from "./Screens/SpecificCourse.jsx";
+import Booking from "./Screens/Booking.jsx";
 
 const App = () => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
@@ -50,6 +52,8 @@ const App = () => {
           <Route exact path="/manage-products" element={<Products isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/product/:id" element={<SpecificProduct isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
+          <Route exact path="/course/:id" element={<SpecificCourse isSidebarHovered={isSidebarHovered}/>}/>
+          <Route exact path="/manage-bookings" element={<Booking isSidebarHovered={isSidebarHovered}/>} />
         </Routes>
       </div>)
       :

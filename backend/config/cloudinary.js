@@ -6,15 +6,18 @@ cloudinary.config({
     api_secret: process.env.API_SECRET,
 })
 
-const uploadToCloudinary = fileBuffer => {
+const uploadToCloudinary = (fileBuffer, resourceType = "auto") => {
     return new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream((error, result) => {
-            if(error){
-                console.log("Error in Uploading to cloudinaty")
-                reject(error)
+        cloudinary.uploader.upload_stream(
+            {resource_type: resourceType},
+            (error, result) => {
+                if(error){
+                    console.log("Getting error in uploading file to cloudinary: ",error)
+                    return reject(error)
+                }
+                return resolve(result.secure_url)
             }
-            else resolve(result.secure_url)
-        }).end(fileBuffer)
+        ).end(fileBuffer)
     })
 }
 

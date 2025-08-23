@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/book-a-call", BookACall)
 router.get("/get-all-bookings", GetAllBookings)
 router.get("/get-specific-booking", GetSpecificBooking)
-router.put("/change-status", ChangeStatus)
-router.delete("/delete-booking", DeleteBooking)
+router.put("/change-status/:id", ChangeStatus)
+router.delete("/delete-booking/:id", DeleteBooking)
 
 export default router

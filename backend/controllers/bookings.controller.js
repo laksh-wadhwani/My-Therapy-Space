@@ -4,6 +4,21 @@ export const BookACall = async(request, response) => {
     try {
         const {firstName, lastName, email, phoneNo, date, timing} = request.body
 
+        const bookingDateTime = new Date(`${date}T${timing}`)
+        const day = bookingDateTime.getDay()
+        const hours = bookingDateTime.getHours();
+        const minutes = bookingDateTime.getMinutes()
+
+        if(day === 0 || day === 6)
+            return response.status(400).json({error: "These are not our working days. Please select a date between Monday and Friday."})
+
+        const totalMinutes = (hours*60) + minutes
+        const startTime = 9*60
+        const endTime = 17*60
+
+        if(totalMinutes < startTime || totalMinutes > endTime)
+            return response.status(400).json({error: "These are not our working hours. Please select a time between 9:00 AM and 5:00 PM."})
+
         const booking = await BookingModel.findOne({firstName, lastName, date, timing})
         if(booking){
             if(booking.status === "Pending")
