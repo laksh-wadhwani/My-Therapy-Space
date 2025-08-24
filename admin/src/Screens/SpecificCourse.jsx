@@ -19,14 +19,13 @@ const SpecificCourse = ({ isSidebarHovered }) => {
     const [updating, setUpdating] = useState(false)
     const [update, setIsUpdate] = useState(false) 
     const [course, setCourse] = useState(null)
-    const [thumbnailImage, setThumbnailImage] = useState(null)
+    const [thumbnailVideo, setThumbnailVideo] = useState(null)
     const [courseIncludes, setCourseIncludes] = useState("")
     const [courseDetails, setCourseDetails] = useState({
         name: "",
         price: 0,
         description: "",
         thumbnail: null,
-        trailer: null,
         video: null
     })
 
@@ -34,7 +33,7 @@ const SpecificCourse = ({ isSidebarHovered }) => {
         axios.get(`${URL}/api/courses/get-specific-course/${id}`)
             .then(response => {
                 setCourse(response.data)
-                setThumbnailImage(response.data.thumbnail) 
+                setThumbnailVideo(response.data.video) 
                 setCourseIncludes(response.data.courseIncludes)
             })
             .catch(error => console.error("Getting error in fetching specific course details: ", error))
@@ -99,7 +98,6 @@ const SpecificCourse = ({ isSidebarHovered }) => {
                         <CustomInput label="Title" placeholder={course.name} value={courseDetails.name} onChange={e => handleChange("name", e.target.value)}/>
                         <CustomInput label="Price" placeholder={course.price} value={courseDetails.price} onChange={e => handleChange("price", e.target.value)}/>
                         <CustomFileUpload label="Thumbnail" value={courseDetails.thumbnail} onChange={file => handleChange("thumbnail", file)}/>
-                        <CustomFileUpload label="Trailer" value={courseDetails.trailer} onChange={file => handleChange("trailer", file)}/>
                         <CustomFileUpload label="Video" value={courseDetails.video} onChange={file => handleChange("video", file)}/>
                         <CustomTextArea label="description" placeholder={course.description} maxWords={100} value={courseDetails.description} onChange={e => handleChange("description", e.target.value)}/>
                         <CustomEditor value={courseIncludes} onChange={value => setCourseIncludes(value)}/>
@@ -116,7 +114,7 @@ const SpecificCourse = ({ isSidebarHovered }) => {
                 (
                     <>
                     <div className="w-full flex justify-around mt-16">
-                        <video src={course.video} alt="Main Course" controls className="w-[47.5%] max-h-[400px] rounded-xl shadow-md object-cover" />
+                        <video src={course.video} poster={course.thumbnail} alt="Main Course" controls className="w-[47.5%] max-h-[400px] rounded-xl shadow-md object-cover" />
 
                         <div className="w-[50%] flex flex-col justify-between p-6 border border-gray-300 rounded-xl shadow-xl">
                             <div className="w-full flex flex-col font-serif text-black capitalize">
@@ -129,7 +127,6 @@ const SpecificCourse = ({ isSidebarHovered }) => {
                                 <CustomButton className="w-[45%]" onClick={() => DeleteCourse(course._id)}>Delete</CustomButton>
                             </div>
                         </div>
-
                     </div>
 
                      <div className="w-full border border-gray-300 rounded-xl shadow-md flex flex-col gap-2">

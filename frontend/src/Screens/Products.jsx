@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Footer from "../Components/footer";
 import Product1 from "../assets/product1.svg"
@@ -6,9 +6,14 @@ import Product2 from "../assets/product2.svg"
 import Product3 from "../assets/product3.svg"
 import RButton from "../Components/Reusable_Button";
 import { Link } from "react-router";
+import { BackendURL } from "../BackendContext";
+import axios from "axios";
 
 const Products = () => {
 
+    const URL = BackendURL()
+    const [products, setProducts] = useState([])
+    
     const productsData = [
         {id: 1, title: "Visual Routine Chart Blank", price: "$8.99", picture: Product1},
         {id: 2, title: "2 Year Old Circle Time Board", price: "$8.82", picture: Product2},

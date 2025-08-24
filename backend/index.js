@@ -24,6 +24,11 @@ app.get("/", async(request, response) => {
     response.json("Backend is working....")
 })
 
+app.use((req, res, next) => {
+  res.setTimeout(5 * 60 * 1000); 
+  next();
+});
+
 //Admin Routes
 import adminRoutes from "./routes/admin.routes.js"
 app.use("/api/admin", adminRoutes)

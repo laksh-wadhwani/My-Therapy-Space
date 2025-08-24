@@ -132,11 +132,10 @@ const SpecificProduct = ({ isSidebarHovered }) => {
                                 <CustomButton className="w-[45%]" onClick={() => DeleteProduct(product._id)}>Delete</CustomButton>
                             </div>
                         </div>
-
                     </div>
 
                     {product.pictures?.length > 0 && (
-                        <div className="w-full grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-6">
+                        <div className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-6">
                             {product.pictures.map((pic, index) => (
                                 <img 
                                     key={index} 

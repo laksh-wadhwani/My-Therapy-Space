@@ -25,7 +25,6 @@ const Courses = ({ isSidebarHovered }) => {
         price: 0,
         description: "",
         thumbnail: null,
-        trailer: null,
         video: null,
         courseIncludes: ""
     })
@@ -85,18 +84,21 @@ const Courses = ({ isSidebarHovered }) => {
                     <CustomSearchBar placeholder="Search" />
                 </div>
 
-
-                <div className="w-full px-4 flex flex-wrap gap-16">
-                    {courses.map(course => (
-                        <Link to={`/course/${course._id}`}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
-                            <img src={course.thumbnail} alt="Course Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
-                            <div className="flex flex-col items center px-2">
-                                <h5 className="font-serif text-black text-xl font-semibold text-center">{course.name}</h5>
-                                <p className="font-serif text-gray-500 text-center text-base">${course.price}</p>
-                            </div>
-                        </div></Link>
-                    ))}
-                </div>
+                {(courses.length === 0) ? (<p className="font-serif text-3xl italic capitalize text-center font-semibold">no courses have been uploaded</p>) :
+                    (
+                        <div className="w-full px-4 flex flex-wrap gap-16">
+                            {courses.map(course => (
+                                <Link to={`/course/${course._id}`}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
+                                    <img src={course.thumbnail} alt="Course Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
+                                    <div className="flex flex-col items center px-2">
+                                        <h5 className="font-serif text-black text-xl font-semibold text-center">{course.name}</h5>
+                                        <p className="font-serif text-gray-500 text-center text-base">${course.price}</p>
+                                    </div>
+                                </div></Link>
+                            ))}
+                        </div>
+                    )
+                }
 
             </div>
 
@@ -113,7 +115,6 @@ const Courses = ({ isSidebarHovered }) => {
                         <CustomTextArea label="course description" placeholder="Description" maxWords={100} value={courseDetail.description} onChange={e => handleChange("description", e.target.value)} />
                         <div className="w-full flex justify-between">
                             <CustomFileUpload label="Thumbnail" value={courseDetail.thumbnail} onChange={file => handleChange("thumbnail", file)} />
-                            <CustomFileUpload label="Trailer" value={courseDetail.trailer} onChange={file => handleChange("trailer", file)} />
                             <CustomFileUpload label="Video" value={courseDetail.video} onChange={file => handleChange("video", file)} />
                         </div>
                         <CustomEditor value={courseDetail.courseIncludes} onChange={value => handleChange("courseIncludes", value)} />
