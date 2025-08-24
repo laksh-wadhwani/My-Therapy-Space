@@ -1,0 +1,101 @@
+export const otpEmailTemplate = (fullname, otp) => {
+    return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h2 style="text-align: center; color: #0BAFA6;">My Therapy Space</h2>
+            <p>Hi <strong>${fullname}</strong>,</p>
+            <p>Welcome to <a href="https://mytherapyspace.com.au" style="color: #0BAFA6; text-decoration: none;">My Therapy Space</a>! We're excited to have you on board.</p>
+            <p>Your One-Time Password (OTP) to verify your account is:</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <span style="display: inline-block; background: #0BAFA6; color: white; font-size: 24px; padding: 10px 20px; border-radius: 5px; letter-spacing: 4px;">
+                    ${otp}
+                </span>
+            </div>
+            <p>This OTP is valid for <strong>2 minutes</strong>. Please do not share it with anyone.</p>
+            <p>Thank you,<br>
+            The My Therapy Space Team</p>
+            <hr style="border: none; border-top: 1px solid #eee; margin-top: 20px;">
+            <small style="display: block; text-align: center; color: #777;">If you did not request this, please ignore this email.</small>
+        </div>
+    </div>
+    `;
+};
+
+export const adminApprovalEmailTemplate = (fullname) => {
+    return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h2 style="text-align: center; color: #0BAFA6;">My Therapy Space</h2>
+            <p>Hi <strong>${fullname}</strong>,</p>
+            <p>Good news! Your admin account has been <strong>approved</strong> by our Super Admin.</p>
+            <p>You can now log in and start using your account:</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="https://mytherapyspace.com.au" 
+                   style="display: inline-block; background: #0BAFA6; color: white; font-size: 18px; padding: 12px 24px; border-radius: 5px; text-decoration: none;">
+                    Go to Login
+                </a>
+            </div>
+            <p>If you face any issues, feel free to contact our support team.</p>
+            <p>Thank you,<br>
+            The My Therapy Space Team</p>
+            <hr style="border: none; border-top: 1px solid #eee; margin-top: 20px;">
+            <small style="display: block; text-align: center; color: #777;">
+                If you did not request this approval, please contact support immediately.
+            </small>
+        </div>
+    </div>
+    `;
+};
+
+export const forgotPasswordWithNewPasswordTemplate = (fullname, newPassword) => {
+    return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h2 style="text-align: center; color: #0BAFA6;">My Therapy Space</h2>
+            <p>Hi <strong>${fullname}</strong>,</p>
+            <p>Your password has been successfully reset. Here is your new temporary password:</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <span style="display: inline-block; background: #0BAFA6; color: white; font-size: 22px; padding: 10px 20px; border-radius: 5px; letter-spacing: 2px;">
+                    ${newPassword}
+                </span>
+            </div>
+            <p>Please log in using this password and update it immediately from your account settings for security.</p>
+            <p>Thank you,<br>
+            The My Therapy Space Team</p>
+            <hr style="border: none; border-top: 1px solid #eee; margin-top: 20px;">
+            <small style="display: block; text-align: center; color: #777;">
+                If you did not request this, please change your password immediately and contact support.
+            </small>
+        </div>
+    </div>
+    `;
+};
+
+export const queryReplyEmailTemplate = (fullname, adminReply) => {
+  return `
+  <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+      <h2 style="text-align: center; color: #0BAFA6;">My Therapy Space</h2>
+      <p>Hi <strong>${fullname}</strong>,</p>
+      <p>Thank you for reaching out to us. Our team has reviewed your query and here is the response:</p>
+
+      <div style="background: #f9f9f9; border-left: 4px solid #0BAFA6; padding: 15px; margin: 20px 0; border-radius: 5px;">
+        <p style="margin: 0; color: #333; font-size: 15px;">
+          ${adminReply}
+        </p>
+      </div>
+
+      <p>If you have any further questions, feel free to reply to this email.  
+      We’re always here to help!</p>
+
+      <p>Best regards,<br>
+      The My Therapy Space Team</p>
+
+      <hr style="border: none; border-top: 1px solid #eee; margin-top: 20px;">
+      <small style="display: block; text-align: center; color: #777;">
+        This is a response to your query submitted via our Contact Us form.
+      </small>
+    </div>
+  </div>
+  `;
+};
