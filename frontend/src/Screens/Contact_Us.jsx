@@ -18,6 +18,7 @@ const ContactUs = () => {
         childName: "",
         phoneNo: "",
         email: "",
+        subject: "",
         message: ""
     })
 
@@ -96,6 +97,10 @@ const ContactUs = () => {
                         <div className="w-full flex justify-between">
                             <input className="contact-inputs" type="text" placeholder="Phone" name="phoneNo" value={query.phoneNo} onChange={handleChange} />
                             <input className="contact-inputs" type="email" placeholder="Email" name="email" value={query.email} onChange={handleChange} />
+                        </div>
+
+                        <div className="w-full flex justify-between">
+                            <input className="contact-inputs" type="text" placeholder="Subject" name="subject" value={query.subject} onChange={handleChange} />
                         </div>
 
                         <div className="flex flex-col gap-2">

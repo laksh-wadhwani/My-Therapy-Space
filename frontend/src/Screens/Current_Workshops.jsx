@@ -1,20 +1,22 @@
-import React from "react";
-import CurrentGroup1 from "../assets/current workshop1.png"
-import CurrentGroup2 from "../assets/current workshop2.png"
-import CurrentGroup3 from "../assets/current workshop3.png"
-import CurrentGroup4 from "../assets/current workshop4.png"
+import React, { useEffect, useState } from "react";
 import RButton from "../Components/Reusable_Button";
 import Footer from "../Components/footer";
-import Workshop from './Workshop';
+import { BackendURL } from "../BackendContext";
+import axios from "axios";
 
 const CurrentWorkshops = () => {
 
-    const currentGroups = [
-        {image: {CurrentGroup1}},
-        {image: {CurrentGroup2}},
-        {image: {CurrentGroup3}},
-        {image: {CurrentGroup4}}
-    ]
+    const URL = BackendURL();
+    const [CurrentWorkshops, setCurrentWorkshops] = useState([])
+
+    useEffect(() => {
+        axios.get(`${URL}/api/workshops/get-all-workshop`)
+        .then(response => {
+            const activeWorkshops = response.data.filter(workshop => workshop.status === "Active")
+            setCurrentWorkshops(activeWorkshops)
+        })
+        .catch(error => console.error("Getting error in fetching current workshops: ",error))
+    }) 
 
     return(
         <React.Fragment>
@@ -26,8 +28,8 @@ const CurrentWorkshops = () => {
                 </div>
 
                 <div className="w-full px-16 flex justify-center flex-wrap gap-12">
-                    {currentGroups.map(group => (
-                        <img src={CurrentGroup1} alt="Group Campaign Image" className="shadow-md" />
+                    {CurrentWorkshops.map(group => (
+                        <img src={group.workshopImage} alt="Group Campaign Image" className="shadow-md" />
                     ))}
                 </div>
 
