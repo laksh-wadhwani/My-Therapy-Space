@@ -7,7 +7,7 @@ import axios from "axios";
 const CurrentWorkshops = () => {
 
     const URL = BackendURL();
-    const [CurrentWorkshops, setCurrentWorkshops] = useState([])
+    const [currentWorkshops, setCurrentWorkshops] = useState([])
 
     useEffect(() => {
         axios.get(`${URL}/api/workshops/get-all-workshop`)
@@ -27,11 +27,13 @@ const CurrentWorkshops = () => {
                     <p className="font-serif text-black text-xl">Following are the details for our current workshop groups:</p>
                 </div>
 
+                {(currentWorkshops.length===0)? <p className="text-3xl font-serif font-semibold italic">No Workshops have been uploaded</p>:
                 <div className="w-full px-16 flex justify-center flex-wrap gap-12">
-                    {CurrentWorkshops.map(group => (
+                    {currentWorkshops.map(group => (
                         <img src={group.workshopImage} alt="Group Campaign Image" className="shadow-md" />
                     ))}
                 </div>
+                }
 
                 <div className="w-full flex flex-col items-center gap-4">
                     <p className="font-serif text-2xl text-black text-center">Please contact reception if you would like us to attend one of these programs</p>

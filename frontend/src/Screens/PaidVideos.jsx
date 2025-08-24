@@ -1,26 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import Footer from "../Components/footer";
-import Video1 from "../assets/video1.png"
-import Video2 from "../assets/video2.png"
-import Video3 from "../assets/video3.png"
-import Video4 from "../assets/video4.png"
-import Video5 from "../assets/video5.png"
-import Video6 from "../assets/video6.png"
-
 import RButton from "../Components/Reusable_Button";
 import { Link } from "react-router";
+import { BackendURL } from "../BackendContext";
+import axios from "axios";
+import Footer from "../Components/footer";
 
 const PaidVideos = () => {
 
-    const coursesData = [
-        {id: 1, title: "Speech Therapy Short Course Video", price: "$78.99", picture: Video1},
-        {id: 2, title: "Occupational Therapy Course Video", price: "$50.00", picture: Video2},
-        {id: 3, title: "Disable Children Tutorial Course Video", price: "$45.00", picture: Video3},
-        {id: 4, title: "Demand Avoidance Course Video", price: "$18.99", picture: Video4},
-        {id: 5, title: "Fine Motor Skill Course Video ", price: "$35.00", picture: Video5},
-        {id: 6, title: "Pediatric Therapy Course Video", price: "$49.99", picture: Video6}
-    ]
+    const URL = BackendURL()
+    const [courses, setCourses] = useState([])
+
+    useEffect(() => {
+        axios.get(`${URL}/api/courses/get-courses`)
+        .then(response => setCourses(response.data))
+        .catch(error => console.error("Getting error in fetching courses: ",error))
+    })
 
     return(
         <React.Fragment>
@@ -40,18 +35,20 @@ const PaidVideos = () => {
                     </div>
                 </div>
 
+                {(courses.length===0)? <p className="text-3xl font-serif font-semibold italic">No Courses have been uploaded</p>:
                 <div className="w-full flex flex-wrap px-16 gap-16 justify-center">
-                    {coursesData.map(course => (
-                        <Link to={`/specificVideo/${course.id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
-                            <img src={course.picture} alt="Product Picture" className="w-full max-h-[70%] object-cover rounded-t-xl" />
+                    {courses.map(course => (
+                        <Link to={`/specificVideo/${course._id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
+                            <img src={course.thumbnail} alt="Product Picture" className="w-full max-h-[70%] object-cover rounded-t-xl" />
                             <div className="flex flex-col items center px-6">
-                                <h5 className="font-serif text-black text-lg text-center">{course.title}</h5>
+                                <h5 className="font-serif text-black text-lg text-center">{course.name}</h5>
                                 <p className="font-serif text-gray-400 text-center">{course.price}</p>
                             </div>
                             <RButton className="px-10">Add to Cart</RButton>
                         </div></Link>
                     ))}
                 </div>
+                }
 
                 <Footer/>
 

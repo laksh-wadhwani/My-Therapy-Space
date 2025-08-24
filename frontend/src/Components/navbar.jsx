@@ -19,7 +19,7 @@ const Navbar = () => {
         <div className="flex items-center w-[95%] bg-white shadow-md justify-between rounded-full px-6 py-2">
 
           <Link to="/"><div className="flex items-center gap-2">
-            <img src="./logo.svg" alt="Logo" className="size-14"/>
+            <img src="../logo.svg" alt="Logo" className="size-14"/>
             <span className="text-2xl font-serif capitalize text-[#0BAFA6]">My Therapy Space</span>
           </div></Link>
 
