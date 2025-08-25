@@ -10,6 +10,7 @@ import { BackendURL } from "../BackendContext";
 import {Link, useNavigate, useParams} from "react-router-dom"
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import CustomFileUpload from "../Components/CustomFileUpload";
 
 const Blogs = ({ isSidebarHovered }) => {
     
@@ -101,21 +102,21 @@ const Blogs = ({ isSidebarHovered }) => {
     return (
         <React.Fragment>
 
-            <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 pb-12`}>
-                <div className="w-full p-4 mt-6 border-b border-gray-200 flex flex-col gap-2">
-                    <h1 className="font-serf text-4xl font-bold text-black capitalize italic">manage blogs</h1>
-                    <p className="font-serif text-gray-500 text-base italic">Create, edit and manage blog posts for your website</p>
+            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
+                <div className="w-full p-4 mt-6 max-sm:mt-18 border-b border-gray-200 flex flex-col gap-2 max-sm:px-0">
+                    <h1 className="font-serf text-4xl max-sm:text-3xl font-bold text-black capitalize italic">manage blogs</h1>
+                    <p className="font-serif text-gray-500 text-base italic max-sm:text-sm">Create, edit and manage blog posts for your website</p>
                 </div>
 
-                <div className="w-full px-10 flex justify-between">
+                <div className="w-full px-10 max-sm:px-0 flex justify-between items-center">
                     <CustomButton onClick={onOpenModal}>add new blog</CustomButton>
                     <CustomSearchBar placeholder="Search" />
                 </div>
 
-                { (blogsData.length===0)? (<p className="font-serif text-black text-2xl font-semibold italic px-12">No Blogs has been uploaded</p>)
+                { (blogsData.length===0)? (<p className="font-serif text-black text-3xl font-semibold italic text-center">No Blogs has been uploaded</p>)
                 :
                 (
-                <div className="w-full px-4 flex flex-wrap gap-8">
+                <div className="w-full px-4 max-sm:px-0 flex max-sm:justify-center flex-wrap gap-8">
                     {blogsData.map(data => (
                         <Link to={`/specific-blog/${data._id}`}><div className="max-w-80 max-h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-gray-200 box-border" key={data._id}>
                             <img src={data.thumbnail} alt="" className="w-full h-[75%] object-cover rounded-xl" />
@@ -139,13 +140,13 @@ const Blogs = ({ isSidebarHovered }) => {
             <Modal open={open} onClose={onCloseModal} center
                 styles={{ closeButton: { display: 'none' }, modal: { padding: '0', borderRadius: ".8rem" } }}>
 
-                <div className="w-3xl h-[43rem] flex flex-col gap-6 box-border pb-10">
+                <div className="w-3xl max-sm:w-full h-[43rem] flex flex-col gap-6 box-border pb-10">
 
                     <h5 className="font-serif text-xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6">add new blogs</h5>
 
                     <div className="w-full flex flex-col gap-4 px-6">
                         <CustomInput label="blog title" placeholder="Title" type="text" name="title" value={blogsContent.title} onChange={handleChange} />
-                        <CustomInput label="Blog Image" type="file" name="thumbnail" onChange={handleChange} />
+                        <CustomFileUpload label="Blog Image" value={blogsContent.thumbnail} onChange={handleChange} />
                         <CustomEditor value={blogsContent.value} onChange={(val) => handleChange(val, "content")} />
                     </div>
 

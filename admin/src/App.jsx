@@ -62,7 +62,7 @@ const App = () => {
         <Route exact path="/signup" element={<Signup/>}/>
       </Routes>)}
     </Router>
-    <ToastContainer position="top-right" autoClose={2500}/>
+    <ToastContainer position="top-right" autoClose={2500} />
    </BackendProvider>
   );
 };

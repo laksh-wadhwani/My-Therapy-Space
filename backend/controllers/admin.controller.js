@@ -13,7 +13,7 @@ export const SignUp = async (request, response) => {
         const { fullname, email, password, secretKey } = request.body
         let profile = null
         if(request.file)
-            profile = await uploadToCloudinary(request.file?.buffer)
+            profile = await uploadToCloudinary(request.file?.buffer, "image")
         const secret = secretKey === process.env.SECRET_KEY
         const otp = GenerateOTP();
         const otp_expiry = new Date(Date.now() + 2 * 60 * 1000)
@@ -32,7 +32,7 @@ export const SignUp = async (request, response) => {
                 fullname,
                 email,
                 password: hashPassword,
-                profile,
+                profile: profile.secure_url,
                 role: "super admin",
                 isSuperAdminVerified: true,
                 otp,
@@ -218,7 +218,7 @@ export const Update = async(request, response) => {
         const {fullname, email, password, newPass} = request.body
         let profile = null
         if(request.file)
-            profile = await uploadToCloudinary(request.file.buffer)
+            profile = await uploadToCloudinary(request.file.buffer, "image")
 
         const admin = await AdminModel.findById(id)
 
@@ -231,7 +231,7 @@ export const Update = async(request, response) => {
 
         if(fullname) admin.fullname = fullname;
         if(email) admin.email = email
-        if(profile) admin.profile = profile
+        if(profile) admin.profile = profile.secure_url
         if(isPassMatch) admin.password = newHashPass
         await admin.save();
         return response.status(201).json({message: "Basic details have been updated"})

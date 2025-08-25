@@ -66,21 +66,21 @@ const Products = ({ isSidebarHovered }) => {
     return (
         <React.Fragment>
 
-            <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 pb-12`}>
+            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
 
-                <div className="w-full p-4 mt-6 border-b border-gray-200 flex flex-col gap-2">
-                    <h1 className="font-serf text-4xl font-bold text-black capitalize italic">Manage Products</h1>
-                    <p className="font-serif text-gray-500 text-base italic">Create, edit and manage product listings for your website</p>
+                <div className="w-full p-4 mt-6 max-sm:mt-18 border-b border-gray-200 flex flex-col gap-2 max-sm:px-0">
+                    <h1 className="font-serf text-4xl max-sm:text-3xl font-bold text-black capitalize italic">Manage Products</h1>
+                    <p className="font-serif text-gray-500 text-base italic max-sm:text-sm">Create, edit and manage product listings for your website</p>
                 </div>
 
-                <div className="w-full px-4 pr-16 flex justify-between">
+                <div className="w-full px-10 max-sm:px-0 flex justify-between items-center">
                     <CustomButton onClick={() => setOpen(true)}>add new product</CustomButton>
                     <CustomSearchBar placeholder="Search" />
                 </div>
 
                 {(products.length === 0) ? (<p className="font-serif text-3xl italic capitalize text-center font-semibold">no products has been uploaded</p>) :
                     (
-                        <div className="w-full px-4 flex flex-wrap gap-16">
+                        <div className="w-full px-4 max-sm:px-0 flex max-sm:justify-center flex-wrap gap-16">
                             {products.map(product => (
                                 <Link to={`/product/${product._id}`}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105" key={product._id}>
                                     <img src={product.thumbnail} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />

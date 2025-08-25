@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { BackendURL } from "../BackendContext";
 import { useNavigate } from "react-router-dom";
+import CustomFileUpload from "../Components/CustomFileUpload";
 
 const Workshops = ({ isSidebarHovered }) => {
 
@@ -147,11 +148,11 @@ const Workshops = ({ isSidebarHovered }) => {
 
   return (
     <React.Fragment>
-      <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 pb-12`}>
+      <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
 
-        <div className="w-full p-4 mt-6 border-b border-gray-200 flex flex-col gap-2">
-          <h1 className="font-serf text-4xl font-bold text-black capitalize italic">manage workshops</h1>
-          <p className="font-serif text-gray-500 text-base italic">create, edit and manage workshop listings for your websites</p>
+        <div className="w-full p-4 mt-6 max-sm:mt-18 border-b border-gray-200 flex flex-col gap-2 max-sm:px-0">
+          <h1 className="font-serf text-4xl max-sm:text-3xl font-bold text-black capitalize italic">manage workshops</h1>
+          <p className="font-serif text-gray-500 text-base italic max-sm:text-sm">create, edit and manage workshop listings for your websites</p>
         </div>
 
         <div className="w-full px-4 flex justify-between">
@@ -174,7 +175,7 @@ const Workshops = ({ isSidebarHovered }) => {
             <CustomInput label="workshop title" placeholder="Title" type="text" name="title" value={workshopData.title} onChange={handleChange} />
             <CustomInput label="facilitator" placeholder="Name" type="text" name="facilitator" value={workshopData.facilitator} onChange={handleChange} />
             <CustomInput label="Date" type="date" name="date" value={workshopData.date} onChange={handleChange} />
-            <CustomInput label="Workshop Image" type="file" name="workshopImage" onChange={handleChange} />
+            <CustomFileUpload label="Workshop Image" value={workshopData.workshopImage} onChange={handleChange} />
           </div>
 
           <div className="w-full px-6 flex justify-center gap-2">
@@ -208,7 +209,7 @@ const Workshops = ({ isSidebarHovered }) => {
             <CustomInput label="workshop title" placeholder={workshop.title} type="text" name="title" value={workshopData.title} onChange={handleChange} />
             <CustomInput label="facilitator" placeholder={workshop.facilitator} type="text" name="facilitator" value={workshopData.facilitator} onChange={handleChange} />
             <CustomInput label="Date" type="date" name="date" value={workshopData.date} onChange={handleChange} />
-            <CustomInput label="Workshop Image" type="file" name="workshopImage" onChange={handleChange} />
+            <CustomFileUpload label="Workshop Image" value={workshopData.workshopImage} onChange={handleChange} />
           </div>
 
           <div className="w-full px-6 flex justify-center gap-2">
