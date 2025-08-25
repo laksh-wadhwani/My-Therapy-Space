@@ -99,3 +99,31 @@ export const queryReplyEmailTemplate = (fullname, adminReply) => {
   </div>
   `;
 };
+
+export const verifyAccountOtpTemplate = (fullname, otp) => {
+  return `
+  <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+      <h2 style="text-align: center; color: #0BAFA6;">My Therapy Space</h2>
+      <p>Hi <strong>${fullname}</strong>,</p>
+      <p>We received a request to create a new account using this email address. To complete your registration, please use the One-Time Password (OTP) below:</p>
+      
+      <div style="text-align: center; margin: 20px 0;">
+        <span style="display: inline-block; background: #0BAFA6; color: white; font-size: 26px; padding: 12px 24px; border-radius: 6px; letter-spacing: 4px; font-weight: bold;">
+          ${otp}
+        </span>
+      </div>
+
+      <p>This OTP will expire in <strong>2 minutes</strong>. If you did not attempt to sign up, please ignore this email.</p>
+
+      <p>Best regards,<br>
+      The My Therapy Space Team</p>
+
+      <hr style="border: none; border-top: 1px solid #eee; margin-top: 20px;">
+      <small style="display: block; text-align: center; color: #777;">
+        Please do not share this OTP with anyone for security reasons.
+      </small>
+    </div>
+  </div>
+  `;
+};
