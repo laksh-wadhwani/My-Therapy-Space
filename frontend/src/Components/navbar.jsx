@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import RButton from "./Reusable_Button";
 import { Link } from "react-router";
+import { HashLink } from 'react-router-hash-link';
+
 
 const Navbar = () => {
 
   const [aboutUsToggle, setAboutUsToggle] = useState(false)
   const [workshopToggle, setWorkshopToggle] = useState(false)
+  const [servicesToggle, setServicesToggle] = useState(false)
+
 
   const ToggleDropDowns = () => {
     setAboutUsToggle(false)
     setWorkshopToggle(false)
+    setServicesToggle(false)
   }
 
   return(
@@ -28,20 +33,32 @@ const Navbar = () => {
             <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979]">
               <Link to="/" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>Home</li></Link>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 relative">
                 <Link to="/AboutUs" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">About us</li></Link>
                 <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onClick={() => setAboutUsToggle(!aboutUsToggle)}>
                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                 </svg>
                 {aboutUsToggle && 
-                <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] fixed top-16 right-[35.75rem] bg-white py-4 px-6 rounded-xl">
+                <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] absolute top-8 left-0  bg-white py-4 px-6 rounded-xl">
                   <Link to="/Team" style={{color:"unset"}} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">team</li></Link>
-                  <Link to="/Services" style={{color:"unset"}} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">services</li></Link>
-                  <Link to="/Fees" style={{color:"unset"}} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">fees</li></Link>
+                  <Link to="/Fees" style={{color:"unset"}} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">fees</li></Link>      
                 </ul>
                 }
               </div>
-
+              <div className="flex items-center gap-2 relative">
+                <Link to="/services" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]">Services</li></Link>
+                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onClick={() => setServicesToggle(!servicesToggle)}>
+                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                </svg>
+                {servicesToggle && 
+                <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] absolute top-8 left-0  bg-white py-4 px-6 rounded-xl min-w-[230px]">
+                  <HashLink to="/services#speech-pathology" style={{color:"unset"}} onClick={() => setServicesToggle(!servicesToggle)}><li className="hover:text-[#0BAFA6]">Speech Pathology</li></HashLink>
+                  <HashLink to="/services#dietician" style={{color:"unset"}} onClick={() => setServicesToggle(!servicesToggle)}><li className="hover:text-[#0BAFA6]">Dietician</li></HashLink>
+                  <HashLink to="/services#occupational-therapy" style={{color:"unset"}} onClick={() => setServicesToggle(!servicesToggle)}><li className="hover:text-[#0BAFA6]">Occupational Therapy</li></HashLink>
+                  <HashLink to="/services#therapy-assistance"  style={{color:"unset"}} onClick={() => setServicesToggle(!servicesToggle)}><li className="hover:text-[#0BAFA6]">Therapy Assistance</li></HashLink>
+                </ul>
+                }
+              </div>
               <Link to="/blogs" style={{color:"unset"}}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>blogs</li></Link>
 
               <div className="flex items-center gap-2">

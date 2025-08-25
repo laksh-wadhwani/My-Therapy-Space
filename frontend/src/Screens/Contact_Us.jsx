@@ -8,6 +8,7 @@ import axios from "axios"
 import { BackendURL } from "../BackendContext";
 import { toast } from "react-toastify"
 import {useNavigate} from "react-router"
+import Contact_Us from "../assets/contact_us.jpg"
 
 const ContactUs = () => {
     
@@ -51,9 +52,16 @@ const ContactUs = () => {
                     <p className="font-serif text-center text-black text-xl">If you would like to refer your child for services, please enter your details below or give us a call or come and see us and one of our lovely receptionists will be able to talk you through the referral process for your child.</p>
                 </div>
 
-                <div className="w-[90%] px-16 flex justify-between items-center border border-black-100 shadow-md rounded-xl py-4">
-                    <div className="w-[50%] px-16">
+              <div className="w-[90%] px-0 flex justify-between items-stretch border border-black-100 shadow-md rounded-xl py-0">
 
+                    <div className="w-1/2">
+                       
+                            <img 
+                                src={Contact_Us} 
+                                alt="Therapist and child illustration"
+                                className="w-full h-full object-cover rounded-l-xl"
+                            />
+                                                
                         {/* <div className="w-full flex flex-col border border-black-100 shadow-md p-8 rounded-xl">
                             <span className="font-serif text-2xl uppercase text-black border-b border-black pb-1">contact information</span>
 
@@ -86,7 +94,7 @@ const ContactUs = () => {
                             </div>
                         </div> */}
                     </div>
-                    <div className="w-[50%] flex flex-col gap-12 px-16 py-8 border-4 border-black rounded-xl">
+                   <div className="w-1/2 flex flex-col gap-12 px-8 md:px-16 py-8 ">
                         <span className="font-serif uppercase text-2xl">contact details</span>
 
                         <div className="w-full flex justify-between">
@@ -112,18 +120,32 @@ const ContactUs = () => {
                     </div>
                 </div>
 
-                <div className="w-[90%] px-16 flex flex-col items-center gap-6 border border-black-100 py-10 rounded-xl shadow-md">
-                    <h2 className="font-serif text-[#0BAFA6] capitalize text-4xl text-center">our system for new referrals is as follows</h2>
-                    <ol className="list-decimal pl-5 font-serif text-xl text-center flex flex-col items-center gap-4">
-                        <li>Referral received via website, phone, or in person</li>
-                        <li>You complete an intake form about your child’s needs, strengths, and interests</li>
-                        <li>Directors review the form and match your child with the right therapist</li>
-                        <li>If seeing one therapist: booked in or added to waitlist</li>
-                        <li>Some families may have an intake meeting to set goals and plan therapy</li>
-                        <li>Appointments are booked and therapy begins</li>
-                        <li>Goals reviewed every 6–12 months to track progress</li>
-                    </ol>
-                </div>
+                <div className="w-full max-w-3xl mx-auto py-8 px-4 flex flex-col gap-6 bg-white rounded-2xl shadow-lg">
+  <h2 className="font-serif text-[#0BAFA6] text-3xl text-center">Our system for new referrals</h2>
+
+  <div className="flex flex-col gap-4 mt-6">
+    {[
+      "Referral received via website, phone, or in person",
+      "Complete an intake form about your child’s needs, strengths, and interests",
+      "Directors review the form and match your child with the right therapist",
+      "If seeing one therapist: booked in or added to waitlist",
+      "Some families may have an intake meeting to set goals and plan therapy",
+      "Appointments are booked and therapy begins",
+      "Goals reviewed every 6–12 months to track progress"
+    ].map((step, index) => (
+      <div 
+        key={index} 
+        className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl shadow-sm hover:shadow-md hover:bg-[#e0f7f6] transition cursor-pointer"
+      >
+        <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-[#0BAFA6] to-[#00C9A7] text-white font-bold">
+          {index + 1}
+        </div>
+        <p className="text-base font-serif">{step}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
 
                 <Footer/>
 

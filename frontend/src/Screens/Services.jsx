@@ -10,7 +10,7 @@ const Services = () => {
         <React.Fragment>
             <div className="main-box bg-white gap-10">
                 <h1 className="font-serif font-normal text-4xl text-[#0BAFA6] px-14 mt-32">Services</h1>
-            <div className="w-full flex flex-col gap-4 px-14">
+            <div id="speech-pathology" className="w-full flex flex-col gap-4 px-14">
   <h2 className="font-serif text-2xl font-normal capitalize">Speech Pathology</h2>
 
   <div className="w-full flex gap-12 items-stretch">
@@ -62,7 +62,7 @@ const Services = () => {
   </div>
 </div>
 
-<div className="w-full flex flex-col gap-4 px-14">
+<div id="dietician" className="w-full flex flex-col gap-4 px-14">
   <h2 className="font-serif text-2xl font-normal capitalize">Dietician</h2>
  
   <div className="w-full flex gap-12 items-start">
@@ -128,7 +128,7 @@ const Services = () => {
   </div>
 </div>
 
-<div className="w-full flex flex-col gap-4 px-14">
+<div id="occupational-therapy" className="w-full flex flex-col gap-4 px-14">
   <h2 className="font-serif text-2xl font-normal capitalize">Occupational Therapy</h2>
 
   <div className="w-full flex gap-12 items-start">
@@ -194,7 +194,7 @@ const Services = () => {
   </div>
 </div>
 
-<div className="w-full flex flex-col gap-4 px-14">
+<div id="therapy-assistance" className="w-full flex flex-col gap-4 px-14">
   <h2 className="font-serif text-2xl font-normal capitalize">Therapy Assistance</h2>
   <div className="w-full flex gap-12 items-start">
   <div className="w-[40%] h-[650px] rounded-lg overflow-hidden">
