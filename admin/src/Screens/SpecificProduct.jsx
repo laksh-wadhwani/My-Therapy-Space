@@ -96,10 +96,10 @@ const SpecificProduct = ({ isSidebarHovered }) => {
 
     return (
         <React.Fragment>
-            <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 items-center px-8 pb-12`}>
+            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
 
                 {update? (
-                    <div className="w-full flex flex-col gap-4 px-32 mt-16">
+                    <div className="w-full flex flex-col gap-4 px-32 max-sm:px-0 mt-16 max-sm:mt-24">
                         <CustomInput label="Title" placeholder={product.name} value={productDetails.name} onChange={e => handleChange("name", e.target.value)}/>
                         <CustomInput label="Price" placeholder={product.price} value={productDetails.price} onChange={e => handleChange("price", e.target.value)}/>
                         <CustomFileUpload label="Thumbnail" value={productDetails.thumbnail} onChange={file => handleChange("thumbnail", file)}/>
@@ -118,25 +118,24 @@ const SpecificProduct = ({ isSidebarHovered }) => {
                 :
                 (
                     <>
-                    <div className="w-full flex justify-around mt-16">
-                        <img  src={thumbnailImage} alt="Main Product"  className="w-[47.5%] max-h-[400px] rounded-xl shadow-md object-cover" />
+                    <div className="w-full flex max-sm:flex-col max-sm:gap-6 justify-around mt-16 max-sm:mt-24">
+                        <img  src={thumbnailImage} alt="Main Product" className="w-[47.5%] max-sm:w-full max-h-[400px] rounded-xl shadow-md object-cover" />
 
-                        <div className="w-[50%] flex flex-col justify-between p-6 border border-gray-300 rounded-xl shadow-xl">
-                            <div className="w-full flex flex-col font-serif text-black capitalize">
+                        <div className="w-[50%] max-sm:w-full flex flex-col max-sm:gap-4 justify-between p-6 border border-gray-300 rounded-xl shadow-xl">
+                            <div className="w-full flex flex-col max-sm:gap-2 font-serif text-black capitalize">
                                 <h3 className="text-3xl font-semibold">{product.name}</h3>
-                                <span className="text-xl"> Price: ${product.price}</span>
+                                <span className="text-xl text-gray-500 italic">Price: ${product.price}</span>
                             </div>
-                            <p className="font-serif text-lg text-black">{product.description}</p>
+                            <p className="font-serif text-lg max-sm:text-sm text-black">{product.description}</p>
                             <div className="w-full flex justify-between">
                                 <CustomButton className="w-[45%]" onClick={() => setIsUpdate(true)}>Update</CustomButton>
                                 <CustomButton className="w-[45%]" onClick={() => DeleteProduct(product._id)}>Delete</CustomButton>
                             </div>
                         </div>
-
                     </div>
 
                     {product.pictures?.length > 0 && (
-                        <div className="w-full grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-6">
+                        <div className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 max-sm:grid-cols-4 gap-4 mt-6">
                             {product.pictures.map((pic, index) => (
                                 <img 
                                     key={index} 
@@ -150,8 +149,8 @@ const SpecificProduct = ({ isSidebarHovered }) => {
                     )}
 
                      <div className="w-full border border-gray-300 rounded-xl shadow-md flex flex-col gap-2">
-                        <h2 className="w-full font-serif text-center text-black text-3xl rounded-t-md bg-[#0BAFA6] capitalize p-6">Features</h2>
-                        <div className="list-disc font-serif text-2xl text-black flex flex-col gap-2 px-10 py-6">
+                        <h2 className="w-full font-serif text-center text-black text-3xl font-semibold rounded-t-md bg-[#0BAFA6] capitalize p-6">Features</h2>
+                        <div className="list-disc font-serif text-2xl max-sm:text-base text-black flex flex-col gap-2 px-10 py-6">
                             <ReactMarkdown
                                 rehypePlugins={[rehypeRaw]}
                                 components={{

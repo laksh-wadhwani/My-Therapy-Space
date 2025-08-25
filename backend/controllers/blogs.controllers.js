@@ -7,10 +7,14 @@ export const SaveAsDraft = async(request, response) => {
         const {title, content} = request.body
         let thumbnail = null
         if(request.file)
-            thumbnail = await uploadToCloudinary(request?.file?.buffer)
+            thumbnail = await uploadToCloudinary(request?.file?.buffer, "image")
 
         const isBlogExist = await BlogsModel.findOne({title})
-        const blog = new BlogsModel({title, thumbnail, content})
+        const blog = new BlogsModel({
+            title, 
+            thumbnail: thumbnail.secure_url, 
+            content
+        })
 
         if(!(title && content))
             return response.status(400).json({error: "Title and Content are required"})
@@ -31,12 +35,12 @@ export const UploadBlog = async(request, response) => {
         const {title, content} = request.body
         let thumbnail = null
         if(request.file)
-            thumbnail = await uploadToCloudinary(request?.file?.buffer)
+            thumbnail = await uploadToCloudinary(request?.file?.buffer, "image")
 
         const isBlogExist = await BlogsModel.findOne({title})
         const blog = new BlogsModel({
             title, 
-            thumbnail, 
+            thumbnail: thumbnail.secure_url, 
             content,
             status: "Published"
         })
@@ -70,18 +74,6 @@ export const GetAllBlogs = async(request, response) => {
     }
 }
 
-export const GetPublishedBlogs = async(request, response) => {
-    try {
-        const blogs = await BlogsModel.find({status: "Published"})
-        if(!blogs)
-            return response.status(400).json({error: "Blogs not found"})
-        return response.status(200).json(blogs)
-    } catch (error) {
-        console.log("Getting error in fetching published blogs: ",error)
-        return response.status(500).json({error: "Internal Server Error"})
-    }
-}
-
 export const GetSpecificBlog = async(request, response) => {
     const { id } = request.params
     const blog = await BlogsModel.findById(id)
@@ -94,11 +86,11 @@ export const UpdateBlog = async(request, response) => {
         const {title, content} = request.body;
         let thumbnail = request.body.thumbnail
         if(request.file)
-            thumbnail = await uploadToCloudinary(request.file?.buffer)
+            thumbnail = await uploadToCloudinary(request.file?.buffer, "image")
 
         let UpdatedData = {
             title,
-            thumbnail,
+            thumbnail: thumbnail.secure_url,
             content
         }
 

@@ -5,6 +5,7 @@ import { BackendURL } from "../BackendContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import CustomFileUpload from "../Components/CustomFileUpload";
 
 const Profile = ({ isSidebarHovered, user }) => {
 
@@ -61,21 +62,21 @@ const Profile = ({ isSidebarHovered, user }) => {
     return (
         <React.Fragment>
 
-            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex items-center justify-between px-18`}>
+            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
 
-                <div className="w-[45%] flex flex-col gap-4 mt-16">
+                <div className="w-[45%] max-sm:w-full flex flex-col gap-4 mt-16 max-sm:mt-24">
                     <h5 className="font-serif text-3xl capitalize italic text-black font-normal">personal information</h5>
                     <div className="flex flex-col gap-6 p-8 border border-gray-200 rounded-xl shadow-md">
                         <CustomInput label="Full Name" type="text" placeholder={user.fullname} name="fullname" value={updatedUser.fullname} onChange={handleChange} />
                         <CustomInput label="Email" type="email" placeholder={user.email} name="email" value={updatedUser.email} onChange={handleChange} />
-                        <CustomInput label="Admin Profile" type="file" value={updatedUser.profile} onChange={handleChange} />
+                        <CustomFileUpload label="Admin Profile" value={updatedUser.profile} onChange={handleChange} />
                         <CustomButton className="w-fit" onClick={() => Update(user.id)}>
                             {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Save"}
                         </CustomButton>
                     </div>
                 </div>
 
-                <div className="w-[45%] flex flex-col gap-4 mt-16">
+                <div className="w-[45%] max-sm:w-full flex flex-col gap-4 mt-16 max-sm:mt-0">
                     <h5 className="font-serif text-3xl capitalize italic text-black font-normal">password</h5>
                     <div className="flex flex-col gap-6 p-8 border border-gray-200 rounded-xl shadow-md">
                         <CustomInput label="Old Password" type="password" placeholder="OldPassword" name="password" value={updatedUser.password} onChange={handleChange} />

@@ -24,6 +24,11 @@ app.get("/", async(request, response) => {
     response.json("Backend is working....")
 })
 
+app.use((req, res, next) => {
+  res.setTimeout(5 * 60 * 1000); 
+  next();
+});
+
 //Admin Routes
 import adminRoutes from "./routes/admin.routes.js"
 app.use("/api/admin", adminRoutes)
@@ -44,10 +49,13 @@ app.use("/api/products", productRoutes)
 import courseRoutes from "./routes/course.routes.js"
 app.use("/api/courses", courseRoutes)
 
-// User Queries Routes
+// Queries Routes
 import queryRoutes from "./routes/query.routes.js"
 app.use("/api/queries", queryRoutes)
 
 //Booking Routes
 import bookingRoutes from "./routes/booking.routes.js"
 app.use("/api/bookings", bookingRoutes)
+
+import userRoutes from "./routes/user.routes.js"
+app.use("/api/users", userRoutes)

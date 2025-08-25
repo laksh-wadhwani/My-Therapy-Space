@@ -1,11 +1,10 @@
-import { request, response } from "express"
 import uploadToCloudinary from "../config/cloudinary.js"
 import WorkshopModel from "../models/Workshop.js"
 
 export const AddWorkshop = async(request, response) => {
     try {
         const {title, facilitator, date} = request.body
-        const workshopImage = await uploadToCloudinary(request?.file?.buffer)
+        const workshopImage = await uploadToCloudinary(request?.file?.buffer, "image")
         const workshop = await WorkshopModel.findOne({title})
 
         if(workshop)
@@ -15,7 +14,7 @@ export const AddWorkshop = async(request, response) => {
             title,
             facilitator,
             date,
-            workshopImage,
+            workshopImage: workshopImage.secure_url,
             status: "Active"
         })
         await newWorkshop.save();
@@ -30,7 +29,7 @@ export const AddWorkshop = async(request, response) => {
 export const SaveAsDraft = async(request, response) => {
     try {
         const {title, facilitator, date} = request.body
-        const workshopImage = await uploadToCloudinary(request?.file?.buffer)
+        const workshopImage = await uploadToCloudinary(request?.file?.buffer, "image")
         const workshop = await WorkshopModel.findOne({title})
 
         if(workshop)
@@ -40,7 +39,7 @@ export const SaveAsDraft = async(request, response) => {
             title,
             facilitator,
             date,
-            workshopImage,
+            workshopImage: workshopImage.secure_url,
         })
         await newWorkshop.save();
 
@@ -82,7 +81,7 @@ export const UpdateWorkshop = async(request, response) => {
         const {title, facilitator, date} = request.body
         let workshopImage = null
         if(request.file)
-            workshopImage = await uploadToCloudinary(request.file?.buffer)
+            workshopImage = await uploadToCloudinary(request.file?.buffer, "image")
 
         const workshop = await WorkshopModel.findById(id)
 
@@ -92,7 +91,7 @@ export const UpdateWorkshop = async(request, response) => {
         if(title) workshop.title = title
         if(facilitator) workshop.facilitator = facilitator
         if(date) workshop.date = date
-        if(workshopImage) workshop.workshopImage = workshopImage
+        if(workshopImage) workshop.workshopImage = workshopImage.secure_url
         await workshop.save()
 
         return response.status(201).json({message: "Workshop detail has been updated"})

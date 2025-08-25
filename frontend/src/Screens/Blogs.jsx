@@ -13,8 +13,11 @@ const Blogs = () => {
     const [blogsData, setBlogData] = useState([])
 
     useEffect(() => {
-        axios.get(`${URL}/api/blogs/get-published-blogs`)
-        .then(response => setBlogData(response.data))
+        axios.get(`${URL}/api/blogs/get-all-blogs`)
+        .then(response => {
+            const publishedBlogs = response.data.filter(blog => blog.status === "Published")
+            setBlogData(publishedBlogs)
+        })
     },[blogsData])
 
     return(
@@ -26,6 +29,7 @@ const Blogs = () => {
                     <p className="font-serif text-xl text-gray-400">Explore insightful articles and health tips for everyone.</p>
                 </div>
 
+                {(blogsData.length === 0)? <p className="text-3xl font-serif font-semibold italic">No Blogs have been uploaded</p>:
                 <div className="w-[90%] flex box-border px-16 flex-wrap gap-12 justify-center">
                     {blogsData.map(data => (
                         <div className="max-w-80 max-h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-black-100 box-border">
@@ -43,6 +47,7 @@ const Blogs = () => {
                         </div>
                     ))}
                 </div>
+                }
 
                 <Footer/>
 

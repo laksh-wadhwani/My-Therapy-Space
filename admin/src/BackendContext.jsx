@@ -2,16 +2,20 @@ import { createContext, useContext } from "react";
 
 export const BackendContext = createContext();
 
-export const BackendProvider = ({children}) => {
-    const backendURL = "http://localhost:3000"
+export const BackendProvider = ({ children }) => {
+  // PC ka IP yahan dalna hai (same WiFi pe hona chahiye)
+  const backendURL =
+    import.meta.env.MODE === "development"
+      ? "http://192.168.1.110:3000" // apna LAN IP yahan replace karo
+      : "https://your-production-domain.com"; // jab host karoge
 
-    return(
-        <BackendContext.Provider value={backendURL}>
-            {children}
-        </BackendContext.Provider>
-    )
-}
+  return (
+    <BackendContext.Provider value={backendURL}>
+      {children}
+    </BackendContext.Provider>
+  );
+};
 
 export const BackendURL = () => {
-    return useContext(BackendContext)
-}
+  return useContext(BackendContext);
+};

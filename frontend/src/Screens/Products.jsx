@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Footer from "../Components/footer";
-import Product1 from "../assets/product1.svg"
-import Product2 from "../assets/product2.svg"
-import Product3 from "../assets/product3.svg"
 import RButton from "../Components/Reusable_Button";
 import { Link } from "react-router";
+import { BackendURL } from "../BackendContext";
+import axios from "axios";
 
 const Products = () => {
 
-    const productsData = [
-        {id: 1, title: "Visual Routine Chart Blank", price: "$8.99", picture: Product1},
-        {id: 2, title: "2 Year Old Circle Time Board", price: "$8.82", picture: Product2},
-        {id: 3, title: "10 Interactive Song Boards", price: "$7.00", picture: Product3},
-        {id: 4, title: "Visual Routine Chart Blank", price: "$8.99", picture: Product1},
-        {id: 5, title: "2 Year Old Circle Time Board", price: "$8.82", picture: Product2},
-        {id: 6, title: "10 Interactive Song Boards", price: "$7.00", picture: Product3}
-    ]
+    const URL = BackendURL()
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        axios.get(`${URL}/api/products/get-all-products`)
+        .then(response => setProducts(response.data))
+        .catch(error => console.error("Getting error in fetching all product details: ",error))
+    })
 
     return(
         <React.Fragment>
@@ -36,18 +35,20 @@ const Products = () => {
                     </div>
                 </div>
 
+                {(products.length===0)? <p className="text-3xl font-serif font-semibold italic">No Products have been uploaded</p>:
                 <div className="w-full flex flex-wrap px-16 gap-16 justify-center">
-                    {productsData.map(product => (
-                        <Link to={`/specificProduct/${product.id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-center pb-4 cursor-pointer hover:scale-105">
-                            <img src={product.picture} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
+                    {products.map(product => (
+                        <Link to={`/specificProduct/${product._id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-center pb-4 cursor-pointer hover:scale-105">
+                            <img src={product.thumbnail} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
                             <div className="flex flex-col items center">
-                                <h5 className="font-serif text-black text-lg text-center">{product.title}</h5>
+                                <h5 className="font-serif text-black text-lg text-center">{product.name}</h5>
                                 <p className="font-serif text-gray-400 text-center">{product.price}</p>
                             </div>
                             <RButton className="px-10">Add to Cart</RButton>
                         </div></Link>
                     ))}
                 </div>
+                }
 
                 <Footer/>
 

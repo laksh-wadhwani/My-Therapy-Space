@@ -7,7 +7,6 @@ const router = express.Router();
 router.post("/add-course", 
     upload.fields([
     {name: "thumbnail", maxCount:1},
-    {name: "trailer", maxCount:1},
     {name: "video", maxCount:1},
 ]), AddCourse)
 router.get("/get-courses", GetCourses)

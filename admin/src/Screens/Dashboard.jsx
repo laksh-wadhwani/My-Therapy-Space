@@ -60,13 +60,13 @@ const Dashboard = ({ isSidebarHovered, user }) => {
 
     return (
         <React.Fragment>
-            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col gap-8 pb-12`}>
+            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
 
-                <h1 className="font-serf text-4xl font-bold text-black capitalize italic mt-6 border-b border-gray-200 p-4">Dashboard</h1>
+                <h1 className="font-serf text-4xl max-sm:text-3xl font-bold text-black capitalize italic mt-6 max-sm:mt-18 border-b border-gray-200 p-4 max-sm:px-0 max-sm:self-start max-sm:w-full">Dashboard</h1>
 
-                <div className="w-full flex flex-col px-4">
-                    <h3 className="font-serif text-black text-xl">Welcome back, {user.fullname}</h3>
-                    <p className="font-serif text-gray-500 text-base">Here's what's happening with your site today.</p>
+                <div className="w-full flex flex-col px-4 max-sm:px-0">
+                    <h3 className="font-serif text-black text-xl max-sm:text-lg">Welcome back, {user.fullname}</h3>
+                    <p className="font-serif text-gray-500 text-base max-sm:text-sm">Here's what's happening with your site today.</p>
                 </div>
 
                 {(user.role === "super admin")?  (

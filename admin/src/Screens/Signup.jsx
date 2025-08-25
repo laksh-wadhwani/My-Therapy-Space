@@ -7,6 +7,7 @@ import { BackendURL } from "../BackendContext";
 import axios from "axios"
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import CustomFileUpload from "../Components/CustomFileUpload";
 
 const Signup = () => {
 
@@ -95,7 +96,7 @@ const Signup = () => {
     return (
         <React.Fragment>
             <Navbar />
-            <div className="w-full h-dvh bg-left bg-no-repeat [background-size:100%] absolute flex items-center px-50" style={{ backgroundImage: `url(${LoginBg})` }}>
+            <div className="w-full h-dvh bg-left bg-no-repeat [background-size:100%] absolute flex items-center px-50 login-bg max-sm:justify-center max-sm:items-center max-sm:mt-0 max-sm:p-0">
 
                 <div className="w-100 py-7 px-12 bg-white border border-gray-200 shadow-md rounded-xl flex flex-col gap-6 mt-16">
                     <h2 className="font-serif capitalize text-2xl text-black font-semibold self-center">{otpToggle ? `Verification` : `admin signup`}</h2>
@@ -117,7 +118,7 @@ const Signup = () => {
                                 <CustomInput label="Email" type="email" placeholder="Email" name="email" value={user.email} onChange={handleChange}  />
                                 <CustomInput label="Password" type="password" placeholder="Password" name="password" value={user.password} onChange={handleChange} showPasswordRules={true} />
                                 <CustomInput label="Secret Key" type="password" placeholder="Secret Key" name="secretKey" value={user.secretKey} onChange={handleChange} />
-                                <CustomInput label="Profile Picture" type="file" name="profile" onChange={handleChange} />
+                                <CustomFileUpload label="Profile Picture" value={user.profile} onChange={handleChange} />
                             </div>
 
                             <div className="flex flex-col gap-2">

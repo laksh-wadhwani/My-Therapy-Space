@@ -1,0 +1,14 @@
+@layer utilities {
+  .login-bg {
+    background-image: url('/src/assets/loginbg.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .login-bg {
+      background-image: none !important;
+    }
+  }
+}

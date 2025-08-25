@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import "../global.styles.css"
 
 const Login = ({setLoginUser}) => {
     
@@ -64,9 +65,9 @@ const Login = ({setLoginUser}) => {
 
             <Navbar/>
 
-            <div className="w-full h-dvh bg-left bg-no-repeat [background-size:100%] absolute flex items-center px-52" style={{ backgroundImage: `url(${LoginBg})` }}>
+            <div className="w-full h-dvh bg-left bg-no-repeat [background-size:100%] absolute flex items-center px-52 login-bg max-sm:justify-center max-sm:items-center max-sm:mt-0 max-sm:p-0">
 
-                <div className="w-100 p-12 bg-white border border-gray-200 shadow-md rounded-xl flex flex-col gap-14 mt-16">
+                <div className="w-100 p-12 bg-white border border-gray-200 shadow-md rounded-xl flex flex-col gap-14 mt-16 max-sm:mt-20">
 
                     <h2 className="font-serif capitalize text-2xl text-black font-semibold self-center">{forgetPassToggle? `forget password` : `admin login`}</h2>
 

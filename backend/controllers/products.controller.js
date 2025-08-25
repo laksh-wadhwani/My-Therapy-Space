@@ -11,13 +11,13 @@ export const AddProducts = async(request, response) => {
 
         let thumbnail = null
         if(request.files?.thumbnail?.[0])
-            thumbnail = await uploadToCloudinary(request.files.thumbnail[0].buffer)
+            thumbnail = await uploadToCloudinary(request.files.thumbnail[0].buffer, "image")
 
         let pictures = []
         if(request.files?.pictures?.length > 0){
             for(const picture of request.files.pictures){
-                const imageUrl = await uploadToCloudinary(picture.buffer)
-                pictures.push(imageUrl)
+                const imageUrl = await uploadToCloudinary(picture.buffer, "image")
+                pictures.push(imageUrl.secure_url)
             }
         }
 
@@ -26,7 +26,7 @@ export const AddProducts = async(request, response) => {
             price,
             description,
             features,
-            thumbnail,
+            thumbnail: thumbnail.secure_url,
             pictures
         })
         newProducts.save();
@@ -78,13 +78,13 @@ export const UpdateProduct = async(request, response) => {
 
        let thumbnail = null
         if(request.files?.thumbnail?.[0])
-            thumbnail = await uploadToCloudinary(request.files.thumbnail[0].buffer)
+            thumbnail = await uploadToCloudinary(request.files.thumbnail[0].buffer, "image")
 
         let pictures = []
         if(request.files?.pictures?.length > 0){
             for(const picture of request.files.pictures){
-                const imageUrl = await uploadToCloudinary(picture.buffer)
-                pictures.push(imageUrl)
+                const imageUrl = await uploadToCloudinary(picture.buffer, "image")
+                pictures.push(imageUrl,secure_url)
             }
         }
 
@@ -97,7 +97,7 @@ export const UpdateProduct = async(request, response) => {
         if(features)
             product.features = features
         if(thumbnail !== null)
-            product.thumbnail = thumbnail
+            product.thumbnail = thumbnail.secure_url
         if(pictures.length > 0)
             product.pictures = pictures
 

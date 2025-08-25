@@ -8,6 +8,7 @@ import CustomButton from "../Components/CustomButton";
 import CustomInput from "../Components/CustomInput";
 import CustomEditor from "../Components/CustomEditor";
 import { toast } from "react-toastify";
+import CustomFileUpload from "../Components/CustomFileUpload";
 
 const SpecificBlog = ({isSidebarHovered}) => {
 
@@ -29,7 +30,7 @@ const SpecificBlog = ({isSidebarHovered}) => {
       setBlogsContent(response.data.content)
     })
     .catch(error => {console.error(error)})
-    .finally(() => setLoading(false))
+    // .finally(() => setLoading(false))
   },[id, URL])
 
   const UpdateBlog = blogId => {
@@ -78,8 +79,8 @@ const SpecificBlog = ({isSidebarHovered}) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-lg font-serif text-gray-500 italic">
+      <div className="flex justify-center items-center size-dvh">
+        <p className="text-lg font-serif text-gray-500 italic text-center">
           Loading blog...
         </p>
       </div>
@@ -89,21 +90,21 @@ const SpecificBlog = ({isSidebarHovered}) => {
   return(
     <React.Fragment>
 
-      <div className={`transition-all duration-300 ${isSidebarHovered ? "w-[82%]" : "w-[94%]"} flex flex-col gap-8 px-8 pb-12`}>
+      <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
 
         {editBlog? 
         (
           <div className="w-full flex flex-col gap-4 mt-20 px-8">
             <CustomInput label="Blog Title" type="text" value={blogTitle} onChange={e => setBlogTitle(e.target.value)}/>
-            <CustomInput label="Thumbnail" type="file" onChange={e => setBlogThumbnail(e.target.files[0])}/>
+            <CustomFileUpload label="Thumbnail" onChange={e => setBlogThumbnail(e.target.files[0])}/>
             <CustomEditor value={blogContent} onChange={val => setBlogsContent(val)}/>
           </div>
         )
         : 
         (
           <>
-            <div className="w-full flex flex-col gap-8 mt-12">
-              <h3 className="font-sans text-[#0BAFA6] text-6xl font-semibold text-center px-16">{blogTitle}</h3>
+            <div className="w-full flex flex-col gap-8 mt-12 max-sm:mt-24">
+              <h3 className="font-sans text-[#0BAFA6] text-6xl max-sm:text-2xl font-semibold text-center px-16 max-sm:px-4">{blogTitle}</h3>
               {thumbnail && <img src={thumbnail} alt={blogTitle} className="rounded-xl object-cover"/>}
             </div>
 
