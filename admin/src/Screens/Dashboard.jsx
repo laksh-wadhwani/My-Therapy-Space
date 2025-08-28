@@ -1,7 +1,7 @@
 import React from "react";
 import CustomTable from "../Components/CustomTable";
 import CustomButton from "../Components/CustomButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios"
 import { BackendURL } from "../BackendContext";
@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 const Dashboard = ({ isSidebarHovered, user }) => {
 
     const URL = BackendURL()
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [admins, setAdmins] = useState([])
 
@@ -92,11 +93,10 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                 <CustomTable title="Recent Activity" columns={columns} data={dummyData} showActions={false} statusStyles={dashboardStatusStyles} />
 
                 <div className="w-full flex gap-8">
-                    <Link to="/manage-blogs"><CustomButton>add new blog</CustomButton></Link>
-                    <Link to="/manage-workshops"><CustomButton>add workshop</CustomButton></Link>
-                    <Link to="/manage-products"><CustomButton>add product</CustomButton></Link>
-                    <Link to="/manage-courses"><CustomButton>add course</CustomButton></Link>
-
+                    <CustomButton onClick={() => navigate("/manage-blogs")}>add new blog</CustomButton>
+                    <CustomButton onClick={() => navigate("/manage-workshops")}>add workshop</CustomButton>
+                    <CustomButton onClick={() => navigate("/manage-products")}>add product</CustomButton>
+                    <CustomButton  onClick={() => navigate("/manage-courses")}>add course</CustomButton>
                 </div>
 
             </div>

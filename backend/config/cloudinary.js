@@ -18,8 +18,7 @@ cloudinary.config({
         if (error) return reject(error);
         resolve(result);
       }
-    );
-
+    )
     streamifier.createReadStream(fileBuffer).pipe(uploadStream);
   });
 };

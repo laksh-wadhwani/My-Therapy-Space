@@ -71,7 +71,7 @@ const UserQueries = ({ isSidebarHovered }) => {
     return (
         <React.Fragment>
 
-            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
+            <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border overflow-auto`}>
 
                 <div className="w-full p-4 mt-6 max-sm:mt-18 border-b border-gray-200 flex flex-col gap-2 max-sm:px-0">
                     <h1 className="font-serf text-4xl font-bold text-black capitalize italic">manage user queries</h1>

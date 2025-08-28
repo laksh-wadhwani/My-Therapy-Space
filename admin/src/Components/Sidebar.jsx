@@ -99,7 +99,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                 </div></Link>
             </div>
 
-            <div className="hidden w-full h-dvh max-sm:flex flex-col fixed top-2 z-50">
+            <div className={`hidden w-full max-sm:flex flex-col fixed top-2 ${isOpen? `z-50`:`z-0`}`}>
                 <div className="w-full bg-white border-b border-gray-100 shadow-md px-4 pb-2 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <img src="../logo.svg" alt="Company Logo" className="size-12" />
@@ -109,7 +109,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                 </div>
 
                 {isOpen && (
-                    <div className="size-full bg-white flex flex-col items-center gap-6 py-8">
+                    <div className="size-full h-dvh bg-white flex flex-col items-center gap-6 py-8">
                         <Link to="/dashboard"><button className="flex items-center gap-2 capitalize font-serif text-lg text-white rounded-md bg-[#0BAFA6] p-2 px-4" onClick={() => setIsOpen(false)}>
                             <LayoutDashboard size={32} />
                             dashboard

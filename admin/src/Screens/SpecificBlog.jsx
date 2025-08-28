@@ -30,7 +30,7 @@ const SpecificBlog = ({isSidebarHovered}) => {
       setBlogsContent(response.data.content)
     })
     .catch(error => {console.error(error)})
-    // .finally(() => setLoading(false))
+    .finally(() => setLoading(false))
   },[id, URL])
 
   const UpdateBlog = blogId => {

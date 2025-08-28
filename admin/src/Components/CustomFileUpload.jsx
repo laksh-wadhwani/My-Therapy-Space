@@ -4,6 +4,8 @@ import { X } from "lucide-react";
 const CustomFileUpload = ({
   label,          // 👈 ab customizable hai (optional bhi)
   multiple = false,
+  name,
+  value,
   onChange,
 }) => {
   const [previews, setPreviews] = useState([]);

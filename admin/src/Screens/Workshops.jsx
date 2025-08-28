@@ -29,9 +29,9 @@ const Workshops = ({ isSidebarHovered }) => {
 
   useEffect(() => {
     axios.get(`${URL}/api/workshops/get-all-workshop`)
-    .then(response => setWorkshops(response.data))
-    .catch(error => console.error("Getting error in fetching workshops: ",error))
-  },[workshopss])
+      .then(response => setWorkshops(response.data))
+      .catch(error => console.error("Getting error in fetching workshops: ", error))
+  }, [workshopss])
 
   const columns = [
     { key: "title", label: "Title" },
@@ -46,25 +46,11 @@ const Workshops = ({ isSidebarHovered }) => {
     Cancelled: "bg-red-100 text-red-700",
   };
 
-  const handleChange = eventTriggered => {
-    const { name, type, value, files } = eventTriggered.target;
-
-    if (type === "file") {
-      const file = files[0];
-      if (file && !file.type.startsWith("image/")) {
-        toast.error("Only image files are allowed!");
-        return;
-      }
-      setWorkshopData({
-        ...workshopData,
-        [name]: file
-      });
-    } else {
-      setWorkshopData({
-        ...workshopData,
-        [name]: value
-      });
-    }
+  const handleChange = (name, value) => {
+    setWorkshopData(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
   const WorkshopData = new FormData();
@@ -112,37 +98,37 @@ const Workshops = ({ isSidebarHovered }) => {
 
   const DeleteWorkshop = workshopData => {
     axios.delete(`${URL}/api/workshops/delete/${workshopData._id}`)
-    .then(response => toast.success(response.data.message) )
-    .catch(error => {
-      console.error("Getting error in deleting workshop")
-      return toast.error(error.response.data.error)
-    })
+      .then(response => toast.success(response.data.message))
+      .catch(error => {
+        console.error("Getting error in deleting workshop")
+        return toast.error(error.response.data.error)
+      })
   }
 
   const UpdateWorkshop = workshopId => {
     setLoading(true)
     axios.put(`${URL}/api/workshops/update/${workshopId}`, WorkshopData)
-    .then(response => {
-      toast.success(response.data.message)
-      setTimeout(() => {navigate(0)},2500)
-    })
-    .catch(error => {
-      console.error("Getting error in updating workshop details: ",error)
-      return toast.error(error.response?.data?.error)
-    })
-    .finally(() => {setLoading(false)})
+      .then(response => {
+        toast.success(response.data.message)
+        setTimeout(() => { navigate(0) }, 2500)
+      })
+      .catch(error => {
+        console.error("Getting error in updating workshop details: ", error)
+        return toast.error(error.response?.data?.error)
+      })
+      .finally(() => { setLoading(false) })
   }
 
   const ChangeStatus = workshopId => {
     axios.put(`${URL}/api/workshops/change-status/${workshopId}`)
-    .then(response => {
-      toast.success(response.data.message)
-      setTimeout(() => {navigate(0)},2500)
-    })
-    .catch(error => {
-      console.error("Getting error in changing status of workshop: ",error)
-      return toast.error(error.response?.data?.error)
-    })
+      .then(response => {
+        toast.success(response.data.message)
+        setTimeout(() => { navigate(0) }, 2500)
+      })
+      .catch(error => {
+        console.error("Getting error in changing status of workshop: ", error)
+        return toast.error(error.response?.data?.error)
+      })
   }
 
 
@@ -172,10 +158,10 @@ const Workshops = ({ isSidebarHovered }) => {
           <h5 className="font-serif text-xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6">add new workshop</h5>
 
           <div className="w-full flex flex-col gap-4 px-6">
-            <CustomInput label="workshop title" placeholder="Title" type="text" name="title" value={workshopData.title} onChange={handleChange} />
-            <CustomInput label="facilitator" placeholder="Name" type="text" name="facilitator" value={workshopData.facilitator} onChange={handleChange} />
-            <CustomInput label="Date" type="date" name="date" value={workshopData.date} onChange={handleChange} />
-            <CustomFileUpload label="Workshop Image" value={workshopData.workshopImage} onChange={handleChange} />
+            <CustomInput label="workshop title" placeholder="Title" type="text" value={workshopData.title} onChange={e => handleChange("title", e.target.value)} />
+            <CustomInput label="facilitator" placeholder="Name" type="text" value={workshopData.facilitator} onChange={e => handleChange("facilitator", e.target.value)} />
+            <CustomInput label="Date" type="date" value={workshopData.date} onChange={e => handleChange("date", e.target.value)} />
+            <CustomFileUpload label="Workshop Image" value={workshopData.workshopImage} onChange={file => handleChange("workshopImage", file)} />
           </div>
 
           <div className="w-full px-6 flex justify-center gap-2">
@@ -194,7 +180,7 @@ const Workshops = ({ isSidebarHovered }) => {
       <Modal open={seeDetails} onClose={() => setSeeDetails(false)} center
         styles={{ closeButton: { display: 'none' }, modal: { padding: '0', borderRadius: ".8rem" } }}>
         <div className="w-full box-border">
-          {workshop && <img src={workshop.workshopImage}/>}
+          {workshop && <img src={workshop.workshopImage} />}
         </div>
       </Modal>
 
@@ -203,13 +189,13 @@ const Workshops = ({ isSidebarHovered }) => {
 
         <div className="w-full flex flex-col gap-6 w-sm box-border pb-10">
 
-          <h5 className="font-serif text-xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6">add new workshop</h5>
+          <h5 className="font-serif text-xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6">update workshop</h5>
 
           <div className="w-full flex flex-col gap-4 px-6">
-            <CustomInput label="workshop title" placeholder={workshop.title} type="text" name="title" value={workshopData.title} onChange={handleChange} />
-            <CustomInput label="facilitator" placeholder={workshop.facilitator} type="text" name="facilitator" value={workshopData.facilitator} onChange={handleChange} />
-            <CustomInput label="Date" type="date" name="date" value={workshopData.date} onChange={handleChange} />
-            <CustomFileUpload label="Workshop Image" value={workshopData.workshopImage} onChange={handleChange} />
+            <CustomInput label="workshop title" placeholder={workshop.title} type="text" value={workshopData.title} onChange={e => handleChange("title", e.target.value)} />
+            <CustomInput label="facilitator" placeholder={workshop.facilitator} type="text" value={workshopData.facilitator} onChange={e => handleChange("facilitator", e.target.value)} />
+            <CustomInput label="Date" type="date" name="date" value={workshopData.date} onChange={e => handleChange("date", e.target.value)} />
+            <CustomFileUpload label="Workshop Image" value={workshopData.workshopImage} onChange={file => handleChange("workshopImage", file)} />
           </div>
 
           <div className="w-full px-6 flex justify-center gap-2">

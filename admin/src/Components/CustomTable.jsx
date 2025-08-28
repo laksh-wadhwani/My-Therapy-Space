@@ -63,7 +63,7 @@ const CustomTable = ({
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
 
   return (
-    <div className="border border-gray-200 rounded-md shadow-md w-full">
+    <div className="border border-gray-200 rounded-md shadow-md w-full overflow-auto">
       <div className="flex justify-between items-center px-6 max-sm:px-3 py-4 border-b border-gray-200">
         <span className="font-serif text-xl max-sm:text-base font-semibold text-black italic">{title}</span>
         <div className="relative">
