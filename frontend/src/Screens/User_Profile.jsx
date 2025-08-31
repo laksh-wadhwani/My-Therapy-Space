@@ -61,20 +61,6 @@ const UserProfile = ({ setLoginUser }) => {
         Resolved: "bg-green-100 text-green-700",
     };
 
-    const dummyData = [
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
-        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" }
-    ];
 
     const UserData = new FormData();
     Object.entries(userData).forEach(([key, value]) => {
@@ -125,9 +111,9 @@ const UserProfile = ({ setLoginUser }) => {
 
     return (
         <React.Fragment>
-            <div className="w-full flex justify-between mt-24 box-border px-6">
+            <div className="w-full flex max-sm:flex-col justify-between mt-24 box-border px-6">
 
-                <div className="w-[20%] flex flex-col gap-4 items-center pb-4">
+                <div className="w-[20%] max-sm:w-full flex flex-col gap-4 items-center pb-4">
 
                     <div className={`w-full flex flex-col gap-4 items-center ${user.profile? `rounded-xl bg-white border border-gray-100 shadow-lg p-2`:``}`}>
                         {user.profile? 
@@ -160,11 +146,11 @@ const UserProfile = ({ setLoginUser }) => {
                 </div>
 
                 {isUpdate ?
-                    <div className="w-[75%] flex flex-col gap-12 pb-12">
+                    <div className="w-[75%] max-sm:w-full flex flex-col gap-12 pb-12">
 
                         <div className="w-full flex flex-col gap-6">
-                            <h3 className="font-serif text-3xl italic">Personal Information</h3>
-                            <div className="w-[75%] flex flex-col gap-4">
+                            <h3 className="font-serif text-3xl max-sm:text-2xl italic">Personal Information</h3>
+                            <div className="w-[75%] max-sm:w-full flex flex-col gap-4">
                                 <CustomInput label="Full Name" type="text" placeholder={user.fullname} value={userData.fullname} onChange={e => handleChange("fullname", e.target.value)} />
                                 <CustomInput label="Email" type="email" placeholder={user.email} value={userData.email} onChange={e => handleChange("email", e.target.value)} />
                                 <CustomInput label="Phone Number" type="text" placeholder={user.phoneNo} value={userData.phoneNo} onChange={e => handleChange("phoneNo", e.target.value)} />
@@ -173,14 +159,14 @@ const UserProfile = ({ setLoginUser }) => {
                         </div>
 
                         <div className="w-full flex flex-col gap-6">
-                            <h3 className="font-serif text-3xl italic">Password</h3>
-                            <div className="w-[75%] flex flex-col gap-4">
+                            <h3 className="font-serif text-3xl max-sm:text-2xl italic">Password</h3>
+                            <div className="w-[75%] max-sm:w-full flex flex-col gap-4">
                                 <CustomInput label="Current Password" placeholder="Current Password" type="password" value={userData.currentPass} onChange={e => handleChange("currentPass", e.target.value)} />
                                 <CustomInput label="New Password" type="password" placeholder="New Password" showPasswordRules={true} value={userData.newPass} onChange={e => handleChange("newPass", e.target.value)} />
                             </div>
                         </div>
 
-                        <div className="w-[75%] flex justify-between">
+                        <div className="w-[75%] max-sm:w-full flex max-sm:flex-col max-sm:gap-4 justify-between">
                             <CustomButton className="w-[30%] bg-blue-500" onClick={() => Update(user._id)} disabled={loading}>
                                 {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Save"}
                             </CustomButton>
@@ -189,8 +175,8 @@ const UserProfile = ({ setLoginUser }) => {
 
                     </div>
                     :
-                    <div className="w-[78%] flex flex-col gap-4">
-                        <h2 className="font-serif text-2xl italic text-gray-500">Welcome back, <strong className="text-[#0BAFA6]">{user.fullname}</strong></h2>
+                    <div className="w-[78%] max-sm:w-full flex flex-col gap-4">
+                        <h2 className="font-serif text-2xl max-sm:text-xl italic text-gray-500">Welcome back, <strong className="text-[#0BAFA6]">{user.fullname}</strong></h2>
 
                         <CustomTable title="Booking History" columns={columns} data={bookingDetails} showActions={false} statusStyles={bookingStatusStyles} />
                     </div>

@@ -73,7 +73,7 @@ const CustomTable = ({
             placeholder="Search..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 max-sm:pl-8 pr-4 max-sm:pr-0 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-md max-sm:text-sm font-serif"
+            className="bg-white pl-10 max-sm:pl-8 pr-4 max-sm:pr-0 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-md max-sm:text-sm font-serif"
           />
         </div>
       </div>
