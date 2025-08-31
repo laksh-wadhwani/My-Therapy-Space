@@ -93,8 +93,7 @@ export const Login = async (request, response) => {
 
         return response.status(200).json({
             message: "Login Successful",
-            token,
-            user: userCheck
+            token
         })
 
 
@@ -152,7 +151,21 @@ export const Update = async (request, response) => {
         if (address) user.address = address
         if (isPassMatch) user.password = newHashPass
         await user.save();
-        return response.status(201).json({ message: "Basic details have been updated" })
+
+        const token = jwt.sign(
+            {
+                id: user.id,
+                fullname: user.fullname,
+                profile: user.profile
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
+        )
+
+        return response.status(201).json({ 
+            message: "Basic details have been updated",
+            token 
+        })
 
     } catch (error) {
         console.log("Getting error in updating user: ", error)
@@ -175,7 +188,21 @@ export const ChangeProfile = async (request, response) => {
         if (profile !== null) user.profile = profile.secure_url
 
         await user.save();
-        return response.status(201).json({ message: "Profile picture has been uploaded" })
+
+        const token = jwt.sign(
+            {
+                id: user.id,
+                fullname: user.fullname,
+                profile: user.profile
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
+        )
+
+        return response.status(201).json({ 
+            message: "Profile picture has been uploaded",
+            token 
+        })
     } catch (error) {
         console.log("Getting error in uploading profile picture: ", error)
         return response.status(500).json({ error: "Internal Server Error" })

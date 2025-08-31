@@ -10,6 +10,7 @@ import CustomInput from "../Components/CustomInput";
 import CustomFileUpload from "../Components/CustomFileUpload";
 import Modal from "react-responsive-modal";
 import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
 const UserProfile = ({ setLoginUser }) => {
 
@@ -85,6 +86,10 @@ const UserProfile = ({ setLoginUser }) => {
         axios.put(`${URL}/api/users/update/${userId}`, userData)
             .then(response => {
                 toast.success(response.data.message)
+                const token = response.data.token
+                sessionStorage.setItem("token", token)
+                const decoded = jwtDecode(token)
+                setLoginUser(decoded)
                 setTimeout(() => {navigate(0)}, 2500)
             })
             .catch(error => {
@@ -99,6 +104,10 @@ const UserProfile = ({ setLoginUser }) => {
         axios.put(`${URL}/api/users/change-profile/${userId}`, UserData)
         .then(response => {
             toast.success(response.data.message)
+            const token = response.data.token
+            sessionStorage.setItem("token", token)
+            const decoded = jwtDecode(token)
+            setLoginUser(decoded)
             setTimeout(() => {navigate(0)}, 2500)
         })
         .catch(error => {
@@ -181,7 +190,7 @@ const UserProfile = ({ setLoginUser }) => {
                     </div>
                     :
                     <div className="w-[78%] flex flex-col gap-4">
-                        <h2 className="font-serif text-2xl italic text-gray-500">Welcome back, <strong className="text-[#0BAFA6]">Laksh Wadhwani !</strong></h2>
+                        <h2 className="font-serif text-2xl italic text-gray-500">Welcome back, <strong className="text-[#0BAFA6]">{user.fullname}</strong></h2>
 
                         <CustomTable title="Booking History" columns={columns} data={bookingDetails} showActions={false} statusStyles={bookingStatusStyles} />
                     </div>

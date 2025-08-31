@@ -13,6 +13,7 @@ import Team10 from "../assets/team10.jpg"
 import TeamMember from "../assets/Team Member.png";
 import RButton from "../Components/Reusable_Button";
 import CustomButton from "../Components/CustomButton";
+import { Link } from "react-router";
 
 const Team = () => {
 
@@ -86,7 +87,7 @@ const Team = () => {
 
             <div className="flex flex-col items-start justify-between max-sm:gap-8">
               <p className="font-serif text-xl max-sm:text-lg text-justify max-sm:text-left text-black font-light leading-[3.25rem] max-sm:leading-7">If you are an allied health professional who is passionate about working with children and teenagers then My Therapy Space is for you.  We provide a flexible, supportive, multi disciplinary team experience.  We are driven to provide the best possible service for families that is family centred, and driven by families.  Staff are offered a flexible working environment, with regular supervision/mentoring and professional development. If this resonates with you, then please contact us to discuss further.</p>
-              <CustomButton>Apply Now</CustomButton>
+              <Link to="/contact"><CustomButton>Apply Now</CustomButton></Link>
             </div>
 
             <div className="flex-shrink-0 w-[50%] max-sm:w-full h-[500px] overflow-hidden rounded-xl shadow-lg">
@@ -179,7 +180,7 @@ const Team = () => {
               <p>Team-building events to foster a fun and collaborative culture.</p>
             </div>
           </div>
-          <RButton className="px-7 py-3 mt-6">Join Now</RButton>
+            <Link to="/contact"><CustomButton className="px-7 py-3 mt-6">Join Now</CustomButton></Link>
         </div>
 
         <Footer />

@@ -139,7 +139,7 @@ const Navbar = ({ user, setLoginUser }) => {
     <React.Fragment>
       <nav className="w-dvw flex max-sm:flex-col max-sm:gap-4 justify-center max-sm:items-center fixed top-0 mt-4 z-50">
 
-        <div className={`flex items-center w-[95%] bg-white shadow-md justify-between ${isMobileOpen ? `` : `rounded-full px-6 py-2`}`}>
+        <div className={`flex items-center w-[95%] bg-white shadow-md justify-between rounded-full px-6 py-2`}>
 
           <Link to="/"><div className="flex items-center gap-2">
             <img src="../logo.svg" alt="Logo" className="size-14 max-sm:size-10" />
@@ -199,9 +199,13 @@ const Navbar = ({ user, setLoginUser }) => {
           {user ?
             <div className="flex gap-6 items-center">
               <Link to={`/user-profile/${user.id}`}><div className="flex items-center gap-2 bg-[#0BAFA6] py-1 px-2 rounded-xl shadow-md cursor-pointer hover:scale-105 max-sm:hidden">
+                {user.profile? 
+                <img src={user.profile} alt="User Profile" className="size-10 rounded-full object-cover"/>
+                :
                 <div className="size-10 bg-white p-3 rounded-full flex items-center justify-center border border-gray-200 shadow-md">
                   <span className="text-lg text-black font-bold uppercase">{nameInitials}</span>
                 </div>
+                }
                 <span className="font-serif text-lg text-white">Hello, {firstName}</span>
               </div></Link>
               <ShoppingCart size={32} className="stroke-[#0BAFA6] hover:scale-105" onClick={() => navigate(`/cart/${user.id}`)}/>
@@ -211,9 +215,9 @@ const Navbar = ({ user, setLoginUser }) => {
 
           <Menu size={32} className="hidden max-sm:block stroke-black hover:scale-105" onClick={() => setIsMobileOpen(!isMobileOpen)} />
         </div>
-        {isMobileOpen &&
-          <div className="w-full h-dvh max-sm:flex">
-          </div>}
+
+        <div className="w-full h-dvh"></div>
+
       </nav>
 
       <Modal open={loginOpen} onClose={() => setLoginOpen(false)} center
