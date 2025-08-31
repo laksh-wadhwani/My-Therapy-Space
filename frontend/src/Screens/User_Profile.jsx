@@ -1,0 +1,207 @@
+import React, { useEffect, useState } from "react";
+import { Flag, UserRound } from 'lucide-react';
+import CustomButton from "../Components/CustomButton";
+import { BackendURL } from "../BackendContext";
+import { useNavigate } from "react-router";
+import CustomTable from "../Components/CustomTable";
+import { useParams } from "react-router";
+import axios from "axios";
+import CustomInput from "../Components/CustomInput";
+import CustomFileUpload from "../Components/CustomFileUpload";
+import Modal from "react-responsive-modal";
+import { toast } from "react-toastify";
+
+const UserProfile = ({ setLoginUser }) => {
+
+    const { id } = useParams();
+    const URL = BackendURL()
+    const navigate = useNavigate();
+    const [isUpdate, setIsUpdate] = useState(false)
+    const [open, setOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [user, setUser] = useState({})
+    const [bookingDetails, setBookingDetails] = useState([])
+    const [userData, setUserData] = useState({
+        fullname: "",
+        email: "",
+        phoneNo: "",
+        address: "",
+        currentPass: "",
+        newPass: "",
+        profile: null
+    })
+
+    useEffect(() => {
+        axios.get(`${URL}/api/users/get-user/${id}`)
+            .then(response => setUser(response.data))
+            .catch(error => console.error("Getting error in fetching user: ", error))
+
+        axios.get(`${URL}/api/users/get-booking-details/${user.email}`)
+        .then(response => setBookingDetails(response.data))
+        .catch(error => console.error("Getting error in fetching booking details: ",error))
+    })
+
+    const handleChange = (name, value) => {
+        setUserData(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    const columns = [
+        { key: "_id", label: "BookingRef#" },
+        { key: "firstName", label: "Patient Details" },
+        { key: "date", label: "Date" },
+        { key: "status", label: "Status" },
+    ];
+
+    const bookingStatusStyles = {
+        Pending: "bg-yellow-100 text-yellow-700",
+        Resolved: "bg-green-100 text-green-700",
+    };
+
+    const dummyData = [
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Pending" },
+        { _id: "12345678", firstName: "Laksh", date: "2025-04-30", status: "Resolved" }
+    ];
+
+    const UserData = new FormData();
+    Object.entries(userData).forEach(([key, value]) => {
+        UserData.append(key, value)
+    })
+
+    const Update = userId => {
+        setLoading(true)
+        axios.put(`${URL}/api/users/update/${userId}`, userData)
+            .then(response => {
+                toast.success(response.data.message)
+                setTimeout(() => {navigate(0)}, 2500)
+            })
+            .catch(error => {
+                console.error("Getting error in updating user's basic information: ",error)
+                return toast.error(error.response?.data?.error)
+            })
+            .finally(() => setLoading(false))
+    }
+
+    const ChangeProfile = userId => {
+        setLoading(true)
+        axios.put(`${URL}/api/users/change-profile/${userId}`, UserData)
+        .then(response => {
+            toast.success(response.data.message)
+            setTimeout(() => {navigate(0)}, 2500)
+        })
+        .catch(error => {
+            console.error("Getting error in changing profile picture for user: ",error)
+            return toast.error(error.response?.data?.error)
+        })
+        .finally(() => setLoading(false))
+    }
+
+    const Logout = () => {
+        setLoginUser(null)
+        sessionStorage.removeItem("token")
+        navigate("/")
+    }
+
+    return (
+        <React.Fragment>
+            <div className="w-full flex justify-between mt-24 box-border px-6">
+
+                <div className="w-[20%] flex flex-col gap-4 items-center pb-4">
+
+                    <div className={`w-full flex flex-col gap-4 items-center ${user.profile? `rounded-xl bg-white border border-gray-100 shadow-lg p-2`:``}`}>
+                        {user.profile? 
+                        <img src={user.profile} alt="User Profile" className="w-full h-60 object-contain"/>
+                        :
+                        <div className="w-full h-60 bg-[#16171D] rounded-xl flex justify-center items-center shadow-lg">
+                            <UserRound size={200} className="fill-gray-500 stroke-none" />
+                        </div>
+                        }
+                    </div>
+
+                    {isUpdate ?
+                        <CustomButton onClick={() => setOpen(true)}>{user.profile ? `Change Photo` : `Upload Photo`}</CustomButton>
+                        :
+                        <>
+                            <CustomButton onClick={() => setIsUpdate(true)}>Manage Profile</CustomButton>
+                            <CustomButton onClick={Logout}>Logout</CustomButton>
+
+
+                            <div className="w-full flex flex-col gap-4 text-gray-500 font-serif bg-white border border-gray-100 shadow-lg rounded-xl box-border p-4">
+                                <h5 className="text-xl capitalize italic">personal information</h5>
+                                <div className="w-full flex flex-col text-base gap-1">
+                                    <span><strong>Name:</strong> {user.fullname}</span>
+                                    <span><strong>Email:</strong> {user.email}</span>
+                                    <span><strong>Phone No:</strong> {user.phoneNo}</span>
+                                    <span><strong>Address:</strong> {user.address}</span>
+                                </div>
+                            </div>
+                        </>}
+                </div>
+
+                {isUpdate ?
+                    <div className="w-[75%] flex flex-col gap-12 pb-12">
+
+                        <div className="w-full flex flex-col gap-6">
+                            <h3 className="font-serif text-3xl italic">Personal Information</h3>
+                            <div className="w-[75%] flex flex-col gap-4">
+                                <CustomInput label="Full Name" type="text" placeholder={user.fullname} value={userData.fullname} onChange={e => handleChange("fullname", e.target.value)} />
+                                <CustomInput label="Email" type="email" placeholder={user.email} value={userData.email} onChange={e => handleChange("email", e.target.value)} />
+                                <CustomInput label="Phone Number" type="text" placeholder={user.phoneNo} value={userData.phoneNo} onChange={e => handleChange("phoneNo", e.target.value)} />
+                                <CustomInput label="Address" type="text" placeholder={user.address} value={userData.address} onChange={e => handleChange("address", e.target.value)} />
+                            </div>
+                        </div>
+
+                        <div className="w-full flex flex-col gap-6">
+                            <h3 className="font-serif text-3xl italic">Password</h3>
+                            <div className="w-[75%] flex flex-col gap-4">
+                                <CustomInput label="Current Password" placeholder="Current Password" type="password" value={userData.currentPass} onChange={e => handleChange("currentPass", e.target.value)} />
+                                <CustomInput label="New Password" type="password" placeholder="New Password" showPasswordRules={true} value={userData.newPass} onChange={e => handleChange("newPass", e.target.value)} />
+                            </div>
+                        </div>
+
+                        <div className="w-[75%] flex justify-between">
+                            <CustomButton className="w-[30%] bg-blue-500" onClick={() => Update(user._id)} disabled={loading}>
+                                {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Save"}
+                            </CustomButton>
+                            <CustomButton className="w-[30%] bg-red-500" onClick={() => setIsUpdate(false)}>Cancel</CustomButton>
+                        </div>
+
+                    </div>
+                    :
+                    <div className="w-[78%] flex flex-col gap-4">
+                        <h2 className="font-serif text-2xl italic text-gray-500">Welcome back, <strong className="text-[#0BAFA6]">Laksh Wadhwani !</strong></h2>
+
+                        <CustomTable title="Booking History" columns={columns} data={bookingDetails} showActions={false} statusStyles={bookingStatusStyles} />
+                    </div>
+                }
+            </div>
+
+            <Modal open={open} onClose={() => setOpen(false)} center
+                styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".7rem" } }}>
+
+                <div className="flex flex-col gap-8 py-8 px-12">
+                    <h4 className="font-serif text-2xl text-black self-center">Upload Profile Picture</h4>
+                    <CustomFileUpload label="Profile Picture" value={user.profile} onChange={file => handleChange("profile", file)} />
+                    <CustomButton onClick={() => ChangeProfile(user._id)} disabled={loading}>
+                        {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Upload"}
+                    </CustomButton>
+                </div>
+
+            </Modal>
+        </React.Fragment>
+    )
+}
+
+export default UserProfile

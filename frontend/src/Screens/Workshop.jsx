@@ -26,12 +26,12 @@ const Workshop = () => {
     <React.Fragment>
       <div className="main-box bg-white items-center gap-10">
 
-        <div className="w-full px-16 mt-32">
-          <h2 className="font-serif text-4xl text-[#0BAFA6]">Group Therapy and Workshops</h2>
-          <p className="font-serif text-xl text-gray-400">My Therapy is passionate about sharing information through workshops. Some of the workshops we have provided include:   </p>
+        <div className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24">
+          <h2 className="font-serif text-4xl max-sm:text-3xl text-[#0BAFA6]">Group Therapy and Workshops</h2>
+          <p className="font-serif text-xl max-sm:text-base text-gray-400">My Therapy is passionate about sharing information through workshops. Some of the workshops we have provided include:   </p>
         </div>
 
-        <div className="w-[90%] grid grid-cols-4 gap-8">
+        <div className="w-[90%] grid grid-cols-4 max-sm:grid-cols-1 gap-8">
           {workshopTypes.map(data => (
             <div className="flex flex-col items-center size-full gap-4">
               <img src={data.image} className="w-full h-40 object-contain" />
@@ -40,16 +40,17 @@ const Workshop = () => {
           ))}
         </div>
 
-        <p className="w-full font-serif text-lg text-gray-400 text-center px-16"><Link to="/currentworkshops" className="text-black underline">Click here</Link> to see what groups are currently on offer. We love suggestions and a chance to get creative so if you have any ideas for groups or workshops that you feel would benefit you and your child, please let us know and we can try and make it happen</p>
+        <p className="w-full font-serif text-lg text-gray-400 text-center px-16 max-sm:px-8"><Link to="/currentworkshops" className="text-black underline">Click here</Link> to see what groups are currently on offer. We love suggestions and a chance to get creative so if you have any ideas for groups or workshops that you feel would benefit you and your child, please let us know and we can try and make it happen</p>
 
-        <div className="w-[90%] px-16 grid grid-cols-4 gap-4">
+        <div className="w-[90%] px-16 grid grid-cols-4 max-sm:grid-cols-1 gap-4">
           <img src={Group1} className="border-8 border-gray-300" />
           <img src={Group2} className="border-8 border-gray-300" />
           <img src={Group3} className="border-8 border-gray-300" />
           <img src={Group4} className="border-8 border-gray-300" />
         </div>
+
         {/* Current Groups */}
-        <div className="w-[90%] px-16 mt-16" id="current-groups">
+        <div className="w-[90%] px-16 max-sm:px-8 mt-16" id="current-groups">
           <h2 className="font-serif text-3xl text-[#0BAFA6] mb-3">Current Groups</h2>
 
           {/* Term-Time Therapy Groups */}

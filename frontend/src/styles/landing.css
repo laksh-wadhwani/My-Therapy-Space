@@ -3,19 +3,15 @@
 }
 
 .sections{
-    @apply w-full flex items-center p-14 box-border
+    @apply w-full flex items-center p-14 max-sm:px-8 box-border
 }
 
 .section-1{
-    @apply h-[950px] bg-[url(../assets/Section1.svg)] bg-center bg-no-repeat bg-cover
-}
-
-.hero-heading{
-    @apply text-7xl font-serif text-[#333333]
+    @apply h-[950px] max-sm:h-dvh bg-[url(../assets/Section1.svg)] bg-center bg-no-repeat bg-cover
 }
 
 .sections-tittle{
-    @apply text-[#FF7F50] font-serif text-center
+    @apply text-[#FF7F50] font-serif text-center max-sm:text-lg
 }
 
 .sections-description{
@@ -23,11 +19,11 @@
 }
 
 .sections-box{
-    @apply w-[50%] flex flex-col items-start box-border
+    @apply w-[50%] max-sm:w-full flex flex-col items-start box-border
 }
 
 .section-2-description-box{
-    @apply w-[90%] h-[250px] box-border bg-[#F8FBFD] border border-[#EBF0F1] rounded-[2.5rem] grid grid-cols-2 shadow-md
+    @apply w-[90%] max-sm:w-full h-[250px] box-border bg-[#F8FBFD] border border-[#EBF0F1] rounded-[2.5rem] grid grid-cols-2 shadow-md
 }
 
 .section-2-description-box > article{
@@ -35,7 +31,7 @@
 }
 
 .services-cards{
-    @apply w-[20%] h-[350px] bg-white shadow-md rounded-[1.5rem] flex flex-col items-center gap-4 box-border p-12
+    @apply w-[20%] max-sm:w-full h-[350px] max-sm:h-[450px] bg-white shadow-md rounded-[1.5rem] flex flex-col items-center max-sm:justify-center gap-4 box-border p-12
 }
 
 .services-cards > div{
@@ -43,7 +39,7 @@
 }
 
 .services-cards > h3{
-    @apply font-serif text-lg capitalize font-bold text-black text-center
+    @apply font-serif text-lg max-sm:text-2xl capitalize font-bold text-black text-center
 }
 
 .services-cards > div > div {
@@ -51,11 +47,11 @@
 }
 
 .another-sections-tittle{
-    @apply font-serif text-5xl capitalize text-[#333333]
+    @apply font-serif text-5xl max-sm:text-3xl capitalize text-[#333333]
 }
 
 .section-4{
-    @apply w-full flex justify-center
+    @apply w-full flex max-sm:flex-col justify-center
 }
 
 .section-4 > div {

@@ -57,5 +57,10 @@ app.use("/api/queries", queryRoutes)
 import bookingRoutes from "./routes/booking.routes.js"
 app.use("/api/bookings", bookingRoutes)
 
+//User Routes
 import userRoutes from "./routes/user.routes.js"
 app.use("/api/users", userRoutes)
+
+//Cart Routes
+import cartRoutes from "./routes/cart.routes.js"
+app.use("/api/cart", cartRoutes)

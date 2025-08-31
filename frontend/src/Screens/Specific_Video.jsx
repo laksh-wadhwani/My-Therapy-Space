@@ -3,14 +3,18 @@ import RButton from "../Components/Reusable_Button";
 import Footer from "../Components/footer";
 import { BackendURL } from "../BackendContext";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import CustomButton from "../Components/CustomButton";
+import { toast } from "react-toastify";
 
-const SpecificVideo = () => {
+const SpecificVideo = ({user}) => {
 
     const { id } = useParams()
     const URL = BackendURL()
+    const navigate = useNavigate();
+    const isSignedIn = (user&&user.id)? true:false
     const [loading, setLoading] = useState(true)
     const [course, setCourse] = useState({})
 
@@ -29,28 +33,44 @@ const SpecificVideo = () => {
         )
     }
 
+    const AddToCart = () => {
+
+        if(!isSignedIn)
+            return toast.error("Please Login First")
+
+        axios.post(`${URL}/api/cart/add-to-cart/${user.id}/${course._id}`)
+        .then(response => {
+            toast.success(response.data.message)
+            setTimeout(() => {navigate(`/cart/${user.id}`)}, 2500)
+        })
+        .catch(error => {
+            console.error("Getting error in adding to the cart: ",error)
+            return toast.error(error.response?.data?.error)
+        })
+    }
+
     return (
         <React.Fragment>
-            <div className="main-box gap-8 items-center">
+            <div className="main-box gap-8 items-center bg-white">
 
-                <h2 className="font-serif text-4xl text-[#0BAFA6] capitalize px-16 mt-32 self-start">course videos</h2>
+                <h2 className="font-serif text-4xl max-sm:text-3xl text-[#0BAFA6] capitalize px-16 max-sm:px-8 mt-32 max-sm:mt-24 self-start">course videos</h2>
 
-                <div className="w-full flex justify-around px-16">
-                    <video src={course.trailer} poster={course.thumbnail} controls alt="Course Video Trailer" className="w-[47.5%] max-h-[400px] rounded-xl shadow-md" />
-                    <div className="w-[50%] flex flex-col justify-between p-6 border border-gray-300 rounded-xl shadow-xl">
+                <div className="w-full flex max-sm:flex-col max-sm:gap-6 justify-around px-16 max-sm:px-8">
+                    <video src={course.trailer} poster={course.thumbnail} controls alt="Course Video Trailer" className="w-[47.5%] max-sm:w-full max-h-[400px] max-sm:h-auto rounded-xl shadow-md" />
+                    <div className="w-[50%] max-sm:w-full flex flex-col max-sm:gap-4 justify-between p-6 border border-gray-300 rounded-xl shadow-xl">
                         <div className="w-full flex flex-col font-serif text-black capitalize">
-                            <h3 className="text-4xl">{course.name}</h3>
-                            <span className="text-xl">Price: ${course.price}</span>
-                            <span className="text-xl">Instructor: Cathy Trace</span>
+                            <h3 className="text-4xl max-sm:text-2xl font-semibold">{course.name}</h3>
+                            <span className="text-xl max-sm:text-base">Price: ${course.price}</span>
+                            <span className="text-xl max-sm:text-base">Instructor: Cathy Trace</span>
                         </div>
-                        <p className="font-serif text-xl text-black">{course.description}</p>
-                        <RButton>Add to Cart</RButton>
+                        <p className="font-serif text-xl max-sm:text-sm text-black">{course.description}</p>
+                        <CustomButton onClick={AddToCart}>Add to Cart</CustomButton>
                     </div>
                 </div>
 
                 <div className="w-[90%] border border-gray-300 rounded-xl shadow-md flex flex-col gap-2">
-                    <h2 className="w-full font-serif text-center text-black text-3xl rounded-t-md bg-[#0BAFA6] capitalize p-6">this course includes</h2>
-                    <div className="list-disc font-serif text-2xl text-black flex flex-col gap-2 px-10 py-6">
+                    <h2 className="w-full font-serif text-center text-white text-3xl max-sm:text-xl rounded-t-md bg-[#0BAFA6] capitalize p-6">this course includes</h2>
+                    <div className="list-disc font-serif text-2xl max-sm:text-base text-black flex flex-col gap-2 max-sm:gap-6 px-10 max-sm:px-6 py-6">
                         <ReactMarkdown
                             rehypePlugins={[rehypeRaw]}
                             components={{

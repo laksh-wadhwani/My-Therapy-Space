@@ -7,6 +7,8 @@ import { useNavigate } from "react-router"
 import { useState } from "react";
 import axios from "axios"
 import { toast } from "react-toastify"
+import CustomInput from "../Components/CustomInput";
+import CustomButton from "../Components/CustomButton";
 
 const Booking = () => {
 
@@ -25,76 +27,64 @@ const Booking = () => {
         const { name, value } = eventTriggered.target
         setBookingDetails({
             ...bookingDetails,
-            [name] : value
+            [name]: value
         })
     }
 
     const BookACall = () => {
         axios.post(`${URL}/api/bookings/book-a-call`, bookingDetails)
-        .then(response => {
-            toast.success(response.data.message)
-            setTimeout(() => {navigate("/")}, 2500)
-        })
-        .catch(error => {
-            console.log("Getting error in booking a call: ",error)
-            return toast.error(error?.response?.data?.error)
-        })
+            .then(response => {
+                toast.success(response.data.message)
+                setTimeout(() => { navigate("/") }, 2500)
+            })
+            .catch(error => {
+                console.log("Getting error in booking a call: ", error)
+                return toast.error(error?.response?.data?.error)
+            })
     }
 
-    return(
+    return (
         <React.Fragment>
-            <div className="main-box bg-white">
-                <div className="w-full px-16 mt-32">
-                    <h2 className="font-serif text-4xl capitalize text-[#0BAFA6]">Book A Phone Appointment </h2>
+            <div className="main-box bg-white max-sm:gap-8">
+                <div className="w-full px-16 max-sm:px-6 mt-32 max-sm:mt-24">
+                    <h2 className="font-serif text-4xl max-sm:text-3xl capitalize text-[#0BAFA6]">Book A Phone Appointment </h2>
                     <p className="font-serif text-xl text-black">Please enter a few details to book a phone appointment with one of our friendly client care team</p>
                 </div>
 
-                <div className="w-full flex justify-between pl-16">
-                    <div className="w-ful flex flex-col gap-4 mt-32">
+                <div className="w-full flex max-sm:flex-col max-sm:items-center justify-between pl-16 max-sm:pl-0">
 
+                    <div className="w-full flex flex-col gap-4 mt-32 max-sm:mt-0 max-sm:px-6">
                         <div className="w-full border border-gray-300 rounded-xl shadow-md p-8 flex flex-col gap-8">
-                            <div className="w-full flex justify-between">
-                                <div className="w-[47.5%] font-serif text-black">
-                                    <label className="text-base capitalize">first name</label>
-                                    <input type="text" className="booking-inputs" name="firstName" value={bookingDetails.firstName} onChange={handleChange} />
-                                </div>
-
-                                <div className="w-[47.5%] font-serif text-black">
-                                    <label className="text-base capitalize">last name</label>
-                                    <input type="text" className="booking-inputs" name="lastName" value={bookingDetails.lastName} onChange={handleChange} />
-                                </div>
+                            <div className="hidden w-full max-sm:flex flex-col gap-2">
+                                <CustomInput label="First Name" type="text" placeholder="First Name" name="firstName" value={bookingDetails.firstName} onChange={handleChange} />
+                                <CustomInput label="Last Name" type="text" placeholder="Last Name" name="lastName" value={bookingDetails.lastName} onChange={handleChange} />
+                                <CustomInput label="Email" type="email" placeholder="Email" name="email" value={bookingDetails.email} onChange={handleChange} />
+                                <CustomInput label="Phone No" type="text" placeholder="Phone Number" name="phoneNo" value={bookingDetails.phoneNo} onChange={handleChange} />
+                                <CustomInput label="Date" placeholder="Date" type="date" name="date" value={bookingDetails.date} onChange={handleChange} />
+                                <CustomInput label="Available Timings" type="datetime-local" placeholder="Available timings" name="timing" value={bookingDetails.timing} onChange={handleChange} />
                             </div>
 
-                            <div className="w-full flex justify-between">
-                                <div className="w-[47.5%] font-serif text-black">
-                                    <label className="text-base capitalize">email</label>
-                                    <input type="email" className="booking-inputs" name="email" value={bookingDetails.email} onChange={handleChange} />
-                                </div>
-
-                                <div className="w-[47.5%] font-serif text-black">
-                                    <label className="text-base capitalize">phone no</label>
-                                    <input type="tel" className="booking-inputs" name="phoneNo" value={bookingDetails.phoneNo} onChange={handleChange} />
-                                </div>
+                            <div className="w-full flex gap-12 max-sm:gap-2 max-sm:hidden">
+                                <CustomInput label="First Name" type="text" placeholder="First Name" name="firstName" value={bookingDetails.firstName} onChange={handleChange} />
+                                <CustomInput label="Last Name" type="text" placeholder="Last Name" name="lastName" value={bookingDetails.lastName} onChange={handleChange} />
                             </div>
 
-                            <div className="w-full flex justify-between">
-                                <div className="w-[47.5%] font-serif text-black">
-                                    <label className="text-base capitalize">date</label>
-                                    <input type="date" className="booking-inputs" name="date" value={bookingDetails.date} onChange={handleChange} />
-                                </div>
+                            <div className="w-full flex gap-12 max-sm:gap-2 max-sm:hidden">
+                                <CustomInput label="Email" type="email" placeholder="Email" name="email" value={bookingDetails.email} onChange={handleChange} />
+                                <CustomInput label="Phone No" type="text" placeholder="Phone Number" name="phoneNo" value={bookingDetails.phoneNo} onChange={handleChange} />
+                            </div>
 
-                                <div className="w-[47.5%] font-serif text-black">
-                                    <label className="text-base capitalize">available timings</label>
-                                    <input type="time" className="booking-inputs" name="timing" value={bookingDetails.timing} onChange={handleChange} />
-                                </div>
+                            <div className="w-full flex gap-12 max-sm:gap-2 max-sm:hidden">
+                                <CustomInput label="Date" placeholder="Date" type="date" name="date" value={bookingDetails.date} onChange={handleChange} />
+                                <CustomInput label="Available Timings" type="datetime-local" placeholder="Available timings" name="timing" value={bookingDetails.timing} onChange={handleChange} />
                             </div>
 
                             <div className="w-full flex flex-col gap-2 font-serif text-xl text-gray-500">
                                 <span className="font-semibold">Terms and Conditions</span>
-                                <p> One of our client care team members will call the number you have provided at the appointment time.<br/>Please advise at least 1hr prior if you wish to cancel or reschedule your phone appointment.<br/>Upon confirming, your personal details will be sent securely to My Therapy Space. Please review and accept the privacy policy of My Therapy Space and click I reviewed and I accept.</p>
+                                <p> One of our client care team members will call the number you have provided at the appointment time.<br />Please advise at least 1hr prior if you wish to cancel or reschedule your phone appointment.<br />Upon confirming, your personal details will be sent securely to My Therapy Space. Please review and accept the privacy policy of My Therapy Space and click I reviewed and I accept.</p>
                             </div>
 
-                            <RButton className="px-8 py-2" onClick={BookACall}>Submit</RButton>
+                            <CustomButton onClick={BookACall}>Submit</CustomButton>
 
                         </div>
 
@@ -124,12 +114,12 @@ const Booking = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
-                            <span className="font-serif text-xl text-black">Mon to Fri: 08:00 AM - 05:00PM<br/>Sat to Sun: Closed</span>
+                            <span className="font-serif text-xl text-black">Mon to Fri: 08:00 AM - 05:00PM<br />Sat to Sun: Closed</span>
                         </div>
 
                         <div className="w-full border border-gray-300 rounded-xl shadow-md p-4 flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="size-8">
-                                <path d="M200 104C200 73.1 225.1 48 256 48C286.9 48 312 73.1 312 104C312 134.9 286.9 160 256 160C225.1 160 200 134.9 200 104zM181.9 261.6L194.5 324.6C155.9 337 128 373.3 128 416C128 469 171 512 224 512C259.6 512 290.7 492.6 307.3 463.8C309.6 463.9 311.9 464 314.3 464L318.4 464C319.4 464 320.5 464 321.5 464L376.7 464C356.3 528.9 295.7 576 224 576C135.6 576 64 504.4 64 416C64 342.2 114 280.1 181.9 261.6zM330.5 233.5L354.2 352L414.7 352C448 352 477.9 372.7 489.6 403.9L515.1 471.9L533.8 465.7C550.6 460.1 568.7 469.2 574.3 485.9C579.9 502.6 570.8 520.8 554.1 526.4L506.1 542.4C489.8 547.8 472.1 539.4 466 523.3L429.7 426.4C427.4 420.2 421.4 416 414.7 416L328.6 416C328.2 416 327.8 416 327.3 416L314.2 416C283.7 416 257.4 394.5 251.4 364.6L229.3 253.7C222.9 221.8 247.3 192 279.9 192C304.5 192 325.7 209.4 330.5 233.5z"/>
+                                <path d="M200 104C200 73.1 225.1 48 256 48C286.9 48 312 73.1 312 104C312 134.9 286.9 160 256 160C225.1 160 200 134.9 200 104zM181.9 261.6L194.5 324.6C155.9 337 128 373.3 128 416C128 469 171 512 224 512C259.6 512 290.7 492.6 307.3 463.8C309.6 463.9 311.9 464 314.3 464L318.4 464C319.4 464 320.5 464 321.5 464L376.7 464C356.3 528.9 295.7 576 224 576C135.6 576 64 504.4 64 416C64 342.2 114 280.1 181.9 261.6zM330.5 233.5L354.2 352L414.7 352C448 352 477.9 372.7 489.6 403.9L515.1 471.9L533.8 465.7C550.6 460.1 568.7 469.2 574.3 485.9C579.9 502.6 570.8 520.8 554.1 526.4L506.1 542.4C489.8 547.8 472.1 539.4 466 523.3L429.7 426.4C427.4 420.2 421.4 416 414.7 416L328.6 416C328.2 416 327.8 416 327.3 416L314.2 416C283.7 416 257.4 394.5 251.4 364.6L229.3 253.7C222.9 221.8 247.3 192 279.9 192C304.5 192 325.7 209.4 330.5 233.5z" />
                             </svg>
                             <span className="font-serif text-xl text-black">Accessibility </span>
                         </div>
@@ -143,10 +133,11 @@ const Booking = () => {
                         </div>
 
                     </div>
-                    <img src={BookingGirl} alt="Booking Girl Picture" loading="lazy" />
+
+                    <img src={BookingGirl} alt="Booking Girl Picture" loading="lazy" className="max-sm:hidden" />
                 </div>
 
-                <Footer/>
+                <Footer />
             </div>
         </React.Fragment>
     )

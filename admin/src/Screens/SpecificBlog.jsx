@@ -79,7 +79,7 @@ const SpecificBlog = ({isSidebarHovered}) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center size-dvh">
+      <div className="w-full h-dvh flex justify-center items-center">
         <p className="text-lg font-serif text-gray-500 italic text-center">
           Loading blog...
         </p>

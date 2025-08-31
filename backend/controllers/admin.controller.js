@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken"
 import GenerateOTP from "../utils/OtpGenerator.js"
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js"
-
 import { adminApprovalEmailTemplate, forgotPasswordWithNewPasswordTemplate, otpEmailTemplate } from "../utils/emailTemplates.js"
 import { transporter } from "../config/mailer.js"
 import uploadToCloudinary from "../config/cloudinary.js"

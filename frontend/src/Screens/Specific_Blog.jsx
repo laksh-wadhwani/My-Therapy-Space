@@ -13,6 +13,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import { BackendURL } from "../BackendContext.jsx"
 import axios from "axios"
+import CustomButton from "../Components/CustomButton.jsx";
 
 const SpecificBlog = () => {
 
@@ -31,14 +32,14 @@ const SpecificBlog = () => {
         <React.Fragment>
             <div className="main-box bg-white items-center gap-10">
 
-                <div className="w-full flex flex-col items-center mt-32 px-32 gap-10">
-                    <h2 className="font-serif text-4xl capitalize text-[#0BAFA6]">{blog.title}</h2>
+                <div className="w-full flex flex-col items-center mt-32 max-sm:mt-24 px-32 max-sm:px-8 gap-10 max-sm:gap-6">
+                    <h2 className="font-serif text-4xl max-sm:text-3xl max-sm:text-center capitalize text-[#0BAFA6]">{blog.title}</h2>
                     {blog && (
                         <img src={blog.thumbnail} alt={blog.title} className="rounded-xl" />
                     )}
                 </div>
 
-                <div className="w-full px-32">
+                <div className="w-full px-32 max-sm:px-8 text-black font-serif flex flex-col gap-6">
                     <ReactMarkdown 
                     rehypePlugins={[rehypeRaw]}
                     components={{
@@ -54,26 +55,26 @@ const SpecificBlog = () => {
                     </ReactMarkdown>
                 </div>
 
-                <div className="w-[80%] box-border px-10 py-4 bg-white border border-black-100 shadow-md rounded-xl flex justify-between items-center">
-                    <span className="font-serif text-2xl text-black uppercase">share this post</span>
+                <div className="w-[80%] box-border px-10 py-4 bg-white border border-black-100 shadow-md rounded-xl flex justify-between items-center max-sm:hidden">
+                    <span className="font-serif text-2xl max-sm:text-base text-black uppercase">share this post</span>
                     <div className="w-fit flex gap-6">
-                        <img src={LinkedIn} alt="LinkedIn Icon" className="object-contain cursor-pointer" />
-                        <img src={Twitter} alt="Twitter Icon" className="object-contain cursor-pointer" />
-                        <img src={Mail} alt="Mail Icon" className="object-contain cursor-pointer" />
-                        <img src={Pintrest} alt="Pintrest Icon" className="object-contain cursor-pointer" />
-                        <img src={Facebook} alt="Facebook Icon" className="object-contain cursor-pointer" />
+                        <img src={LinkedIn} alt="LinkedIn Icon" className="max-sm:size-6 object-contain cursor-pointer" />
+                        <img src={Twitter} alt="Twitter Icon" className="max-sm:size-6 object-contain cursor-pointer" />
+                        <img src={Mail} alt="Mail Icon" className="max-sm:size-6 object-contain cursor-pointer" />
+                        <img src={Pintrest} alt="Pintrest Icon" className="max-sm:size-6 object-contain cursor-pointer" />
+                        <img src={Facebook} alt="Facebook Icon" className="max-sm:size-6 object-contain cursor-pointer" />
                     </div>
                 </div>
 
                 <div className="w-[80%] flex flex-col gap-2">
                     <label className="font-serif capitalize text-lg text-black">leave a comment</label>
-                    <textarea className="w-full h-80 border border-gray-200 shadow-md rounded-xl box-border px-8 py-4 font-serif text-lg" placeholder="Any Suggestions"/>
+                    <textarea className="w-full bg-transparent h-80 border border-gray-200 shadow-md rounded-xl box-border px-8 py-4 font-serif text-lg" placeholder="Any Suggestions"/>
                 </div>
 
-                <div className="w-[80%] flex justify-between items-center">
-                    <input placeholder="Name" className="w-[30%] border border-gray-200 shadow-md rounded-xl p-4 font-serif text-base" />
-                    <input placeholder="Email" className="w-[30%] border border-gray-200 shadow-md rounded-xl p-4 font-serif text-base" />
-                    <RButton className="px-24 py-4">Submit</RButton>
+                <div className="w-[80%] flex max-sm:flex-col max-sm:gap-6 justify-between items-center">
+                    <input placeholder="Name" className="w-[30%] max-sm:w-full bg-transparent border border-gray-200 shadow-md rounded-xl p-4 font-serif text-base" />
+                    <input placeholder="Email" className="w-[30%] max-sm:w-full bg-transparent border border-gray-200 shadow-md rounded-xl p-4 font-serif text-base" />
+                    <CustomButton>Submit</CustomButton>
                 </div>
 
                 <Footer/>

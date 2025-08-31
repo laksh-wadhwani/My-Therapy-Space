@@ -5,6 +5,7 @@ import RButton from "../Components/Reusable_Button";
 import { Link } from "react-router";
 import { BackendURL } from "../BackendContext";
 import axios from "axios";
+import CustomButton from "../Components/CustomButton";
 
 const Products = () => {
 
@@ -21,18 +22,8 @@ const Products = () => {
         <React.Fragment>
             <div className="main-box bg-white gap-10 items-center">
                 
-                <div className="w-full flex justify-between px-16 mt-32 items-center">
-                    <h2 className="font-serif text-[#0BAFA6] text-4xl capitalize">products</h2>
-                    <div className="w-[25%] flex">
-                        <input
-                            type="text"
-                            placeholder="search for products"
-                            className="w-full border border-gray-300 rounded-md font-serif text-base capitalize p-3 focus:outline-none "
-                        />
-                        <button className="relative right-16 bg-[#0BAFA6] rounded-r-md rounded-none hover:border-[#0BAFA6] focus:outline-none hover:bg-transparent">
-                            <MagnifyingGlassIcon className="w-6 h-6" />
-                        </button>
-                    </div>
+                <div className="w-full flex justify-between px-16 max-sm:px-8 mt-32 max-sm:mt-24 items-center">
+                    <h2 className="font-serif text-[#0BAFA6] text-4xl max-sm:text-3xl capitalize">products</h2>
                 </div>
 
                 {(products.length===0)? <p className="text-3xl font-serif font-semibold italic">No Products have been uploaded</p>:
@@ -44,7 +35,7 @@ const Products = () => {
                                 <h5 className="font-serif text-black text-lg text-center">{product.name}</h5>
                                 <p className="font-serif text-gray-400 text-center">{product.price}</p>
                             </div>
-                            <RButton className="px-10">Add to Cart</RButton>
+                            <CustomButton>Add to Cart</CustomButton>
                         </div></Link>
                     ))}
                 </div>

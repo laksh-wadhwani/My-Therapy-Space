@@ -4,7 +4,7 @@ export const signupValidation = (req, res, next) => {
     const {fullname, email, password} = req.body;
 
     if(!(fullname && email && password))
-        return res.status(400).json({error: "Fullname, Email, and Password are required"})
+        return response.status(400).json({error: "Fullname, email, and password are required"})
 
     if(!isValidEmail(email))
         return res.status(400).json({error: "Invalid Email Format"})

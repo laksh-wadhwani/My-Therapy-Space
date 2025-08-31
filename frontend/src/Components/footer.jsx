@@ -5,7 +5,7 @@ const Footer = () => {
         <React.Fragment>
             <div className="w-full bg-[#3A3A3A] border-box flex flex-col items-center gap-12 py-20">
 
-                <p className="font-serif text-white text-2xl">Cpoyright &copy; 2025 My Therapy Space</p>
+                <p className="font-serif text-white text-2xl">Copyright &copy; 2025 My Therapy Space</p>
 
                 <div className="flex flex-col items-center italic text-center">
                     <span className="font-serif text-base text-white">reception@mytherapyspace.com.au</span>

@@ -46,68 +46,75 @@ const AboutUs = () => {
     return(
         <React.Fragment>
             <div className="main-box bg-white">
-                <div className="sections justify-between mt-20">
-                    <div className="sections-box gap-20">
-                        <h1 className="hero-heading capitalize">Our approach is family centered therapy</h1>
+
+                <div className="sections max-sm:flex-col max-sm:gap-6 justify-between mt-20 max-sm:mt-12">
+                    <div className="sections-box gap-20 max-sm:gap-4">
+                        <h1 className="text-7xl max-sm:text-3xl font-serif text-[#333333] capitalize">Our approach is family centered therapy</h1>
                         <p className="sections-description text-base text-justify">My Therapy Space is a multidisciplinary allied health clinic based in the Gold Coast, Australia, offering a family-centered approach to therapy. Established in 2020 as a multi-speciality pediatric practice, our vision is to provide care with a nurturing environment. Our teams works collaboratively with families to ensure the best outcomes.</p>
                     </div>
                     <img src={About} alt="About Us" />
                 </div>
 
-                <div className="w-[80%] grid grid-cols-4 self-center pb-8">
+                <div className="w-[80%] max-sm:w-[90%] grid grid-cols-4 self-center pb-8">
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
                         <h3 className="another-sections-tittle font-black">5+</h3>
-                        <span className="sections-description capitalize">years experince</span>
+                        <span className="sections-description max-sm:text-xs text-center capitalize">years experince</span>
                     </div>
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
                         <h3 className="another-sections-tittle font-black">100%</h3>
-                        <span className="sections-description capitalize">family-centered</span>
+                        <span className="sections-description max-sm:text-xs text-center capitalize">family-centered</span>
                     </div>
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
                         <h3 className="another-sections-tittle font-black">15</h3>
-                        <span className="sections-description capitalize">specialized programs</span>
+                        <span className="sections-description max-sm:text-xs text-center capitalize">specialized programs</span>
                     </div>
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
                         <h3 className="another-sections-tittle font-black">500+</h3>
-                        <span className="sections-description capitalize">happy families</span>
+                        <span className="sections-description max-sm:text-xs text-center capitalize">happy families</span>
                     </div>
                 </div>
 
                 <div className="sections flex-col gap-10">
                     <h2 className="another-sections-tittle font-black self-start">Our Core Values</h2>
-                    <div className="w-full grid grid-cols-4 border border-[#EAEAEA] rounded-xl box-border p-8">
+                    
+                    <div className="w-full grid grid-cols-4 max-sm:grid-cols-1 max-sm:gap-8 border border-[#EAEAEA] rounded-xl box-border p-8">
+
                         <div className="flex flex-col items-center">
-                            <div className="size-[50px] bg-[#38B6FF]/20 rounded-full font-serif text-[#38B6FF] text-3xl flex justify-center items-center mb-6">1</div>
-                            <h3 className="font-bold text-xl font-serif capitalize text-center italic">family-centered</h3>
-                            <p className="text-base font-serif text-[#666666] text-center">Involving families in every step</p>
+                            <div className="size-[50px] bg-[#38B6FF]/20 rounded-full font-serif text-[#38B6FF] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">1</div>
+                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">family-centered</h3>
+                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">Involving families in every step</p>
                         </div>
+
                         <div className="flex flex-col items-center">
-                            <div className="size-[50px] bg-[#FF7F50]/20 rounded-full font-serif text-[#FF7F50] text-3xl flex justify-center items-center mb-6">2</div>
-                            <h3 className="font-bold text-xl font-serif capitalize text-center italic">play-based</h3>
-                            <p className="text-base font-serif text-[#666666] text-center">Learning through fun</p>
+                            <div className="size-[50px] bg-[#FF7F50]/20 rounded-full font-serif text-[#FF7F50] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">2</div>
+                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">play-based</h3>
+                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">Learning through fun</p>
                         </div>
+
                         <div className="flex flex-col items-center">
-                            <div className="size-[50px] bg-[#66CC99]/20 rounded-full font-serif text-[#66CC99] text-3xl flex justify-center items-center mb-6">3</div>
-                            <h3 className="font-bold text-xl font-serif capitalize text-center italic">safe approach</h3>
-                            <p className="text-base font-serif text-[#666666] text-center">Creating secure environments</p>
+                            <div className="size-[50px] bg-[#66CC99]/20 rounded-full font-serif text-[#66CC99] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">3</div>
+                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">safe approach</h3>
+                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">Creating secure environments</p>
                         </div>
+
                         <div className="flex flex-col items-center">
-                            <div className="size-[50px] bg-[#AA88DD]/20 rounded-full font-serif text-[#AA88DD] text-3xl flex justify-center items-center mb-6">4</div>
-                            <h3 className="font-bold text-xl font-serif capitalize text-center italic">neurodiversity affirming</h3>
-                            <p className="text-base font-serif text-[#666666] text-center">Celeberating differences</p>
+                            <div className="size-[50px] bg-[#AA88DD]/20 rounded-full font-serif text-[#AA88DD] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">4</div>
+                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">neurodiversity affirming</h3>
+                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">Celeberating differences</p>
                         </div>
+
                     </div>
                 </div>
 
-                <div className="sections flex-col gap-10">
-                    <h2 className="another-sections-tittle font-black">Our Clinic Space Burleigh Waters</h2>
-                     <p className="text-[#557271] text-md font-serif text-center">
+                <div className="sections flex-col gap-10 max-sm:gap-6">
+                    <h2 className="another-sections-tittle font-black max-sm:text-center">Our Clinic Space Burleigh Waters</h2>
+                     <p className="text-[#557271] text-lg font-serif text-center">
                        Our multidisciplinary team works collaboratively from our spacious, purpose-built office in Burleigh Waters. The clinic features 11 therapy rooms, including a large gym and a dedicated group therapy room with a fully equipped kitchen.
                     <br/>You’ll find us conveniently located opposite Treetops Plaza at Burleigh Waters, in Suite 3, Treetops Square, 2 Classic Way
                     </p>
                     <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
                         {BurleighSpace.map(space => (
-                            <div className="flex flex-col items-start w-[30%] gap-2">
+                            <div className="flex flex-col items-start w-[30%] max-sm:w-full gap-2">
                                 <img src={space.picture} alt="Burleigh Space Picture" />
                                 <span className="text-[#557271] text-lg font-serif capitalize">{space.room}</span>
                             </div>
@@ -115,15 +122,15 @@ const AboutUs = () => {
                     </div>
                 </div>
 
-                <div className="sections flex-col gap-10">
-                    <h2 className="another-sections-tittle font-black">Our Clinic Space Hope Island</h2>
-                    <p className="text-[#557271] text-md font-serif text-center">
+                <div className="sections flex-col gap-10 max-sm:gap-6">
+                    <h2 className="another-sections-tittle font-black max-sm:text-center">Our Clinic Space Hope Island</h2>
+                    <p className="text-[#557271] text-lg font-serif text-center">
                        Our Hope Island clinic is located at 12 Halcyon Way, right next door to Rackleys Swimming School. This beautiful, welcoming space features
                        three dedicated therapy rooms designed to provide a comfortable and effective environment for your child’s therapy sessions.
                     </p>
                     <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
                         {HopeIsland.map(space => (
-                            <div className="flex flex-col items-start w-[30%] gap-2">
+                            <div className="flex flex-col items-start w-[30%] max-sm:w-full gap-2">
                                 <img src={space.picture} alt="Burleigh Space Picture" />
                                 <span className="text-[#557271] text-lg font-serif capitalize">{space.room}</span>
                             </div>
