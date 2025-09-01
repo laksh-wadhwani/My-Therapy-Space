@@ -15,7 +15,7 @@ import SpecificBlog from "./Screens/SpecificBlog";
 import Products from "./Screens/Products";
 import PaidVideos from "./Screens/PaidVideos";
 import SpecificProduct from "./Screens/SpecificProduct";
-import SpecificVideo from "./Screens/SpecificVideo";
+import SpecificVideo from "./Screens/SpecificVideo.jsx";
 import Booking from "./Screens/Booking";
 import Cart from "./Screens/Cart";
 import { BackendProvider } from "./BackendContext";
