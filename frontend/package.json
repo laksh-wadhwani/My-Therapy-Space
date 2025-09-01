@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@stripe/react-stripe-js": "^3.9.2",
+    "@stripe/stripe-js": "^7.9.0",
     "axios": "^1.11.0",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.525.0",
@@ -37,5 +39,13 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.1",
     "vite": "^7.0.0"
+  },
+  "overrides": {
+    "@bedrock-layout/use-stateful-ref": {
+      "react": "^19.0.0"
+    },
+    "@bedrock-layout/use-forwarded-ref": {
+      "react": "^19.0.0"
+    }
   }
 }
