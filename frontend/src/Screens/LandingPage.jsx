@@ -4,6 +4,10 @@ import RButton from "../Components/Reusable_Button"
 import ChooseUs from "../assets/section4.svg"
 import Footer from "../Components/footer"
 import work2 from "../assets/work2.jpg"
+import work1 from "../assets/work1.jpg"
+import work3 from "../assets/work3.jpg"
+import work4 from "../assets/work4.jpg"
+import work5 from "../assets/work5.jpg"
 import CustomButton from "../Components/CustomButton";
 import { Link } from "react-router";
 
@@ -89,7 +93,7 @@ const LandingPage = () => {
 
                     <div className="w-full overflow-x-auto">
                         <div className="flex md:grid md:grid-cols-5 gap-6 px-4">
-                            {["work1.jpg", "work2.jpg", "work3.jpg", "work4.jpg", "work5.jpg"].map((img, i) => (
+                            {[work1, work2, work3, work4, work5].map((img, i) => (
                                 <div
                                     key={i}
                                     className="w-64 h-64 max-sm:w-full flex-shrink-0 rounded-lg bg-white shadow-md overflow-hidden border border-gray-200"
@@ -140,7 +144,7 @@ const LandingPage = () => {
                 </div>
 
                 {/* Our Space Section */}
-                <div className="bg-[#F9FAFB] py-12 flex flex-col gap-6">
+{/*                 <div className="bg-[#F9FAFB] py-12 flex flex-col gap-6">
                     <div className="flex flex-col gap-4 items-center">
                         <span className="sections-tittle">Our Space</span>
                         <h2 className="text-7xl max-sm:text-3xl font-serif text-[#333333] text-center">
@@ -171,7 +175,7 @@ const LandingPage = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Why Choose Us Section */}
                 <div className="sections flex-col gap-14 bg-white">
