@@ -99,7 +99,7 @@ const LandingPage = () => {
                                     className="w-64 h-64 max-sm:w-full flex-shrink-0 rounded-lg bg-white shadow-md overflow-hidden border border-gray-200"
                                 >
                                     <img
-                                        src={`/src/assets/${img}`}
+                                        src={`${img}`}
                                         alt={`Workshop ${i + 1}`}
                                         className="size-full object-cover"
                                     />
