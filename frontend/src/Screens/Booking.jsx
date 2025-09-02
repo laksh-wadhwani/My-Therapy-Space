@@ -14,6 +14,7 @@ const Booking = () => {
 
     const URL = BackendURL();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
     const [bookingDetails, setBookingDetails] = useState({
         firstName: "",
         lastName: "",
@@ -32,6 +33,7 @@ const Booking = () => {
     }
 
     const BookACall = () => {
+        setLoading(true)
         axios.post(`${URL}/api/bookings/book-a-call`, bookingDetails)
             .then(response => {
                 toast.success(response.data.message)
@@ -39,8 +41,9 @@ const Booking = () => {
             })
             .catch(error => {
                 console.log("Getting error in booking a call: ", error)
-                return toast.error(error?.response?.data?.error)
+                toast.error(error?.response?.data?.error)
             })
+            .finally(() => {setLoading(false)})
     }
 
     return (
@@ -76,7 +79,7 @@ const Booking = () => {
 
                             <div className="w-full flex gap-12 max-sm:gap-2 max-sm:hidden">
                                 <CustomInput label="Date" placeholder="Date" type="date" name="date" value={bookingDetails.date} onChange={handleChange} />
-                                <CustomInput label="Available Timings" type="datetime-local" placeholder="Available timings" name="timing" value={bookingDetails.timing} onChange={handleChange} />
+                                <CustomInput label="Available Timings" type="time" placeholder="Available timings" name="timing" value={bookingDetails.timing} onChange={handleChange} />
                             </div>
 
                             <div className="w-full flex flex-col gap-2 font-serif text-xl text-gray-500">
@@ -84,7 +87,9 @@ const Booking = () => {
                                 <p> One of our client care team members will call the number you have provided at the appointment time.<br />Please advise at least 1hr prior if you wish to cancel or reschedule your phone appointment.<br />Upon confirming, your personal details will be sent securely to My Therapy Space. Please review and accept the privacy policy of My Therapy Space and click I reviewed and I accept.</p>
                             </div>
 
-                            <CustomButton onClick={BookACall}>Submit</CustomButton>
+                            <CustomButton onClick={BookACall} disabled={loading}>
+                                {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Book"}
+                            </CustomButton>
 
                         </div>
 

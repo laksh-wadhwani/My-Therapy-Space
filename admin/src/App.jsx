@@ -17,6 +17,7 @@ import Profile from "./Screens/Profile.jsx";
 import SpecificProduct from "./Screens/SpecificProduct.jsx";
 import SpecificCourse from "./Screens/SpecificCourse.jsx";
 import Booking from "./Screens/Booking.jsx";
+import TeamMembers from "./Screens/TeamMembers.jsx";
 
 const App = () => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
@@ -54,6 +55,7 @@ const App = () => {
           <Route exact path="/manage-courses" element={<Courses isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/course/:id" element={<SpecificCourse isSidebarHovered={isSidebarHovered}/>}/>
           <Route exact path="/manage-bookings" element={<Booking isSidebarHovered={isSidebarHovered}/>} />
+          <Route exact path="/manage-team" element={<TeamMembers isSidebarHovered={isSidebarHovered}/>}/>
         </Routes>
       </div>)
       :

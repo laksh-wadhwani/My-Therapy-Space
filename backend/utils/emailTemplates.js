@@ -127,3 +127,104 @@ export const verifyAccountOtpTemplate = (fullname, otp) => {
   </div>
   `;
 };
+
+export const rejectAdminEmailTemplate = (fullname, remarks) => {
+  return `
+  <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+      <h2 style="text-align: center; color: #0BAFA6;">My Therapy Space</h2>
+      <p>Hi <strong>${fullname}</strong>,</p>
+      <p>We appreciate your interest in joining <strong>My Therapy Space</strong> as an admin.  
+      After reviewing your request, we regret to inform you that your admin account has been <span style="color: red; font-weight: bold;">rejected</span>.</p>
+
+      <p><strong>Reason provided:</strong></p>
+      <div style="background: #fdf3f3; border-left: 4px solid red; padding: 15px; margin: 20px 0; border-radius: 5px;">
+        <p style="margin: 0; color: #333; font-size: 15px;">
+          ${remarks}
+        </p>
+      </div>
+
+      <p>If you believe this decision was made in error or would like to reapply, please reach out to our support team.</p>
+
+      <p>Thank you for your understanding,<br>
+      The My Therapy Space Team</p>
+
+      <hr style="border: none; border-top: 1px solid #eee; margin-top: 20px;">
+      <small style="display: block; text-align: center; color: #777;">
+        This email was sent regarding your admin registration request on My Therapy Space.
+      </small>
+    </div>
+  </div>
+  `;
+};
+
+export const queryReceivedTemplate = (guardianName, childName, phoneNo, email, subject, message) => {
+    return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <h2 style="color: #2c3e50;">📩 New Query Received</h2>
+        
+        <p>Hello Admin,</p>
+        <p>You have received a new query from <strong>${guardianName}</strong>.</p>
+
+        <h3 style="margin-top: 20px; color: #2c3e50;">Query Details:</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li><strong>Guardian Name:</strong> ${guardianName}</li>
+            <li><strong>Child Name:</strong> ${childName}</li>
+            <li><strong>Phone No:</strong> ${phoneNo}</li>
+            <li><strong>Email:</strong> ${email}</li>
+            <li><strong>Subject:</strong> ${subject}</li>
+        </ul>
+
+        <h3 style="margin-top: 20px; color: #2c3e50;">Message:</h3>
+        <p style="background: #f8f9fa; padding: 10px; border-left: 4px solid #2c3e50;">
+            ${message}
+        </p>
+
+        <p style="margin-top: 30px;">Best Regards,<br>My Therapy Space</p>
+    </div>
+    `;
+};
+
+// bookingAdminTemplate.js
+export const bookingAdminTemplate = (firstName, lastName, email, phoneNo, date, timing) => {
+    return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <h2 style="color: #2c3e50;">📞 New Call Booking Request</h2>
+        
+        <p>Hello Admin,</p>
+        <p>A new booking request has been made. Here are the details:</p>
+
+        <ul style="list-style: none; padding: 0;">
+            <li><strong>Name:</strong> ${firstName} ${lastName}</li>
+            <li><strong>Email:</strong> ${email}</li>
+            <li><strong>Phone No:</strong> ${phoneNo}</li>
+            <li><strong>Date:</strong> ${date}</li>
+            <li><strong>Timing:</strong> ${timing}</li>
+        </ul>
+
+        <p style="margin-top: 20px;">Please review this request in the admin panel.</p>
+        <p style="margin-top: 30px;">Best Regards,<br>My Therapy Space</p>
+    </div>
+    `;
+};
+
+// bookingUserTemplate.js
+export const bookingUserTemplate = (firstName, date, timing) => {
+    return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <h2 style="color: #2c3e50;">✅ Booking Request Received</h2>
+        
+        <p>Dear ${firstName},</p>
+        <p>Thank you for booking a call with us. We have received your request and will confirm it shortly.</p>
+
+        <h3 style="margin-top: 20px; color: #2c3e50;">Booking Details:</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li><strong>Date:</strong> ${date}</li>
+            <li><strong>Timing:</strong> ${timing}</li>
+        </ul>
+
+        <p style="margin-top: 20px;">Our team will get back to you soon with confirmation.</p>
+        <p style="margin-top: 30px;">Best Regards,<br>My Therapy Space</p>
+    </div>
+    `;
+};

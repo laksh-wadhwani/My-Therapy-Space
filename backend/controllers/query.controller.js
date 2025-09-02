@@ -1,6 +1,6 @@
 import { transporter } from "../config/mailer.js"
 import QueryModel from "../models/Query.js"
-import { queryReplyEmailTemplate } from "../utils/emailTemplates.js"
+import { queryReceivedTemplate, queryReplyEmailTemplate } from "../utils/emailTemplates.js"
 
 export const SendQuery = async(request, response) => {
     try {
@@ -19,6 +19,14 @@ export const SendQuery = async(request, response) => {
             message
         })
         await newQuery.save();
+
+        await transporter.sendMail({
+            from: email,
+            to: process.env.SMTP_MAIL,
+            subject: `New Query Received ${subject}`,
+            html: queryReceivedTemplate(guardianName, childName, phoneNo, email, subject, message)
+        })
+
         return response.status(200).json({message: "Message has been successfully sent"})
     } catch (error) {
         console("Getting Error in sending query")

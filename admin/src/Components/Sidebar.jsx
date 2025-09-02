@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Logs, Store, FileUser, LogOut, MonitorStop, Box, PhoneCall, Menu } from 'lucide-react';
+import { LayoutDashboard, Logs, Store, FileUser, LogOut, MonitorStop, Box, PhoneCall, Menu, UsersRound  } from 'lucide-react';
 
 
 const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
@@ -19,7 +19,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
 
     return (
         <React.Fragment>
-            <div className={`group fixed top-0 left-0 h-dvw bg-white shadow-md transition-all duration-300 ease-in-out w-[5%] hover:w-[17%] flex flex-col gap-10 box-border py-12 px-4 overflow-hidden max-sm:hidden`}
+            <div className={`group fixed top-0 left-0 h-dvw bg-white shadow-md transition-all duration-300 ease-in-out w-[5%] hover:w-[17%] flex flex-col gap-6 box-border py-12 px-4 overflow-hidden max-sm:hidden`}
                 onMouseEnter={() => onHoverChange(true)}
                 onMouseLeave={() => onHoverChange(false)}>
 
@@ -78,6 +78,13 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                         </button>
                     </Link>
 
+                    <Link to="/manage-team">
+                        <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-[#F0FDFA] hover:scale-105 hover:text-[#14B8A6]">
+                            <UsersRound className="size-6" />
+                            <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Manage Team</span>
+                        </button>
+                    </Link>
+
                     <button className="group/menu flex items-center gap-2 font-serif text-base py-2 px-2 size-fit rounded-md transition duration-300 ease-in-out hover:bg-red-100 hover:scale-105 hover:text-red-500" onClick={Logout}>
                         <LogOut className="size-6" />
                         <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Logout</span>
@@ -99,7 +106,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                 </div></Link>
             </div>
 
-            <div className={`hidden w-full max-sm:flex flex-col fixed top-2 ${isOpen? `z-50`:`z-0`}`}>
+            <div className={`hidden w-full max-sm:flex flex-col fixed top-0 ${isOpen? `z-50`:`z-0`}`}>
                 <div className="w-full bg-white border-b border-gray-100 shadow-md px-4 pb-2 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <img src="../logo.svg" alt="Company Logo" className="size-12" />
@@ -109,7 +116,7 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                 </div>
 
                 {isOpen && (
-                    <div className="size-full h-dvh bg-white flex flex-col items-center gap-6 py-8">
+                    <div className="size-full h-dvh bg-white flex flex-col items-center gap-4 py-6">
                         <Link to="/dashboard"><button className="flex items-center gap-2 capitalize font-serif text-lg text-white rounded-md bg-[#0BAFA6] p-2 px-4" onClick={() => setIsOpen(false)}>
                             <LayoutDashboard size={32} />
                             dashboard
@@ -144,6 +151,16 @@ const Sidebar = ({ onHoverChange, user, setLoginUser }) => {
                             <PhoneCall size={32} />
                             Manage Bookings
                         </button></Link>
+
+                        <Link to="/manage-team"><button className="flex items-center gap-2 capitalize font-serif text-lg text-white rounded-md bg-[#0BAFA6] p-2 px-4" onClick={() => setIsOpen(false)}>
+                            <UsersRound size={32} />
+                            Manage Team Members
+                        </button></Link>
+
+                        <button className="flex items-center gap-2 capitalize font-serif text-lg text-white rounded-md bg-red-500 p-2 px-4" onClick={Logout}>
+                            <LogOut size={32} />
+                            Logout
+                        </button>
 
                         <Link to={`/profile`}>
                             <div className="w-fit flex items-center gap-2 bg-[#0BAFA6] p-2 box-border rounded-lg font-serif" onClick={() => setIsOpen(false)}>

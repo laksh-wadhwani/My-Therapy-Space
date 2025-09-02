@@ -107,6 +107,7 @@ const Navbar = ({ user, setLoginUser }) => {
   }
 
   const Login = () => {
+    setLoading(true)
     axios.post(`${URL}/api/users/login`, userData)
       .then(response => {
         toast.success(response.data.message)
@@ -118,8 +119,9 @@ const Navbar = ({ user, setLoginUser }) => {
       })
       .catch(error => {
         console.error("Getting error in logging in: ", error)
-        return toast.error(error.response?.data?.error)
+        toast.error(error.response?.data?.error)
       })
+      .finally(() => setLoading(false))
   }
 
   const ForgetPassword = () => {
@@ -363,7 +365,9 @@ const Navbar = ({ user, setLoginUser }) => {
               </div>
 
               <div className="w-full flex flex-col gap-2">
-                <CustomButton onClick={Login}>Login</CustomButton>
+                <CustomButton onClick={Login} disabled={loading}>
+                  {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Login"}
+                </CustomButton>
                 <p className="font-serif self-center">Don't have an account? <strong className="text-[#00C7BE] cursor-pointer" onClick={ToggleSignUp}>Create</strong></p>
               </div>
             </>)

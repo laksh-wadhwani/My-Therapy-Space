@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import GenerateOTP from "../utils/OtpGenerator.js"
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js"
-import { adminApprovalEmailTemplate, forgotPasswordWithNewPasswordTemplate, otpEmailTemplate } from "../utils/emailTemplates.js"
+import { adminApprovalEmailTemplate, forgotPasswordWithNewPasswordTemplate, otpEmailTemplate, rejectAdminEmailTemplate } from "../utils/emailTemplates.js"
 import { transporter } from "../config/mailer.js"
 import uploadToCloudinary from "../config/cloudinary.js"
 import AdminModel from "../models/Admin.js"
@@ -137,7 +137,6 @@ export const Login = async(request, response) => {
         return response.status(200).json({
             message: "Login Successful",
             token,
-            user: userCheck
         })
 
 
@@ -178,6 +177,32 @@ export const ApproveAdmin = async(request, response) => {
         return response.status(200).json({message: "Admin has been approved"})
     } catch (error) {
         console.log("Getting error in approving admins request", error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
+export const RejectAdmin = async(request, response) => {
+    try {
+        const { id } = request.params
+        const { remarks } = request.body
+        const admin = await AdminModel.findById(id)
+
+        if(!admin)
+            return response.status(400).json({error: "User Not Found"})
+
+        await transporter.sendMail({
+            from: `"My Therapy Space" <no-reply@mytherapyspace.com.au>`,
+            to: admin.email,
+            subject: "Your Admin Account Has Been Rejected",
+            html: rejectAdminEmailTemplate(admin.fullname, remarks)
+        })
+
+        await AdminModel.findByIdAndDelete(id);
+
+        return response.status(201).json({message: "Admin has been rejected"})
+
+    } catch (error) {
+        console.log("Getting error in while rejecting the admin: ", error)
         return response.status(500).json({error: "Internal Server Error"})
     }
 }
@@ -233,7 +258,23 @@ export const Update = async(request, response) => {
         if(profile) admin.profile = profile.secure_url
         if(isPassMatch) admin.password = newHashPass
         await admin.save();
-        return response.status(201).json({message: "Basic details have been updated"})
+
+        const token = jwt.sign(
+            {
+                id: admin.id, 
+                role: admin.role, 
+                fullname: admin.fullname, 
+                profile: admin.profile,
+                email: admin.email
+            },
+            process.env.JWT_SECRET,
+            {expiresIn: process.env.JWT_EXPIRES_IN || "1d"}
+        )
+
+        return response.status(201).json({
+            message: "Basic details have been updated",
+            token
+        })
         
     } catch (error) {
         console.log("Getting error in updating user: ",error)

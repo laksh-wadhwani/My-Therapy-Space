@@ -64,3 +64,11 @@ app.use("/api/users", userRoutes)
 //Cart Routes
 import cartRoutes from "./routes/cart.routes.js"
 app.use("/api/cart", cartRoutes)
+
+//Payment Routes
+import paymentRoutes from "./routes/payment.routes.js"
+app.use("/api/payments", paymentRoutes)
+
+//Team Member Routes
+import teamRoutes from "./routes/team.routes.js"
+app.use("/api/team", teamRoutes)

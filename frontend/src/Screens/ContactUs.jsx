@@ -9,11 +9,13 @@ import { BackendURL } from "../BackendContext";
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router"
 import Contact_Us from "../assets/contact_us.jpg"
+import CustomButton from "../Components/CustomButton";
 
 const ContactUs = () => {
 
     const URL = BackendURL();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
     const [query, setQuery] = useState({
         guardianName: "",
         childName: "",
@@ -32,6 +34,7 @@ const ContactUs = () => {
     }
 
     const SendQuery = () => {
+        setLoading(true)
         axios.post(`${URL}/api/queries/send-query`, query)
             .then(response => {
                 toast.success(response.data.message)
@@ -39,8 +42,10 @@ const ContactUs = () => {
             })
             .catch(error => {
                 console.error("Getting error in sending query: ", error)
-                return toast.error(error?.response?.data?.error)
+                toast.error(error?.response?.data?.error)
+                setTimeout(() => {navigate(0)}, 2500)
             })
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -86,7 +91,9 @@ const ContactUs = () => {
                             <textarea className="w-full h-40 border-2 border-gray-400 rounded-xl p-4 bg-transparent" name="message" value={query.message} onChange={handleChange} />
                         </div>
 
-                        <RButton className="px-6 py-4" onClick={SendQuery}>Send Message</RButton>
+                        <CustomButton onClick={SendQuery} disabled={loading}>
+                            {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Send"}
+                        </CustomButton>
                     </div>
                 </div>
 

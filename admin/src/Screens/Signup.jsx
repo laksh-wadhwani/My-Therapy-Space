@@ -20,7 +20,6 @@ const Signup = () => {
         email: "",
         password: "",
         secretKey: "",
-        profile: null,
         c: "",
         o: "",
         d: "",
@@ -35,33 +34,18 @@ const Signup = () => {
     const dRef = useRef(null)
     const eRef = useRef(null)
 
-
-    const handleChange = (eventTriggered, nextRef) => {
-        const { name, type, value, files } = eventTriggered.target;
-
-        if (type === "file") {
-            const file = files[0];
-            if (file && !file.type.startsWith("image/")) {
-                toast.error("Only image files are allowed!");
-                return;
-            }
-            setUser({
-                ...user,
-                [name]: file
-            });
-        } else {
-            setUser({
-                ...user,
-                [name]: value
-            });
-        }
+    const handleChange = (name, value, nextRef) => {
+        setUser(prev => ({
+            ...prev,
+            [name]: value
+        }))
 
         if (name === "c" || name === "o" || name === "d" || name === "e") {
             if (value.length === 1 && nextRef?.current) {
                 nextRef.current.focus();
             }
         }
-    };
+    }
 
     const CreateAccount = () => {
         const UserData = new FormData();
@@ -104,21 +88,20 @@ const Signup = () => {
                     {otpToggle ?
                         <>
                             <div className="flex justify-between">
-                                <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" name="c" value={user.c} maxLength={1} ref={cRef} onChange={e => handleChange(e, oRef)} />
-                                <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" name="o" value={user.o} maxLength={1} ref={oRef} onChange={e => handleChange(e, dRef)} />
-                                <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" name="d" value={user.d} maxLength={1} ref={dRef} onChange={e => handleChange(e, eRef)} />
-                                <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" name="e" value={user.e} maxLength={1} ref={eRef} onChange={handleChange} />
+                                <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={user.c} maxLength={1} ref={cRef} onChange={e => handleChange("c",e.target.value, oRef)} />
+                                <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={user.o} maxLength={1} ref={oRef} onChange={e => handleChange("o",e.target.value, dRef)} />
+                                <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={user.d} maxLength={1} ref={dRef} onChange={e => handleChange("d",e.target.value, eRef)} />
+                                <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={user.e} maxLength={1} ref={eRef} onChange={e => handleChange("e", e.target.value)} />
                             </div>
                             <CustomButton onClick={VerifyOtp}>Verify</CustomButton>
                         </>
                         :
                         <>
                             <div className="w-full flex flex-col gap-3">
-                                <CustomInput label="Name" type="text" placeholder="Name" name="fullname" value={user.fullname} onChange={handleChange} />
-                                <CustomInput label="Email" type="email" placeholder="Email" name="email" value={user.email} onChange={handleChange}  />
-                                <CustomInput label="Password" type="password" placeholder="Password" name="password" value={user.password} onChange={handleChange} showPasswordRules={true} />
-                                <CustomInput label="Secret Key" type="password" placeholder="Secret Key" name="secretKey" value={user.secretKey} onChange={handleChange} />
-                                <CustomFileUpload label="Profile Picture" value={user.profile} onChange={handleChange} />
+                                <CustomInput label="Name" type="text" placeholder="Name" value={user.fullname} onChange={e => handleChange("fullname", e.target.value)} />
+                                <CustomInput label="Email" type="email" placeholder="Email" value={user.email} onChange={e => handleChange("email", e.target.value)} />
+                                <CustomInput label="Password" type="password" placeholder="Password" value={user.password} onChange={e => handleChange("password", e.target.value)} showPasswordRules={true} />
+                                <CustomInput label="Secret Key" type="password" placeholder="Secret Key" value={user.secretKey} onChange={e => handleChange("secretKey", e.target.value)} />
                             </div>
 
                             <div className="flex flex-col gap-2">

@@ -14,31 +14,29 @@ import TeamMember from "../assets/Team Member.png";
 import RButton from "../Components/Reusable_Button";
 import CustomButton from "../Components/CustomButton";
 import { Link } from "react-router";
+import { BackendURL } from "../BackendContext";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import Modal from "react-responsive-modal";
 
 const Team = () => {
 
-  const TeamMembersData = [
-    { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-    // { name: "Trish Hill - Co Founder", designation: "Speech Pathologist", picture: `${TeamMember}` },
-  ]
+  const URL = BackendURL();
+  const [open, setOpen] = useState(false)
+  const [members, setMembers] = useState([])
+  const [member, setMember] = useState()
+
+  useEffect(() => {
+    axios.get(`${URL}/api/team/get-team-members`)
+      .then(response => setMembers(response.data))
+      .catch(error => console.error("Getting error in fetching team member details: ", error))
+  })
+
+  const SeeMemberDetails = member => {
+    setOpen(true)
+    setMember(member)
+  }
 
   return (
     <React.Fragment>
@@ -52,16 +50,15 @@ const Team = () => {
           </div>
 
           <div className="w-full grid grid-cols-5 max-sm:grid-cols-1 place-items-center gap-y-8 gap-x-4">
-            {TeamMembersData.map(memebers => (
-              <div className="w-62 h-70 flex flex-col items-center">
+            {members.map(member => (
+              <div className="w-62 h-70 flex flex-col items-center cursor-pointer hover:scale-105" onClick={() => SeeMemberDetails(member)}>
                 <div className="w-full h-[80%] bg-[#ECF1ED] rounded-3xl">
-                  <img src={memebers.picture} alt="Team Member" className="size-full object-contain" />
+                  <img src={member.profile} alt="Team Member" className="size-full object-contain" />
                 </div>
-                <h4 className="font-serif capitalize text-lg text-black">{memebers.name}</h4>
-                <span className="font-serif text-base capitalize text-gray-500">{memebers.designation}</span>
+                <h4 className="font-serif capitalize text-lg text-black">{member.name}</h4>
+                <span className="font-serif text-base capitalize text-gray-500">{member.designation}</span>
               </div>
             ))}
-
           </div>
 
         </div>
@@ -80,7 +77,7 @@ const Team = () => {
         </div>
 
         <div className="w-full flex flex-col gap-8 px-14 max-sm:px-8">
-          
+
           <h2 className="font-serif text-3xl max-sm:text-2xl text-[#0BAFA6] capitalize">join our team</h2>
 
           <div className="w-full flex max-sm:flex-col-reverse gap-16 max-sm:gap-4 h-[520px] max-sm:h-auto">
@@ -180,12 +177,28 @@ const Team = () => {
               <p>Team-building events to foster a fun and collaborative culture.</p>
             </div>
           </div>
-            <Link to="/contact"><CustomButton className="px-7 py-3 mt-6">Join Now</CustomButton></Link>
+          <Link to="/contact"><CustomButton className="px-7 py-3 mt-6">Join Now</CustomButton></Link>
         </div>
 
         <Footer />
 
       </div>
+
+      <Modal open={open} onClose={() => setOpen(false)} center
+        styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".8rem" } }}>
+        {member && (<div className="w-auto flex flex-col items-center px-16 max-sm:px-0">
+          <div className="w-64 max-sm:w-38 h-72 max-sm:h-48 flex flex-col items-center">
+            <div className="w-full h-[75%] max-sm:h-[60%] bg-[#ECF1ED] rounded-3xl max-sm:rounded-xl">
+              <img src={member.profile} alt="Team Member" className="size-full object-contain" />
+            </div>
+            <h4 className="font-serif capitalize text-lg max-sm:text-sm text-black">{member.name}</h4>
+            <span className="font-serif text-base max-sm:text-sm capitalize text-gray-500">{member.designation}</span>
+          </div>
+          <p className="font-serif text-base max-sm:text-xs text-center">{member.description}</p>
+
+        </div>)}
+      </Modal>
+
     </React.Fragment>
   )
 }

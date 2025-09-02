@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import CustomFileUpload from "../Components/CustomFileUpload";
+import { jwtDecode } from "jwt-decode";
 
-const Profile = ({ isSidebarHovered, user }) => {
+const Profile = ({ isSidebarHovered, user, setLoginUser }) => {
 
     const URL = BackendURL()
     const navigate = useNavigate();
@@ -20,25 +21,11 @@ const Profile = ({ isSidebarHovered, user }) => {
         newPass: ""
     })
 
-    const handleChange = eventTriggered => {
-        const { name, type, value, files } = eventTriggered.target;
-
-        if (type === "file") {
-            const file = files[0];
-            if (file && !file.type.startsWith("image/")) {
-                toast.error("Only image files are allowed!");
-                return;
-            }
-            setUpdatedUser({
-                ...updatedUser,
-                [name]: file
-            });
-        } else {
-            setUpdatedUser({
-                ...updatedUser,
-                [name]: value
-            });
-        }
+    const handleChange = (name, value) => {
+        setUpdatedUser(prev => ({
+            ...prev,
+            [name]: value
+        }))
     }
 
     const Update = userId => {
@@ -50,11 +37,17 @@ const Profile = ({ isSidebarHovered, user }) => {
         axios.put(`${URL}/api/admin/update/${userId}`, UserData )
         .then(response => {
             toast.success(response.data.message)
-            setTimeout(() => {navigate(0)},2500)
+            const token = response.data.token
+            sessionStorage.setItem("token", token)
+            const decoded = jwtDecode(token)
+            setLoginUser(decoded)
+            setTimeout(() => {
+                navigate(0)
+            }, 2500)
         })
         .catch(error => {
             console.error("Getting error in updating basic details: ",error)
-            return toast.error(error?.response?.data?.error)
+            toast.error(error?.response?.data?.error)
         })
         .finally(() => {setLoading(false)})
     }
@@ -67,9 +60,9 @@ const Profile = ({ isSidebarHovered, user }) => {
                 <div className="w-[45%] max-sm:w-full flex flex-col gap-4 mt-16 max-sm:mt-24">
                     <h5 className="font-serif text-3xl capitalize italic text-black font-normal">personal information</h5>
                     <div className="flex flex-col gap-6 p-8 border border-gray-200 rounded-xl shadow-md">
-                        <CustomInput label="Full Name" type="text" placeholder={user.fullname} name="fullname" value={updatedUser.fullname} onChange={handleChange} />
-                        <CustomInput label="Email" type="email" placeholder={user.email} name="email" value={updatedUser.email} onChange={handleChange} />
-                        <CustomFileUpload label="Admin Profile" value={updatedUser.profile} onChange={handleChange} />
+                        <CustomInput label="Full Name" type="text" placeholder={user.fullname} value={updatedUser.fullname} onChange={e => handleChange("fullname", e.target.value)} />
+                        <CustomInput label="Email" type="email" placeholder={user.email} value={updatedUser.email} onChange={e => handleChange("email", e.target.value)} />
+                        <CustomFileUpload label="Admin Profile" value={updatedUser.profile} onChange={file => handleChange("profile", file)} />
                         <CustomButton className="w-fit" onClick={() => Update(user.id)}>
                             {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Save"}
                         </CustomButton>
@@ -79,8 +72,8 @@ const Profile = ({ isSidebarHovered, user }) => {
                 <div className="w-[45%] max-sm:w-full flex flex-col gap-4 mt-16 max-sm:mt-0">
                     <h5 className="font-serif text-3xl capitalize italic text-black font-normal">password</h5>
                     <div className="flex flex-col gap-6 p-8 border border-gray-200 rounded-xl shadow-md">
-                        <CustomInput label="Old Password" type="password" placeholder="OldPassword" name="password" value={updatedUser.password} onChange={handleChange} />
-                        <CustomInput label="New Password" type="password" placeholder="New Password" name="newPass" value={updatedUser.newPass} onChange={handleChange} />
+                        <CustomInput label="Old Password" type="password" placeholder="OldPassword" value={updatedUser.password} onChange={e => handleChange("password", e.target.value)} />
+                        <CustomInput label="New Password" type="password" placeholder="New Password" showPasswordRules={true} value={updatedUser.newPass} onChange={e => handleChange("newPass", e.target.value)} />
                         <CustomButton className="w-fit" onClick={() => Update(user.id)}>
                             {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Save"}
                         </CustomButton>

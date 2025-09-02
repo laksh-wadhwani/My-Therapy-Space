@@ -1,31 +1,34 @@
 import Navbar from "./Components/navbar";
-import LandingPage from "./Screens/Landing_Page";
+import LandingPage from "./Screens/LandingPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router"
-import AboutUs from "./Screens/About_Us";
+import AboutUs from "./Screens/AboutUs";
 import Services from "./Screens/Services"
 import Fees from "./Screens/Fees";
 import Team from "./Screens/Team";
-import ContactUs from "./Screens/Contact_Us";
-import AlsoOffer from "./Screens/Also_Offer"
-import CurrentWorkshops from "./Screens/Current_Workshops";
+import ContactUs from "./Screens/ContactUs";
+import AlsoOffer from "./Screens/AlsoOffer"
+import CurrentWorkshops from "./Screens/CurrentWorkshops";
 import Blogs from "./Screens/Blogs";
 import Workshop from "./Screens/Workshop";
 import Shop from "./Screens/Shop";
-import SpecificBlog from "./Screens/Specific_Blog";
+import SpecificBlog from "./Screens/SpecificBlog";
 import Products from "./Screens/Products";
 import PaidVideos from "./Screens/PaidVideos";
-import SpecificProduct from "./Screens/Specific_Product";
-import SpecificVideo from "./Screens/specific_video";
+import SpecificProduct from "./Screens/SpecificProduct";
+import SpecificVideo from "./Screens/SpecificVideo";
 import Booking from "./Screens/Booking";
 import Cart from "./Screens/Cart";
 import { BackendProvider } from "./BackendContext";
 import { ToastContainer } from "react-toastify"
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode"
-import UserProfile from "./Screens/User_Profile";
+import UserProfile from "./Screens/UserProfile";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 const App = () => {
 
+  const stripePromise = loadStripe("pk_test_51S2CN1DUdFyp0hC9JR73WTa3rkt8TUbMHjtZ85CMOkvX7PjBZeq51gYcL4oWpdrNKUAeMnLCfcJip8k94ZneoYiB00lg19G9FC")
   const [user, setLoginUser] = useState(null)
 
   useEffect(() => {
@@ -43,6 +46,7 @@ const App = () => {
 
 
   return (
+    <Elements stripe={stripePromise}>
     <BackendProvider>
       <Router>
         <Navbar user={user} setLoginUser={setLoginUser} />
@@ -76,6 +80,7 @@ const App = () => {
       </Router>
       <ToastContainer position="top-right" autoClose={2500} />
     </BackendProvider>
+    </Elements>
   )
 }
 
