@@ -39,5 +39,13 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.1",
     "vite": "^7.0.0"
+  },
+  "overrides": {
+    "@bedrock-layout/use-stateful-ref": {
+      "react": "^19.0.0"
+    },
+    "@bedrock-layout/use-forwarded-ref": {
+      "react": "^19.0.0"
+    }
   }
 }
