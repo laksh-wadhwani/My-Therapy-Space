@@ -4,6 +4,7 @@ import TeamModel from "../models/Team.js"
 export const AddTeamMember = async (request, response) => {
     try {
         const { name, designation, description } = request.body
+        console.log(name) // For Testing Purpose
         const member = await TeamModel.findOne({ name, designation })
 
         if (member)
