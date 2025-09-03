@@ -38,7 +38,7 @@ const App = () => {
         const decoded = jwtDecode(token)
         setLoginUser(decoded)
       } catch (error) {
-        console.error("Invalid Token Error:", error)
+        console.error("Invalid Token:", error)
         sessionStorage.removeItem("token")
       }
     }
