@@ -22,7 +22,9 @@ import { BackendProvider } from "./BackendContext";
 import { ToastContainer } from "react-toastify"
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode"
-import UserProfile from "./Screens/User_Profile";
+import UserProfile from "./Screens/UserProfile";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 const App = () => {
 

@@ -4,10 +4,6 @@ import ChooseUs from "../assets/section4.svg"
 import Footer from "../Components/footer"
 import work1 from "../assets/work1.jpg"
 import work2 from "../assets/work2.jpg"
-<<<<<<< HEAD
-=======
-import work1 from "../assets/work1.jpg"
->>>>>>> e8bcfc299af1d27f1c8d5c3c8490e68552c0dc2c
 import work3 from "../assets/work3.jpg"
 import work4 from "../assets/work4.jpg"
 import work5 from "../assets/work5.jpg"
@@ -147,11 +143,7 @@ const LandingPage = () => {
                 </div>
 
                 {/* Our Space Section */}
-<<<<<<< HEAD
-                {/* <div className="bg-[#F9FAFB] py-12 flex flex-col gap-6">
-=======
-{/*                 <div className="bg-[#F9FAFB] py-12 flex flex-col gap-6">
->>>>>>> e8bcfc299af1d27f1c8d5c3c8490e68552c0dc2c
+                 <div className="bg-[#F9FAFB] py-12 flex flex-col gap-6">
                     <div className="flex flex-col gap-4 items-center">
                         <span className="sections-tittle">Our Space</span>
                         <h2 className="text-7xl max-sm:text-3xl font-serif text-[#333333] text-center">
@@ -182,7 +174,7 @@ const LandingPage = () => {
                             </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
 
                 {/* Why Choose Us Section */}
                 <div className="sections flex-col gap-14 bg-white">
