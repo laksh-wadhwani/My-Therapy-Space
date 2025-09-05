@@ -19,9 +19,12 @@ const UserProfile = ({ setLoginUser }) => {
     const navigate = useNavigate();
     const [isUpdate, setIsUpdate] = useState(false)
     const [open, setOpen] = useState(false)
+    const [seeProductDetails, setSeeProductDetails] = useState(false)
     const [loading, setLoading] = useState(false)
     const [user, setUser] = useState({})
     const [bookingDetails, setBookingDetails] = useState([])
+    const [orderDetails, setOrderDetails] = useState([])
+    const [product, setProduct] = useState()
     const [userData, setUserData] = useState({
         fullname: "",
         email: "",
@@ -38,8 +41,12 @@ const UserProfile = ({ setLoginUser }) => {
             .catch(error => console.error("Getting error in fetching user: ", error))
 
         axios.get(`${URL}/api/users/get-booking-details/${user.email}`)
-        .then(response => setBookingDetails(response.data))
-        .catch(error => console.error("Getting error in fetching booking details: ",error))
+            .then(response => setBookingDetails(response.data))
+            .catch(error => console.error("Getting error in fetching booking details: ", error))
+
+        axios.get(`${URL}/api/users/get-product-details/${id}`)
+            .then(response => setOrderDetails(response.data))
+            .catch(error => console.error("Getting error in fetching order details: ", error))
     })
 
     const handleChange = (name, value) => {
@@ -49,12 +56,20 @@ const UserProfile = ({ setLoginUser }) => {
         }))
     }
 
-    const columns = [
+    const Bookingcolumns = [
         { key: "_id", label: "BookingRef#" },
         { key: "firstName", label: "Patient Details" },
         { key: "date", label: "Date" },
         { key: "status", label: "Status" },
     ];
+
+    const Ordercolumns = [
+        { key: "orderID", label: "OrdeRef#" },
+        { key: "productName", label: "Product Name" },
+        { key: "price", label: "Price" },
+        { key: "createdAt", label: "Purchase Date" },
+        { key: "type", label: "Type" }
+    ]
 
     const bookingStatusStyles = {
         Pending: "bg-yellow-100 text-yellow-700",
@@ -76,10 +91,10 @@ const UserProfile = ({ setLoginUser }) => {
                 sessionStorage.setItem("token", token)
                 const decoded = jwtDecode(token)
                 setLoginUser(decoded)
-                setTimeout(() => {navigate(0)}, 2500)
+                setTimeout(() => { navigate(0) }, 2500)
             })
             .catch(error => {
-                console.error("Getting error in updating user's basic information: ",error)
+                console.error("Getting error in updating user's basic information: ", error)
                 return toast.error(error.response?.data?.error)
             })
             .finally(() => setLoading(false))
@@ -88,19 +103,19 @@ const UserProfile = ({ setLoginUser }) => {
     const ChangeProfile = userId => {
         setLoading(true)
         axios.put(`${URL}/api/users/change-profile/${userId}`, UserData)
-        .then(response => {
-            toast.success(response.data.message)
-            const token = response.data.token
-            sessionStorage.setItem("token", token)
-            const decoded = jwtDecode(token)
-            setLoginUser(decoded)
-            setTimeout(() => {navigate(0)}, 2500)
-        })
-        .catch(error => {
-            console.error("Getting error in changing profile picture for user: ",error)
-            return toast.error(error.response?.data?.error)
-        })
-        .finally(() => setLoading(false))
+            .then(response => {
+                toast.success(response.data.message)
+                const token = response.data.token
+                sessionStorage.setItem("token", token)
+                const decoded = jwtDecode(token)
+                setLoginUser(decoded)
+                setTimeout(() => { navigate(0) }, 2500)
+            })
+            .catch(error => {
+                console.error("Getting error in changing profile picture for user: ", error)
+                return toast.error(error.response?.data?.error)
+            })
+            .finally(() => setLoading(false))
     }
 
     const Logout = () => {
@@ -109,45 +124,51 @@ const UserProfile = ({ setLoginUser }) => {
         navigate("/")
     }
 
+    const SeeDetails = product => {
+        setSeeProductDetails(true)
+        setProduct(product)
+    }
+
     return (
         <React.Fragment>
-            <div className="w-full flex max-sm:flex-col justify-between mt-24 box-border px-6">
 
-                <div className="w-[20%] max-sm:w-full flex flex-col gap-4 items-center pb-4">
+            <div className="fixed left-6 mt-24 w-[20%] max-sm:w-full flex flex-col gap-2 items-center">
 
-                    <div className={`w-full flex flex-col gap-4 items-center ${user.profile? `rounded-xl bg-white border border-gray-100 shadow-lg p-2`:``}`}>
-                        {user.profile? 
-                        <img src={user.profile} alt="User Profile" className="w-full h-60 object-contain"/>
+                <div className={`w-full flex flex-col gap-4 items-center ${user.profile ? `rounded-xl bg-white border border-gray-100 shadow-lg p-2` : ``}`}>
+                    {user.profile ?
+                        <img src={user.profile} alt="User Profile" className="w-full h-60 object-contain" />
                         :
                         <div className="w-full h-60 bg-[#16171D] rounded-xl flex justify-center items-center shadow-lg">
                             <UserRound size={200} className="fill-gray-500 stroke-none" />
                         </div>
-                        }
-                    </div>
-
-                    {isUpdate ?
-                        <CustomButton onClick={() => setOpen(true)}>{user.profile ? `Change Photo` : `Upload Photo`}</CustomButton>
-                        :
-                        <>
-                            <CustomButton onClick={() => setIsUpdate(true)}>Manage Profile</CustomButton>
-                            <CustomButton onClick={Logout}>Logout</CustomButton>
-
-
-                            <div className="w-full flex flex-col gap-4 text-gray-500 font-serif bg-white border border-gray-100 shadow-lg rounded-xl box-border p-4">
-                                <h5 className="text-xl capitalize italic">personal information</h5>
-                                <div className="w-full flex flex-col text-base gap-1">
-                                    <span><strong>Name:</strong> {user.fullname}</span>
-                                    <span><strong>Email:</strong> {user.email}</span>
-                                    <span><strong>Phone No:</strong> {user.phoneNo}</span>
-                                    <span><strong>Address:</strong> {user.address}</span>
-                                </div>
-                            </div>
-                        </>}
+                    }
                 </div>
 
                 {isUpdate ?
-                    <div className="w-[75%] max-sm:w-full flex flex-col gap-12 pb-12">
+                    <CustomButton onClick={() => setOpen(true)}>{user.profile ? `Change Photo` : `Upload Photo`}</CustomButton>
+                    :
+                    <>
+                        <CustomButton onClick={() => setIsUpdate(true)}>Manage Profile</CustomButton>
+                        <CustomButton onClick={Logout}>Logout</CustomButton>
 
+
+                        <div className="w-full flex flex-col gap-4 text-gray-500 font-serif bg-white border border-gray-100 shadow-lg rounded-xl box-border p-4">
+                            <h5 className="text-xl capitalize italic">personal information</h5>
+                            <div className="w-full flex flex-col text-base gap-1">
+                                <span><strong>Name:</strong> {user.fullname}</span>
+                                <span><strong>Email:</strong> {user.email}</span>
+                                <span><strong>Phone No:</strong> {user.phoneNo}</span>
+                                <span><strong>Address:</strong> {user.address}</span>
+                            </div>
+                        </div>
+                    </>}
+            </div>
+
+
+            <div className="w-[78%] max-sm:w-full flex flex-col gap-8 pb-4 mt-28 px-6 float-right">
+
+                {isUpdate ?
+                    <>
                         <div className="w-full flex flex-col gap-6">
                             <h3 className="font-serif text-3xl max-sm:text-2xl italic">Personal Information</h3>
                             <div className="w-[75%] max-sm:w-full flex flex-col gap-4">
@@ -172,16 +193,18 @@ const UserProfile = ({ setLoginUser }) => {
                             </CustomButton>
                             <CustomButton className="w-[30%] bg-red-500" onClick={() => setIsUpdate(false)}>Cancel</CustomButton>
                         </div>
-
-                    </div>
+                    </>
                     :
-                    <div className="w-[78%] max-sm:w-full flex flex-col gap-4">
+                    <>
                         <h2 className="font-serif text-2xl max-sm:text-xl italic text-gray-500">Welcome back, <strong className="text-[#0BAFA6]">{user.fullname}</strong></h2>
 
-                        <CustomTable title="Booking History" columns={columns} data={bookingDetails} showActions={false} statusStyles={bookingStatusStyles} />
-                    </div>
+                        <CustomTable title="Booking History" columns={Bookingcolumns} data={bookingDetails} showActions={false} statusStyles={bookingStatusStyles} />
+                        <CustomTable title="Order History" columns={Ordercolumns} data={orderDetails} showActions onView={SeeDetails} />
+                    </>
                 }
+
             </div>
+
 
             <Modal open={open} onClose={() => setOpen(false)} center
                 styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".7rem" } }}>
@@ -193,6 +216,25 @@ const UserProfile = ({ setLoginUser }) => {
                         {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Upload"}
                     </CustomButton>
                 </div>
+
+            </Modal>
+
+            <Modal open={seeProductDetails} onClose={() => setSeeProductDetails(false)} center
+                styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".7rem" } }}>
+                {product &&
+                    <div className="flex flex-col gap-2 p-2">
+                        {product.type === "Product" ?
+                            <>
+                                <h4 className="font-serif text-2xl text-black self-center">Product</h4>
+                                <img src={product.thumbnail} alt="Product Thumnail Picture" />
+                            </>
+                            :
+                            <>
+                                <h4 className="font-serif text-2xl text-black self-center">Course</h4>
+                                <video src={product.course} controls />
+                            </>}
+                    </div>
+                }
 
             </Modal>
         </React.Fragment>

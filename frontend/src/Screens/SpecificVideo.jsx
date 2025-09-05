@@ -16,6 +16,7 @@ const SpecificVideo = ({user}) => {
     const navigate = useNavigate();
     const isSignedIn = (user&&user.id)? true:false
     const [loading, setLoading] = useState(true)
+    const [carting, setCarting] = useState(false)
     const [course, setCourse] = useState({})
 
     useEffect(() => {
@@ -38,6 +39,7 @@ const SpecificVideo = ({user}) => {
         if(!isSignedIn)
             return toast.error("Please Login First")
 
+        setCarting(true)
         axios.post(`${URL}/api/cart/add-to-cart/${user.id}/${course._id}`)
         .then(response => {
             toast.success(response.data.message)
@@ -45,8 +47,9 @@ const SpecificVideo = ({user}) => {
         })
         .catch(error => {
             console.error("Getting error in adding to the cart: ",error)
-            return toast.error(error.response?.data?.error)
+            toast.error(error.response?.data?.error)
         })
+        .finally(() => setCarting(false))
     }
 
     return (
@@ -64,7 +67,9 @@ const SpecificVideo = ({user}) => {
                             <span className="text-xl max-sm:text-base">Instructor: Cathy Trace</span>
                         </div>
                         <p className="font-serif text-xl max-sm:text-sm text-black">{course.description}</p>
-                        <CustomButton onClick={AddToCart}>Add to Cart</CustomButton>
+                        <CustomButton onClick={AddToCart} disabled={carting}>
+                            {carting ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "add to cart"}
+                        </CustomButton>
                     </div>
                 </div>
 

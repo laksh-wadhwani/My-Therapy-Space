@@ -1,150 +1,270 @@
 import React from "react";
-import Workshop1 from "../assets/workshop1.png"
-import Workshop2 from "../assets/workshop2.png"
-import Workshop3 from "../assets/workshop3.png"
-import Workshop4 from "../assets/workshop4.png"
-import Group1 from "../assets/group1.png"
-import Group2 from "../assets/group2.png"
-import Group3 from "../assets/group3.png"
-import Group4 from "../assets/group4.png"
+import { Helmet } from "react-helmet-async"; // ✅ Helmet for SEO
+import Workshop1 from "../assets/workshop1.png";
+import Workshop2 from "../assets/workshop2.png";
+import Workshop3 from "../assets/workshop3.png";
+import Workshop4 from "../assets/workshop4.png";
+import Group1 from "../assets/group1.png";
+import Group2 from "../assets/group2.png";
+import Group3 from "../assets/group3.png";
+import Group4 from "../assets/group4.png";
 import Footer from "../Components/footer";
 import { Link, useNavigate } from "react-router";
 import RButton from "../Components/Reusable_Button";
 
 const Workshop = () => {
-
   const navigate = useNavigate();
 
   const workshopTypes = [
-    { image: Workshop1, description: "Accredited Key Word Sign Workshop - Basic & Intermediate " },
-    { image: Workshop2, description: "An Introduction to Neurodiversity Affirming Practice" },
-    { image: Workshop3, description: "Understanding Sensory" },
-    { image: Workshop4, description: "Emotional Regulation" }
-  ]
+    {
+      image: Workshop1,
+      description:
+        "Accredited Key Word Sign Workshop - Basic & Intermediate ",
+      alt: "Key Word Sign workshop for speech and communication therapy",
+    },
+    {
+      image: Workshop2,
+      description: "An Introduction to Neurodiversity Affirming Practice",
+      alt: "Neurodiversity affirming therapy practice workshop poster",
+    },
+    {
+      image: Workshop3,
+      description: "Understanding Sensory",
+      alt: "Understanding sensory needs therapy workshop poster",
+    },
+    {
+      image: Workshop4,
+      description: "Emotional Regulation",
+      alt: "Children’s emotional regulation therapy workshop poster",
+    },
+  ];
 
   return (
     <React.Fragment>
-      <div className="main-box bg-white items-center gap-10">
+      {/* ✅ SEO Meta Tags */}
+      <Helmet>
+        <title>
+          Therapy Workshops & Group Programs for Children | My Therapy Space
+        </title>
+        <meta
+          name="description"
+          content="Join My Therapy Space workshops in Australia — speech therapy, occupational therapy, sensory integration, emotional regulation, and social skill groups for children."
+        />
+        <meta
+          name="keywords"
+          content="therapy workshops Australia, pediatric therapy workshops, speech therapy workshops, occupational therapy groups, sensory integration therapy, emotional regulation therapy"
+        />
+      </Helmet>
 
+      <div className="main-box bg-white items-center gap-10">
+        {/* ✅ Heading with keyword */}
         <div className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24">
-          <h2 className="font-serif text-4xl max-sm:text-3xl text-[#0BAFA6]">Group Therapy and Workshops</h2>
-          <p className="font-serif text-xl max-sm:text-base text-gray-400">My Therapy is passionate about sharing information through workshops. Some of the workshops we have provided include:   </p>
+          <h1 className="font-serif text-4xl max-sm:text-3xl text-[#0BAFA6]">
+            Group Therapy and Workshops for Children
+          </h1>
+          <p className="font-serif text-xl max-sm:text-base text-gray-400">
+            My Therapy Space is passionate about sharing knowledge through
+            workshops in Australia. Some of our most popular therapy workshops
+            include:
+          </p>
         </div>
 
+        {/* ✅ Workshop Cards */}
         <div className="w-[90%] grid grid-cols-4 max-sm:grid-cols-1 gap-8">
-          {workshopTypes.map(data => (
-            <div className="flex flex-col items-center size-full gap-4">
-              <img src={data.image} className="w-full h-40 object-contain" />
-              <span className="font-serif text-gray-400 text-base text-center capitalize">{data.description}</span>
-            </div>
+          {workshopTypes.map((data, index) => (
+            <article
+              key={index}
+              className="flex flex-col items-center size-full gap-4"
+            >
+              <img
+                src={data.image}
+                alt={data.alt}
+                className="w-full h-40 object-contain"
+              />
+              <span className="font-serif text-gray-400 text-base text-center capitalize">
+                {data.description}
+              </span>
+            </article>
           ))}
         </div>
 
-        <p className="w-full font-serif text-lg text-gray-400 text-center px-16 max-sm:px-8"><Link to="/currentworkshops" className="text-black underline">Click here</Link> to see what groups are currently on offer. We love suggestions and a chance to get creative so if you have any ideas for groups or workshops that you feel would benefit you and your child, please let us know and we can try and make it happen</p>
+        {/* ✅ Internal Linking with keyword */}
+        <p className="w-full font-serif text-lg text-gray-400 text-center px-16 max-sm:px-8">
+          <Link to="/currentworkshops" className="text-black underline">
+            Click here
+          </Link>{" "}
+          to explore current{" "}
+          <strong>therapy workshops and group programs</strong>. We welcome your
+          suggestions to create workshops that support you and your child’s
+          needs.
+        </p>
 
+        {/* ✅ Images with alt text */}
         <div className="w-[90%] px-16 grid grid-cols-4 max-sm:grid-cols-1 gap-4">
-          <img src={Group1} className="border-8 border-gray-300" />
-          <img src={Group2} className="border-8 border-gray-300" />
-          <img src={Group3} className="border-8 border-gray-300" />
-          <img src={Group4} className="border-8 border-gray-300" />
+          <img
+            src={Group1}
+            alt="Children participating in group therapy workshop"
+            className="border-8 border-gray-300"
+          />
+          <img
+            src={Group2}
+            alt="Kids enjoying group occupational therapy activities"
+            className="border-8 border-gray-300"
+          />
+          <img
+            src={Group3}
+            alt="Therapy group for communication and social interaction"
+            className="border-8 border-gray-300"
+          />
+          <img
+            src={Group4}
+            alt="School readiness and learning therapy group"
+            className="border-8 border-gray-300"
+          />
         </div>
 
-        {/* Current Groups */}
-        <div className="w-[90%] px-16 max-sm:px-8 mt-16" id="current-groups">
-          <h2 className="font-serif text-3xl text-[#0BAFA6] mb-3">Current Groups</h2>
+        {/* ✅ Current Groups Section */}
+        <div
+          className="w-[90%] px-16 max-sm:px-8 mt-16"
+          id="current-groups"
+        >
+          <h2 className="font-serif text-3xl text-[#0BAFA6] mb-3">
+            Current Therapy Groups
+          </h2>
 
           {/* Term-Time Therapy Groups */}
           <div className="space-y-4">
-            <h3 className="font-serif text-2xl text-[#0BAFA6]">Term-Time Therapy Groups</h3>
+            <h3 className="font-serif text-2xl text-[#0BAFA6]">
+              Term-Time Therapy Groups
+            </h3>
             <p className="font-serif text-lg text-gray-600">
-              Our therapy groups provide children with fun, structured opportunities to work on their goals while
-              building social skills with peers. Groups support development in communication, motor skills,
-              emotional regulation, and school readiness.
+              Our term-time therapy groups provide children with structured,
+              engaging opportunities to develop communication, fine motor
+              skills, emotional regulation, and school readiness.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Seabridges</h4>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Seabridges
+                </h4>
                 <p className="text-gray-700">
-                  A neurodiversity affirming group for children with Autism to learn about themselves and social interaction.
+                  A neurodiversity affirming group for children with Autism,
+                  focusing on social interaction and self-awareness.
                 </p>
-              </div>
+              </article>
 
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Fine Motor Group</h4>
-                <p className="text-gray-700">Focuses on skills like cutting and handwriting.</p>
-              </div>
-
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Let’s Communicate Together</h4>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Fine Motor Group
+                </h4>
                 <p className="text-gray-700">
-                  Supports toddlers (18 months to 2.5 years) showing signs of delayed language development.
+                  Focuses on developing motor skills such as cutting and
+                  handwriting through occupational therapy.
                 </p>
-              </div>
+              </article>
 
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Chatterbox Group</h4>
-                <p className="text-gray-700">Helps 4–5-year-olds improve language skills.</p>
-              </div>
-
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Prep Readiness</h4>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Let’s Communicate Together
+                </h4>
                 <p className="text-gray-700">
-                  Prepares children for a smooth transition to school with combined Speech Pathology and Occupational Therapy support.
+                  Supports toddlers (18 months to 2.5 years) with delayed
+                  language development through guided activities.
                 </p>
-              </div>
+              </article>
+
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Chatterbox Group
+                </h4>
+                <p className="text-gray-700">
+                  Helps children aged 4–5 improve language and communication
+                  skills.
+                </p>
+              </article>
+
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Prep Readiness
+                </h4>
+                <p className="text-gray-700">
+                  Prepares children for school with combined speech and
+                  occupational therapy support.
+                </p>
+              </article>
             </div>
           </div>
 
-
+          {/* School Holiday Groups */}
           <div className="space-y-4 mt-10">
-            <h3 className="font-serif text-2xl text-[#0BAFA6]">School Holiday Groups</h3>
+            <h3 className="font-serif text-2xl text-[#0BAFA6]">
+              School Holiday Therapy Groups
+            </h3>
             <p className="font-serif text-lg text-gray-600">
-              Our holiday groups combine therapy goals with engaging, fun activities to keep children connected and learning
-              outside school terms. These groups also encourage new friendships and reduce screen time.
+              Our school holiday programs combine therapy with fun activities,
+              encouraging learning, reducing screen time, and fostering new
+              friendships.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Cooking Classes</h4>
-              </div>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Cooking Classes
+                </h4>
+              </article>
 
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Scavenger hunts</h4>
-              </div>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Scavenger Hunts
+                </h4>
+              </article>
 
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Movement, dance, boxing or yoga sessions</h4>
-              </div>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Movement, Dance & Yoga
+                </h4>
+              </article>
 
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Lego Masters</h4>
-              </div>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Lego Masters
+                </h4>
+              </article>
 
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Teen outings</h4>
-              </div>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Teen Outings
+                </h4>
+              </article>
 
-              <div className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
-                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">Paint and sip sessions</h4>
-              </div>
+              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+                <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
+                  Paint & Sip Sessions
+                </h4>
+              </article>
             </div>
 
             <div className="mt-6 bg-[#F5FBFB] border border-[#E0F4F5] rounded-xl p-4">
               <p className="font-serif text-gray-700">
-                We love hearing your ideas for new workshops or groups! If there’s something you think would benefit your child and family,
-                please get in touch — we’re here to create meaningful, enjoyable learning experiences together.
+                Have an idea for a new therapy group or workshop? Share your
+                suggestions — we love creating meaningful, fun, and effective
+                experiences for children and families.
               </p>
             </div>
           </div>
         </div>
 
-        <RButton className="px-8 py-4" onClick={() => navigate("/currentworkshops")}>View Current Groups</RButton>
+        <RButton
+          className="px-8 py-4"
+          onClick={() => navigate("/currentworkshops")}
+        >
+          View Current Groups
+        </RButton>
 
         <Footer />
-
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default Workshop;

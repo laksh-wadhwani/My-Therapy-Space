@@ -1,38 +1,9 @@
-import { request, response } from "express"
 import uploadToCloudinary from "../config/cloudinary.js"
 import BlogsModel from "../models/Blogs.js"
 
 export const SaveAsDraft = async(request, response) => {
     try{
-        const {title, content} = request.body
-        let thumbnail = null
-        if(request.file)
-            thumbnail = await uploadToCloudinary(request?.file?.buffer, "image")
-
-        const isBlogExist = await BlogsModel.findOne({title})
-        const blog = new BlogsModel({
-            title, 
-            thumbnail: thumbnail.secure_url, 
-            content
-        })
-
-        if(!(title && content))
-            return response.status(400).json({error: "Title and Content are required"})
-
-        if(isBlogExist)
-        return response.status(400).json({error: "This blog already exists"})
-        
-        await blog.save();
-        return response.status(200).json({message: "Blog Saved as Draft"})
-    }catch(error){
-        console.log("Getting error in uploading blog: ",error)
-        return response.status(500).json({error: "Internal Server Error"})
-    }
-}
-
-export const UploadBlog = async(request, response) => {
-    try{
-        const {title, content} = request.body
+        const {title, content, metaDescription, excerpt, imageAltText} = request.body
         let thumbnail = null
         if(request.file)
             thumbnail = await uploadToCloudinary(request?.file?.buffer, "image")
@@ -42,11 +13,45 @@ export const UploadBlog = async(request, response) => {
             title, 
             thumbnail: thumbnail.secure_url, 
             content,
+            metaDescription, 
+            excerpt,        
+            imageAltText,  
+        })
+
+        if(!(title && content && metaDescription && imageAltText))
+            return response.status(400).json({error: "All fields are required except Excerpt"})
+
+        if(isBlogExist)
+        return response.status(400).json({error: "This blog already exists"})
+        
+        await blog.save();
+        return response.status(200).json({message: "Blog Uploaded"})
+    }catch(error){
+        console.log("Getting error in uploading blog: ",error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
+export const UploadBlog = async(request, response) => {
+    try{
+        const {title, content, metaDescription, excerpt, imageAltText} = request.body
+        let thumbnail = null
+        if(request.file)
+            thumbnail = await uploadToCloudinary(request?.file?.buffer, "image")
+
+        const isBlogExist = await BlogsModel.findOne({title})
+        const blog = new BlogsModel({
+            title, 
+            thumbnail: thumbnail.secure_url, 
+            content,
+            metaDescription, 
+            excerpt,        
+            imageAltText,  
             status: "Published"
         })
 
-        if(!(title && content))
-            return response.status(400).json({error: "Title and Content are required"})
+        if(!(title && content && metaDescription && imageAltText))
+            return response.status(400).json({error: "All fields are required except Excerpt"})
 
         if(isBlogExist)
         return response.status(400).json({error: "This blog already exists"})
@@ -62,7 +67,7 @@ export const UploadBlog = async(request, response) => {
 export const GetAllBlogs = async(request, response) => {
     try {
         const blogs = await BlogsModel.find()
-        
+    
         if (!blogs || blogs.length === 0)
             return response.status(404).json({ error: "No blogs have been uploaded" })
 
@@ -75,15 +80,20 @@ export const GetAllBlogs = async(request, response) => {
 }
 
 export const GetSpecificBlog = async(request, response) => {
-    const { id } = request.params
-    const blog = await BlogsModel.findById(id)
-    response.status(200).json(blog)
+    try {
+        const { slug } = request.params
+        const blog = await BlogsModel.findOne({slug})
+        response.status(200).json(blog)
+    } catch (error) {
+        console.log("Getting error in fetching specific blog details: ",error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
 }
 
 export const UpdateBlog = async(request, response) => {
     try {
         const {id} = request.params;
-        const {title, content} = request.body;
+        const {title, content, metaDescription, excerpt, imageAltText} = request.body;
         let thumbnail = request.body.thumbnail
         if(request.file)
             thumbnail = await uploadToCloudinary(request.file?.buffer, "image")
@@ -91,7 +101,10 @@ export const UpdateBlog = async(request, response) => {
         let UpdatedData = {
             title,
             thumbnail: thumbnail.secure_url,
-            content
+            content,
+            metaDescription,
+            excerpt,
+            imageAltText
         }
 
         const updateBlog = await BlogsModel.findByIdAndUpdate(

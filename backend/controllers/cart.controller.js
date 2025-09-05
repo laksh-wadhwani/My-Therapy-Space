@@ -6,21 +6,15 @@ export const AddToCart = async (request, response) => {
     try {
         const { userID, productID } = request.params;
 
-        const isProductAlreadyExist = await CartModel.findOne({userID, "products.productID": productID}) || await CartModel.findOne({userID, "products.courseID": productID})
+        const isProductAlreadyExist = await CartModel.findOne({userID, productID: productID}) || await CartModel.findOne({userID, courseID: productID})
         if(isProductAlreadyExist)
             return response.status(400).json({error: "This product has already been in the cart"})
 
         const product = await ProductModel.findById(productID)
         if (product) {
-            const cartAlreadyExistForUser = await CartModel.findOne({userID})
-            if(cartAlreadyExistForUser){
-                cartAlreadyExistForUser.products.push({productID: productID})
-                await cartAlreadyExistForUser.save();
-                return response.status(201).json({ message: "Product has been added to the cart" })
-            }
             const newProduct = new CartModel({
                 userID,
-                products: [{productID: productID}]
+                productID: productID
             })
             await newProduct.save();
             return response.status(201).json({ message: "Product has been added to the cart" })
@@ -28,15 +22,9 @@ export const AddToCart = async (request, response) => {
 
         const course = await CoursesModel.findById(productID)
         if (course) {
-            const cartAlreadyExistForUser = await CartModel.findOne({userID})
-            if(cartAlreadyExistForUser){
-                cartAlreadyExistForUser.products.push({courseID: productID})
-                await cartAlreadyExistForUser.save();
-                return response.status(201).json({ message: "Product has been added to the cart" })
-            }
             const newCourse = new CartModel({
                 userID,
-                products: [{courseID: productID}]
+                courseID: productID
             })
             await newCourse.save();
             return response.status(201).json({ message: "Course has been added to the cart" })
@@ -52,29 +40,32 @@ export const GetCartDetails = async (request, response) => {
   try {
     const { id } = request.params;
 
-    const cart = await CartModel.findOne({ userID: id })
-      .populate("products.productID")
-      .populate("products.courseID");
+    const cart = await CartModel.find({ userID: id })
+      .populate("productID")
+      .populate("courseID");
 
-    if (!cart || cart.products.length === 0) {
+    if (!cart) {
       return response.status(400).json({ error: "No Products found" });
     }
 
     let totalPrice = 0;
-    const formattedCart = cart.products.map(item => {
+    const formattedCart = cart.map(item => {
       if (item.productID) {
         totalPrice += item.productID.price;
         return {
-          itemId: item._id,
+          cartID: item._id,
+          itemId: item.productID._id,
           title: item.productID.name,
           price: item.productID.price,
           thumbnail: item.productID.thumbnail,
           type: "product"
         };
-      } else if (item.courseID) {
+      } 
+      else if (item.courseID) {
         totalPrice += item.courseID.price;
         return {
-          itemId: item._id,
+          cartID: item._id,
+          itemId: item.courseID._id,
           title: item.courseID.name,
           price: item.courseID.price,
           thumbnail: item.courseID.thumbnail,
@@ -84,7 +75,6 @@ export const GetCartDetails = async (request, response) => {
     });
 
     return response.status(200).json({
-        cartID: cart._id,
         items: formattedCart,
         totalPrice
     });
@@ -98,17 +88,14 @@ export const GetCartDetails = async (request, response) => {
 
 export const DeleteProduct = async(request, response) => {
     try {
-        const { cartID, itemID } = request.params
-        const cart = await CartModel.findByIdAndUpdate(
-            cartID,
-            { $pull: { products: { _id: itemID } } },
-            { new: true }
-        )
+        const { id } = request.params
+        const cart = await CartModel.findByIdAndDelete(id)
 
         if(!cart)
             return response.status(400).json({error: "No Product found"})
 
         return response.status(200).json({message: "Product removed successfully"})
+        
     } catch (error) {
         console.log("Getting error in deleting package: ",error)
         return response.status(500).json({error: "Internal Server Error"})

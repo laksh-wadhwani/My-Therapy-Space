@@ -1,5 +1,7 @@
 import { stripe } from "../config/stripe.js"
+import CartModel from "../models/Cart.js";
 import PaymentModel from "../models/Payment.js";
+import mongoose from "mongoose";
 
 export const createPaymentIntent = async(request, response) => {
     try {
@@ -22,21 +24,60 @@ export const createPaymentIntent = async(request, response) => {
 }
 
 export const savePayment = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
-    const { userId, amount, status, paymentIntentId } = req.body;
+    const { userId, amount, status, paymentIntentId, products } = req.body;
 
-    const payment = new PaymentModel({
-      userId,
-      amount,
-      status,
-      paymentIntentId,
-    });
+    for (const product of products) {
+      const fieldName = product.type === "product" ? "productID" : "courseID";
 
-    await payment.save();
+      // Duplicate check
+      const isAlreadyExist = await PaymentModel.findOne(
+        { userId, [fieldName]: product.itemId },
+        null,
+        { session }
+      );
 
-    res.status(201).json({ message: "Payment saved successfully", payment });
+      if (isAlreadyExist) {
+        await session.abortTransaction();
+        session.endSession();
+        return res.status(400).json({
+          error: `This ${product.type} has already been reserved by you`,
+        });
+      }
+
+      // Save payment (divide amount by 100 because Stripe gives cents)
+      const payment = new PaymentModel({
+        userId,
+        amount: amount / 100,
+        status,
+        paymentIntentId,
+        [fieldName]: product.itemId,
+      });
+
+      await payment.save({ session });
+    }
+
+    // Clear the cart after successful payment
+    await CartModel.deleteMany({ userID: userId }, { session });
+
+    // Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    return res
+      .status(201)
+      .json({ message: "Payment has been done successfully" });
   } catch (error) {
-    console.log("Getting error in saving payment: ",error)
-    return res.status(500).json({ error: "Internal Server Error" });
+    // Rollback on error
+    await session.abortTransaction();
+    session.endSession();
+
+    console.log("Getting error in saving payment: ", error.message);
+    return res
+      .status(500)
+      .json({ error: error.message || "Internal Server Error" });
   }
 };

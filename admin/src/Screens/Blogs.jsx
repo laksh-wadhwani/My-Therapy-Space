@@ -11,6 +11,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import CustomFileUpload from "../Components/CustomFileUpload";
+import CustomTextArea from "../Components/CustomTextArea"; 
 
 const Blogs = ({ isSidebarHovered }) => {
 
@@ -23,7 +24,10 @@ const Blogs = ({ isSidebarHovered }) => {
     const [blogsContent, setBlogsContent] = useState({
         title: "",
         thumbnail: null,
-        content: ""
+        content: "",
+        metaDescription: "", 
+        excerpt: "", 
+        imageAltText: ""
     })
 
     useEffect(() => {
@@ -98,17 +102,22 @@ const Blogs = ({ isSidebarHovered }) => {
                     (
                         <div className="w-full px-4 max-sm:px-0 flex max-sm:justify-center flex-wrap gap-8">
                             {blogsData.map(data => (
-                                <Link to={`/specific-blog/${data._id}`} key={data._id}>
-                                    <div className="max-w-80 max-h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-gray-200 box-border cursor-pointer hover:scale-105">
-                                        <img src={data.thumbnail} alt="" className="w-full h-[75%] object-cover rounded-xl" />
+                                <Link to={`/specific-blog/${data.slug}/${data._id}`} key={data._id}>
+                                    <div className="w-80 h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-gray-200 box-border cursor-pointer hover:scale-105">
+                                        <img src={data.thumbnail} alt={data.imageAltText || data.title} className="w-full h-[35%] object-cover rounded-xl" /> {/* Improved alt text */}
                                         <div className="flex flex-col gap-2">
                                             <h5 className="font-serif text-lg text-black font-semibold line-clamp-2">{data.title}</h5>
                                             <p className="font-serif font-light text-black text-sm text-gray-400">{new Date(data.updatedAt).toLocaleDateString("en-GB")}</p>
-                                            <div className="font-serif font-light text-base text-gray-400 line-clamp-3 prose max-w-none pointer-events-none">
-                                                <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                                                    {data.content}
-                                                </ReactMarkdown>
-                                            </div>
+                                            {/* Show excerpt if available, otherwise show content */}
+                                            <p className="font-serif font-light text-base text-gray-400 line-clamp-3">
+                                                {data.excerpt || ( // NEW: Use excerpt
+                                                    <div className="prose max-w-none pointer-events-none">
+                                                        <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                                                            {data.content}
+                                                        </ReactMarkdown>
+                                                    </div>
+                                                )}
+                                            </p>
                                             <span className={`p-2 rounded-lg text-sm w-fit font-medium ${data.status === "Published" ? "bg-blue-50 text-blue-600" : "bg-yellow-100 text-yellow-600"}`}>{data.status}</span>
                                         </div>
                                     </div>
@@ -120,19 +129,56 @@ const Blogs = ({ isSidebarHovered }) => {
             </div>
 
             <Modal open={open} onClose={onCloseModal} center
-                styles={{ closeButton: { display: 'none' }, modal: { padding: '0', borderRadius: ".8rem" } }}>
+                styles={{ closeButton: { display: 'none' }, modal: { padding: '0', borderRadius: ".8rem", width: '90%', scrollbarWidth: "none" } }}>
 
-                <div className="w-3xl max-sm:w-full h-[43rem] flex flex-col gap-6 box-border pb-10">
+                <div className="w-full h-[60rem] flex flex-col gap-6 box-border">
 
-                    <h5 className="font-serif text-xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6">add new blogs</h5>
+                    <h5 className="font-serif text-2xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6 text-center">add new blogs</h5>
 
-                    <div className="w-full flex flex-col gap-4 px-6">
-                        <CustomInput label="blog title" placeholder="Title" type="text" value={blogsContent.title} onChange={e => handleChange("title", e.target.value)} />
-                        <CustomFileUpload label="Blog Image" value={blogsContent.thumbnail} onChange={file => handleChange("thumbnail", file)} />
-                        <CustomEditor value={blogsContent.value} onChange={(val) => handleChange("content", val)} />
+                    <div className="w-full flex flex-col gap-2 px-6"> 
+                        <CustomInput 
+                            label="Blog Title *" 
+                            placeholder="E.g., 5 Signs Your Child Might Benefit from Speech Therapy" 
+                            type="text" 
+                            value={blogsContent.title} 
+                            onChange={e => handleChange("title", e.target.value)} 
+                        />
+                        
+                        <CustomInput 
+                            label="Image Alt Text" 
+                            placeholder="E.g., Speech therapist working with a child using AAC device" 
+                            type="text" 
+                            value={blogsContent.imageAltText} 
+                            onChange={e => handleChange("imageAltText", e.target.value)} 
+                        />
+                        
+                        <CustomTextArea 
+                            label="Meta Description" 
+                            placeholder="A compelling 150-160 character summary for search engines. E.g., Discover 5 key signs that indicate your child may need speech therapy. Learn how early intervention can support communication development." 
+                            value={blogsContent.metaDescription} 
+                            onChange={e => handleChange("metaDescription", e.target.value)}
+                            rows="3"
+                            maxWords={160}
+                        />
+                        
+                        <CustomTextArea
+                            label="Excerpt" 
+                            placeholder="A short preview text for the blog listing page. (2-3 sentences)" 
+                            value={blogsContent.excerpt} 
+                            onChange={e => handleChange("excerpt", e.target.value)}
+                            rows="2"
+                            maxWords={30}
+                        />
+                        
+                        <CustomFileUpload label="Blog Thumbnail Image" value={blogsContent.thumbnail} onChange={file => handleChange("thumbnail", file)} />
+                        
+                        <div>
+                            <label className="font-serif text-base text-black capitalize font-medium">blog content</label>
+                            <CustomEditor value={blogsContent.content} onChange={(val) => handleChange("content", val)} />
+                        </div>
                     </div>
 
-                    <div className="w-full px-6 flex justify-center gap-2">
+                    <div className="w-full px-6 flex justify-center gap-2 pb-8">
                         <CustomButton onClick={SaveAsDraft} disabled={drafting}>
                             {drafting ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "save as draft"}
                         </CustomButton>

@@ -1,146 +1,254 @@
 import React from "react";
-import About from "../assets/about.svg"
+import About from "../assets/about.svg";
 import Footer from "../Components/footer";
-import CafeRoom from "../assets/burleigh/Cafe-Room.jpg"
-import FrogRoom from "../assets/burleigh/Frog-Room.jpg"
-import GiraffeRoom from "../assets/burleigh/Giraffe-Room.jpg"
-import Gym from "../assets/burleigh/Gym.jpg"
-import KittenRoom from "../assets/burleigh/Kitten-Room.jpg"
-import MainReception from "../assets/burleigh/Main-Reception.jpg"
-import MonkeyRoom from "../assets/burleigh/Monkey-Room.jpg"
-import OwlRoom from "../assets/burleigh/Owl-Room.jpg"
-import PuppyRoom from "../assets/burleigh/Puppy-Room.jpg"
-import RedRoom from "../assets/burleigh/Red-Room.jpg"
-import TreeRoom from "../assets/burleigh/Tree-Room.jpg"
-import WaitingRoom from "../assets/burleigh/Waiting-Room.jpg"
-import Entrance from "../assets/Hope Island/Entrance.jpg"
-import Reception from "../assets/Hope Island/Reception.jpg"
-import Room1 from "../assets/Hope Island/Room1.jpg"
-import Room2 from "../assets/Hope Island/Room2.jpg"
-import Room3 from "../assets/Hope Island/Room3.jpg"
+import { Helmet } from "react-helmet-async";
+
+// Burleigh Images
+import CafeRoom from "../assets/burleigh/Cafe-Room.jpg";
+import FrogRoom from "../assets/burleigh/Frog-Room.jpg";
+import GiraffeRoom from "../assets/burleigh/Giraffe-Room.jpg";
+import Gym from "../assets/burleigh/Gym.jpg";
+import KittenRoom from "../assets/burleigh/Kitten-Room.jpg";
+import MainReception from "../assets/burleigh/Main-Reception.jpg";
+import MonkeyRoom from "../assets/burleigh/Monkey-Room.jpg";
+import OwlRoom from "../assets/burleigh/Owl-Room.jpg";
+import PuppyRoom from "../assets/burleigh/Puppy-Room.jpg";
+import RedRoom from "../assets/burleigh/Red-Room.jpg";
+import TreeRoom from "../assets/burleigh/Tree-Room.jpg";
+import WaitingRoom from "../assets/burleigh/Waiting-Room.jpg";
+
+// Hope Island Images
+import Entrance from "../assets/Hope Island/Entrance.jpg";
+import Reception from "../assets/Hope Island/Reception.jpg";
+import Room1 from "../assets/Hope Island/Room1.jpg";
+import Room2 from "../assets/Hope Island/Room2.jpg";
+import Room3 from "../assets/Hope Island/Room3.jpg";
+
 const AboutUs = () => {
-    
     const BurleighSpace = [
-        {room:"Studio Waiting Room", picture: WaitingRoom},
-        {room:"Main Reception Area", picture: MainReception},
-        {room:"Kitten Room", picture: KittenRoom},
-        {room:"Frog Room", picture: FrogRoom},
-        {room:"Owl Room", picture: OwlRoom},
-        {room:"Monkey Room", picture: MonkeyRoom},
-        {room:"Giraffe Room", picture: GiraffeRoom},
-        {room:"Gym", picture: Gym},
-        {room:"Tree Room", picture: TreeRoom},
-        {room:"Cafe Room", picture: CafeRoom},
-        {room:"Puppy Room", picture: PuppyRoom},
-        {room:"Red Room", picture: RedRoom}
-    ]
+        { room: "Studio Waiting Room", picture: WaitingRoom },
+        { room: "Main Reception Area", picture: MainReception },
+        { room: "Kitten Room", picture: KittenRoom },
+        { room: "Frog Room", picture: FrogRoom },
+        { room: "Owl Room", picture: OwlRoom },
+        { room: "Monkey Room", picture: MonkeyRoom },
+        { room: "Giraffe Room", picture: GiraffeRoom },
+        { room: "Therapy Gym", picture: Gym },
+        { room: "Tree Room", picture: TreeRoom },
+        { room: "Cafe Room", picture: CafeRoom },
+        { room: "Puppy Room", picture: PuppyRoom },
+        { room: "Red Room", picture: RedRoom },
+    ];
 
     const HopeIsland = [
-        {room:"Hope Island Entrance", picture: Entrance},
-        {room:"Hope Island Reception", picture: Reception},
-        {room:"Hope Island Room 1", picture: Room1},
-        {room:"Hope Island Room 2", picture: Room2},
-        {room:"Hope Island Room 3", picture: Room3}
-    ]
+        { room: "Hope Island Entrance", picture: Entrance },
+        { room: "Hope Island Reception", picture: Reception },
+        { room: "Hope Island Therapy Room 1", picture: Room1 },
+        { room: "Hope Island Therapy Room 2", picture: Room2 },
+        { room: "Hope Island Therapy Room 3", picture: Room3 },
+    ];
 
-    return(
+    return (
         <React.Fragment>
-            <div className="main-box bg-white">
+            <Helmet>
+                {/* Title for browser tab + search engines */}
+                <title>About Us | My Therapy Space - Family-Centered Pediatric Therapy Gold Coast</title>
 
-                <div className="sections max-sm:flex-col max-sm:gap-6 justify-between mt-20 max-sm:mt-12">
+                {/* Meta description (shows in Google search results) */}
+                <meta
+                    name="description"
+                    content="Learn about My Therapy Space, a multidisciplinary pediatric therapy clinic in Gold Coast. We provide speech therapy, occupational therapy, dietitian services, and neurodiversity affirming care in a family-centered environment."
+                />
+
+                {/* Keywords (less important now, but okay to include) */}
+                <meta
+                    name="keywords"
+                    content="pediatric therapy Gold Coast, speech therapy Gold Coast, occupational therapy for children, pediatric dietitian, family centered therapy, neurodiversity affirming practice"
+                />
+
+                {/* Open Graph for social media */}
+                <meta property="og:title" content="About Us | My Therapy Space - Family-Centered Pediatric Therapy Gold Coast" />
+                <meta property="og:description" content="Discover our family-centered pediatric therapy clinic in Gold Coast. We specialize in speech pathology, occupational therapy, and dietitian services." />
+                <meta property="og:type" content="website" />
+            </Helmet>
+            <main className="main-box bg-white">
+                {/* ================= HERO / ABOUT SECTION ================= */}
+                <section className="sections max-sm:flex-col max-sm:gap-6 justify-between mt-20 max-sm:mt-12">
                     <div className="sections-box gap-20 max-sm:gap-4">
-                        <h1 className="text-7xl max-sm:text-3xl font-serif text-[#333333] capitalize">Our approach is family centered therapy</h1>
-                        <p className="sections-description text-base text-justify">My Therapy Space is a multidisciplinary allied health clinic based in the Gold Coast, Australia, offering a family-centered approach to therapy. Established in 2020 as a multi-speciality pediatric practice, our vision is to provide care with a nurturing environment. Our teams works collaboratively with families to ensure the best outcomes.</p>
+                        {/* Main SEO Heading */}
+                        <h1 className="text-7xl max-sm:text-3xl font-serif text-[#333333] capitalize">
+                            Family-Centered Pediatric Therapy in Gold Coast
+                        </h1>
+                        <p className="sections-description text-base text-justify">
+                            <strong>My Therapy Space</strong> is a{" "}
+                            <em>multidisciplinary allied health clinic</em> offering{" "}
+                            <b>speech therapy</b>, <b>occupational therapy</b>,{" "}
+                            <b>pediatric dietetics</b>, and family-centered support programs
+                            across the Gold Coast. Since 2020, our{" "}
+                            <strong>neurodiversity-affirming practice</strong> has worked
+                            collaboratively with families to provide nurturing, inclusive
+                            environments that help children thrive.
+                        </p>
                     </div>
-                    <img src={About} alt="About Us" />
-                </div>
+                    <img
+                        src={About}
+                        alt="About My Therapy Space clinic in Gold Coast"
+                        className="max-sm:w-full"
+                    />
+                </section>
 
-                <div className="w-[80%] max-sm:w-[90%] grid grid-cols-4 self-center pb-8">
+                {/* ================= CLINIC STATS ================= */}
+                <section className="w-[80%] max-sm:w-[90%] grid grid-cols-4 self-center pb-8">
+                    {/* Each stat highlights trust/authority */}
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
                         <h3 className="another-sections-tittle font-black">5+</h3>
-                        <span className="sections-description max-sm:text-xs text-center capitalize">years experince</span>
+                        <span className="sections-description max-sm:text-xs text-center capitalize">
+                            Years Pediatric Therapy Experience
+                        </span>
                     </div>
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
                         <h3 className="another-sections-tittle font-black">100%</h3>
-                        <span className="sections-description max-sm:text-xs text-center capitalize">family-centered</span>
+                        <span className="sections-description max-sm:text-xs text-center capitalize">
+                            Family-Centered Approach
+                        </span>
                     </div>
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
                         <h3 className="another-sections-tittle font-black">15</h3>
-                        <span className="sections-description max-sm:text-xs text-center capitalize">specialized programs</span>
+                        <span className="sections-description max-sm:text-xs text-center capitalize">
+                            Specialized Child Programs
+                        </span>
                     </div>
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
                         <h3 className="another-sections-tittle font-black">500+</h3>
-                        <span className="sections-description max-sm:text-xs text-center capitalize">happy families</span>
+                        <span className="sections-description max-sm:text-xs text-center capitalize">
+                            Families Supported
+                        </span>
                     </div>
-                </div>
+                </section>
 
-                <div className="sections flex-col gap-10">
-                    <h2 className="another-sections-tittle font-black self-start">Our Core Values</h2>
-                    
+                {/* ================= CORE VALUES ================= */}
+                <section className="sections flex-col gap-10">
+                    <h2 className="another-sections-tittle font-black self-start">
+                        Our Core Values in Therapy
+                    </h2>
+
                     <div className="w-full grid grid-cols-4 max-sm:grid-cols-1 max-sm:gap-8 border border-[#EAEAEA] rounded-xl box-border p-8">
-
-                        <div className="flex flex-col items-center">
-                            <div className="size-[50px] bg-[#38B6FF]/20 rounded-full font-serif text-[#38B6FF] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">1</div>
-                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">family-centered</h3>
-                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">Involving families in every step</p>
-                        </div>
-
-                        <div className="flex flex-col items-center">
-                            <div className="size-[50px] bg-[#FF7F50]/20 rounded-full font-serif text-[#FF7F50] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">2</div>
-                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">play-based</h3>
-                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">Learning through fun</p>
-                        </div>
-
-                        <div className="flex flex-col items-center">
-                            <div className="size-[50px] bg-[#66CC99]/20 rounded-full font-serif text-[#66CC99] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">3</div>
-                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">safe approach</h3>
-                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">Creating secure environments</p>
-                        </div>
-
-                        <div className="flex flex-col items-center">
-                            <div className="size-[50px] bg-[#AA88DD]/20 rounded-full font-serif text-[#AA88DD] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">4</div>
-                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">neurodiversity affirming</h3>
-                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">Celeberating differences</p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div className="sections flex-col gap-10 max-sm:gap-6">
-                    <h2 className="another-sections-tittle font-black max-sm:text-center">Our Clinic Space Burleigh Waters</h2>
-                     <p className="text-[#557271] text-lg font-serif text-center">
-                       Our multidisciplinary team works collaboratively from our spacious, purpose-built office in Burleigh Waters. The clinic features 11 therapy rooms, including a large gym and a dedicated group therapy room with a fully equipped kitchen.
-                    <br/>You’ll find us conveniently located opposite Treetops Plaza at Burleigh Waters, in Suite 3, Treetops Square, 2 Classic Way
-                    </p>
-                    <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
-                        {BurleighSpace.map(space => (
-                            <div className="flex flex-col items-start w-[30%] max-sm:w-full gap-2">
-                                <img src={space.picture} alt="Burleigh Space Picture" />
-                                <span className="text-[#557271] text-lg font-serif capitalize">{space.room}</span>
+                        <article className="flex flex-col items-center">
+                            <div className="size-[50px] bg-[#38B6FF]/20 rounded-full text-[#38B6FF] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">
+                                1
                             </div>
-                        ))}
-                    </div>
-                </div>
+                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">
+                                Family-Centered
+                            </h3>
+                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">
+                                Involving families in every therapy step.
+                            </p>
+                        </article>
 
-                <div className="sections flex-col gap-10 max-sm:gap-6">
-                    <h2 className="another-sections-tittle font-black max-sm:text-center">Our Clinic Space Hope Island</h2>
+                        <article className="flex flex-col items-center">
+                            <div className="size-[50px] bg-[#FF7F50]/20 rounded-full text-[#FF7F50] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">
+                                2
+                            </div>
+                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">
+                                Play-Based Learning
+                            </h3>
+                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">
+                                Children learn best through fun, engaging activities.
+                            </p>
+                        </article>
+
+                        <article className="flex flex-col items-center">
+                            <div className="size-[50px] bg-[#66CC99]/20 rounded-full text-[#66CC99] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">
+                                3
+                            </div>
+                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">
+                                Safe & Supportive
+                            </h3>
+                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">
+                                Secure therapy environments for every child.
+                            </p>
+                        </article>
+
+                        <article className="flex flex-col items-center">
+                            <div className="size-[50px] bg-[#AA88DD]/20 rounded-full text-[#AA88DD] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">
+                                4
+                            </div>
+                            <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">
+                                Neurodiversity Affirming
+                            </h3>
+                            <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">
+                                Celebrating differences and strengths.
+                            </p>
+                        </article>
+                    </div>
+                </section>
+
+                {/* ================= BURLEIGH CLINIC ================= */}
+                <section className="sections flex-col gap-10 max-sm:gap-6">
+                    <h2 className="another-sections-tittle font-black max-sm:text-center">
+                        Our Burleigh Waters Pediatric Therapy Clinic
+                    </h2>
                     <p className="text-[#557271] text-lg font-serif text-center">
-                       Our Hope Island clinic is located at 12 Halcyon Way, right next door to Rackleys Swimming School. This beautiful, welcoming space features
-                       three dedicated therapy rooms designed to provide a comfortable and effective environment for your child’s therapy sessions.
+                        Our Burleigh Waters clinic features{" "}
+                        <strong>11 therapy rooms</strong>, including a{" "}
+                        <b>pediatric therapy gym</b> and group therapy space with a kitchen.
+                        Conveniently located opposite Treetops Plaza, Suite 3, Treetops
+                        Square, Gold Coast.
                     </p>
                     <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
-                        {HopeIsland.map(space => (
-                            <div className="flex flex-col items-start w-[30%] max-sm:w-full gap-2">
-                                <img src={space.picture} alt="Burleigh Space Picture" />
-                                <span className="text-[#557271] text-lg font-serif capitalize">{space.room}</span>
-                            </div>
+                        {BurleighSpace.map((space, idx) => (
+                            <figure
+                                key={idx}
+                                className="flex flex-col items-start w-[30%] max-sm:w-full gap-2"
+                            >
+                                <img
+                                    src={space.picture}
+                                    alt={`${space.room} - Burleigh Waters child therapy space`}
+                                    className="rounded-md"
+                                />
+                                <figcaption className="text-[#557271] text-lg font-serif capitalize">
+                                    {space.room}
+                                </figcaption>
+                            </figure>
                         ))}
                     </div>
-                </div>
-                <Footer/>
-            </div>
-        </React.Fragment>
-    )
-}
+                </section>
 
-export default AboutUs
+                {/* ================= HOPE ISLAND CLINIC ================= */}
+                <section className="sections flex-col gap-10 max-sm:gap-6">
+                    <h2 className="another-sections-tittle font-black max-sm:text-center">
+                        Our Hope Island Therapy Clinic
+                    </h2>
+                    <p className="text-[#557271] text-lg font-serif text-center">
+                        Located at <strong>12 Halcyon Way</strong>, next to Rackley’s
+                        Swimming School, our <b>Hope Island clinic</b> offers{" "}
+                        <strong>three therapy rooms</strong> designed for comfort and
+                        effective child-centered therapy.
+                    </p>
+                    <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
+                        {HopeIsland.map((space, idx) => (
+                            <figure
+                                key={idx}
+                                className="flex flex-col items-start w-[30%] max-sm:w-full gap-2"
+                            >
+                                <img
+                                    src={space.picture}
+                                    alt={`${space.room} - Hope Island therapy clinic`}
+                                    className="rounded-md"
+                                />
+                                <figcaption className="text-[#557271] text-lg font-serif capitalize">
+                                    {space.room}
+                                </figcaption>
+                            </figure>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ================= FOOTER ================= */}
+                <Footer />
+            </main>
+        </React.Fragment>
+    );
+};
+
+export default AboutUs;

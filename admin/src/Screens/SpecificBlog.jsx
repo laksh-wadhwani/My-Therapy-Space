@@ -9,72 +9,83 @@ import CustomInput from "../Components/CustomInput";
 import CustomEditor from "../Components/CustomEditor";
 import { toast } from "react-toastify";
 import CustomFileUpload from "../Components/CustomFileUpload";
+import CustomTextArea from "../Components/CustomTextArea";
 
-const SpecificBlog = ({isSidebarHovered}) => {
+const SpecificBlog = ({ isSidebarHovered }) => {
 
-  const { id } = useParams();
+  const { slug, id } = useParams();
   const URL = BackendURL();
   const naviagte = useNavigate();
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState(false)
   const [editBlog, setEditBlog] = useState(false)
   const [blogTitle, setBlogTitle] = useState("")
+  const [metaDescription, setMetaDescription] = useState("")
+  const [excerpt, setExcerpt] = useState("")
+  const [imageAltText, setImageAltText] = useState("")
   const [thumbnail, setBlogThumbnail] = useState(null)
   const [blogContent, setBlogsContent] = useState("")
 
   useEffect(() => {
-    axios.get(`${URL}/api/blogs/specific-blog/${id}`)
-    .then(response => {
-      setBlogTitle(response.data.title)
-      setBlogThumbnail(response.data.thumbnail)
-      setBlogsContent(response.data.content)
-    })
-    .catch(error => {console.error(error)})
-    .finally(() => setLoading(false))
-  },[id, URL])
+    axios.get(`${URL}/api/blogs/specific-blog/${slug}`)
+      .then(response => {
+        setBlogTitle(response.data.title)
+        setMetaDescription(response.data.metaDescription)
+        setExcerpt(response.data.excerpt)
+        setImageAltText(response.data.imageAltText)
+        setBlogThumbnail(response.data.thumbnail)
+        setBlogsContent(response.data.content)
+      })
+      .catch(error => { console.error(error) })
+      .finally(() => setLoading(false))
+  }, [slug, URL])
 
   const UpdateBlog = blogId => {
     const BlogData = new FormData();
     BlogData.append("title", blogTitle)
     BlogData.append("thumbnail", thumbnail)
     BlogData.append("content", blogContent)
+    BlogData.append("metaDescription", metaDescription)
+    BlogData.append("excerpt", excerpt)
+    BlogData.append("imageAltText", imageAltText)
 
+    setUpdating(true)
     axios.put(`${URL}/api/blogs/update/${blogId}`, BlogData)
-    .then(response => {
-      toast.success(response.data.message)
-      setTimeout(() => {naviagte(0)},2500)
-    })
-    .catch(error => {
-      console.error("Error in updating blog: ",error)
-      return toast.error(error.response?.data?.error)
-    })
-    .finally(() => {
-      setUpdating(false)
-    })
+      .then(response => {
+        toast.success(response.data.message)
+        setTimeout(() => { naviagte(0) }, 2500)
+      })
+      .catch(error => {
+        console.error("Error in updating blog: ", error)
+        return toast.error(error.response?.data?.error)
+      })
+      .finally(() => {
+        setUpdating(false)
+      })
   }
 
   const DeleteBlog = blogId => {
     axios.delete(`${URL}/api/blogs/delete/${blogId}`)
-    .then(response => {
-      toast.success(response.data.message)
-      setTimeout(() => {naviagte(`/manage-blogs`)},2500)
-    })
-    .catch(error => {
-      console.error("Getting error in deleting blog: ",error)
-      return toast.error(error.response?.data?.error)
-    })
+      .then(response => {
+        toast.success(response.data.message)
+        setTimeout(() => { naviagte(`/manage-blogs`) }, 2500)
+      })
+      .catch(error => {
+        console.error("Getting error in deleting blog: ", error)
+        return toast.error(error.response?.data?.error)
+      })
   }
 
   const ChangeStatus = blogId => {
     axios.put(`${URL}/api/blogs/change-status/${blogId}`)
-    .then(response => {
-      toast.success(response.data.message)
-      setTimeout(() => {naviagte("/manage-blogs")},2500)
-    })
-    .catch(error => {
-      console.error("Getting error in changing status: ",error)
-      return toast.error(error?.response?.data?.error)
-    })
+      .then(response => {
+        toast.success(response.data.message)
+        setTimeout(() => { naviagte("/manage-blogs") }, 2500)
+      })
+      .catch(error => {
+        console.error("Getting error in changing status: ", error)
+        return toast.error(error?.response?.data?.error)
+      })
   }
 
   if (loading) {
@@ -87,62 +98,95 @@ const SpecificBlog = ({isSidebarHovered}) => {
     );
   }
 
-  return(
+  return (
     <React.Fragment>
 
       <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
 
-        {editBlog? 
-        (
-          <div className="w-full flex flex-col gap-4 mt-20 px-8">
-            <CustomInput label="Blog Title" type="text" value={blogTitle} onChange={e => setBlogTitle(e.target.value)}/>
-            <CustomFileUpload label="Thumbnail" onChange={e => setBlogThumbnail(e.target.files[0])}/>
-            <CustomEditor value={blogContent} onChange={val => setBlogsContent(val)}/>
-          </div>
-        )
-        : 
-        (
-          <>
-            <div className="w-full flex flex-col gap-8 mt-12 max-sm:mt-24">
-              <h3 className="font-sans text-[#0BAFA6] text-6xl max-sm:text-2xl font-semibold text-center px-16 max-sm:px-4">{blogTitle}</h3>
-              {thumbnail && <img src={thumbnail} alt={blogTitle} className="rounded-xl object-cover"/>}
-            </div>
+        {editBlog ?
+          (
+            <div className="w-full flex flex-col gap-4 mt-20 px-8">
+              <CustomInput
+                label="Blog Title"
+                type="text"
+                value={blogTitle}
+                onChange={e => setBlogTitle(e.target.value)}
+              />
 
-            <div className="w-full font-sans prose max-w-full flex flex-col gap-6 text-justify px-4">
-              <ReactMarkdown
-              rehypePlugins={[rehypeRaw]}
-              components={{
-                h1: ({node, ...props}) => <h1 className="text-3xl font-bold text-[#0BAFA6]" {...props} />,
-                h2: ({node, ...props}) => <h2 className="text-2xl font-semibold text-[#15b7ac]" {...props} />,
-                h3: ({node, ...props}) => <h3 className="text-xl font-medium text-[#01b7ac]" {...props} />,
-                ul: ({node, ...props}) => <ul className="list-disc ml-6" {...props} />,
-                li: ({node, ...props}) => <li className="mb-1" {...props} />,
-                span: ({node, style, ...props}) => <span style={style} {...props} />
-              }}>
-                {blogContent}
-              </ReactMarkdown>
-            </div>
-          </>
-        )}
+              <CustomInput
+                label="Image Alt Text"
+                type="text"
+                value={imageAltText}
+                onChange={e => setImageAltText(e.target.value)}
+              />
 
-        {editBlog? 
-        (
-          <div className="w-full flex justify-evenly">
-            <CustomButton className="w-[30%] bg-blue-500" disabled={updating} onClick={() => UpdateBlog(id)}>
-              {updating ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "upload blog"}
-            </CustomButton>
-            <CustomButton className="w-[30%] bg-red-500" onClick={() => setEditBlog(false)}>Cancel</CustomButton>
-          </div>
-        )
-        : 
-        (
-          <div className="w-full flex justify-evenly">
-            <CustomButton className="w-[30%]" onClick={() => setEditBlog(true)}>Edit Blog</CustomButton>
-            <CustomButton className="w-[30%]" onClick={() => DeleteBlog(id)}>Delete Blog</CustomButton>
-            <CustomButton className="w-[30%]" onClick={() => ChangeStatus(id)}>Change Status</CustomButton>
-          </div>
-        )}
-       
+              <CustomTextArea
+                label="Meta Description"
+                value={metaDescription}
+                onChange={e => setMetaDescription(e.target.value)}
+                rows="3"
+                maxWords={160}
+              />
+
+              <CustomTextArea
+                label="Excerpt"
+                value={excerpt}
+                onChange={e => setExcerpt(e.target.value)}
+                rows="2"
+                maxWords={30}
+              />
+
+              <CustomFileUpload label="Blog Thumbnail Image" onChange={e => setBlogThumbnail(e.target.files[0])} />
+
+              <div>
+                <label className="font-serif text-base text-black capitalize font-medium">blog content</label>
+                <CustomEditor value={blogContent} onChange={(val) => setBlogsContent(val)} />
+              </div>
+            </div>
+          )
+          :
+          (
+            <>
+              <div className="w-full flex flex-col gap-8 mt-12 max-sm:mt-24">
+                <h3 className="font-sans text-[#0BAFA6] text-6xl max-sm:text-2xl font-semibold text-center px-16 max-sm:px-4">{blogTitle}</h3>
+                {thumbnail && <img src={thumbnail} alt={imageAltText || blogTitle} className="rounded-xl object-cover" />}
+              </div>
+
+              <div className="w-full font-sans prose max-w-full flex flex-col gap-6 text-justify px-4">
+                <ReactMarkdown
+                  rehypePlugins={[rehypeRaw]}
+                  components={{
+                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold text-[#0BAFA6]" {...props} />,
+                    h2: ({ node, ...props }) => <h2 className="text-2xl font-semibold text-[#15b7ac]" {...props} />,
+                    h3: ({ node, ...props }) => <h3 className="text-xl font-medium text-[#01b7ac]" {...props} />,
+                    ul: ({ node, ...props }) => <ul className="list-disc ml-6" {...props} />,
+                    li: ({ node, ...props }) => <li className="mb-1" {...props} />,
+                    span: ({ node, style, ...props }) => <span style={style} {...props} />
+                  }}>
+                  {blogContent}
+                </ReactMarkdown>
+              </div>
+            </>
+          )}
+
+        {editBlog ?
+          (
+            <div className="w-full flex justify-evenly">
+              <CustomButton className="w-[30%] bg-blue-500" disabled={updating} onClick={() => UpdateBlog(id)}>
+                {updating ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "upload blog"}
+              </CustomButton>
+              <CustomButton className="w-[30%] bg-red-500" onClick={() => setEditBlog(false)}>Cancel</CustomButton>
+            </div>
+          )
+          :
+          (
+            <div className="w-full flex justify-evenly">
+              <CustomButton className="w-[30%]" onClick={() => setEditBlog(true)}>Edit Blog</CustomButton>
+              <CustomButton className="w-[30%]" onClick={() => DeleteBlog(id)}>Delete Blog</CustomButton>
+              <CustomButton className="w-[30%]" onClick={() => ChangeStatus(id)}>Change Status</CustomButton>
+            </div>
+          )}
+
       </div>
 
     </React.Fragment>

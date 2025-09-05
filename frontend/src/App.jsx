@@ -25,6 +25,7 @@ import { jwtDecode } from "jwt-decode"
 import UserProfile from "./Screens/UserProfile";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { HelmetProvider } from "react-helmet-async"
 
 const App = () => {
 
@@ -47,39 +48,41 @@ const App = () => {
 
   return (
     <Elements stripe={stripePromise}>
-    <BackendProvider>
-      <Router>
-        <Navbar user={user} setLoginUser={setLoginUser} />
-        <Routes>
-          <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/AboutUs" element={<AboutUs />} />
-          <Route exact path="Services" element={<Services />} />
-          <Route exact path="Fees" element={<Fees />} />
-          <Route exact path="/Team" element={<Team />} />
-          <Route exact path="/contact" element={<ContactUs />} />
-          <Route exact path="/alsooffer" element={<AlsoOffer />} />
-          <Route exact path="/currentworkshops" element={<CurrentWorkshops />} />
-          <Route exact path="/blogs" element={<Blogs />} />
-          <Route exact path="/blog/:id" element={<SpecificBlog />} />
-          <Route exact path="/workshop" element={<Workshop />} />
-          <Route exact path="/shop" element={<Shop />} />
-          <Route exact path="/products" element={<Products />} />
-          <Route exact path="/videos" element={<PaidVideos />} />
-          <Route exact path="/specificProduct/:id" element={<SpecificProduct user={user} />} />
-          <Route exact path="/specificVideo/:id" element={<SpecificVideo user={user} />} />
-          <Route exact path="/booking" element={<Booking />} />
+      <BackendProvider>
+        <HelmetProvider>
+          <Router>
+            <Navbar user={user} setLoginUser={setLoginUser} />
+            <Routes>
+              <Route exact path="/" element={<LandingPage />} />
+              <Route exact path="/AboutUs" element={<AboutUs />} />
+              <Route exact path="Services" element={<Services />} />
+              <Route exact path="Fees" element={<Fees />} />
+              <Route exact path="/Team" element={<Team />} />
+              <Route exact path="/contact" element={<ContactUs />} />
+              <Route exact path="/alsooffer" element={<AlsoOffer />} />
+              <Route exact path="/currentworkshops" element={<CurrentWorkshops />} />
+              <Route exact path="/blogs" element={<Blogs />} />
+              <Route exact path="/blog/:slug" element={<SpecificBlog />} />
+              <Route exact path="/workshop" element={<Workshop />} />
+              <Route exact path="/shop" element={<Shop />} />
+              <Route exact path="/products" element={<Products />} />
+              <Route exact path="/videos" element={<PaidVideos />} />
+              <Route exact path="/specificProduct/:id" element={<SpecificProduct user={user} />} />
+              <Route exact path="/specificVideo/:id" element={<SpecificVideo user={user} />} />
+              <Route exact path="/booking" element={<Booking />} />
 
-          {user && (
-            <>
-              <Route exact path="/user-profile/:id" element={<UserProfile user={user} setLoginUser={setLoginUser} />} />
-              <Route exact path="/cart/:id" element={<Cart />} />
-            </>
-          )}
+              {user && (
+                <>
+                  <Route exact path="/user-profile/:id" element={<UserProfile user={user} setLoginUser={setLoginUser} />} />
+                  <Route exact path="/cart/:id" element={<Cart />} />
+                </>
+              )}
 
-        </Routes>
-      </Router>
-      <ToastContainer position="top-right" autoClose={2500} />
-    </BackendProvider>
+            </Routes>
+          </Router>
+          <ToastContainer position="top-right" autoClose={2500} />
+        </HelmetProvider>
+      </BackendProvider>
     </Elements>
   )
 }

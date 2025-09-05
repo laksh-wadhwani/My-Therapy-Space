@@ -7,7 +7,7 @@ const PaymentSchema = mongoose.Schema(
         currency: { type: String, default: "aud" },
         status: { type: String, required: true },
         paymentIntentId: { type: String, required: true },
-        productId: {type: mongoose.Schema.Types.ObjectId, ref: "Products"},
+        productID: {type: mongoose.Schema.Types.ObjectId, ref: "Products"},
         courseID: {type: mongoose.Schema.Types.ObjectId, ref: "Courses"}
     },
     {timestamps: true}

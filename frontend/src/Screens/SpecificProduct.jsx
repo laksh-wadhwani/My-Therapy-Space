@@ -15,6 +15,7 @@ const SpecificProduct = ({user}) => {
     const navigate = useNavigate();
     const isSignedIn = (user&&user.id)? true:false
     const [loading, setLoading] = useState(true)
+    const [carting, setCarting] = useState(false)
     const [thumbnailImage, setThumbnailImage] = useState()
     const [product, setProduct] = useState({})
 
@@ -28,19 +29,12 @@ const SpecificProduct = ({user}) => {
             .finally(() => setLoading(false))
     },[id, URL])
 
-    if (loading) {
-        return (
-            <div className="w-full h-dvh flex justify-center items-center">
-                <p className="font-serif text-xl italic text-gray-400">Loading Product.....</p>
-            </div>
-        )
-    }
-
     const AddToCart = () => {
 
         if(!isSignedIn)
             return toast.error("Please Login First")
 
+        setCarting(true)
         axios.post(`${URL}/api/cart/add-to-cart/${user.id}/${product._id}`)
         .then(response => {
             toast.success(response.data.message)
@@ -50,6 +44,15 @@ const SpecificProduct = ({user}) => {
             console.error("Getting error in adding to the cart: ",error)
             return toast.error(error.response?.data?.error)
         })
+        .finally(() => setCarting(false))
+    }
+
+    if (loading) {
+        return (
+            <div className="w-full h-dvh flex justify-center items-center">
+                <p className="font-serif text-xl italic text-gray-400">Loading Product.....</p>
+            </div>
+        )
     }
 
     return (
@@ -66,7 +69,9 @@ const SpecificProduct = ({user}) => {
                             <span className="text-xl max-sm:text-base"> Price: ${product.price}</span>
                         </div>
                         <p className="font-serif text-xl max-sm:text-sm text-black">{product.description}</p>
-                        <CustomButton onClick={AddToCart}>Add to Cart</CustomButton>
+                        <CustomButton onClick={AddToCart} disabled={carting}>
+                            {carting ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "add to cart"}
+                        </CustomButton>
                     </div>
                 </div>
 

@@ -9,7 +9,7 @@ import axios from "axios";
 import { BackendURL } from "../BackendContext.jsx";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
-import { Menu, ShoppingCart } from 'lucide-react';
+import { Menu, ShoppingCart, ChevronDown  } from 'lucide-react';
 
 const Navbar = ({ user, setLoginUser }) => {
 
@@ -68,6 +68,24 @@ const Navbar = ({ user, setLoginUser }) => {
     setAboutUsToggle(false)
     setWorkshopToggle(false)
     setServicesToggle(false)
+  }
+
+  const ToggleWorkshop = () => {
+    setWorkshopToggle(!workshopToggle)
+    setAboutUsToggle(false)
+    setServicesToggle(false)
+  }
+
+  const ToggleAboutUs = () => {
+    setAboutUsToggle(!aboutUsToggle)
+    setWorkshopToggle(false)
+    setServicesToggle(false)
+  }
+
+  const ToggleServices = () => {
+    setServicesToggle(!servicesToggle)
+    setWorkshopToggle(false)
+    setAboutUsToggle(false)
   }
 
   const ToggleSignUp = () => {
@@ -161,11 +179,9 @@ const Navbar = ({ user, setLoginUser }) => {
             <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979] max-sm:hidden">
               <Link to="/" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>Home</li></Link>
 
-              <div className="flex items-center gap-2 relative">
+              <div className="flex items-center relative gap-1">
                 <Link to="/AboutUs" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]">About us</li></Link>
-                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onClick={() => setAboutUsToggle(!aboutUsToggle)}>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown size={18} onClick={ToggleAboutUs}/>
                 {aboutUsToggle &&
                   <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] absolute top-8 left-0  bg-white py-4 px-6 rounded-xl">
                     <Link to="/Team" style={{ color: "unset" }} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">team</li></Link>
@@ -173,11 +189,10 @@ const Navbar = ({ user, setLoginUser }) => {
                   </ul>
                 }
               </div>
-              <div className="flex items-center gap-2 relative">
+
+              <div className="flex items-center relative gap-1">
                 <Link to="/services" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]">Services</li></Link>
-                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onClick={() => setServicesToggle(!servicesToggle)}>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown size={18} onClick={ToggleServices}/>
                 {servicesToggle &&
                   <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] absolute top-8 left-0  bg-white py-4 px-6 rounded-xl min-w-[230px]">
                     <HashLink to="/services#speech-pathology" style={{ color: "unset" }} onClick={() => setServicesToggle(!servicesToggle)}><li className="hover:text-[#0BAFA6]">Speech Pathology</li></HashLink>
@@ -187,13 +202,12 @@ const Navbar = ({ user, setLoginUser }) => {
                   </ul>
                 }
               </div>
+
               <Link to="/blogs" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>blogs</li></Link>
 
-              <div className="flex items-center gap-2">
-                <Link to="/workshop" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>workshops</li></Link>
-                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onClick={() => setWorkshopToggle(!workshopToggle)}>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
+              <div className="flex items-center relative gap-1">
+                <Link to="/workshop" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]">workshops</li></Link>
+                <ChevronDown size={18} onClick={ToggleWorkshop} />
                 {workshopToggle &&
                   <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] fixed top-16 right-[19rem] bg-white py-4 px-6 rounded-xl">
                     <Link to="/currentworkshops" style={{ color: "unset" }} onClick={() => setWorkshopToggle(!workshopToggle)}><li className="hover:text-[#0BAFA6]">Current Workshops</li></Link>
@@ -217,7 +231,7 @@ const Navbar = ({ user, setLoginUser }) => {
                       <span className="text-lg text-black font-bold uppercase">{nameInitials}</span>
                     </div>
                   }
-                  <span className="font-serif text-lg text-white">Hello, {firstName}</span>
+                  <span className="font-serif text-lg lg:text-sm text-white">Hello, {firstName}</span>
                 </div></Link>
                 <ShoppingCart size={32} className="stroke-[#0BAFA6] hover:scale-105 max-sm:size-6" onClick={() => navigate(`/cart/${user.id}`)} />
               </div>
@@ -315,7 +329,7 @@ const Navbar = ({ user, setLoginUser }) => {
           <Link to="/contact" onClick={() => setIsMobileOpen(false)}>Contact</Link>
 
           {user ?
-            <Link to={`/user-profile/${user.id}`} onClick={() => setIsMobileOpen(false)}><div className="flex items-center gap-2 bg-[#0BAFA6] py-1 px-2 rounded-xl shadow-md cursor-pointer hover:scale-105">
+            <Link to={`/user-profile/${user.id}`} onClick={() => setIsMobileOpen(false)}><div className="md:hidden flex items-center gap-2 bg-[#0BAFA6] py-1 px-2 rounded-xl shadow-md cursor-pointer hover:scale-105">
               {user.profile ?
                 <img src={user.profile} alt="User Profile" className="size-10 rounded-full object-cover" />
                 :
@@ -327,7 +341,7 @@ const Navbar = ({ user, setLoginUser }) => {
             </div></Link>
             :
             <RButton
-              className="px-6 py-2 mt-6 self-start"
+              className="md:hidden px-6 py-2 mt-6 self-start"
               onClick={() => {
                 setLoginOpen(true);
                 setIsMobileOpen(false);

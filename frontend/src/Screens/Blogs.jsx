@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from 'react-helmet-async';
 import Footer from "../Components/footer";
-import blog_picture from "../assets/blog.png"
 import { Link } from "react-router";
 import axios from "axios"
 import { BackendURL } from "../BackendContext";
@@ -18,39 +18,54 @@ const Blogs = () => {
             const publishedBlogs = response.data.filter(blog => blog.status === "Published")
             setBlogData(publishedBlogs)
         })
-    },[blogsData])
+    }, []) 
 
     return(
         <React.Fragment>
+            {/* ===== ADD SEO HEAD TAGS ===== */}
+            <Helmet>
+                <title>Child Therapy & Development Blog | Expert Tips & Resources | My Therapy Space</title>
+                <meta name="description" content="Explore our expert blog on pediatric speech therapy, occupational therapy, autism support, AAC, and child development strategies for parents and caregivers." />
+                <link rel="canonical" href="https://mytherapyspace.com.au/blogs" />
+            </Helmet>
+
             <div className="main-box bg-white items-center gap-10">
 
                 <div className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24 self-start">
-                    <h2 className="font-serif text-4xl max-sm:text-3xl uppercase text-[#0BAFA6]">our blog articles</h2>
-                    <p className="font-serif text-xl max-sm:text-base text-gray-400">Explore insightful articles and health tips for everyone.</p>
+                    {/* Changed from h2 to h1 for main page title */}
+                    <h1 className="font-serif text-4xl max-sm:text-3xl uppercase text-[#0BAFA6]">Our Therapy Blog</h1>
+                    <p className="font-serif text-xl max-sm:text-base text-gray-400">Expert insights on speech pathology, occupational therapy, and supporting your child's development.</p>
                 </div>
 
-                {(blogsData.length === 0)? <p className="text-3xl font-serif font-semibold italic">No Blogs have been uploaded</p>:
-                <div className="w-[90%] flex box-border px-16 flex-wrap gap-12 justify-center">
+                {(blogsData.length === 0) ? <p className="text-3xl font-serif font-semibold italic">No Blogs have been uploaded</p> :
+                <div className="w-full flex box-border px-4 flex-wrap gap-12 justify-center">
                     {blogsData.map(data => (
-                       <Link to={`/blog/${data._id}`}><div className="max-w-80 max-h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-black-100 box-border">
-                            <img src={data.thumbnail} alt="" className="w-full h-[75%] object-cover rounded-xl" />
+                     
+                       <Link to={`/blog/${data.slug}`} key={data._id}> 
+                        <div className="w-80 h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-black-100 box-border">
+                           
+                            <img src={data.thumbnail} alt={data.imageAltText || data.title} className="w-full h-[35%] object-cover rounded-xl" />
                             <div className="flex flex-col gap-2">
-                                <h5 className="font-serif text-lg text-black font-semibold line-clamp-2">{data.title}</h5>
+                                <h2 className="font-serif text-lg text-black font-semibold line-clamp-2">{data.title}</h2>
                                 <p className="font-serif font-light text-black text-base">{new Date(data.updatedAt).toLocaleDateString("en-GB")}</p>
+                              
                                 <p className="font-serif font-light text-base text-gray-400 line-clamp-3">
-                                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                                        {data.content}
-                                    </ReactMarkdown>
+                                    {data.excerpt ? data.excerpt : (
+                                        <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                                            {data.content}
+                                        </ReactMarkdown>
+                                    )}
                                 </p>
-                                <Link to={`/blog/${data._id}`} style={{color: 'unset'}}><a className="text-[#0BAFA6] font--light text-base font-serif uppercase cursor-pointer">Read More</a></Link>
+                                <Link to={`/blog/${data.slug}`} style={{color: 'unset'}}> 
+                                    <span className="text-[#0BAFA6] font--light text-base font-serif uppercase cursor-pointer">Read More</span>
+                                </Link>
                             </div>
-                        </div></Link>
+                        </div>
+                       </Link>
                     ))}
                 </div>
                 }
-
                 <Footer/>
-
             </div>
         </React.Fragment>
     )

@@ -1,7 +1,7 @@
 import express from "express"
 import upload from "../middlewares/multer.js";
 import { signupValidation } from "../middlewares/signupValidations.js";
-import { BookingDetailsForUser, ChangeProfile, ForgetPassword, GetSpecificUser, Login, Signup, Update, verifyOtp } from "../controllers/user.controllers.js";
+import { BookingDetailsForUser, ChangeProfile, ForgetPassword, GetProductDetails, GetSpecificUser, Login, Signup, Update, verifyOtp } from "../controllers/user.controllers.js";
 
 const router = express.Router();
 
@@ -13,5 +13,6 @@ router.put("/update/:id", Update)
 router.put("/change-profile/:id", upload.single("profile"), ChangeProfile)
 router.get("/get-user/:id", GetSpecificUser)
 router.get("/get-booking-details/:email", BookingDetailsForUser)
+router.get("/get-product-details/:id", GetProductDetails)
 
 export default router
