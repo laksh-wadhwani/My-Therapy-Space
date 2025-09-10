@@ -5,6 +5,7 @@ import CoursesModel from "../models/Courses.js";
 export const AddToCart = async (request, response) => {
     try {
         const { userID, productID } = request.params;
+        const { pickupLocation } = request.body || {}
 
         const isProductAlreadyExist = await CartModel.findOne({userID, productID: productID}) || await CartModel.findOne({userID, courseID: productID})
         if(isProductAlreadyExist)
@@ -14,7 +15,8 @@ export const AddToCart = async (request, response) => {
         if (product) {
             const newProduct = new CartModel({
                 userID,
-                productID: productID
+                productID: productID,
+                pickupLocation
             })
             await newProduct.save();
             return response.status(201).json({ message: "Product has been added to the cart" })
@@ -58,6 +60,7 @@ export const GetCartDetails = async (request, response) => {
           title: item.productID.name,
           price: item.productID.price,
           thumbnail: item.productID.thumbnail,
+          pickupLocation: item.pickupLocation,
           type: "product"
         };
       } 
@@ -84,7 +87,6 @@ export const GetCartDetails = async (request, response) => {
     return response.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 
 export const DeleteProduct = async(request, response) => {
     try {

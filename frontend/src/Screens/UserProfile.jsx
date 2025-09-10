@@ -225,8 +225,9 @@ const UserProfile = ({ setLoginUser }) => {
                     <div className="flex flex-col gap-2 p-2">
                         {product.type === "Product" ?
                             <>
-                                <h4 className="font-serif text-2xl text-black self-center">Product</h4>
+                                <h4 className="font-serif text-2xl text-black self-center font-semibold">Product</h4>
                                 <img src={product.thumbnail} alt="Product Thumnail Picture" />
+                                <p className="font-serif text-base text-black"><strong>Pickup Location: </strong>{product.pickupLocation}</p>
                             </>
                             :
                             <>

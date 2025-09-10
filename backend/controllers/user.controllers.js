@@ -4,9 +4,10 @@ import BookingModel from "../models/Bookings.js";
 import PaymentModel from "../models/Payment.js";
 import UserModel from "../models/User.js";
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js";
-import { verifyAccountOtpTemplate } from "../utils/emailTemplates.js";
+import { verifyAccountOtpTemplate, forgotPasswordWithNewPasswordTemplate } from "../utils/emailTemplates.js";
 import GenerateOTP from "../utils/OtpGenerator.js";
 import jwt from "jsonwebtoken"
+import { generateTempPassword } from "../utils/passwordGenerator.js";
 
 export const Signup = async (request, response) => {
     try {
@@ -259,6 +260,7 @@ export const GetProductDetails = async(request, response) => {
                     price: `$ ${item.productID.price}`,
                     createdAt: item.createdAt,
                     thumbnail: item.productID.thumbnail,
+                    pickupLocation: item.pickupLocation,
                     type: "Product"
                 }
             }

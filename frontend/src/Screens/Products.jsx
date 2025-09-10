@@ -29,13 +29,13 @@ const Products = () => {
                 {(products.length===0)? <p className="text-3xl font-serif font-semibold italic">No Products have been uploaded</p>:
                 <div className="w-full flex flex-wrap px-16 gap-16 justify-center">
                     {products.map(product => (
-                        <Link to={`/specificProduct/${product._id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-center pb-4 cursor-pointer hover:scale-105">
+                        <Link to={`/specificProduct/${product._id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
                             <img src={product.thumbnail} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
-                            <div className="flex flex-col items center">
-                                <h5 className="font-serif text-black text-lg text-center">{product.name}</h5>
+                            <div className="flex flex-col items center px-1">
+                                <h5 className="font-serif text-black font-semibold text-xl text-center">{product.name}</h5>
                                 <p className="font-serif text-gray-400 text-center">{product.price}</p>
                             </div>
-                            <CustomButton>Add to Cart</CustomButton>
+                            {/* <CustomButton>Add to Cart</CustomButton> */}
                         </div></Link>
                     ))}
                 </div>

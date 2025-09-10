@@ -6,6 +6,7 @@ import { transporter } from "../config/mailer.js"
 import uploadToCloudinary from "../config/cloudinary.js"
 import AdminModel from "../models/Admin.js"
 import { generateTempPassword } from "../utils/passwordGenerator.js"
+import PaymentModel from "../models/Payment.js"
 
 export const SignUp = async (request, response) => {
     try {
@@ -278,6 +279,52 @@ export const Update = async(request, response) => {
         
     } catch (error) {
         console.log("Getting error in updating user: ",error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
+export const GetProductDetails = async(request, response) => {
+    try {
+        const products = await PaymentModel.find()
+            .populate("productID")
+            .populate("courseID")
+            .populate("userId")
+
+        if(!products)
+            return response.status(400).json({error: "No products found"})
+
+        let formattedDetails = products.map(item => {
+
+            if(item.productID){
+                return{
+                    orderID: item._id,
+                    userName: item.userId.fullname,
+                    productName: item.productID.name,
+                    price: `$ ${item.productID.price}`,
+                    createdAt: item.createdAt,
+                    thumbnail: item.productID.thumbnail,
+                    pickupLocation: item.pickupLocation,
+                    type: "Product"
+                }
+            }
+
+            else if(item.courseID){
+                return{
+                    orderID: item._id,
+                    userName: item.userId.fullname,
+                    productName: item.courseID.name,
+                    price: `$ ${item.courseID.price}`,
+                    createdAt: item.createdAt,
+                    course: item.courseID.video,
+                    type: "Course"
+                }
+            }
+        })
+
+        return response.status(201).json(formattedDetails)
+
+    } catch (error) {
+        console.log("Getting error in fetching product details: ",error)
         return response.status(500).json({error: "Internal Server Error"})
     }
 }

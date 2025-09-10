@@ -16,41 +16,28 @@ const Dashboard = ({ isSidebarHovered, user }) => {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
+    const [seeDetails, setSeeDetails] = useState(true)
     const [admins, setAdmins] = useState([])
     const [selectedAdminId, setSelectedAdminId] = useState(null)
+    const [productDetails, setProductDetails] = useState([])
+    const [product, setProduct] = useState()
     const [remarks, setRemarks] = useState("")
 
     useEffect(() => {
         axios.get(`${URL}/api/admin/get-admins`)
         .then(response => setAdmins(response.data))
-    },[admins])
+
+        axios.get(`${URL}/api/admin/get-product-details`)
+        .then(response => setProductDetails(response.data))
+    },[admins, productDetails])
 
     const columns = [
-        { key: "type", label: "Type" },
-        { key: "user", label: "User" },
-        { key: "date", label: "Date" },
-        { key: "status", label: "Status" },
-    ];
-
-    const dashboardStatusStyles = {
-        Confirmed: "bg-green-100 text-green-700",
-        Paid: "bg-blue-100 text-blue-700",
-        Pending: "bg-yellow-100 text-yellow-700",
-        Shipped: "bg-indigo-100 text-indigo-700",
-        Rescheduled: "bg-red-100 text-red-700",
-    };
-
-    const dummyData = [
-        { type: "Booking", user: "Mubeen Ahmed", date: "2025-04-30", status: "Confirmed" },
-        { type: "Course", user: "Sahil Kumar", date: "2025-04-29", status: "Paid" },
-        { type: "Query", user: "Zia-Ul-Haq", date: "2025-04-28", status: "Pending" },
-        { type: "Product", user: "Suman", date: "2025-04-27", status: "Shipped" },
-        { type: "Booking", user: "Angeli", date: "2025-04-26", status: "Rescheduled" },
-        { type: "Booking", user: "Mubeen Ahmed", date: "2025-04-30", status: "Confirmed" },
-        { type: "Course", user: "Sahil Kumar", date: "2025-04-29", status: "Paid" },
-        { type: "Query", user: "Zia-Ul-Haq", date: "2025-04-28", status: "Pending" },
-        { type: "Product", user: "Suman", date: "2025-04-27", status: "Shipped" },
-        { type: "Booking", user: "Angeli", date: "2025-04-26", status: "Rescheduled" }
+        { key: "orderID", label: "Order Ref#" },
+        { key: "userName", label: "Customer Name" },
+        { key: "productName", label: "Product Name" },
+        { key: "price", label: "Price" },
+        { key: "createdAt", label: "Purchase Date" },
+        { key: "type", label: "Type" }
     ];
 
     const ApproveAdmin = adminId => {
@@ -76,6 +63,11 @@ const Dashboard = ({ isSidebarHovered, user }) => {
             return toast.error(error?.response?.data?.error)
         })
         .finally(() => setLoading(false))
+    }
+
+    const SeeDetails = product => {
+        setSeeDetails(true)
+        setProduct(product)
     }
 
     return (
@@ -112,7 +104,7 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                     </div>
                 ):null}
 
-                <CustomTable title="Recent Activity" columns={columns} data={dummyData} showActions={false} statusStyles={dashboardStatusStyles} />
+                {productDetails && <CustomTable title="Recent Activity" columns={columns} data={productDetails} showActions={true} onView={SeeDetails} />}
 
                 <div className="w-full flex gap-8">
                     <CustomButton onClick={() => navigate("/manage-blogs")}>add new blog</CustomButton>
@@ -134,6 +126,28 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                 </div>
 
             </Modal>
+
+             <Modal open={seeDetails} onClose={() => setSeeDetails(false)} center
+                styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".8rem" } }}>
+
+                {product &&
+                    <div className="flex flex-col gap-2 p-2">
+                        {product.type === "Product" ?
+                            <>
+                                <h4 className="font-serif text-2xl text-black self-center font-semibold">Product</h4>
+                                <img src={product.thumbnail} alt="Product Thumnail Picture" />
+                                <p className="font-serif text-base text-black"><strong>Pickup Location: </strong>{product.pickupLocation}</p>
+                            </>
+                            :
+                            <>
+                                <h4 className="font-serif text-2xl text-black self-center">Course</h4>
+                                <video src={product.course} controls />
+                            </>}
+                    </div>
+                }
+
+            </Modal>
+
         </React.Fragment>
     )
 }

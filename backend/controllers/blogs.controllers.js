@@ -35,29 +35,34 @@ export const SaveAsDraft = async(request, response) => {
 export const UploadBlog = async(request, response) => {
     try{
         const {title, content, metaDescription, excerpt, imageAltText} = request.body
-        let thumbnail = null
-        if(request.file)
-            thumbnail = await uploadToCloudinary(request?.file?.buffer, "image")
-
-        const isBlogExist = await BlogsModel.findOne({title})
-        const blog = new BlogsModel({
-            title, 
-            thumbnail: thumbnail.secure_url, 
-            content,
-            metaDescription, 
-            excerpt,        
-            imageAltText,  
-            status: "Published"
-        })
 
         if(!(title && content && metaDescription && imageAltText))
             return response.status(400).json({error: "All fields are required except Excerpt"})
 
+        if(!request.file)
+            return response.status(400).json({error: "Please upload a blog image"})
+
+        const thumbnail = await uploadToCloudinary(request?.file?.buffer, "image")
+
+        const isBlogExist = await BlogsModel.findOne({title})
+
         if(isBlogExist)
         return response.status(400).json({error: "This blog already exists"})
+
+        // console.log(request)
+
+        // const blog = new BlogsModel({
+        //     title, 
+        //     thumbnail: thumbnail.secure_url, 
+        //     content,
+        //     metaDescription, 
+        //     excerpt,        
+        //     imageAltText,  
+        //     status: "Published"
+        // })
         
-        await blog.save();
-        return response.status(200).json({message: "Blog Uploaded"})
+        // await blog.save();
+        // return response.status(200).json({message: "Blog Uploaded"})
     }catch(error){
         console.log("Getting error in uploading blog: ",error)
         return response.status(500).json({error: "Internal Server Error"})

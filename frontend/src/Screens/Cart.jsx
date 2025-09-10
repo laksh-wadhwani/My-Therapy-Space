@@ -85,10 +85,9 @@ const Cart = () => {
         setStatus(`❌ Payment failed: ${result.error.message}`);
       } else {
         if (result.paymentIntent.status === "succeeded") {
-          // Save payment to backend
           await axios.post(`${URL}/api/payments/save-payment`, {
             userId: id,
-            amount: result.paymentIntent.amount, // Stripe amount in cents
+            amount: result.paymentIntent.amount,
             status: result.paymentIntent.status,
             paymentIntentId: result.paymentIntent.id,
             products: cart.items,
@@ -133,6 +132,8 @@ const Cart = () => {
                     <div className="w-[60%] flex flex-col font-serif text-black capitalize">
                       <span className="text-2xl max-sm:text-lg">{data.title}</span>
                       <span className="text-xl max-sm:text-base">Price: {data.price}</span>
+                      {data.pickupLocation && <span className="text-xl max-sm:text-base">Pickup Location: {data.pickupLocation}</span>}
+                      {console.log(data)}
                     </div>
                   </div>
                   <Trash2 size={24} className="stroke-red-500 hover:scale-105 cursor-pointer" onClick={() => DeleteProduct(data.cartID)} />

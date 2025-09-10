@@ -7,17 +7,20 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import CustomButton from "../Components/CustomButton";
 import { toast } from "react-toastify";
+import Modal from "react-responsive-modal";
 
-const SpecificProduct = ({user}) => {
+const SpecificProduct = ({ user }) => {
 
     const { id } = useParams();
     const URL = BackendURL();
     const navigate = useNavigate();
-    const isSignedIn = (user&&user.id)? true:false
+    const isSignedIn = (user && user.id) ? true : false
     const [loading, setLoading] = useState(true)
     const [carting, setCarting] = useState(false)
+    const [open, setOpen] = useState(false)
     const [thumbnailImage, setThumbnailImage] = useState()
     const [product, setProduct] = useState({})
+    const [pickupLocation, setPickupLocation] = useState("")
 
     useEffect(() => {
         axios.get(`${URL}/api/products/get-specific-product/${id}`)
@@ -27,24 +30,24 @@ const SpecificProduct = ({user}) => {
             })
             .catch(error => console.log("Getting error in fetching specific product details: ", error))
             .finally(() => setLoading(false))
-    },[id, URL])
+    }, [id, URL])
 
     const AddToCart = () => {
 
-        if(!isSignedIn)
+        if (!isSignedIn)
             return toast.error("Please Login First")
 
         setCarting(true)
-        axios.post(`${URL}/api/cart/add-to-cart/${user.id}/${product._id}`)
-        .then(response => {
-            toast.success(response.data.message)
-            setTimeout(() => {navigate(`/cart/${user.id}`)}, 2500)
-        })
-        .catch(error => {
-            console.error("Getting error in adding to the cart: ",error)
-            return toast.error(error.response?.data?.error)
-        })
-        .finally(() => setCarting(false))
+        axios.post(`${URL}/api/cart/add-to-cart/${user.id}/${product._id}`, {pickupLocation})
+            .then(response => {
+                toast.success(response.data.message)
+                setTimeout(() => { navigate(`/cart/${user.id}`) }, 2500)
+            })
+            .catch(error => {
+                console.error("Getting error in adding to the cart: ", error)
+                return toast.error(error.response?.data?.error)
+            })
+            .finally(() => setCarting(false))
     }
 
     if (loading) {
@@ -69,25 +72,23 @@ const SpecificProduct = ({user}) => {
                             <span className="text-xl max-sm:text-base"> Price: ${product.price}</span>
                         </div>
                         <p className="font-serif text-xl max-sm:text-sm text-black">{product.description}</p>
-                        <CustomButton onClick={AddToCart} disabled={carting}>
-                            {carting ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "add to cart"}
-                        </CustomButton>
+                        <CustomButton onClick={() => setOpen(true)}>Add to Cart</CustomButton>
                     </div>
                 </div>
 
                 {product.pictures?.length > 0 && (
-                        <div className="w-full grid grid-cols-4 max-sm:grid-cols-2 max-sm:gap-4 md:grid-cols-2 lg:grid-cols-4 justify-between items-centerd mt-6 max-sm:mt-2 px-16 max-sm:px-8">
-                            {product.pictures.map((pic, index) => (
-                                <img 
-                                    key={index} 
-                                    src={pic} 
-                                    alt={`Product ${index}`} 
-                                    className={`size-60 max-sm:size-full object-cover rounded-md shadow cursor-pointer transition-all duration-200 hover:scale-105 ${thumbnailImage === pic ? "ring-4 ring-[#0BAFA6]" : ""}`}
-                                    onClick={() => setThumbnailImage(pic)}
-                                />
-                            ))}
-                        </div>
-                    )}
+                    <div className="w-full grid grid-cols-4 max-sm:grid-cols-2 max-sm:gap-4 md:grid-cols-2 lg:grid-cols-4 justify-between items-centerd mt-6 max-sm:mt-2 px-16 max-sm:px-8">
+                        {product.pictures.map((pic, index) => (
+                            <img
+                                key={index}
+                                src={pic}
+                                alt={`Product ${index}`}
+                                className={`size-60 max-sm:size-full object-cover rounded-md shadow cursor-pointer transition-all duration-200 hover:scale-105 ${thumbnailImage === pic ? "ring-4 ring-[#0BAFA6]" : ""}`}
+                                onClick={() => setThumbnailImage(pic)}
+                            />
+                        ))}
+                    </div>
+                )}
 
                 <div className="w-[95%] border border-gray-300 rounded-xl shadow-md flex flex-col gap-2">
                     <h2 className="w-full font-serif text-center text-white text-3xl max-sm:text-2xl rounded-t-md bg-[#0BAFA6] capitalize p-6">Features</h2>
@@ -111,6 +112,55 @@ const SpecificProduct = ({user}) => {
                 <Footer />
 
             </div>
+
+            <Modal open={open} onClose={() => setOpen(false)} center
+                styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".7rem" } }}>
+
+                <div className="flex flex-col gap-8 py-8 px-12">
+                   
+                    <p className="font-serif text-lg text-gray-700">
+                        Please note: This product is available for collection only.
+                        Kindly select your preferred collection point:
+                    </p>
+
+                   
+                    <div className="flex flex-col gap-3">
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="pickup"
+                                value="Hope Island"
+                                checked={pickupLocation === "Hope Island"}
+                                onChange={(e) => setPickupLocation(e.target.value)}
+                            />
+                            <span>Hope Island</span>
+                        </label>
+
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="pickup"
+                                value="Burleigh Waters"
+                                checked={pickupLocation === "Burleigh Waters"}
+                                onChange={(e) => setPickupLocation(e.target.value)}
+                            />
+                            <span>Burleigh Waters</span>
+                        </label>
+                    </div>
+
+                    
+                    <CustomButton
+                        onClick={() => {
+                            if (!pickupLocation) {
+                                return toast.error("Please select a collection location first");
+                            }
+                            AddToCart();
+                        }} disabled={carting} >
+                        {carting ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Confirm & Add to Cart"}
+                    </CustomButton>
+                </div>
+
+            </Modal>
         </React.Fragment>
     )
 }

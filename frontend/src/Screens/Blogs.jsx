@@ -42,7 +42,7 @@ const Blogs = () => {
                     {blogsData.map(data => (
                      
                        <Link to={`/blog/${data.slug}`} key={data._id}> 
-                        <div className="w-80 h-100 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-black-100 box-border">
+                        <div className="w-80 h-96 shadow-md rounded-xl bg-white p-6 flex flex-col gap-6 border border-black-100 box-border">
                            
                             <img src={data.thumbnail} alt={data.imageAltText || data.title} className="w-full h-[35%] object-cover rounded-xl" />
                             <div className="flex flex-col gap-2">
@@ -65,8 +65,8 @@ const Blogs = () => {
                     ))}
                 </div>
                 }
-                <Footer/>
             </div>
+            <Footer/>
         </React.Fragment>
     )
 }

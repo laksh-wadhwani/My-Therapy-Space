@@ -29,11 +29,11 @@ export const savePayment = async (req, res) => {
 
   try {
     const { userId, amount, status, paymentIntentId, products } = req.body;
+    console.log(products)
 
     for (const product of products) {
       const fieldName = product.type === "product" ? "productID" : "courseID";
 
-      // Duplicate check
       const isAlreadyExist = await PaymentModel.findOne(
         { userId, [fieldName]: product.itemId },
         null,
@@ -48,22 +48,20 @@ export const savePayment = async (req, res) => {
         });
       }
 
-      // Save payment (divide amount by 100 because Stripe gives cents)
       const payment = new PaymentModel({
         userId,
         amount: amount / 100,
         status,
         paymentIntentId,
         [fieldName]: product.itemId,
+        pickupLocation: product.pickupLocation
       });
 
       await payment.save({ session });
     }
 
-    // Clear the cart after successful payment
     await CartModel.deleteMany({ userID: userId }, { session });
 
-    // Commit the transaction
     await session.commitTransaction();
     session.endSession();
 
@@ -71,7 +69,6 @@ export const savePayment = async (req, res) => {
       .status(201)
       .json({ message: "Payment has been done successfully" });
   } catch (error) {
-    // Rollback on error
     await session.abortTransaction();
     session.endSession();
 
