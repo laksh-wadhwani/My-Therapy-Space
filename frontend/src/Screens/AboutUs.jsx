@@ -77,17 +77,15 @@ const AboutUs = () => {
                     <div className="sections-box gap-20 max-sm:gap-4">
                         {/* Main SEO Heading */}
                         <h1 className="text-7xl max-sm:text-3xl font-serif text-[#333333] capitalize">
-                            Family-Centered Pediatric Therapy in Gold Coast
+                            Empowering families so children can thrive
                         </h1>
                         <p className="sections-description text-base text-justify">
-                            <strong>My Therapy Space</strong> is a{" "}
-                            <em>multidisciplinary allied health clinic</em> offering{" "}
-                            <b>speech therapy</b>, <b>occupational therapy</b>,{" "}
-                            <b>pediatric dietetics</b>, and family-centered support programs
-                            across the Gold Coast. Since 2020, our{" "}
-                            <strong>neurodiversity-affirming practice</strong> has worked
-                            collaboratively with families to provide nurturing, inclusive
-                            environments that help children thrive.
+                            My Therapy Space is a
+                            multidisciplinary allied health team based on the Gold Coast offering a family
+                            centred, play based and neuro-diversity affirming approach to therapy.  With
+                            over 25 years experience supporting families, our vision is to provide support
+                            to families in a nurturing environment where families feel connected to this
+                            community.
                         </p>
                     </div>
                     <img
@@ -101,7 +99,7 @@ const AboutUs = () => {
                 <section className="w-[80%] max-sm:w-[90%] grid grid-cols-4 self-center pb-8">
                     {/* Each stat highlights trust/authority */}
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
-                        <h3 className="another-sections-tittle font-black">5+</h3>
+                        <h3 className="another-sections-tittle font-black">25+</h3>
                         <span className="sections-description max-sm:text-xs text-center capitalize">
                             Years Pediatric Therapy Experience
                         </span>
@@ -113,9 +111,9 @@ const AboutUs = () => {
                         </span>
                     </div>
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
-                        <h3 className="another-sections-tittle font-black">15</h3>
+                        <h3 className="another-sections-tittle font-black">2</h3>
                         <span className="sections-description max-sm:text-xs text-center capitalize">
-                            Specialized Child Programs
+                            Great Locations
                         </span>
                     </div>
                     <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
@@ -162,10 +160,10 @@ const AboutUs = () => {
                                 3
                             </div>
                             <h3 className="font-bold text-xl max-sm:text-lg font-serif capitalize text-center italic text-black">
-                                Safe & Supportive
+                                Collaborative Approach
                             </h3>
                             <p className="text-base max-sm:text-sm font-serif text-[#666666] text-center">
-                                Secure therapy environments for every child.
+                                Working together with the multi disciplinary team and family
                             </p>
                         </article>
 

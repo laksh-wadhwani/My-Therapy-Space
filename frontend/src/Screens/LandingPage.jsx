@@ -28,8 +28,7 @@ const LandingPage = () => {
                         <header className="flex flex-col gap-6 max-sm:gap-3">
                             {/* h1 is main keyword target */}
                             <h1 className="text-7xl font-serif text-[#333333] max-sm:text-4xl">
-                                Specialized <span className="text-[#01B2A9]">Therapy Services</span>
-                                for Children on the Gold Coast
+                                Empowering families so <span className="text-[#0BAFA6]">children</span> can thrive
                             </h1>
                             <div className="bg-[#92278F] w-20 h-1 rounded-xl" />
                             <p className="sections-description text-lg max-sm:text-base">
@@ -57,10 +56,12 @@ const LandingPage = () => {
                 <section className="sections flex-col gap-2 max-sm:gap-6 bg-white">
                     <span className="sections-tittle self-start">About Us</span>
 
-                    <div className="w-full flex max-sm:flex-col max-sm:gap-6">
+                    <div className="w-full flex gap-12 max-sm:flex-col max-sm:gap-6">
                         <div className="sections-box justify-between">
-                            <h2 className="text-5xl font-serif text-[#333333] max-sm:text-3xl">
-                                Family-Centered Pediatric Therapy on the Gold Coast
+                            <h2 className="text-4xl text-justify font-serif text-[#333333] max-sm:text-3xl">
+                                We offer a Family
+                                Centred, Play based, Neurodiversity Affirming approach where connecting
+                                with children and families is paramount.
                             </h2>
                             <Link to="/AboutUs">
                                 <CustomButton className="max-sm:hidden">About Us</CustomButton>
@@ -79,7 +80,7 @@ const LandingPage = () => {
                             {/* Stats with keywords */}
                             <div className="section-2-description-box">
                                 <article className="border-b border-r">
-                                    <h3 className="another-sections-tittle font-black">5+</h3>
+                                    <h3 className="another-sections-tittle font-black">25+</h3>
                                     <span className="sections-description capitalize">
                                         Years of Pediatric Therapy Experience
                                     </span>
@@ -93,9 +94,9 @@ const LandingPage = () => {
                                 </article>
 
                                 <article className="border-r">
-                                    <h3 className="another-sections-tittle font-black">15</h3>
+                                    <h3 className="another-sections-tittle font-black">2</h3>
                                     <span className="sections-description capitalize">
-                                        Specialized Child Programs
+                                        Great Locations
                                     </span>
                                 </article>
 
@@ -120,9 +121,9 @@ const LandingPage = () => {
                 <section className="sections flex-col gap-10 bg-[#F9FAFB]">
                     <div className="flex flex-col gap-4 items-center">
                         <span className="sections-tittle">Therapy Fun</span>
-                        <h2 className="text-5xl max-sm:text-3xl font-serif text-[#333333] text-center">
+                        {/* <h2 className="text-5xl max-sm:text-3xl font-serif text-[#333333] text-center">
                             Moments from Our Child Workshops
-                        </h2>
+                        </h2> */}
                     </div>
 
                     <div className="w-full overflow-x-auto">
@@ -146,10 +147,10 @@ const LandingPage = () => {
                 {/* ================= OUR SERVICES ================= */}
                 <section className="sections flex-col gap-10">
                     <div className="flex flex-col gap-4 item-center">
-                        <span className="sections-tittle">Our Services</span>
-                        <h2 className="text-5xl max-sm:text-3xl font-serif text-[#333333] text-center">
+                        <span className="sections-tittle">Our Therapy Services</span>
+                        {/* <h2 className="text-5xl max-sm:text-3xl font-serif text-[#333333] text-center">
                             Comprehensive Child Development Therapy Solutions
-                        </h2>
+                        </h2> */}
                     </div>
 
                     <div className="w-full flex max-sm:flex-col max-sm:gap-8 justify-evenly">
@@ -158,7 +159,7 @@ const LandingPage = () => {
                             <div className="bg-[#00B2A9]/10">
                                 <div className="bg-[#00B2A9]" />
                             </div>
-                            <h3>Speech Therapy Gold Coast</h3>
+                            <h3>Speech Pathology</h3>
                             <p className="sections-description text-center text-sm max-sm:text-lg">
                                 Helping children communicate effectively and build lifelong language skills.
                             </p>
@@ -188,7 +189,7 @@ const LandingPage = () => {
                             <div className="bg-[#1B75BC]/10">
                                 <div className="bg-[#1B75BC]" />
                             </div>
-                            <h3>Therapy Assistance & Family Support</h3>
+                            <h3>Therapy Assistants</h3>
                             <p className="sections-description text-center text-sm max-sm:text-lg">
                                 Helping families achieve therapy goals at home, childcare, and in the community.
                             </p>
