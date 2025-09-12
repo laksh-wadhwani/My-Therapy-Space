@@ -45,7 +45,7 @@ const LandingPage = () => {
 
                     {/* Background image with alt text */}
                     <div
-                        className="w-full md:w-[50%] h-[50%] md:h-full bg-[url(./assets/rightside.svg)] bg-no-repeat bg-contain bg-center"
+                        className="w-full md:w-[50%] h-[50%] md:h-full bg-[url(./assets/threechildren.png)] bg-no-repeat bg-contain bg-[position:center_40%]"
                         role="img"
                         aria-label="Child Therapy Illustration"
                     />

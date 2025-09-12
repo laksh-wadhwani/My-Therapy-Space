@@ -15,29 +15,29 @@ import RButton from "../Components/Reusable_Button";
 const Workshop = () => {
   const navigate = useNavigate();
 
-  const workshopTypes = [
-    {
-      image: Workshop1,
-      description:
-        "Accredited Key Word Sign Workshop - Basic & Intermediate ",
-      alt: "Key Word Sign workshop for speech and communication therapy",
-    },
-    {
-      image: Workshop2,
-      description: "An Introduction to Neurodiversity Affirming Practice",
-      alt: "Neurodiversity affirming therapy practice workshop poster",
-    },
-    {
-      image: Workshop3,
-      description: "Understanding Sensory",
-      alt: "Understanding sensory needs therapy workshop poster",
-    },
-    {
-      image: Workshop4,
-      description: "Emotional Regulation",
-      alt: "Children’s emotional regulation therapy workshop poster",
-    },
-  ];
+  // const workshopTypes = [
+  //   {
+  //     image: Workshop1,
+  //     description:
+  //       "Accredited Key Word Sign Workshop - Basic & Intermediate ",
+  //     alt: "Key Word Sign workshop for speech and communication therapy",
+  //   },
+  //   {
+  //     image: Workshop2,
+  //     description: "An Introduction to Neurodiversity Affirming Practice",
+  //     alt: "Neurodiversity affirming therapy practice workshop poster",
+  //   },
+  //   {
+  //     image: Workshop3,
+  //     description: "Understanding Sensory",
+  //     alt: "Understanding sensory needs therapy workshop poster",
+  //   },
+  //   {
+  //     image: Workshop4,
+  //     description: "Emotional Regulation",
+  //     alt: "Children’s emotional regulation therapy workshop poster",
+  //   },
+  // ];
 
   return (
     <React.Fragment>
@@ -56,21 +56,19 @@ const Workshop = () => {
         />
       </Helmet>
 
-      <div className="main-box bg-white items-center gap-10">
+      <div className="main-box bg-[#E0F4F5] items-center gap-10">
 
         <div className="w-full px-8 md:px-14 mt-24 lg:mt-32">
           <h1 className="font-serif text-3xl text-[#0BAFA6]">
             Group Therapy and Workshops for Children
           </h1>
           <p className="font-serif sm:text-base text-gray-400">
-            My Therapy Space is passionate about sharing knowledge through
-            workshops in Australia. Some of our most popular therapy workshops
-            include:
+            My Therapy Space is passionate about sharing information through workshops. They are a great way to share information to groups of people, to meet with others having similar experiences with their children and openly discuss the topics on offer. They are a useful resource when trying to upskill yourself, family members or educators in your child’s life to better understand and support them. Some of the workshops we have provided include:
           </p>
         </div>
 
         {/* ✅ Workshop Cards */}
-        <div className="w-[90%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* <div className="w-[90%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {workshopTypes.map((data, index) => (
             <article
               key={index}
@@ -86,7 +84,28 @@ const Workshop = () => {
               </span>
             </article>
           ))}
-        </div>
+        </div> */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 ">
+            {[
+              "Accredited Key Word Sign workshops - basic and intermediate",
+              "An introduction to Neurodiversity affirming practice",
+              "Understanding Sensory processing",
+              "Emotional regulation",
+            ].map((workshop, idx) => (
+              <div
+                key={idx}
+                className="group relative p-4 border rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer bg-white max-w-md mx-auto"
+              >
+                <p className="font-serif  text-lg group-hover:text-teal-500 transition-colors">
+                  {workshop}
+                </p>
+                <p className="mt-2 text-gray-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                  This workshop provides valuable insights and hands-on strategies for families and educators to support children’s development.
+                </p>
+              </div>
+            ))}
+          </div>
+
 
         {/* ✅ Internal Linking with keyword */}
         <p className="w-full font-serif text-lg text-gray-400 text-center px-8 md:px-14">
@@ -143,8 +162,8 @@ const Workshop = () => {
               skills, emotional regulation, and school readiness.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Seabridges
                 </h4>
@@ -154,7 +173,7 @@ const Workshop = () => {
                 </p>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Fine Motor Group
                 </h4>
@@ -164,7 +183,7 @@ const Workshop = () => {
                 </p>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Let’s Communicate Together
                 </h4>
@@ -174,7 +193,7 @@ const Workshop = () => {
                 </p>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Chatterbox Group
                 </h4>
@@ -184,7 +203,7 @@ const Workshop = () => {
                 </p>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Prep Readiness
                 </h4>
@@ -207,44 +226,44 @@ const Workshop = () => {
               friendships.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Cooking Classes
                 </h4>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Scavenger Hunts
                 </h4>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Movement, Dance & Yoga
                 </h4>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Lego Masters
                 </h4>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Teen Outings
                 </h4>
               </article>
 
-              <article className="bg-[#E0F4F5] p-5 rounded-xl shadow-md">
+              <article className="bg-white p-5 rounded-xl shadow-md">
                 <h4 className="font-serif text-xl text-[#0BAFA6] mb-1">
                   Paint & Sip Sessions
                 </h4>
               </article>
             </div>
 
-            <div className="mt-6 bg-[#F5FBFB] border border-[#E0F4F5] rounded-xl p-4">
+            <div className="mt-6 bg-white border border-[#E0F4F5] rounded-xl p-4">
               <p className="font-serif text-gray-700">
                 Have an idea for a new therapy group or workshop? Share your
                 suggestions — we love creating meaningful, fun, and effective

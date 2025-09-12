@@ -29,7 +29,7 @@ const Blogs = () => {
                 <link rel="canonical" href="https://mytherapyspace.com.au/blogs" />
             </Helmet>
 
-            <div className="main-box bg-white items-center gap-10">
+            <div className="main-box bg-[#E0F4F5] items-center gap-10">
 
                 <div className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24 self-start">
                     {/* Changed from h2 to h1 for main page title */}

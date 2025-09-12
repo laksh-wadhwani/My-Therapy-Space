@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async"; // 👈 SEO helmet
 import SpeechPathology from "../assets/speech service.png"
 import Dietician from "../assets/dietician service.png"
-import TherapyAssistance from "../assets/Therapy Assistance.jpg"
+import TherapyAssistance from "../assets/Therapy Assistant.jpg"
 import OccupationTherapy from "../assets/occupational service.png"
 import Footer from "../Components/footer";
 
@@ -24,7 +24,7 @@ const Services = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      <div className="main-box bg-white gap-10">
+      <div className="main-box bg-[#E0F4F5] gap-10">
         <h1 className="font-serif font-normal text-4xl text-[#0BAFA6] px-8 mt-24">Services</h1>
 
         <div id="speech-pathology" className="w-full flex flex-col gap-4 px-8 lg:px-14">
@@ -35,7 +35,7 @@ const Services = () => {
             <img
               src={SpeechPathology}
               alt="Speech Pathology Picture"
-              className="w-full xl:w-[50%] h-auto max-h-[700px] object-cover rounded-lg"
+              className="w-full xl:w-[50%] h-auto max-h-[680px] object-cover rounded-lg"
             />
 
             {/* Right Cards */}
@@ -67,7 +67,8 @@ const Services = () => {
 
                 <div className="p-4 border rounded-lg shadow-md bg-white flex flex-col">
                   <h3 className="font-bold text-lg mb-2">Feeding</h3>
-                  <p>We support children who have difficulty chewing, swallowing, or trying new food textures and tastes.</p>
+                  <p>We support children who have difficulty chewing, swallowing, or trying new food textures and tastes,  as well as supporting  infant feeding, and children with 
+nasogastric or gastrostomy tubes. </p>
                 </div>
 
                 <div className="p-4 border rounded-lg shadow-md bg-white flex flex-col">
@@ -79,7 +80,7 @@ const Services = () => {
           </div>
         </div>
 
-        <div id="dietician" className="w-full flex flex-col gap-4 px-8 lg:px-14 text-black">
+        <div id="dietician" className="w-full flex flex-col gap-4 px-8 lg:px-14 ">
           <h2 className="font-serif text-2xl font-normal capitalize text-black">Dietician</h2>
 
           <div className="w-full flex flex-col xl:flex-row gap-6 items-start">
@@ -87,7 +88,7 @@ const Services = () => {
             <img
               src={Dietician}
               alt="Dietician Picture"
-              className="w-full xl:w-[50%] h-auto max-h-[950px] object-cover rounded-lg"
+              className="w-full xl:w-[50%] h-auto max-h-[730px] object-cover rounded-lg"
             />
 
             {/* Right Cards */}
@@ -98,7 +99,7 @@ const Services = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-4 border rounded-lg shadow-md bg-white flex flex-col">
                   <h3 className="font-bold text-lg mb-2">Infant Feeding</h3>
-                  <p>Support with breastfeeding, bottle feeding, starting solids, baby-led weaning, and vegetarian/vegan feeding.</p>
+                  <p>Support with breastfeeding, bottle feeding, starting solids, and baby-led weaning.</p>
                 </div>
 
                 <div className="p-4 border rounded-lg shadow-md bg-white flex flex-col">
@@ -135,11 +136,6 @@ const Services = () => {
                   <h3 className="font-bold text-lg mb-2">Tube Feeding</h3>
                   <p>Guidance and ongoing support for nasogastric or gastrostomy feeding.</p>
                 </div>
-
-                <div className="p-4 border rounded-lg shadow-md bg-white flex flex-col">
-                  <h3 className="font-bold text-lg mb-2">Blended Tube Feeds</h3>
-                  <p>Assessment, recipes, and plans for families considering or using blended tube feeding.</p>
-                </div>
               </div>
             </div>
           </div>
@@ -153,13 +149,13 @@ const Services = () => {
             <img
               src={OccupationTherapy}
               alt="Occupational Therapy Picture"
-              className="w-full xl:w-[50%] h-auto max-h-[900px] object-cover rounded-lg"
+              className="w-full xl:w-[50%] h-auto max-h-[850px] object-cover rounded-lg"
             />
 
             {/* Right Cards */}
             <div className="flex flex-col gap-6 w-full xl:w-[50%]">
               <p className="font-serif text-lg uppercase max-sm:text-center">
-                Our experienced team of Speech Pathologists work together to support you in the areas of:
+                Our experienced team of Occupational Therapists work together to support you in the areas of:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-4 border rounded-lg shadow-md bg-white flex flex-col">
@@ -211,15 +207,15 @@ const Services = () => {
           </div>
         </div>
 
-        <div id="therapy-assistance" className="w-full flex flex-col gap-4 px-8 lg:px-14 text-black">
-          <h2 className="font-serif text-2xl font-normal capitalize">Therapy Assistance</h2>
+        <div id="therapy-assistance" className="w-full flex flex-col gap-4 px-8 lg:px-14 text-blac">
+          <h2 className="font-serif text-2xl font-normal capitalize">Therapy Assistants</h2>
 
-          <div className="w-full flex flex-col xl:flex-row gap-6 items-start xl:items-center">
+          <div className="w-full flex flex-col xl:flex-row gap-6 items-start">
            
             <img
               src={TherapyAssistance}
               alt="Therapy Assistance"
-              className="w-full xl:w-[50%] h-auto max-h-[500px] object-cover rounded-lg"
+              className="w-full xl:w-[50%] h-[520px] object-cover rounded-lg"
             />
             
 
@@ -233,12 +229,6 @@ const Services = () => {
                   <h3 className="font-bold text-lg mb-2">Work in Familiar Settings</h3>
                   <p>Work with your child in familiar settings like home or community.</p>
                 </div>
-
-                <div className="p-4 border rounded-lg shadow-md bg-white flex flex-col">
-                  <h3 className="font-bold text-lg mb-2">Affordable Support</h3>
-                  <p>More affordable than therapy sessions with a therapist.</p>
-                </div>
-
                 <div className="p-4 border rounded-lg shadow-md bg-white flex flex-col">
                   <h3 className="font-bold text-lg mb-2">Flexible Hours</h3>
                   <p>Can often provide more hours of support.</p>

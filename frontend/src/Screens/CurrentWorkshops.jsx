@@ -21,7 +21,7 @@ const CurrentWorkshops = () => {
 
     return(
         <React.Fragment>
-            <div className="main-box bg-white gap-12">
+            <div className="main-box bg-[#E0F4F5] gap-12">
 
                 <div className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24">
                     <h2 className="font-serif text-4xl max-sm:text-3xl capitalize text-[#0BAFA6]">Current Workshops</h2>

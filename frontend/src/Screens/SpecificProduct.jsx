@@ -60,13 +60,13 @@ const SpecificProduct = ({ user }) => {
 
     return (
         <React.Fragment>
-            <div className="main-box bg-white gap-8 items-center">
+            <div className="main-box bg-[#E0F4F5] gap-8 items-center">
 
                 <h2 className="font-serif text-4xl max-sm:text-3xl text-[#0BAFA6] capitalize px-16 max-sm:px-8 mt-32 max-sm:mt-24 self-start">Products</h2>
 
                 <div className="w-full flex max-sm:flex-col max-sm:gap-6 justify-around px-16 max-sm:px-8">
                     <img src={thumbnailImage} alt="Course Video Trailer" className="w-[47.5%] max-sm:w-full max-h-[400px] max-sm:h-auto rounded-xl shadow-md" />
-                    <div className="w-[50%] max-sm:w-full flex flex-col max-sm:gap-5 justify-between p-6 border border-gray-300 rounded-xl shadow-xl">
+                    <div className="w-[50%] max-sm:w-full flex flex-col max-sm:gap-5 justify-between p-6 border border-gray-300 rounded-xl shadow-xl bg-white">
                         <div className="w-full flex flex-col font-serif text-black capitalize">
                             <h3 className="text-4xl max-sm:text-2xl">{product.name}</h3>
                             <span className="text-xl max-sm:text-base"> Price: ${product.price}</span>
@@ -90,7 +90,7 @@ const SpecificProduct = ({ user }) => {
                     </div>
                 )}
 
-                <div className="w-[95%] border border-gray-300 rounded-xl shadow-md flex flex-col gap-2">
+                <div className="w-[95%] border border-gray-300 rounded-xl shadow-md flex flex-col gap-2 bg-white">
                     <h2 className="w-full font-serif text-center text-white text-3xl max-sm:text-2xl rounded-t-md bg-[#0BAFA6] capitalize p-6">Features</h2>
                     <div className="list-disc font-serif text-2xl max-sm:text-base text-black flex flex-col gap-2 px-10 max-sm:px-6 py-6">
                         <ReactMarkdown

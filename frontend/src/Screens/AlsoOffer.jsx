@@ -8,10 +8,10 @@ import { Link } from "react-router";
 const AlsoOffer = () => {
     return(
         <React.Fragment>
-            <div className="main-box bg-white items-center gap-8">
+            <div className="main-box bg-[#E0F4F5] items-center gap-8">
                 <h2 className="font-serif text-4xl max-sm:text-3xl capitalize text-[#0BAFA6] mt-32 max-sm:mt-24 px-16 max-sm:px-8 self-start">we also offer:</h2>
 
-                <div className="w-[80%] flex flex-col items-center gap-12 p-10 border border-black-300 shadow-md rounded-xl">
+                <div className="w-[80%] flex flex-col items-center gap-12 p-10 border border-black-300 shadow-md rounded-xl bg-white">
 
                     <div className="w-full flex items-center gap-8">
                         <ul className="lg:w-[50%] list-disc pl-5 max-sm:pl-2 font-serif text-2xl max-sm:text-base text-black text-justify flex flex-col gap-2 max-sm:gap-1">

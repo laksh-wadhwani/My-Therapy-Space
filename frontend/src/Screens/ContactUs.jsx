@@ -68,7 +68,7 @@ const ContactUs = () => {
         />
       </Helmet>
 
-      <div className="main-box bg-white gap-12 items-center">
+      <div className="main-box bg-[#E0F4F5] gap-12 items-center">
         {/* ✅ Header Section with Keywords */}
         <header className="w-full px-16 max-sm:px-8 flex flex-col gap-4 mt-32 max-sm:mt-24">
           <h1 className="font-serif text-[#0BAFA6] text-4xl max-sm:text-3xl capitalize">
@@ -83,7 +83,7 @@ const ContactUs = () => {
         </header>
 
         {/* ✅ Contact Form Section */}
-        <section className="w-[90%] max-sm:w-full flex justify-between items-stretch border border-black-100 shadow-md rounded-xl">
+        <section className="w-[90%] max-sm:w-full flex justify-between items-stretch border border-black-100 shadow-md rounded-xl bg-white">
           {/* Left Image */}
           <div className="w-1/2 max-sm:hidden">
             <img

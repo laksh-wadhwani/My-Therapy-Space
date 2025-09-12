@@ -47,7 +47,7 @@ const Team = () => {
         <link rel="canonical" href="https://mytherapyspace.com.au/Team" />
       </Helmet>
 
-      <div className="main-box gap-10 xl:gap-20 bg-white">
+      <div className="main-box gap-10 xl:gap-20 bg-[#E0F4F5]">
 
         {/* ================= MAIN HEADING ================= */}
         <div className="w-full flex flex-col gap-8 px-8 mt-24 box-border">
@@ -60,7 +60,7 @@ const Team = () => {
           <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center gap-y-8 gap-x-4">
             {members.map(member => (
               <div className="w-62 h-70 flex flex-col items-center cursor-pointer hover:scale-105" onClick={() => SeeMemberDetails(member)}>
-                <div className="w-full h-[80%] bg-[#ECF1ED] rounded-3xl">
+                <div className="w-full h-[80%]  rounded-3xl">
                   <img src={member.profile} alt={`${member.name}, ${member.designation} at My Therapy Space`} className="size-full object-contain" /> {/* Improved alt text */}
                 </div>
                 <h4 className="font-serif capitalize text-lg text-black">{member.name}</h4>
@@ -128,7 +128,7 @@ const Team = () => {
         </div>
 
         {/* ================= BENEFITS SECTION ================= */}
-        <div className="w-full flex flex-col gap-4 px-8 items-center bg-[#f9fdfd] text-black">
+        <div className="w-full flex flex-col gap-4 px-8 items-center  text-black">
           
           <p className="font-serif text-3xl text-black self-start max-sm:text-center">Benefits and Perks for All Staff</p>
 

@@ -113,7 +113,7 @@ const Cart = () => {
 
   return (
     <React.Fragment>
-      <div className="main-box bg-white gap-10">
+      <div className="main-box bg-[#E0F4F5] gap-10">
         <h2 className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24 font-serif text-4xl max-sm:text-3xl text-[#0BAFA6] capitalize">shopping cart</h2>
 
         <div className="w-full px-16 max-sm:px-8 flex max-sm:flex-col max-sm:gap-10 justify-between items-start">

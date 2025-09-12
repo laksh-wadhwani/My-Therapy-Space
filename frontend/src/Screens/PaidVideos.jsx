@@ -19,7 +19,7 @@ const PaidVideos = () => {
 
     return(
         <React.Fragment>
-            <div className="main-box bg-white gap-10 items-center">
+            <div className="main-box bg-[#E0F4F5] gap-10 items-center">
                 
                 <div className="w-full flex justify-between px-16 max-sm:px-8 mt-32 max-sm:mt-24 items-center">
                     <h2 className="font-serif text-[#0BAFA6] text-4xl max-sm:text-3xl capitalize">Course Videos</h2>
