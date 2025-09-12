@@ -3,7 +3,7 @@ const CustomButton = ({ children, onClick, disabled, className = "" }) => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`w-full flex items-center justify-center font-serif text-lg max-sm:text-sm capitalize rounded-xl p-3 max-sm:p-2 transition-all duration-500 ease-in-out
+      className={`w-full flex items-center justify-center font-serif text-base md:text-lg capitalize rounded-xl p-2 transition-all duration-500 ease-in-out
         ${
           disabled
             ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"

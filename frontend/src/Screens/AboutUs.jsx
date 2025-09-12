@@ -71,15 +71,16 @@ const AboutUs = () => {
                 <meta property="og:description" content="Discover our family-centered pediatric therapy clinic in Gold Coast. We specialize in speech pathology, occupational therapy, and dietitian services." />
                 <meta property="og:type" content="website" />
             </Helmet>
-            <main className="main-box bg-white">
+
+            <main className="main-box bg-[#E0F4F5]">
                 {/* ================= HERO / ABOUT SECTION ================= */}
-                <section className="sections max-sm:flex-col max-sm:gap-6 justify-between mt-20 max-sm:mt-12">
-                    <div className="sections-box gap-20 max-sm:gap-4">
+                <section className="sections h-dvh flex-col md:flex-row gap-6 justify-between mt-12 md:mt-16">
+                    <div className="sections-box gap-4">
                         {/* Main SEO Heading */}
-                        <h1 className="text-7xl max-sm:text-3xl font-serif text-[#333333] capitalize">
+                        <h1 className="font-serif text-[#333333] capitalize max-sm:text-center text-3xl lg:text-5xl xl:text-6xl">
                             Empowering families so children can thrive
                         </h1>
-                        <p className="sections-description text-base text-justify">
+                        <p className="sections-description text-base xl:text-xl text-justify">
                             My Therapy Space is a
                             multidisciplinary allied health team based on the Gold Coast offering a family
                             centred, play based and neuro-diversity affirming approach to therapy.  With
@@ -91,34 +92,34 @@ const AboutUs = () => {
                     <img
                         src={About}
                         alt="About My Therapy Space clinic in Gold Coast"
-                        className="max-sm:w-full"
+                        className="w-full md:w-[45%]"
                     />
                 </section>
 
                 {/* ================= CLINIC STATS ================= */}
-                <section className="w-[80%] max-sm:w-[90%] grid grid-cols-4 self-center pb-8">
+                <section className="bg-white w-full grid grid-cols-2 lg:grid-cols-4 self-center py-12 px-6 ">
                     {/* Each stat highlights trust/authority */}
-                    <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
+                    <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center rounded-md">
                         <h3 className="another-sections-tittle font-black">25+</h3>
-                        <span className="sections-description max-sm:text-xs text-center capitalize">
+                        <span className="sections-description text-xs md:text-base text-center capitalize">
                             Years Pediatric Therapy Experience
                         </span>
                     </div>
-                    <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
+                    <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center rounded-md">
                         <h3 className="another-sections-tittle font-black">100%</h3>
-                        <span className="sections-description max-sm:text-xs text-center capitalize">
+                        <span className="sections-description text-xs md:text-base text-center capitalize">
                             Family-Centered Approach
                         </span>
                     </div>
-                    <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
+                    <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center rounded-md">
                         <h3 className="another-sections-tittle font-black">2</h3>
-                        <span className="sections-description max-sm:text-xs text-center capitalize">
+                        <span className="sections-description text-xs md:text-base text-center capitalize">
                             Great Locations
                         </span>
                     </div>
-                    <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center">
+                    <div className="flex flex-col items-center border border-[#EBF0F1] p-4 justify-center rounded-md">
                         <h3 className="another-sections-tittle font-black">500+</h3>
-                        <span className="sections-description max-sm:text-xs text-center capitalize">
+                        <span className="sections-description text-xs md:text-base text-center capitalize">
                             Families Supported
                         </span>
                     </div>
@@ -126,11 +127,11 @@ const AboutUs = () => {
 
                 {/* ================= CORE VALUES ================= */}
                 <section className="sections flex-col gap-10">
-                    <h2 className="another-sections-tittle font-black self-start">
+                    <h2 className="another-sections-tittle font-black self-start max-sm:text-center">
                         Our Core Values in Therapy
                     </h2>
 
-                    <div className="w-full grid grid-cols-4 max-sm:grid-cols-1 max-sm:gap-8 border border-[#EAEAEA] rounded-xl box-border p-8">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border border-[#EAEAEA] rounded-xl box-border p-8">
                         <article className="flex flex-col items-center">
                             <div className="size-[50px] bg-[#38B6FF]/20 rounded-full text-[#38B6FF] text-3xl flex justify-center items-center mb-6 max-sm:mb-2">
                                 1
@@ -182,8 +183,8 @@ const AboutUs = () => {
                 </section>
 
                 {/* ================= BURLEIGH CLINIC ================= */}
-                <section className="sections flex-col gap-10 max-sm:gap-6">
-                    <h2 className="another-sections-tittle font-black max-sm:text-center">
+                <section className="bg-white sections flex-col gap-6">
+                    <h2 className="another-sections-tittle font-black text-center">
                         Our Burleigh Waters Pediatric Therapy Clinic
                     </h2>
                     <p className="text-[#557271] text-lg font-serif text-center">
@@ -193,11 +194,11 @@ const AboutUs = () => {
                         Conveniently located opposite Treetops Plaza, Suite 3, Treetops
                         Square, Gold Coast.
                     </p>
-                    <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
+                    <div className="w-full box-border grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
                         {BurleighSpace.map((space, idx) => (
                             <figure
                                 key={idx}
-                                className="flex flex-col items-start w-[30%] max-sm:w-full gap-2"
+                                className="flex flex-col items-start w-full gap-2"
                             >
                                 <img
                                     src={space.picture}
@@ -223,11 +224,11 @@ const AboutUs = () => {
                         <strong>three therapy rooms</strong> designed for comfort and
                         effective child-centered therapy.
                     </p>
-                    <div className="w-[80%] box-border flex flex-wrap gap-8 justify-center">
+                    <div className="w-full box-border grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-content-center">
                         {HopeIsland.map((space, idx) => (
                             <figure
                                 key={idx}
-                                className="flex flex-col items-start w-[30%] max-sm:w-full gap-2"
+                                className="flex flex-col items-start w-full gap-2"
                             >
                                 <img
                                     src={space.picture}

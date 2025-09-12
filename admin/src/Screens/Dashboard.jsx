@@ -9,6 +9,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Modal from "react-responsive-modal";
 import CustomTextArea from "../Components/CustomTextArea";
+import { BookText } from 'lucide-react';
 
 const Dashboard = ({ isSidebarHovered, user }) => {
 
@@ -16,7 +17,7 @@ const Dashboard = ({ isSidebarHovered, user }) => {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
-    const [seeDetails, setSeeDetails] = useState(true)
+    const [seeDetails, setSeeDetails] = useState(false)
     const [admins, setAdmins] = useState([])
     const [selectedAdminId, setSelectedAdminId] = useState(null)
     const [productDetails, setProductDetails] = useState([])
@@ -81,6 +82,34 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                     <p className="font-serif text-gray-500 text-base max-sm:text-sm">Here's what's happening with your site today.</p>
                 </div>
 
+                {/* <div className="w-full grid grid-cols-3 px-4 place-items-center">
+
+                    <div className="w-80 h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
+                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Blogs Uploaded</h5>
+                            <BookText size={32} className="stroke-white shadow-md"/>
+                        </div>
+                        <span className="font-serif text-5xl font-semibold">26</span>
+                    </div>
+
+                    <div className="w-80 h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
+                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Blogs Uploaded</h5>
+                            <BookText size={32} className="stroke-white shadow-md"/>
+                        </div>
+                        <span className="font-serif text-5xl font-semibold">26</span>
+                    </div>
+
+                    <div className="w-80 h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
+                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Blogs Uploaded</h5>
+                            <BookText size={32} className="stroke-white shadow-md"/>
+                        </div>
+                        <span className="font-serif text-5xl font-semibold">26</span>
+                    </div>
+
+                </div> */}
+
                 {(user.role === "super admin")?  (
                     <div className="w-full flex flex-col gap-4 px-4 max-sm:px-0">
                         <h3 className="font-serif text-black text-xl font-semibold capitalize">{admins.length===0? `no admin approvals`:`admin approvals`}</h3>
@@ -104,7 +133,10 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                     </div>
                 ):null}
 
-                {productDetails && <CustomTable title="Recent Activity" columns={columns} data={productDetails} showActions={true} onView={SeeDetails} />}
+                {(productDetails.length===0)? 
+                <p className="font-serif text-xl text-black text-center">There is no activity on a site</p>
+                :
+                <CustomTable title="Recent Activity" columns={columns} data={productDetails} showActions={true} onView={SeeDetails} />}
 
                 <div className="w-full flex gap-8">
                     <CustomButton onClick={() => navigate("/manage-blogs")}>add new blog</CustomButton>

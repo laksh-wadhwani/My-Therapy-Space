@@ -21,55 +21,55 @@ const LandingPage = () => {
                 {/* Canonical Tag to avoid duplicate content */}
                 <link rel="canonical" href="https://mytherapyspace.com.au/" />
             </Helmet>
+
             <main className="main-box bg-[#E0F4F5]">
                 {/* ================= HERO SECTION ================= */}
-                <section className="sections max-sm:flex-col-reverse section-1">
-                    <div className="sections-box md:h-[50%] max-sm:h-[50%] gap-20 max-sm:gap-4">
-                        <header className="flex flex-col gap-6 max-sm:gap-3">
+                <section className="sections flex-col-reverse md:flex-row section-1-bg mt-10 lg:mt-0">
+
+                    <div className="sections-box items-start gap-4 md:gap-8 h-[50%] md:h-auto">
+                        <header className="flex flex-col gap-4">
                             {/* h1 is main keyword target */}
-                            <h1 className="text-7xl font-serif text-[#333333] max-sm:text-4xl">
-                                Empowering families so <span className="text-[#0BAFA6]">children</span> can thrive
+                            <h1 className="font-serif text-[#333333] font-semibold text-2xl md:text-3xl lg:text-4xl xl:text-6xl">
+                                Empowering Families So <span className="text-[#0BAFA6]">Children</span> Can Thrive
                             </h1>
                             <div className="bg-[#92278F] w-20 h-1 rounded-xl" />
-                            <p className="sections-description text-lg max-sm:text-base">
-                                <b>My Therapy Space</b> provides expert
-                                <strong> Speech Therapy, Occupational Therapy, Pediatric Therapy</strong>,
-                                Dietetics, and Family Support Programs. Our team of
-                                <strong> Gold Coast specialists</strong> helps every child grow with confidence.
+                            <p className="sections-description text-sm md:text-base lg:text-lg xl:text-xl">
+                                My Therapy Space is a team of experienced, enthusiastic, Speech Language Pathologists, Occupational Therapists, Dietitians and Therapy Assistants all working together to support your child and family.
                             </p>
                         </header>
 
                         <Link to="/booking">
-                            <CustomButton>Book a Therapy Call</CustomButton>
+                            <CustomButton>Book a Call</CustomButton>
                         </Link>
                     </div>
 
                     {/* Background image with alt text */}
                     <div
-                        className="w-[50%] max-sm:w-full h-full max-sm:h-[50%] bg-[url(./assets/rightside.svg)] bg-no-repeat bg-contain bg-center"
+                        className="w-full md:w-[50%] h-[50%] md:h-full bg-[url(./assets/rightside.svg)] bg-no-repeat bg-contain bg-center"
                         role="img"
                         aria-label="Child Therapy Illustration"
                     />
                 </section>
 
                 {/* ================= ABOUT US ================= */}
-                <section className="sections flex-col gap-2 max-sm:gap-6 bg-white">
+                <section className="sections flex-col gap-2 bg-white">
                     <span className="sections-tittle self-start">About Us</span>
 
-                    <div className="w-full flex gap-12 max-sm:flex-col max-sm:gap-6">
-                        <div className="sections-box justify-between">
-                            <h2 className="text-4xl text-justify font-serif text-[#333333] max-sm:text-3xl">
+                    <div className="w-full flex flex-col md:flex-row gap-8">
+
+                        <div className="sections-box justify-between items-start">
+                            <h2 className="font-serif text-[#333333] text-xl lg:text-2xl xl:text-4xl">
                                 We offer a Family
                                 Centred, Play based, Neurodiversity Affirming approach where connecting
                                 with children and families is paramount.
                             </h2>
                             <Link to="/AboutUs">
-                                <CustomButton className="max-sm:hidden">About Us</CustomButton>
+                                <CustomButton className="hidden md:block px-6">About Us</CustomButton>
                             </Link>
                         </div>
 
-                        <div className="sections-box gap-20 max-sm:gap-10 mt-6 max-sm:mt-0">
-                            <p className="sections-description text-base max-sm:text-sm text-justify">
+                        <div className="sections-box gap-4 md:gap-8 items-start lg:items-center">
+                            <p className="sections-description text-sm xl:text-lg md:text-justify">
                                 <b>My Therapy Space</b> is a multidisciplinary allied health clinic
                                 providing <strong>Speech Pathology</strong>,
                                 <strong> Occupational Therapy</strong>, Psychology, Dietetics, and Audiology.
@@ -78,47 +78,42 @@ const LandingPage = () => {
                             </p>
 
                             {/* Stats with keywords */}
-                            <div className="section-2-description-box">
-                                <article className="border-b border-r">
+                            <div className="section-2-description-box text-center">
+
+                                <article className="border-b md:border-r">
                                     <h3 className="another-sections-tittle font-black">25+</h3>
-                                    <span className="sections-description capitalize">
-                                        Years of Pediatric Therapy Experience
-                                    </span>
+                                    <span className="sections-description capitalize text-xs xl:text-base">Years of Pediatric Therapy Experience</span>
                                 </article>
 
                                 <article className="border-b">
                                     <h3 className="another-sections-tittle font-black">100%</h3>
-                                    <span className="sections-description capitalize">
-                                        Family-Centered Care
-                                    </span>
+                                    <span className="sections-description capitalize text-xs xl:text-base">Family-Centered Care</span>
                                 </article>
 
-                                <article className="border-r">
+                                <article className="max-sm:border-b md:border-r">
                                     <h3 className="another-sections-tittle font-black">2</h3>
-                                    <span className="sections-description capitalize">
-                                        Great Locations
-                                    </span>
+                                    <span className="sections-description capitalize text-xs xl:text-base">Great Locations</span>
                                 </article>
 
                                 <article>
                                     <h3 className="another-sections-tittle font-black">500+</h3>
-                                    <span className="sections-description capitalize">
-                                        Happy Families Served
-                                    </span>
+                                    <span className="sections-description capitalize text-xs xl:text-base">Happy Families Served</span>
                                 </article>
                             </div>
+
                         </div>
+
                     </div>
 
                     <Link to="/AboutUs">
-                        <CustomButton className="lg:hidden md:hidden sm:hidden max-sm:px-12 max-sm:py-4">
+                        <CustomButton className="mt-4 md:hidden">
                             About Us
                         </CustomButton>
                     </Link>
                 </section>
 
                 {/* ================= WORKSHOP FUN ================= */}
-                <section className="sections flex-col gap-10 bg-[#F9FAFB]">
+                <section className="sections flex-col gap-2 md:gap-4 bg-[#F9FAFB]">
                     <div className="flex flex-col gap-4 items-center">
                         <span className="sections-tittle">Therapy Fun</span>
                         {/* <h2 className="text-5xl max-sm:text-3xl font-serif text-[#333333] text-center">
@@ -127,7 +122,7 @@ const LandingPage = () => {
                     </div>
 
                     <div className="w-full overflow-x-auto">
-                        <div className="flex md:grid md:grid-cols-5 gap-6 px-4">
+                        <div className="flex gap-6 px-4">
                             {[work1, work2, work3, work4, work5].map((img, i) => (
                                 <div
                                     key={i}
@@ -153,44 +148,44 @@ const LandingPage = () => {
                         </h2> */}
                     </div>
 
-                    <div className="w-full flex max-sm:flex-col max-sm:gap-8 justify-evenly">
+                    <div className="w-full flex flex-col md:flex-row gap-8 md:flex-wrap justify-evenly">
                         {/* Each service card has keyword-rich headings */}
-                        <article className="services-cards rotate-[-3deg] max-sm:rotate-0">
+                        <article className="services-cards lg:rotate-[-3deg] rotate-0">
                             <div className="bg-[#00B2A9]/10">
                                 <div className="bg-[#00B2A9]" />
                             </div>
                             <h3>Speech Pathology</h3>
-                            <p className="sections-description text-center text-sm max-sm:text-lg">
+                            <p className="sections-description text-center text-base lg:text-sm xl:text-base">
                                 Helping children communicate effectively and build lifelong language skills.
                             </p>
                         </article>
 
-                        <article className="services-cards rotate-[3deg] max-sm:rotate-0">
+                        <article className="services-cards lg:rotate-[3deg] rotate-0">
                             <div className="bg-[#92278F]/10">
                                 <div className="bg-[#92278F]" />
                             </div>
                             <h3>Occupational Therapy for Children</h3>
-                            <p className="sections-description text-center text-sm max-sm:text-lg">
+                            <p className="sections-description text-center text-base lg:text-sm xl:text-base">
                                 Supporting daily activities, sensory processing, and motor skills development.
                             </p>
                         </article>
 
-                        <article className="services-cards rotate-[-3deg] max-sm:rotate-0">
+                        <article className="services-cards lg:rotate-[-3deg] rotate-0">
                             <div className="bg-[#F8971D]/10">
                                 <div className="bg-[#F8971D]" />
                             </div>
                             <h3>Dietitian & Feeding Therapy</h3>
-                            <p className="sections-description text-center text-sm max-sm:text-lg">
+                            <p className="sections-description text-center text-base lg:text-sm xl:text-base">
                                 Nutrition guidance for children with feeding difficulties and special diets.
                             </p>
                         </article>
 
-                        <article className="services-cards rotate-[3deg] max-sm:rotate-0">
+                        <article className="services-cards lg:rotate-[3deg] rotate-0">
                             <div className="bg-[#1B75BC]/10">
                                 <div className="bg-[#1B75BC]" />
                             </div>
                             <h3>Therapy Assistants</h3>
-                            <p className="sections-description text-center text-sm max-sm:text-lg">
+                            <p className="sections-description text-center text-base lg:text-sm xl:text-base">
                                 Helping families achieve therapy goals at home, childcare, and in the community.
                             </p>
                         </article>
@@ -198,60 +193,67 @@ const LandingPage = () => {
                 </section>
 
                 {/* ================= WHY CHOOSE US ================= */}
-                <section className="sections flex-col gap-14 bg-white">
-                    <h2 className="another-sections-tittle font-semibold">
+                <section className="sections flex-col gap-4 md:gap-10 bg-white">
+                    <h2 className="font-serif text-[#333333] capitalize font-semibold text-center text-xl md:text-3xl lg:text-5xl">
                         Why Choose My Therapy Space?
                     </h2>
 
-                    <div className="section-4">
-                        <div>
+                    <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+
+                        <div className="w-full lg:w-[45%] flex flex-col gap-4">
                             <article className="flex flex-col">
                                 <div className="flex items-center gap-2">
-                                    <div className="size-[22px] bg-[#333333]" />
-                                    <h3 className="font-serif capitalize text-xl font-semibold text-black">
-                                        Collaborative Therapy Approach
-                                    </h3>
+                                    <div className="size-4 bg-[#333333]" />
+                                    <h3 className="font-serif capitalize text-lg font-semibold text-black">Experienced Team</h3>
                                 </div>
-                                <p className="font-serif text-base text-[#666666] text-justify max-sm:text-left w-[50%] max-sm:w-full">
-                                    Our <strong>multidisciplinary specialists</strong> work together
-                                    to provide complete child care solutions.
-                                </p>
+                                <p className="font-serif text-[#666666] text-justify">Our directors have worked together supporting families for over 25 years! </p>
                             </article>
 
                             <article className="flex flex-col">
                                 <div className="flex items-center gap-2">
-                                    <div className="size-[22px] bg-[#333333]" />
-                                    <h3 className="font-serif text-base capitalize text-xl font-semibold text-black">
-                                        Expert Pediatric Specialists
-                                    </h3>
+                                    <div className="size-4 bg-[#333333]" />
+                                    <h3 className="font-serif capitalize text-lg font-semibold text-black">Collaborative approach</h3>
                                 </div>
-                                <p className="font-serif text-base text-[#666666] text-justify max-sm:text-left w-[50%] max-sm:w-full">
-                                    Our <strong>speech pathologists</strong> and
-                                    <strong> occupational therapists</strong> bring years of experience in child therapy.
-                                </p>
+                                <p className="font-serif text-[#666666] text-justify">Our therapists all work together under the
+                                    one roof.  You don't have to repeat your story.  We work with you and
+                                    your family on the goals that are important to you!
+                                    Play based:  who needs to sit at a table to do therapy?  We follow the
+                                    child’s lead and interests resulting in lots more fun, and more positive
+                                    outcomes for your child.</p>
                             </article>
 
                             <article className="flex flex-col">
                                 <div className="flex items-center gap-2">
-                                    <div className="size-[22px] bg-[#333333]" />
-                                    <h3 className="font-serif text-base capitalize text-xl font-semibold text-black">
-                                        Child-Centered Focus
-                                    </h3>
+                                    <div className="size-4 bg-[#333333]" />
+                                    <h3 className="font-serif capitalize text-lg font-semibold text-black">Play based</h3>
                                 </div>
-                                <p className="font-serif text-base text-[#666666] text-justify max-sm:text-left w-[50%] max-sm:w-full">
-                                    Personalized therapy plans tailored to each child’s unique
-                                    <em>developmental needs and goals</em>.
-                                </p>
+                                <p className="font-serif text-[#666666] text-justify">who needs to sit at a table to do therapy?  We follow the
+                                    child’s lead and interests resulting in lots more fun, and more positive
+                                    outcomes for your child. </p>
                             </article>
+
+                            <article className="flex flex-col">
+                                <div className="flex items-center gap-2">
+                                    <div className="size-4 bg-[#333333]" />
+                                    <h3 className="font-serif capitalize text-lg font-semibold text-black">Neurodiversity Affirming</h3>
+                                </div>
+                                <p className="font-serif text-[#666666] text-justify">We have listened to the voices of autistic
+                                    people and continue to learn from them daily. Our aim is NOT to
+                                    change the child- we aim to change the environment, to support our
+                                    children with any resources and skills they may need and to educate
+                                    the people around your child to accept and embrace your child’s
+                                    differences.</p>
+                            </article>
+
+
                         </div>
 
-                        {/* Optimized image with alt */}
-                        <img
-                            src={ChooseUs}
-                            alt="Why families choose My Therapy Space for child development therapy"
-                            className="max-sm:hidden"
-                        />
+                        <div className="hidden lg:block w-[45%]">
+                            <img src={ChooseUs} alt="Why families choose My Therapy Space for child development therapy" className="size-full" />
+                        </div>
+
                     </div>
+
                 </section>
 
                 {/* ================= FOOTER ================= */}

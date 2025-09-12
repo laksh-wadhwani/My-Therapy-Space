@@ -159,24 +159,24 @@ const Navbar = ({ user, setLoginUser }) => {
 
       <nav className="w-full flex flex-col items-center fixed top-4 z-50">
 
-        <div className="w-[95%] flex items-center bg-white shadow-md justify-between rounded-full px-6 py-2">
+        <div className="w-[95%] flex items-center bg-white shadow-md justify-between rounded-full px-4 md:px-6 py-1 md:py-2">
 
           <Link to="/">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 lg:gap-0 xl:gap-2">
               <img
                 src="../logo.svg"
                 alt="Logo"
-                className="size-14 max-sm:size-10"
+                className="size-8 md:size-10 lg:size-8 xl:size-12"
               />
-              <span className="text-2xl max-sm:text-lg font-serif capitalize text-[#0BAFA6]">
+              <span className="font-serif capitalize text-[#0BAFA6] text-base md:text-xl lg:text-base xl:text-xl">
                 My Therapy Space
               </span>
             </div>
           </Link>
 
           {/* Desktop Links */}
-          <div className="flex items-center gap-6">
-            <ul className="flex font-serif text-lg capitalize gap-4 cursor-pointer text-[#797979] max-sm:hidden">
+          <div className="flex items-center gap-2 md:gap-6">
+            <ul className="hidden lg:flex font-serif text-sm xl:text-lg capitalize gap-4 cursor-pointer text-[#797979]">
               <Link to="/" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>Home</li></Link>
 
               <div className="flex items-center relative gap-1">
@@ -217,13 +217,14 @@ const Navbar = ({ user, setLoginUser }) => {
               </div>
 
               <Link to="/booking" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>booking</li></Link>
-              <Link to="/shop" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>shop</li></Link>
+              {/* <Link to="/shop" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>shop</li></Link> */}
               <Link to="/contact" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>contact</li></Link>
             </ul>
 
             {user ?
-              <div className="flex gap-6 items-center">
-                <Link to={`/user-profile/${user.id}`}><div className="flex items-center gap-2 bg-[#0BAFA6] py-1 px-2 rounded-xl shadow-md cursor-pointer hover:scale-105 max-sm:hidden">
+              <div className="flex gap-4 lg:gap-2 xl:gap-4 items-center">
+                <Link to={`/user-profile/${user.id}`}>
+                <div className="hidden md:flex items-center gap-2 bg-[#0BAFA6] py-1 px-2 rounded-xl shadow-md cursor-pointer hover:scale-105">
                   {user.profile ?
                     <img src={user.profile} alt="User Profile" className="size-10 rounded-full object-cover" />
                     :
@@ -231,13 +232,13 @@ const Navbar = ({ user, setLoginUser }) => {
                       <span className="text-lg text-black font-bold uppercase">{nameInitials}</span>
                     </div>
                   }
-                  <span className="font-serif text-lg lg:text-sm text-white">Hello, {firstName}</span>
+                  <span className="font-serif text-lg text-white lg:text-base xl:text-lg">Hello, {firstName}</span>
                 </div></Link>
-                <ShoppingCart size={32} className="stroke-[#0BAFA6] hover:scale-105 max-sm:size-6" onClick={() => navigate(`/cart/${user.id}`)} />
+                <ShoppingCart size={24} className="stroke-[#0BAFA6] hover:scale-105 xl:size-8" onClick={() => navigate(`/cart/${user.id}`)} />
               </div>
               :
               <RButton
-                className="px-8 py-2 max-sm:hidden"
+                className="hidden px-4 lg:px-6 py-2 md:block"
                 onClick={() => setLoginOpen(true)}
               >
                 Login
@@ -245,8 +246,8 @@ const Navbar = ({ user, setLoginUser }) => {
 
             {/* Mobile Menu Icon */}
             <Menu
-              size={32}
-              className="hidden max-sm:block stroke-black hover:scale-105"
+              size={26}
+              className="stroke-black hover:scale-105 lg:hidden"
               onClick={() => setIsMobileOpen(true)}
             />
           </div>
@@ -363,8 +364,8 @@ const Navbar = ({ user, setLoginUser }) => {
       <Modal open={loginOpen} onClose={() => setLoginOpen(false)} center
         styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".7rem" } }}>
 
-        <div className="flex flex-col gap-8 py-8 px-12">
-          <h4 className="font-serif text-2xl text-black self-center">{isForget ? `Forget Password` : `Member Login`}</h4>
+        <div className="flex flex-col gap-6 px-4 md:p-8">
+          <h4 className="font-serif text-black font-semibold self-center text-xl md:text-2xl">{isForget ? `Forget Password` : `Member Login`}</h4>
 
           {isForget ?
             (<>
@@ -375,14 +376,14 @@ const Navbar = ({ user, setLoginUser }) => {
               <div className="w-full flex flex-col gap-2">
                 <CustomInput label="Email" placeholder="Email" type="email" value={userData.email} onChange={e => handleChange("email", e.target.value)} />
                 <CustomInput label="Password" placeholder="Password" type="password" value={userData.password} onChange={e => handleChange("password", e.target.value)} />
-                <p className="font-serif text-base underline self-end cursor-pointer" onClick={() => setIsForget(true)}>Forget Password?</p>
+                <p className="font-serif text-sm md:text-base underline self-end cursor-pointer" onClick={() => setIsForget(true)}>Forget Password?</p>
               </div>
 
               <div className="w-full flex flex-col gap-2">
                 <CustomButton onClick={Login} disabled={loading}>
                   {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Login"}
                 </CustomButton>
-                <p className="font-serif self-center">Don't have an account? <strong className="text-[#00C7BE] cursor-pointer" onClick={ToggleSignUp}>Create</strong></p>
+                <p className="font-serif self-center text-sm md:text-base">Don't have an account? <strong className="text-[#00C7BE] cursor-pointer" onClick={ToggleSignUp}>Create</strong></p>
               </div>
             </>)
           }
@@ -394,8 +395,8 @@ const Navbar = ({ user, setLoginUser }) => {
       <Modal open={signupOpen} onClose={() => setSignupOpen(false)} center
         styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".7rem" } }}>
 
-        <div className="flex flex-col gap-8 py-8 px-12">
-          <h4 className="font-serif text-3xl text-black self-center">{isVerify ? `Verification` : `Sign Up`}</h4>
+        <div className="flex flex-col gap-6 px-4 md:p-8">
+          <h4 className="font-serif text-black font-semibold self-center text-xl md:text-2xl">{isVerify ? `Verification` : `Sign Up`}</h4>
 
           {isVerify ?
             (<>
@@ -421,7 +422,7 @@ const Navbar = ({ user, setLoginUser }) => {
                 <CustomButton onClick={CreateAccount} disabled={loading}>
                   {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Create Account"}
                 </CustomButton>
-                <p className="font-serif self-center">Already Member? <strong className="text-[#00C7BE] cursor-pointer" onClick={ToggleLogin}>Login</strong></p>
+                <p className="font-serif self-center text-sm md:text-base">Already Member? <strong className="text-[#00C7BE] cursor-pointer" onClick={ToggleLogin}>Login</strong></p>
               </div>
             </>)}
         </div>

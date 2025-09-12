@@ -28,7 +28,7 @@ const CustomInput = ({
     <div className={`w-full flex flex-col ${className}`}>
       <label
         htmlFor={name}
-        className="font-serif text-sm text-black capitalize"
+        className="font-serif text-sm md:text-base text-black capitalize"
       >
         {label}
       </label>
@@ -39,7 +39,7 @@ const CustomInput = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className="w-full font-serif text-base py-2 px-2 rounded-md pr-10 border border-gray-400 bg-transparent"
+          className="w-full font-serif text-sm md:text-base p-2 rounded-md border border-gray-400 bg-transparent"
         />
         {isPasswordField && (
           <span

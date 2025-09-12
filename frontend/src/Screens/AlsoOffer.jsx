@@ -14,7 +14,7 @@ const AlsoOffer = () => {
                 <div className="w-[80%] flex flex-col items-center gap-12 p-10 border border-black-300 shadow-md rounded-xl">
 
                     <div className="w-full flex items-center gap-8">
-                        <ul className="list-disc pl-5 max-sm:pl-2 font-serif text-2xl max-sm:text-base text-black text-justify flex flex-col gap-2 max-sm:gap-1">
+                        <ul className="lg:w-[50%] list-disc pl-5 max-sm:pl-2 font-serif text-2xl max-sm:text-base text-black text-justify flex flex-col gap-2 max-sm:gap-1">
                             <li>Hanen ”It Takes Two to Talk”</li>
                             <li>Hanen “More than Words”</li>
                             <li>Hanen “Learning Language and Loving it”Programs.</li>
@@ -23,7 +23,7 @@ const AlsoOffer = () => {
                             <li>Fun with Switches – An OT/SLP group aimed at developing social communications with switch access</li>
                             <li>Let’s Communicate – An 8 week program for parents and children aged 18 months to 3 who are late talkers</li>
                         </ul>
-                        <img src={Also_Offer} alt="Also Offer Image" className="max-sm:hidden" />
+                        <img src={Also_Offer} alt="Also Offer Image" className="max-sm:hidden md:hidden lg:block w-[50%]" />
                     </div>
                     <Link to="/contact"><CustomButton>Get In Touch</CustomButton></Link>
 

@@ -49,14 +49,14 @@ const Booking = () => {
     return (
         <React.Fragment>
             <div className="main-box bg-white max-sm:gap-8">
-                <div className="w-full px-16 max-sm:px-6 mt-32 max-sm:mt-24">
+                <div className="w-full px-6 lg:px-16 mt-32 max-sm:mt-24">
                     <h2 className="font-serif text-4xl max-sm:text-3xl capitalize text-[#0BAFA6]">Book A Phone Appointment </h2>
                     <p className="font-serif text-xl text-black">Please enter a few details to book a phone appointment with one of our friendly client care team</p>
                 </div>
 
-                <div className="w-full flex max-sm:flex-col max-sm:items-center justify-between pl-16 max-sm:pl-0">
+                <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-between pl-0 lg:pl-16">
 
-                    <div className="w-full flex flex-col gap-4 mt-32 max-sm:mt-0 max-sm:px-6">
+                    <div className="w-full flex flex-col gap-4 mt-0 lg:mt-32 px-6 lg:px-0 pb-8 lg:pb-0">
                         <div className="w-full border border-gray-300 rounded-xl shadow-md p-8 flex flex-col gap-8">
                             <div className="hidden w-full max-sm:flex flex-col gap-2">
                                 <CustomInput label="First Name" type="text" placeholder="First Name" name="firstName" value={bookingDetails.firstName} onChange={handleChange} />
@@ -139,10 +139,11 @@ const Booking = () => {
 
                     </div>
 
-                    <img src={BookingGirl} alt="Booking Girl Picture" loading="lazy" className="max-sm:hidden" />
+                    <img src={BookingGirl} alt="Booking Girl Picture" loading="lazy" className="max-sm:hidden md:hidden lg:block" />
                 </div>
 
                 <Footer />
+
             </div>
         </React.Fragment>
     )

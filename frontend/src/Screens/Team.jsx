@@ -11,8 +11,6 @@ import Team7 from "../assets/team7.jpg"
 import Team8 from "../assets/team8.jpg"
 import Team9 from "../assets/team9.jpg"
 import Team10 from "../assets/team10.jpg"
-import TeamMember from "../assets/Team Member.png";
-import RButton from "../Components/Reusable_Button";
 import CustomButton from "../Components/CustomButton";
 import { Link } from "react-router";
 import { BackendURL } from "../BackendContext";
@@ -49,18 +47,17 @@ const Team = () => {
         <link rel="canonical" href="https://mytherapyspace.com.au/Team" />
       </Helmet>
 
-      <div className="main-box gap-20 bg-white">
+      <div className="main-box gap-10 xl:gap-20 bg-white">
 
         {/* ================= MAIN HEADING ================= */}
-        <div className="w-full flex flex-col gap-8 px-14 max-sm:px-8 mt-32 max-sm:mt-24 box-border">
-          <div>
-            {/* Consider making this an H1 if it's the main title of the page */}
-            <h1 className="font-serif text-3xl text-[#0BAFA6] capitalize">Our Expert Therapy Team</h1> {/* Changed from h2 to h1 */}
+        <div className="w-full flex flex-col gap-8 px-8 mt-24 box-border">
+          <div className="max-sm:text-center">
+            <h1 className="font-serif text-3xl md:text-4xl text-[#0BAFA6] capitalize">Our Expert Therapy Team</h1>
             <p className="font-serif text-base text-black">Meet our dedicated <strong>multidisciplinary team</strong> of allied health professionals who listen, care, and walk with you every step of the way.</p> {/* Added strong tag */}
           </div>
 
           {/* ================= TEAM MEMBER GRID ================= */}
-          <div className="w-full grid grid-cols-5 max-sm:grid-cols-1 place-items-center gap-y-8 gap-x-4">
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center gap-y-8 gap-x-4">
             {members.map(member => (
               <div className="w-62 h-70 flex flex-col items-center cursor-pointer hover:scale-105" onClick={() => SeeMemberDetails(member)}>
                 <div className="w-full h-[80%] bg-[#ECF1ED] rounded-3xl">
@@ -74,9 +71,9 @@ const Team = () => {
         </div>
 
         {/* ================= TEAM PHOTOS SECTION ================= */}
-        <div className="w-full px-14 max-sm:px-8 flex flex-col gap-6">
-          <p className="font-serif text-2xl text-[#0BAFA6] capitalize">Our Team in Action</p> {/* Slightly more descriptive title */}
-          <div className="flex gap-4 overflow-x-auto scroll-smooth">
+        <div className="w-full px-8 flex flex-col gap-6">
+          <p className="font-serif text-3xl md:text-4xl text-[#0BAFA6] capitalize max-sm:text-center">Our Team in Action</p> {/* Slightly more descriptive title */}
+          <div className="flex gap-4 overflow-x-auto scroll-smooth pb-4">
             <img src={Team4} alt="Speech pathologist using AAC with a child" className="w-80 max-sm:w-full h-45 rounded-xl object-cover flex-shrink-0" /> {/* Improved alt text */}
             <img src={Team5} alt="Occupational therapy session for sensory processing" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" /> {/* Improved alt text */}
             <img src={Team6} alt="Group therapy session at our Gold Coast clinic" className="w-80 h-45 rounded-xl object-cover flex-shrink-0" /> {/* Improved alt text */}
@@ -88,50 +85,55 @@ const Team = () => {
         </div>
 
         {/* ================= JOIN OUR TEAM SECTION ================= */}
-        <div className="w-full flex flex-col gap-8 px-14 max-sm:px-8">
+        <div className="w-full flex flex-col gap-8 md:gap-16 lg:gap-12 px-8">
 
-          <h2 className="font-serif text-3xl max-sm:text-2xl text-[#0BAFA6] capitalize">Join Our Team</h2>
+          <h2 className="font-serif text-3xl md:text-4xl text-[#0BAFA6] capitalize max-sm:text-center">Join Our Team</h2>
 
-          <div className="w-full flex max-sm:flex-col-reverse gap-16 max-sm:gap-4 h-[520px] max-sm:h-auto">
-            <div className="flex flex-col items-start justify-between max-sm:gap-8">
-              <p className="font-serif text-xl max-sm:text-lg text-justify max-sm:text-left text-black font-light leading-[3.25rem] max-sm:leading-7">If you are an allied health professional who is passionate about working with children and teenagers then My Therapy Space is for you.  We provide a flexible, supportive, <strong>multi disciplinary team</strong> experience.  We are driven to provide the best possible service for families that is <strong>family centred</strong>, and driven by families.  Staff are offered a flexible working environment, with regular supervision/mentoring and professional development. If this resonates with you, then please contact us to discuss further.</p> {/* Added strong tags */}
+          <div className="w-full flex flex-col-reverse md:flex-row gap-4 lg:gap-12 h-auto">
+
+            <div className="flex flex-col items-start justify-between gap-8">
+              <p className="font-serif text-lg lg:text-xl text-left lg:text-justify text-black font-light leading-7 md:leading-[2rem] lg:leading-[2.25rem] xl:leading-[3.25rem]">If you are an allied health professional who is passionate about working with children and teenagers then My Therapy Space is for you.  We provide a flexible, supportive, <strong>multi disciplinary team</strong> experience.  We are driven to provide the best possible service for families that is <strong>family centred</strong>, and driven by families.  Staff are offered a flexible working environment, with regular supervision/mentoring and professional development. If this resonates with you, then please contact us to discuss further.</p> {/* Added strong tags */}
               <Link to="/contact"><CustomButton>Apply Now</CustomButton></Link>
             </div>
-            <div className="flex-shrink-0 w-[50%] max-sm:w-full h-[500px] overflow-hidden rounded-xl shadow-lg">
+
+            <div className="flex-shrink-0 w-full md:w-[50%] h-[500px] overflow-hidden rounded-xl shadow-lg">
               <img
                 src={Team1}
                 alt="Collaborative multi-disciplinary team meeting at My Therapy Space"
                 className="w-full h-full object-cover"
-              /> {/* Improved alt text */}
+              />
             </div>
           </div>
 
-          {/* ... rest of the existing code for "What Makes Us Different" and "New Graduate" sections remains the same, but ensure keywords are naturally included ... */}
-          <div className="w-full flex max-sm:flex-col gap-16 max-sm:gap-4 h-[643px] max-sm:h-auto">
-            <img src={Team2} alt="Directors Trish and Lisa of My Therapy Space" className="object-cover rounded-xl" /> {/* Improved alt text */}
-            <div className="flex flex-col items-start gap-4 max-sm:gap-2">
-              <strong className="font-serif text-2xl max-sm:text-xl text-justify max-sm:text-left text-black">What Makes Our Pediatric Therapy Team Different?</strong> {/* Slightly more descriptive */}
-              <p className="font-serif text-xl max-sm:text-lg text-justify max-sm:text-left text-black font-light leading-[2.5rem]">Since opening a <strong>Speech Pathology</strong> private practice in 2001, directors Trish and Lisa have dreamt about forming the perfect <strong>multi disciplinary team</strong>. In 2018 that dream came true and My Therapy Space was born! Seven of our staff members had worked for between 5 & 20 years at a government organisation together. Our team is a wonderful combination of fabulous people working closely as a <strong>multi disciplinary team</strong> that supports children with all types of presenting difficulties, as well as teenagers and young adults with disabilities. We provide <strong>Speech Pathology, Occupational Therapy, and Dietician</strong> services.<br />The directors live and breathe our company and work alongside all the therapists daily on the ground. There is no corporate structure here! Only people who truly care for their staff and the families we support. They work hard to recruit exactly the right people that will fit with our company culture of being fun, innovative and caring.</p> {/* Added strong tags */}
+          <div className="w-full flex flex-col md:flex-row gap-4 lg:gap-12 h-auto">
+
+            <img src={Team2} alt="Directors Trish and Lisa of My Therapy Space" className="object-cover rounded-xl md:w-[50%] md:h-[600px] lg:h-[630px]" />
+
+            <div className="flex flex-col items-start gap-2">
+              <strong className="font-serif text-lg lg:text-xl xl:text-2xl text-black">What Makes Our Pediatric Therapy Team Different?</strong> {/* Slightly more descriptive */}
+              <p className="font-serif text-base lg:text-lg xl:text-xl text-left lg:text-justify text-black font-light xl:leading-[2.75rem]">Since opening a <strong>Speech Pathology</strong> private practice in 2001, directors Trish and Lisa have dreamt about forming the perfect <strong>multi disciplinary team</strong>. In 2018 that dream came true and My Therapy Space was born! Seven of our staff members had worked for between 5 & 20 years at a government organisation together. Our team is a wonderful combination of fabulous people working closely as a <strong>multi disciplinary team</strong> that supports children with all types of presenting difficulties, as well as teenagers and young adults with disabilities. We provide <strong>Speech Pathology, Occupational Therapy, and Dietician</strong> services.<br />The directors live and breathe our company and work alongside all the therapists daily on the ground. There is no corporate structure here! Only people who truly care for their staff and the families we support. They work hard to recruit exactly the right people that will fit with our company culture of being fun, innovative and caring.</p> {/* Added strong tags */}
             </div>
+
           </div>
 
-          <div className="w-full flex max-sm:flex-col-reverse gap-16 max-sm:gap-4 h-[682px] max-sm:h-auto">
-            <div className="flex flex-col items-start gap-4 max-sm:gap-2">
-              <strong className="font-serif text-2xl max-sm:text-xl text-justify max-sm:text-left text-black">New Graduate or Early Career Pediatric Therapist?</strong> {/* Slightly more descriptive */}
-              <p className="font-serif text-xl max-sm:text-lg text-justify max-sm:text-left text-black font-light leading-[2.75rem] max-sm:leading-8">If you’re a new graduate or early career clinician in your first two years of working in paediatrics, we have a specialised program for you. We know it’s daunting entering the workforce as an allied health new graduate, especially going into a private practice. Our company is passionate about nurturing our early career clinicians, by having a well developed <strong>new graduate program</strong> that helps you ease into the working world. We do this by a slow build up of your caseload, weekly supervision, a second weekly support session and training program, on tap access to directors to support you, a generous professional development budget, reasonable client numbers of 20 hours per week so adequate time for research, planning and thinking. The majority of our sessions are within the clinic so you’re not spending a lot of time travelling and you will have access to a wonderful experienced team. New graduates will also have the other new grad members on the team for moral support!</p> {/* Added strong tag */}
+          <div className="w-full flex flex-col-reverse md:flex-row gap-4 lg:gap-12 h-auto">
+
+            <div className="flex flex-col items-start gap-2">
+              <strong className="font-serif text-lg lg:text-xl xl:text-2xl text-left text-black">New Graduate or Early Career Pediatric Therapist?</strong> 
+              <p className="font-serif text-lg md:text-base lg:text-lg xl:text-xl text-left text-black font-light leading-8 xl:leading-[3.75rem]">If you’re a new graduate or early career clinician in your first two years of working in paediatrics, we have a specialised program for you. We know it’s daunting entering the workforce as an allied health new graduate, especially going into a private practice. Our company is passionate about nurturing our early career clinicians, by having a well developed <strong>new graduate program</strong> that helps you ease into the working world. We do this by a slow build up of your caseload, weekly supervision, a second weekly support session and training program, on tap access to directors to support you, a generous professional development budget, reasonable client numbers of 20 hours per week so adequate time for research, planning and thinking. The majority of our sessions are within the clinic so you’re not spending a lot of time travelling and you will have access to a wonderful experienced team. New graduates will also have the other new grad members on the team for moral support!</p> {/* Added strong tag */}
             </div>
-            <img src={Team3} alt="Mentoring and support for new graduate therapists" className="object-cover rounded-xl" /> {/* Improved alt text */}
+
+            <img src={Team3} alt="Mentoring and support for new graduate therapists" className="object-cover rounded-xl md:w-[50%]" /> 
           </div>
         </div>
 
         {/* ================= BENEFITS SECTION ================= */}
-        <div className="w-full flex flex-col gap-12 px-14 pb-12 items-center bg-[#f9fdfd] text-black">
-          {/* Section Title */}
-          <p className="font-serif text-3xl text-black self-start">Benefits and Perks for All Staff</p>
+        <div className="w-full flex flex-col gap-4 px-8 items-center bg-[#f9fdfd] text-black">
+          
+          <p className="font-serif text-3xl text-black self-start max-sm:text-center">Benefits and Perks for All Staff</p>
 
-          {/* Grid of benefits cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-            {/* Example Card */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
+           
             <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex flex-col gap-4">
               <h3 className="font-bold text-lg">Supportive Team</h3>
               <p>A wonderful, supportive and fun team of 17 therapists who genuinely care for each other.</p>
@@ -187,13 +189,13 @@ const Team = () => {
               <p>Team-building events to foster a fun and collaborative culture.</p>
             </div>
           </div>
-          <Link to="/contact"><CustomButton className="px-7 py-3 mt-6">Join Now</CustomButton></Link>
+
+          <Link to="/contact"><CustomButton className="px-6 py-3 mt-4">Join Now</CustomButton></Link>
         </div>
 
         <Footer />
       </div>
 
-      {/* Modal (unchanged) */}
       <Modal open={open} onClose={() => setOpen(false)} center
         styles={{ closeButton: { display: 'none' }, modal: { borderRadius: ".8rem" } }}>
         {member && (<div className="w-auto flex flex-col items-center px-16 max-sm:px-0">

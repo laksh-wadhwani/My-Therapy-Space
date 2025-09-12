@@ -57,12 +57,12 @@ const Workshop = () => {
       </Helmet>
 
       <div className="main-box bg-white items-center gap-10">
-        {/* ✅ Heading with keyword */}
-        <div className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24">
-          <h1 className="font-serif text-4xl max-sm:text-3xl text-[#0BAFA6]">
+
+        <div className="w-full px-8 md:px-14 mt-24 lg:mt-32">
+          <h1 className="font-serif text-3xl text-[#0BAFA6]">
             Group Therapy and Workshops for Children
           </h1>
-          <p className="font-serif text-xl max-sm:text-base text-gray-400">
+          <p className="font-serif sm:text-base text-gray-400">
             My Therapy Space is passionate about sharing knowledge through
             workshops in Australia. Some of our most popular therapy workshops
             include:
@@ -70,7 +70,7 @@ const Workshop = () => {
         </div>
 
         {/* ✅ Workshop Cards */}
-        <div className="w-[90%] grid grid-cols-4 max-sm:grid-cols-1 gap-8">
+        <div className="w-[90%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {workshopTypes.map((data, index) => (
             <article
               key={index}
@@ -89,7 +89,7 @@ const Workshop = () => {
         </div>
 
         {/* ✅ Internal Linking with keyword */}
-        <p className="w-full font-serif text-lg text-gray-400 text-center px-16 max-sm:px-8">
+        <p className="w-full font-serif text-lg text-gray-400 text-center px-8 md:px-14">
           <Link to="/currentworkshops" className="text-black underline">
             Click here
           </Link>{" "}
@@ -100,7 +100,7 @@ const Workshop = () => {
         </p>
 
         {/* ✅ Images with alt text */}
-        <div className="w-[90%] px-16 grid grid-cols-4 max-sm:grid-cols-1 gap-4">
+        <div className="w-[90%] px-8 md:px-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <img
             src={Group1}
             alt="Children participating in group therapy workshop"
@@ -125,10 +125,10 @@ const Workshop = () => {
 
         {/* ✅ Current Groups Section */}
         <div
-          className="w-[90%] px-16 max-sm:px-8 mt-16"
+          className="w-[90%] px-8 md:px-14"
           id="current-groups"
         >
-          <h2 className="font-serif text-3xl text-[#0BAFA6] mb-3">
+          <h2 className="font-serif text-4xl text-[#0BAFA6] max-sm:text-center mb-8">
             Current Therapy Groups
           </h2>
 
@@ -198,7 +198,7 @@ const Workshop = () => {
 
           {/* School Holiday Groups */}
           <div className="space-y-4 mt-10">
-            <h3 className="font-serif text-2xl text-[#0BAFA6]">
+            <h3 className="font-serif text-2xl text-[#0BAFA6] ">
               School Holiday Therapy Groups
             </h3>
             <p className="font-serif text-lg text-gray-600">
