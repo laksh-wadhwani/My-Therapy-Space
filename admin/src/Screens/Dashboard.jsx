@@ -82,7 +82,7 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                     <p className="font-serif text-gray-500 text-base max-sm:text-sm">Here's what's happening with your site today.</p>
                 </div>
 
-                {/* <div className="w-full grid grid-cols-3 px-4 place-items-center">
+                <div className="w-full grid grid-cols-3 px-4 place-items-center">
 
                     <div className="w-80 h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
                         <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
@@ -108,7 +108,7 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                         <span className="font-serif text-5xl font-semibold">26</span>
                     </div>
 
-                </div> */}
+                </div>
 
                 {(user.role === "super admin")?  (
                     <div className="w-full flex flex-col gap-4 px-4 max-sm:px-0">

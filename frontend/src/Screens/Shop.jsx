@@ -10,15 +10,15 @@ const Shop = () => {
         <React.Fragment>
             <div className="main-box bg-white items-center gap-10">
 
-                <div className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24">
-                    <h2 className="font-serif text-4xl max-sm:text-3xl text-[#0BAFA6] capitalize">Shopping</h2>
-                    <p className="font-serif text-black text-xl max-sm:text-base capitalize">Welcome to My Therapy Space Shopping Area Please Select one of the below categories</p>
+                <div className="w-full px-8 md:px-14 mt-24 lg:mt-32">
+                    <h2 className="font-serif text-4xl text-[#0BAFA6] capitalize">Shopping</h2>
+                    <p className="font-serif text-black text-base md:text-lg capitalize">Welcome to My Therapy Space Shopping Area Please Select one of the below categories</p>
                 </div>
 
-                <div className="w-full flex max-sm:flex-col max-sm:gap-16 justify-between px-60 max-sm:px-8">
+                <div className="w-full flex flex-col md:flex-row items-center lg:justify-center gap-16 px-8 md:px-14">
 
                     <div className="max-w-[30rem] max-h-[34rem] box-border p-6 border border-black-100 bg-white shadow-xl rounded-2xl flex flex-col items-center gap-6">
-                        <img src={ShopProducts} alt="Shop Products Picture" className="w-full h-[60%] object-cover" />
+                        <img src={ShopProducts} alt="Shop Products Picture" className="w-[50%] lg:w-[60%] h-[60%] object-contain" />
                         <div className="flex flex-col items-center">
                             <h3 className="font-serif text-xl text-black capitalize">shop products</h3>
                             <p className="text-lg font-serif text-gray-500 capitalize text-center">visual time tables, song boards, and therapy-related tools</p>

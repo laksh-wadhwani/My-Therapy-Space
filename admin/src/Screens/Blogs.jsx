@@ -11,7 +11,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import CustomFileUpload from "../Components/CustomFileUpload";
-import CustomTextArea from "../Components/CustomTextArea"; 
+import CustomTextArea from "../Components/CustomTextArea";
 
 const Blogs = ({ isSidebarHovered }) => {
 
@@ -25,8 +25,8 @@ const Blogs = ({ isSidebarHovered }) => {
         title: "",
         thumbnail: null,
         content: "",
-        metaDescription: "", 
-        excerpt: "", 
+        metaDescription: "",
+        excerpt: "",
         imageAltText: ""
     })
 
@@ -38,7 +38,7 @@ const Blogs = ({ isSidebarHovered }) => {
             .catch(error => {
                 console.error(error)
             })
-    }, [blogsData])
+    }, [])
 
     const handleChange = (name, value) => {
         setBlogsContent(prev => ({
@@ -47,13 +47,15 @@ const Blogs = ({ isSidebarHovered }) => {
         }))
     }
 
-    const BlogsData = new FormData();
-    Object.entries(blogsContent).forEach(([key, value]) => {
-        BlogsData.append(key, value)
-    })
 
     const UploadBlog = () => {
         setUploading(true);
+
+        const BlogsData = new FormData();
+        Object.entries(blogsContent).forEach(([key, value]) => {
+            BlogsData.append(key, value)
+        })
+
         axios.post(`${URL}/api/blogs/upload`, BlogsData)
             .then(response => {
                 toast.success(response.data.message)
@@ -61,13 +63,19 @@ const Blogs = ({ isSidebarHovered }) => {
             })
             .catch(error => {
                 console.error(error)
-                return toast.error(error.response?.data?.message)
+                return toast.error(error.response?.data?.error)
             })
             .finally(() => { setUploading(false) })
     }
 
     const SaveAsDraft = () => {
         setDrafting(true);
+
+        const BlogsData = new FormData();
+        Object.entries(blogsContent).forEach(([key, value]) => {
+            BlogsData.append(key, value)
+        })
+
         axios.post(`${URL}/api/blogs/save-as-draft`, BlogsData)
             .then(response => {
                 toast.success(response.data.message)
@@ -75,7 +83,7 @@ const Blogs = ({ isSidebarHovered }) => {
             })
             .catch(error => {
                 console.error(error)
-                return toast.error(error.response?.data?.message)
+                return toast.error(error.response?.data?.error)
             })
             .finally(() => { setDrafting(false) })
     }
@@ -135,43 +143,43 @@ const Blogs = ({ isSidebarHovered }) => {
 
                     <h5 className="font-serif text-2xl capitalize text-white font-semibold italic bg-[#00BFA6] shadow-lg p-6 text-center">add new blogs</h5>
 
-                    <div className="w-full flex flex-col gap-2 px-6"> 
-                        <CustomInput 
-                            label="Blog Title *" 
-                            placeholder="E.g., 5 Signs Your Child Might Benefit from Speech Therapy" 
-                            type="text" 
-                            value={blogsContent.title} 
-                            onChange={e => handleChange("title", e.target.value)} 
+                    <div className="w-full flex flex-col gap-2 px-6">
+                        <CustomInput
+                            label="Blog Title *"
+                            placeholder="E.g., 5 Signs Your Child Might Benefit from Speech Therapy"
+                            type="text"
+                            value={blogsContent.title}
+                            onChange={e => handleChange("title", e.target.value)}
                         />
-                        
-                        <CustomInput 
-                            label="Image Alt Text" 
-                            placeholder="E.g., Speech therapist working with a child using AAC device" 
-                            type="text" 
-                            value={blogsContent.imageAltText} 
-                            onChange={e => handleChange("imageAltText", e.target.value)} 
+
+                        <CustomInput
+                            label="Image Alt Text"
+                            placeholder="E.g., Speech therapist working with a child using AAC device"
+                            type="text"
+                            value={blogsContent.imageAltText}
+                            onChange={e => handleChange("imageAltText", e.target.value)}
                         />
-                        
-                        <CustomTextArea 
-                            label="Meta Description" 
-                            placeholder="A compelling 150-160 character summary for search engines. E.g., Discover 5 key signs that indicate your child may need speech therapy. Learn how early intervention can support communication development." 
-                            value={blogsContent.metaDescription} 
+
+                        <CustomTextArea
+                            label="Meta Description"
+                            placeholder="A compelling 150-160 character summary for search engines. E.g., Discover 5 key signs that indicate your child may need speech therapy. Learn how early intervention can support communication development."
+                            value={blogsContent.metaDescription}
                             onChange={e => handleChange("metaDescription", e.target.value)}
                             rows="3"
                             maxWords={160}
                         />
-                        
+
                         <CustomTextArea
-                            label="Excerpt" 
-                            placeholder="A short preview text for the blog listing page. (2-3 sentences)" 
-                            value={blogsContent.excerpt} 
+                            label="Excerpt"
+                            placeholder="A short preview text for the blog listing page. (2-3 sentences)"
+                            value={blogsContent.excerpt}
                             onChange={e => handleChange("excerpt", e.target.value)}
                             rows="2"
                             maxWords={30}
                         />
-                        
+
                         <CustomFileUpload label="Blog Thumbnail Image" value={blogsContent.thumbnail} onChange={file => handleChange("thumbnail", file)} />
-                        
+
                         <div>
                             <label className="font-serif text-base text-black capitalize font-medium">blog content</label>
                             <CustomEditor value={blogsContent.content} onChange={(val) => handleChange("content", val)} />

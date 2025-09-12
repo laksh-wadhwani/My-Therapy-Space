@@ -22,22 +22,20 @@ const Blogs = () => {
 
     return(
         <React.Fragment>
-            {/* ===== ADD SEO HEAD TAGS ===== */}
             <Helmet>
                 <title>Child Therapy & Development Blog | Expert Tips & Resources | My Therapy Space</title>
                 <meta name="description" content="Explore our expert blog on pediatric speech therapy, occupational therapy, autism support, AAC, and child development strategies for parents and caregivers." />
                 <link rel="canonical" href="https://mytherapyspace.com.au/blogs" />
             </Helmet>
 
-            <div className="main-box bg-[#E0F4F5] items-center gap-10">
+            <div className="main-box bg-[#E0F4F5] min-h-screen items-center gap-10">
 
-                <div className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24 self-start">
-                    {/* Changed from h2 to h1 for main page title */}
-                    <h1 className="font-serif text-4xl max-sm:text-3xl uppercase text-[#0BAFA6]">Our Therapy Blog</h1>
-                    <p className="font-serif text-xl max-sm:text-base text-gray-400">Expert insights on speech pathology, occupational therapy, and supporting your child's development.</p>
+                <div className="flex-1 w-full px-8 lg:px-16 mt-24 lg:mt-32 self-start max-sm:text-center">
+                    <h1 className="font-serif text-3xl uppercase text-[#0BAFA6]">Our Therapy Blog</h1>
+                    <p className="font-serif text-base text-gray-400">Expert insights on speech pathology, occupational therapy, and supporting your child's development.</p>
                 </div>
 
-                {(blogsData.length === 0) ? <p className="text-3xl font-serif font-semibold italic">No Blogs have been uploaded</p> :
+                {(blogsData.length === 0) ? <p className="text-3xl text-center font-serif font-semibold italic">No Blogs have been uploaded</p> :
                 <div className="w-full flex box-border px-4 flex-wrap gap-12 justify-center">
                     {blogsData.map(data => (
                      
@@ -57,7 +55,7 @@ const Blogs = () => {
                                     )}
                                 </p>
                                 <Link to={`/blog/${data.slug}`} style={{color: 'unset'}}> 
-                                    <span className="text-[#0BAFA6] font--light text-base font-serif uppercase cursor-pointer">Read More</span>
+                                    <span className="text-[#0BAFA6] font-light text-base font-serif uppercase cursor-pointer">Read More</span>
                                 </Link>
                             </div>
                         </div>
@@ -65,8 +63,8 @@ const Blogs = () => {
                     ))}
                 </div>
                 }
+                <Footer/>
             </div>
-            <Footer/>
         </React.Fragment>
     )
 }

@@ -20,20 +20,20 @@ const Products = () => {
 
     return(
         <React.Fragment>
-            <div className="main-box bg-[#E0F4F5] gap-10 items-center">
+            <div className="main-box bg-[#E0F4F5] gap-10 items-center min-h-screen">
                 
-                <div className="w-full flex justify-between px-16 max-sm:px-8 mt-32 max-sm:mt-24 items-center">
-                    <h2 className="font-serif text-[#0BAFA6] text-4xl max-sm:text-3xl capitalize">products</h2>
-                </div>
+               
+                <h2 className="md:self-start flex-1 font-serif text-[#0BAFA6] text-4xl capitalize mt-24 lg:mt-32 md:px-14">products</h2>
+              
 
-                {(products.length===0)? <p className="text-3xl font-serif font-semibold italic">No Products have been uploaded</p>:
-                <div className="w-full flex flex-wrap px-16 gap-16 justify-center">
+                {(products.length === 0)? <p className="text-3xl text-center font-serif font-semibold italic">No Products have been uploaded</p>:
+                <div className="w-full flex flex-wrap px-8 md:px-14 gap-16 justify-center">
                     {products.map(product => (
                         <Link to={`/specificProduct/${product._id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
                             <img src={product.thumbnail} alt="Product Picture" className="w-full h-[70%] object-cover rounded-t-xl" />
                             <div className="flex flex-col items center px-1 ">
                                 <h5 className="font-serif text-black font-semibold text-xl text-center">{product.name}</h5>
-                                <p className="font-serif text-gray-400 text-center">{product.price}</p>
+                                <p className="font-serif text-gray-400 text-center">${product.price}</p>
                             </div>
                             {/* <CustomButton>Add to Cart</CustomButton> */}
                         </div></Link>

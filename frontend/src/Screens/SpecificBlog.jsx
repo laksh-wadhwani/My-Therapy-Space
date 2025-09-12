@@ -39,7 +39,6 @@ const SpecificBlog = () => {
 
     const handleSubmitComment = (e) => {
         e.preventDefault();
-        // Add your comment submission logic here
         console.log("Comment submitted:", { name, email, comment });
         alert("Thank you for your comment! It will be reviewed before publishing.");
         setComment("");
@@ -95,14 +94,12 @@ const SpecificBlog = () => {
 
     return (
         <React.Fragment>
-            {/* ================= DYNAMIC SEO META TAGS ================= */}
             <Helmet>
                 <title>{blog.title} | My Therapy Space</title>
                 <meta name="description" content={blog.metaDescription || blog.excerpt || `Read our article about ${blog.title} on My Therapy Space.`} />
                 <meta name="keywords" content={blog.keywords || `speech therapy, occupational therapy, pediatric therapy, ${blog.title}`} />
                 <link rel="canonical" href={canonicalUrl} />
                 
-                {/* Open Graph Tags */}
                 <meta property="og:title" content={blog.title} />
                 <meta property="og:description" content={blog.metaDescription || blog.excerpt} />
                 <meta property="og:image" content={blog.thumbnail} />
@@ -110,13 +107,11 @@ const SpecificBlog = () => {
                 <meta property="og:type" content="article" />
                 <meta property="og:site_name" content="My Therapy Space" />
                 
-                {/* Twitter Card Tags */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={blog.title} />
                 <meta name="twitter:description" content={blog.metaDescription || blog.excerpt} />
                 <meta name="twitter:image" content={blog.thumbnail} />
                 
-                {/* Structured Data for SEO */}
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",
@@ -146,19 +141,16 @@ const SpecificBlog = () => {
                 </script>
             </Helmet>
 
-            <div className="main-box bg-white items-center gap-10">
-                {/* Blog Header */}
-                <div className="w-full flex flex-col items-center mt-32 max-sm:mt-24 px-32 max-sm:px-8 gap-8 max-sm:gap-6">
-                    <h1 className="font-serif text-4xl max-sm:text-3xl text-center capitalize text-[#0BAFA6] leading-tight">
+            <div className="main-box bg-white items-center gap-6">
+
+                <div className="w-full flex flex-col items-center mt-24 lg:mt-32 px-8 md:px-14 gap-6">
+                    <h1 className="font-serif text-2xl lg:text-4xl text-center capitalize text-[#0BAFA6] leading-tight">
                         {blog.title}
                     </h1>
                     
-                    {/* Blog Meta Information */}
-                    <div className="flex flex-col items-center gap-2 text-gray-600">
-                        <span className="font-serif text-lg">Published on {publishedDate}</span>
-                        {/* Add reading time estimate if needed */}
-                        {/* <span className="font-serif text-sm">• 5 min read</span> */}
-                    </div>
+                    {/* <div className="flex flex-col items-center gap-2 text-gray-600">
+                        <span className="font-serif text-sm">Published on {publishedDate}</span>
+                    </div> */}
 
                     {blog.thumbnail && (
                         <img 
@@ -169,19 +161,18 @@ const SpecificBlog = () => {
                     )}
                 </div>
 
-                {/* Blog Content */}
-                <article className="w-full px-32 max-sm:px-8 text-black font-serif flex flex-col gap-8">
+                <article className="w-full px-8 md:px-14 text-black font-serif flex flex-col">
                     <ReactMarkdown 
                         rehypePlugins={[rehypeRaw]}
                         components={{
-                            h1: ({node, ...props}) => <h2 className="text-3xl font-bold text-[#0BAFA6] mt-12 mb-6" {...props} />,
-                            h2: ({node, ...props}) => <h3 className="text-2xl font-semibold text-[#15b7ac] mt-10 mb-4" {...props} />,
-                            h3: ({node, ...props}) => <h4 className="text-xl font-medium text-[#01b7ac] mt-8 mb-3" {...props} />,
-                            p: ({node, ...props}) => <p className="text-lg leading-8 mb-6 text-gray-800" {...props} />,
+                            h1: ({node, ...props}) => <h2 className="text-3xl font-bold my-6" {...props} />,
+                            h2: ({node, ...props}) => <h3 className="text-2xl font-semibold my-6" {...props} />,
+                            h3: ({node, ...props}) => <h4 className="text-xl font-medium my-6" {...props} />,
+                            p: ({node, ...props}) => <p className="text-lg leading-8 mb-2 text-gray-800" {...props} />,
                             ul: ({node, ...props}) => <ul className="list-disc ml-8 mb-6 space-y-2" {...props} />,
                             ol: ({node, ...props}) => <ol className="list-decimal ml-8 mb-6 space-y-2" {...props} />,
                             li: ({node, ...props}) => <li className="text-lg text-gray-800" {...props} />,
-                            strong: ({node, ...props}) => <strong className="font-semibold text-[#0BAFA6]" {...props} />,
+                            strong: ({node, ...props}) => <strong className="font-semibold" {...props} />,
                             em: ({node, ...props}) => <em className="italic text-gray-700" {...props} />,
                             blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-[#0BAFA6] pl-6 italic text-gray-600 my-6" {...props} />,
                             a: ({node, ...props}) => <a className="text-[#0BAFA6] hover:text-[#08887c] underline" {...props} />
@@ -191,12 +182,13 @@ const SpecificBlog = () => {
                     </ReactMarkdown>
                 </article>
 
-                {/* Social Sharing */}
-                <div className="w-[80%] box-border px-10 py-6 bg-white border border-gray-200 shadow-md rounded-xl flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <span className="font-serif text-2xl max-sm:text-xl text-black uppercase font-semibold">
+                
+                <div className="w-[85%] box-border px-10 py-6 bg-white border border-gray-200 shadow-md rounded-xl flex flex-col lg:flex-row justify-between items-center gap-4">
+                    <span className="font-serif text-xl lg:text-2xl text-black uppercase font-semibold">
                         Share this post
                     </span>
-                    <div className="w-fit flex gap-4 flex-wrap justify-center">
+
+                    <div className="w-fit flex gap-1 flex-wrap justify-center">
                         <button onClick={() => handleShare('facebook')} className="p-2 hover:scale-110 transition-transform">
                             <img src={Facebook} alt="Share on Facebook" className="w-8 h-8 object-contain" />
                         </button>
@@ -216,7 +208,7 @@ const SpecificBlog = () => {
                 </div>
 
                 {/* Comment Section */}
-                <div className="w-[80%] flex flex-col gap-6">
+                {/* <div className="w-[80%] flex flex-col gap-6">
                     <h3 className="font-serif text-2xl text-black capitalize border-b pb-2">
                         Leave a Comment
                     </h3>
@@ -249,7 +241,7 @@ const SpecificBlog = () => {
                             Post Comment
                         </CustomButton>
                     </form>
-                </div>
+                </div> */}
 
                 <Footer/>
             </div>

@@ -55,7 +55,7 @@ const ContactUs = () => {
 
   return (
     <React.Fragment>
-      {/* ✅ SEO Meta Tags */}
+      
       <Helmet>
         <title>Contact Us | My Therapy Space - Pediatric Therapy in Australia</title>
         <meta
@@ -68,13 +68,13 @@ const ContactUs = () => {
         />
       </Helmet>
 
-      <div className="main-box bg-[#E0F4F5] gap-12 items-center">
-        {/* ✅ Header Section with Keywords */}
-        <header className="w-full px-16 max-sm:px-8 flex flex-col gap-4 mt-32 max-sm:mt-24">
-          <h1 className="font-serif text-[#0BAFA6] text-4xl max-sm:text-3xl capitalize">
+      <div className="main-box bg-[#E0F4F5] gap-12 items-center px-8 md:px-14 pb-8">
+        
+        <header className="w-full flex flex-col gap-4 mt-24 lg:mt-32 max-sm:text-center">
+          <h1 className="font-serif text-[#0BAFA6] text-3xl md:text-4xl capitalize">
             Contact My Therapy Space
           </h1>
-          <p className="font-serif text-center text-black text-xl max-sm:text-sm">
+          <p className="font-serif text-center text-black text-sm md:text-lg">
             If you would like to refer your child for{" "}
             <strong>speech therapy, occupational therapy, or dietitian services</strong>,
             please enter your details below or visit our clinic. Our friendly staff
@@ -82,20 +82,19 @@ const ContactUs = () => {
           </p>
         </header>
 
-        {/* ✅ Contact Form Section */}
-        <section className="w-[90%] max-sm:w-full flex justify-between items-stretch border border-black-100 shadow-md rounded-xl bg-white">
-          {/* Left Image */}
-          <div className="w-1/2 max-sm:hidden">
+       
+        <section className="w-full flex md:flex-col lg:flex-row justify-between items-stretch border border-black-100 shadow-md rounded-xl bg-white">
+          
+          <div className="hidden md:block w-full lg:w-1/2">
             <img
               src={Contact_Us}
               alt="Child receiving pediatric therapy at My Therapy Space"
-              className="w-full h-full object-cover rounded-l-xl"
+              className="w-full h-full object-cover md:rounded-t-xl lg:rounded-l-xl"
             />
           </div>
 
-          {/* Right Form */}
           <form
-            className="w-1/2 max-sm:w-full flex flex-col gap-12 px-8 py-8 text-black"
+            className="w-full lg:w-1/2 flex flex-col gap-12 px-8 py-8 text-black"
             onSubmit={(e) => {
               e.preventDefault();
               SendQuery();
@@ -181,7 +180,6 @@ const ContactUs = () => {
           </form>
         </section>
 
-        {/* ✅ Referral Process Section */}
         <section className="w-full max-w-3xl mx-auto py-8 px-4 flex flex-col gap-6 bg-white rounded-2xl shadow-lg text-black">
           <h2 className="font-serif text-[#0BAFA6] text-3xl text-center">
             Our Referral Process for Pediatric Therapy
@@ -209,9 +207,8 @@ const ContactUs = () => {
             ))}
           </div>
         </section>
-
-        <Footer />
       </div>
+      <Footer />
     </React.Fragment>
   );
 };

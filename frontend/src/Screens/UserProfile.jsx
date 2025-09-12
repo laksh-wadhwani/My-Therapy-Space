@@ -132,7 +132,7 @@ const UserProfile = ({ setLoginUser }) => {
     return (
         <React.Fragment>
 
-            <div className="fixed left-6 mt-24 w-[20%] max-sm:w-full flex flex-col gap-2 items-center">
+            <div className="fixed px-8 w-full flex flex-col gap-2 items-center">
 
                 <div className={`w-full flex flex-col gap-4 items-center ${user.profile ? `rounded-xl bg-white border border-gray-100 shadow-lg p-2` : ``}`}>
                     {user.profile ?
@@ -165,7 +165,7 @@ const UserProfile = ({ setLoginUser }) => {
             </div>
 
 
-            <div className="w-[78%] max-sm:w-full flex flex-col gap-8 pb-4 mt-28 px-6 float-right">
+            {/* <div className="w-[78%] max-sm:w-full flex flex-col gap-8 pb-4 mt-28 px-6 float-right">
 
                 {isUpdate ?
                     <>
@@ -203,7 +203,7 @@ const UserProfile = ({ setLoginUser }) => {
                     </>
                 }
 
-            </div>
+            </div> */}
 
 
             <Modal open={open} onClose={() => setOpen(false)} center

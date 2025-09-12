@@ -114,9 +114,9 @@ const Cart = () => {
   return (
     <React.Fragment>
       <div className="main-box bg-[#E0F4F5] gap-10">
-        <h2 className="w-full px-16 max-sm:px-8 mt-32 max-sm:mt-24 font-serif text-4xl max-sm:text-3xl text-[#0BAFA6] capitalize">shopping cart</h2>
+        <h2 className="w-full px-8 md:px-14 mt-24 lg:mt-24 font-serif text-3xl md:text-4xl text-[#0BAFA6] capitalize">shopping cart</h2>
 
-        <div className="w-full px-16 max-sm:px-8 flex max-sm:flex-col max-sm:gap-10 justify-between items-start">
+        <div className="w-full px-8 md:px-14 flex flex-col lg:flex-row gap-10 lg:gap-0 justify-between items-start">
 
           {(isCartEmpty) ?
             <div className="w-full flex flex-col items-center justify-center py-20">
@@ -124,16 +124,15 @@ const Cart = () => {
               <Link to={`/shop`}><CustomButton>Continue Shopping</CustomButton></Link>
             </div>
             :
-            <div className="w-[65%] max-sm:w-full flex flex-col gap-6">
+            <div className="w-full lg:w-[65%] flex flex-col gap-6">
               {cart.items.map(data => (
                 <div className="w-full border border-gray-300 rounded-xl shadow-md py-3 px-8 flex justify-between items-center">
-                  <div className="w-[80%] flex items-center max-sm:items-center gap-4">
-                    <img src={data.thumbnail} alt="Product Picture" className="w-[40%] rounded-xl h-40 max-sm:h-auto" />
+                  <div className="w-[80%] flex items-center gap-4">
+                    <img src={data.thumbnail} alt="Product Picture" className="w-[40%] rounded-xl max-h-40 h-auto" />
                     <div className="w-[60%] flex flex-col font-serif text-black capitalize">
-                      <span className="text-2xl max-sm:text-lg">{data.title}</span>
-                      <span className="text-xl max-sm:text-base">Price: {data.price}</span>
-                      {data.pickupLocation && <span className="text-xl max-sm:text-base">Pickup Location: {data.pickupLocation}</span>}
-                      {console.log(data)}
+                      <span className="text-lg md:text-2xl">{data.title}</span>
+                      <span className="text-base md:text-xl">Price: {data.price}</span>
+                      {data.pickupLocation && <span className="text-base md:text-xl">Pickup Location: {data.pickupLocation}</span>}
                     </div>
                   </div>
                   <Trash2 size={24} className="stroke-red-500 hover:scale-105 cursor-pointer" onClick={() => DeleteProduct(data.cartID)} />
@@ -144,7 +143,7 @@ const Cart = () => {
 
 
 
-          <div className="w-[30%] max-sm:w-full border border-gray-300 rounded-xl shadow-md flex flex-col gap-8 px-8 py-6">
+          <div className="w-full lg:w-[30%] border border-gray-300 rounded-xl shadow-md flex flex-col gap-8 px-8 py-6">
             <h5 className="font-serif text-3xl text-black capitalize">order summary</h5>
             <div className="flex flex-col gap-2">
               <div className="w-full flex justify-between font-serif text-black text-lg capitalize">

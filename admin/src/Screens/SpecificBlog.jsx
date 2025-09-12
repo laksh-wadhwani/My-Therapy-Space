@@ -156,10 +156,11 @@ const SpecificBlog = ({ isSidebarHovered }) => {
                 <ReactMarkdown
                   rehypePlugins={[rehypeRaw]}
                   components={{
-                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold text-[#0BAFA6]" {...props} />,
-                    h2: ({ node, ...props }) => <h2 className="text-2xl font-semibold text-[#15b7ac]" {...props} />,
-                    h3: ({ node, ...props }) => <h3 className="text-xl font-medium text-[#01b7ac]" {...props} />,
+                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold" {...props} />,
+                    h2: ({ node, ...props }) => <h2 className="text-2xl font-semibold" {...props} />,
+                    h3: ({ node, ...props }) => <h3 className="text-xl font-medium" {...props} />,
                     ul: ({ node, ...props }) => <ul className="list-disc ml-6" {...props} />,
+                    ol: ({ node, ...props }) => <ol className="list-decimal ml-6" {...props} />,
                     li: ({ node, ...props }) => <li className="mb-1" {...props} />,
                     span: ({ node, style, ...props }) => <span style={style} {...props} />
                   }}>

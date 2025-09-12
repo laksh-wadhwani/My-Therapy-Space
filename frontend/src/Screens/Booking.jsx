@@ -49,7 +49,7 @@ const Booking = () => {
     return (
         <React.Fragment>
             <div className="main-box bg-[#E0F4F5] max-sm:gap-8">
-                <div className="w-full px-6 lg:px-16 mt-32 max-sm:mt-24">
+                <div className="w-full px-6 lg:px-16 mt-32 max-sm:mt-24 max-sm:text-center">
                     <h2 className="font-serif text-4xl max-sm:text-3xl capitalize text-[#0BAFA6]">Book A Phone Appointment </h2>
                     <p className="font-serif text-xl text-black">Please enter a few details to book a phone appointment with one of our friendly client care team</p>
                 </div>

@@ -85,7 +85,7 @@ const Workshop = () => {
             </article>
           ))}
         </div> */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 ">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 px-8 md:px-14">
             {[
               "Accredited Key Word Sign workshops - basic and intermediate",
               "An introduction to Neurodiversity affirming practice",

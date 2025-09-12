@@ -19,22 +19,20 @@ const PaidVideos = () => {
 
     return(
         <React.Fragment>
-            <div className="main-box bg-[#E0F4F5] gap-10 items-center">
+            <div className="main-box bg-[#E0F4F5] gap-6 md:gap-10 items-center min-h-screen">
                 
-                <div className="w-full flex justify-between px-16 max-sm:px-8 mt-32 max-sm:mt-24 items-center">
-                    <h2 className="font-serif text-[#0BAFA6] text-4xl max-sm:text-3xl capitalize">Course Videos</h2>
-                </div>
+                <h2 className="flex-1 md:self-start font-serif text-[#0BAFA6] text-3xl md:text-4xl capitalize mt-24 lg:mt-32 px-8 md:px-14">Course Videos</h2>
 
-                {(courses.length===0)? <p className="text-3xl font-serif font-semibold italic">No Courses have been uploaded</p>:
-                <div className="w-full flex flex-wrap px-16 gap-16 justify-center">
+                {(courses.length===0)? <p className="text-3xl text-center font-serif font-semibold italic">No Courses have been uploaded</p>:
+                <div className="w-full flex flex-wrap px-8 md:px-14 gap-16 justify-center">
                     {courses.map(course => (
                         <Link to={`/specificVideo/${course._id}`} style={{color:"unset"}}><div className="w-[280px] h-[330px] shadow-md rounded-xl flex flex-col items-center justify-between pb-4 cursor-pointer hover:scale-105">
                             <img src={course.thumbnail} alt="Product Picture" className="w-full max-h-[70%] object-cover rounded-t-xl" />
                             <div className="flex flex-col items center px-6">
-                                <h5 className="font-serif text-black text-lg text-center">{course.name}</h5>
+                                <h5 className="font-serif text-black text-lg font-semibold text-center">{course.name}</h5>
                                 <p className="font-serif text-gray-400 text-center">{course.price}</p>
                             </div>
-                            <CustomButton>Add to Cart</CustomButton>
+                            {/* <CustomButton>Add to Cart</CustomButton> */}
                         </div></Link>
                     ))}
                 </div>
