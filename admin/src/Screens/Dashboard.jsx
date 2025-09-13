@@ -9,7 +9,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Modal from "react-responsive-modal";
 import CustomTextArea from "../Components/CustomTextArea";
-import { BookText } from 'lucide-react';
+import { Logs, Store, FileUser, PhoneCall, UsersRound, DollarSign  } from 'lucide-react';
 
 const Dashboard = ({ isSidebarHovered, user }) => {
 
@@ -21,6 +21,7 @@ const Dashboard = ({ isSidebarHovered, user }) => {
     const [admins, setAdmins] = useState([])
     const [selectedAdminId, setSelectedAdminId] = useState(null)
     const [productDetails, setProductDetails] = useState([])
+    const [analytics, setAnalytics] = useState()
     const [product, setProduct] = useState()
     const [remarks, setRemarks] = useState("")
 
@@ -30,7 +31,11 @@ const Dashboard = ({ isSidebarHovered, user }) => {
 
         axios.get(`${URL}/api/admin/get-product-details`)
         .then(response => setProductDetails(response.data))
-    },[admins, productDetails])
+
+        axios.get(`${URL}/api/admin/get-analytics`)
+        .then(response => setAnalytics(response.data))
+        .catch(error => console.error("Getting error in fetching basic analytics:",error))
+    },[])
 
     const columns = [
         { key: "orderID", label: "Order Ref#" },
@@ -74,7 +79,6 @@ const Dashboard = ({ isSidebarHovered, user }) => {
     return (
         <React.Fragment>
             <div className={`transition-all duration-300 ${isSidebarHovered ? 'w-[82%]' : 'w-[94%]'} flex flex-col max-sm:items-center gap-8 pb-12 max-sm:w-full max-sm:px-6 box-border`}>
-
                 <h1 className="font-serf text-4xl max-sm:text-3xl font-bold text-black capitalize italic mt-6 max-sm:mt-18 border-b border-gray-200 p-4 max-sm:px-0 max-sm:self-start max-sm:w-full">Dashboard</h1>
 
                 <div className="w-full flex flex-col px-4 max-sm:px-0">
@@ -82,33 +86,59 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                     <p className="font-serif text-gray-500 text-base max-sm:text-sm">Here's what's happening with your site today.</p>
                 </div>
 
-                <div className="w-full grid grid-cols-3 px-4 place-items-center">
+                {analytics && 
+                <div className="w-full grid grid-cols-3 px-4 gap-x-16 gap-y-4 place-items-center">
 
-                    <div className="w-80 h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
                         <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
                             <h5 className="font-serif text-lg text-white text-shadow-md">Total Blogs Uploaded</h5>
-                            <BookText size={32} className="stroke-white shadow-md"/>
+                            <Logs size={32} className="stroke-white"/>
                         </div>
-                        <span className="font-serif text-5xl font-semibold">26</span>
+                        <span className="font-serif text-5xl font-semibold">{analytics.totalBlogs}</span>
                     </div>
 
-                    <div className="w-80 h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
                         <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
-                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Blogs Uploaded</h5>
-                            <BookText size={32} className="stroke-white shadow-md"/>
+                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Workshops</h5>
+                            <Store size={32} className="stroke-white"/>
                         </div>
-                        <span className="font-serif text-5xl font-semibold">26</span>
+                        <span className="font-serif text-5xl font-semibold">{analytics.totalWorkshops}</span>
                     </div>
 
-                    <div className="w-80 h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
                         <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
-                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Blogs Uploaded</h5>
-                            <BookText size={32} className="stroke-white shadow-md"/>
+                            <h5 className="font-serif text-lg text-white text-shadow-md">Total User Queries</h5>
+                            <FileUser size={32} className="stroke-white"/>
                         </div>
-                        <span className="font-serif text-5xl font-semibold">26</span>
+                        <span className="font-serif text-5xl font-semibold">{analytics.totalQueries}</span>
+                    </div>
+
+                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
+                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Bookings</h5>
+                            <PhoneCall size={32} className="stroke-white"/>
+                        </div>
+                        <span className="font-serif text-5xl font-semibold">{analytics.totalBookings}</span>
+                    </div>
+
+                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
+                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Team Members</h5>
+                            <UsersRound size={32} className="stroke-white"/>
+                        </div>
+                        <span className="font-serif text-5xl font-semibold">{analytics.totalTeamMembers}</span>
+                    </div>
+
+                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
+                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
+                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Products Sell</h5>
+                            <DollarSign  size={32} className="stroke-white"/>
+                        </div>
+                        <span className="font-serif text-5xl font-semibold">{analytics.totalProductsBought}</span>
                     </div>
 
                 </div>
+                }                
 
                 {(user.role === "super admin")?  (
                     <div className="w-full flex flex-col gap-4 px-4 max-sm:px-0">

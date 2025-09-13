@@ -7,6 +7,11 @@ import uploadToCloudinary from "../config/cloudinary.js"
 import AdminModel from "../models/Admin.js"
 import { generateTempPassword } from "../utils/passwordGenerator.js"
 import PaymentModel from "../models/Payment.js"
+import BlogsModel from "../models/Blogs.js"
+import WorkshopModel from "../models/Workshop.js"
+import QueryModel from "../models/Query.js"
+import BookingModel from "../models/Bookings.js"
+import TeamModel from "../models/Team.js"
 
 export const SignUp = async (request, response) => {
     try {
@@ -325,6 +330,30 @@ export const GetProductDetails = async(request, response) => {
 
     } catch (error) {
         console.log("Getting error in fetching product details: ",error)
+        return response.status(500).json({error: "Internal Server Error"})
+    }
+}
+
+export const BasicAnalytics = async(request, response) => {
+    try {
+        const totalBlogs = await BlogsModel.countDocuments();
+        const totalWorkshops = await WorkshopModel.countDocuments();
+        const totalQueries = await QueryModel.countDocuments();
+        const totalBookings = await BookingModel.countDocuments();
+        const totalTeamMembers = await TeamModel.countDocuments();
+        const totalProductsBought = await PaymentModel.countDocuments();
+
+        return response.status(200).json({
+            totalBlogs,
+            totalWorkshops,
+            totalQueries,
+            totalBookings,
+            totalTeamMembers,
+            totalProductsBought
+        })
+
+    } catch (error) {
+        console.log("Getting error in fetching basic analytics: ", error)
         return response.status(500).json({error: "Internal Server Error"})
     }
 }
