@@ -90,25 +90,25 @@ const Workshop = () => {
           ))}
         </div> */}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 px-8 md:px-14">
-            {[
-              "Accredited Key Word Sign workshops - basic and intermediate",
-              "An introduction to Neurodiversity affirming practice",
-              "Understanding Sensory processing",
-              "Emotional regulation",
-            ].map((workshop, idx) => (
-              <div
-                key={idx}
-                className="group relative p-4 border rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer bg-white max-w-md mx-auto"
-              >
-                <p className="font-serif  text-lg group-hover:text-teal-500 transition-colors">
-                  {workshop}
-                </p>
-                <p className="mt-2 text-gray-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                  This workshop provides valuable insights and hands-on strategies for families and educators to support children’s development.
-                </p>
-              </div>
-            ))}
-          </div>
+          {[
+            "Accredited Key Word Sign workshops - basic and intermediate",
+            "An introduction to Neurodiversity affirming practice",
+            "Understanding Sensory processing",
+            "Emotional regulation",
+          ].map((workshop, idx) => (
+            <div
+              key={idx}
+              className="group relative p-4 border rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer bg-white max-w-md mx-auto"
+            >
+              <p className="font-serif  text-lg group-hover:text-teal-500 transition-colors">
+                {workshop}
+              </p>
+              <p className="mt-2 text-gray-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                This workshop provides valuable insights and hands-on strategies for families and educators to support children’s development.
+              </p>
+            </div>
+          ))}
+        </div>
 
 
         {/* ✅ Internal Linking with keyword */}
@@ -284,23 +284,27 @@ const Workshop = () => {
           View Current Groups
         </RButton>
 
+
+
         <div className="w-[80%] flex flex-col items-center gap-8 xl:gap-12 p-8 xl:p-12 border border-black-300 shadow-md rounded-xl bg-white">
+          <h3 className="font-serif text-3xl self-start text-[#0BAFA6] ">
+            We Also Offer
+          </h3>
+          <div className="w-full flex flex-col-reverse md:flex-row items-center gap-8">
+            <ul className="list-disc pl-2 lg:pl-6 font-serif text-sm lg:text-lg xl:text-xl text-black flex flex-col gap-1 xl:gap-3 md:w-[50%]">
+              <li>Hanen ”It Takes Two to Talk”</li>
+              <li>Hanen “More than Words”</li>
+              <li>Hanen “Learning Language and Loving it”Programs.</li>
+              <li>Social Thinking Explorers Groups</li>
+              <li>Let’s Chat – A Speech Pathology Group of 4-6 year old learning AAC & Social Communication through cooking</li>
+              <li>Fun with Switches – An OT/SLP group aimed at developing social communications with switch access</li>
+              <li>Let’s Communicate – An 8 week program for parents and children aged 18 months to 3 who are late talkers</li>
+            </ul>
+            <img src={Also_Offer} alt="Also Offer Image" className="w-full md:w-[50%]" />
+          </div>
+          <Link to="/contact"><CustomButton>Get In Touch</CustomButton></Link>
 
-                    <div className="w-full flex flex-col-reverse md:flex-row items-center gap-8">
-                        <ul className="list-disc pl-2 lg:pl-6 font-serif text-sm lg:text-lg xl:text-xl text-black flex flex-col gap-1 xl:gap-3 md:w-[50%]">
-                            <li>Hanen ”It Takes Two to Talk”</li>
-                            <li>Hanen “More than Words”</li>
-                            <li>Hanen “Learning Language and Loving it”Programs.</li>
-                            <li>Social Thinking Explorers Groups</li>
-                            <li>Let’s Chat – A Speech Pathology Group of 4-6 year old learning AAC & Social Communication through cooking</li>
-                            <li>Fun with Switches – An OT/SLP group aimed at developing social communications with switch access</li>
-                            <li>Let’s Communicate – An 8 week program for parents and children aged 18 months to 3 who are late talkers</li>
-                        </ul>
-                        <img src={Also_Offer} alt="Also Offer Image" className="w-full md:w-[50%]" />
-                    </div>
-                    <Link to="/contact"><CustomButton>Get In Touch</CustomButton></Link>
-
-                </div>
+        </div>
 
         <Footer />
       </div>
