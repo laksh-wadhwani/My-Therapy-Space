@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 export const BackendContext = createContext();
 
 export const BackendProvider = ({children}) => {
-    const backendURL = "http://localhost:3000"
+    const backendURL = "https://my-therapy-space-backend.vercel.app"
 
     return(
         <BackendContext.Provider value={backendURL}>
