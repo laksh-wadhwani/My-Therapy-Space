@@ -16,6 +16,7 @@ const Login = ({setLoginUser}) => {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [forgetPassToggle, setForgetPassToggle] = useState(false)
+    const [verifyToggle, setVerifyToggle] = useState(false)
     const [user, setUser] = useState({
         email: "",
         password: ""
@@ -60,6 +61,12 @@ const Login = ({setLoginUser}) => {
         })
     }
 
+    const Verify = () => {
+        const {email, password} = user
+        if(!(email && password))
+            return toast.error("Please enter email and password")
+    }
+
     return (
         <React.Fragment>
 
@@ -84,7 +91,10 @@ const Login = ({setLoginUser}) => {
                         <div className="w-full flex flex-col gap-4">
                             <CustomInput label="Email" type="email" placeholder="Email" name="email" value={user.email} onChange={handleChange} />
                             <CustomInput label="Password" type="password" placeholder="Password" name="password" value={user.password} onChange={handleChange} />
-                            <span className="font-serif text-base text-black capitalize underline cursor-pointer self-end" onClick={() => setForgetPassToggle(true)}>forget password?</span>
+                            <div className="w-full flex justify-between">
+                                <span className="font-serif text-base text-[#14B8A6] capitalize hover:scale-105 cursor-pointer" onClick={Verify}>Verify</span>
+                                <span className="font-serif text-base text-black capitalize underline cursor-pointer" onClick={() => setForgetPassToggle(true)}>forget password?</span>
+                            </div>
                         </div>   
 
                         <div className="flex flex-col gap-2">

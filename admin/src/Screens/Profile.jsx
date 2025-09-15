@@ -72,7 +72,7 @@ const Profile = ({ isSidebarHovered, user, setLoginUser }) => {
                 <div className="w-[45%] max-sm:w-full flex flex-col gap-4 mt-16 max-sm:mt-0">
                     <h5 className="font-serif text-3xl capitalize italic text-black font-normal">password</h5>
                     <div className="flex flex-col gap-6 p-8 border border-gray-200 rounded-xl shadow-md">
-                        <CustomInput label="Old Password" type="password" placeholder="OldPassword" value={updatedUser.password} onChange={e => handleChange("password", e.target.value)} />
+                        <CustomInput label="Old Password" type="password" placeholder="Old Password" value={updatedUser.password} onChange={e => handleChange("password", e.target.value)} />
                         <CustomInput label="New Password" type="password" placeholder="New Password" showPasswordRules={true} value={updatedUser.newPass} onChange={e => handleChange("newPass", e.target.value)} />
                         <CustomButton className="w-fit" onClick={() => Update(user.id)}>
                             {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Save"}
