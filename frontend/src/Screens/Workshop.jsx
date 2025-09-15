@@ -11,6 +11,10 @@ import Group4 from "../assets/group4.png";
 import Footer from "../Components/footer";
 import { Link, useNavigate } from "react-router";
 import RButton from "../Components/Reusable_Button";
+import Also_Offer from "../assets/Also Offer.png"
+import CustomButton from "../Components/CustomButton";
+
+
 
 const Workshop = () => {
   const navigate = useNavigate();
@@ -279,6 +283,24 @@ const Workshop = () => {
         >
           View Current Groups
         </RButton>
+
+        <div className="w-[80%] flex flex-col items-center gap-8 xl:gap-12 p-8 xl:p-12 border border-black-300 shadow-md rounded-xl bg-white">
+
+                    <div className="w-full flex flex-col-reverse md:flex-row items-center gap-8">
+                        <ul className="list-disc pl-2 lg:pl-6 font-serif text-sm lg:text-lg xl:text-xl text-black flex flex-col gap-1 xl:gap-3 md:w-[50%]">
+                            <li>Hanen ”It Takes Two to Talk”</li>
+                            <li>Hanen “More than Words”</li>
+                            <li>Hanen “Learning Language and Loving it”Programs.</li>
+                            <li>Social Thinking Explorers Groups</li>
+                            <li>Let’s Chat – A Speech Pathology Group of 4-6 year old learning AAC & Social Communication through cooking</li>
+                            <li>Fun with Switches – An OT/SLP group aimed at developing social communications with switch access</li>
+                            <li>Let’s Communicate – An 8 week program for parents and children aged 18 months to 3 who are late talkers</li>
+                        </ul>
+                        <img src={Also_Offer} alt="Also Offer Image" className="w-full md:w-[50%]" />
+                    </div>
+                    <Link to="/contact"><CustomButton>Get In Touch</CustomButton></Link>
+
+                </div>
 
         <Footer />
       </div>
