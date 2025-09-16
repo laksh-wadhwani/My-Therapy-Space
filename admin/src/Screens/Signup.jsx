@@ -94,7 +94,7 @@ const Signup = () => {
     }
 
     const ResendOTP = () => {
-        axios.put(`${URL}/api/admin/resend-otp/${email}`)
+        axios.put(`${URL}/api/admin/resend-otp/${email}`, {purpose: "signup"})
         .then(response => {
             toast.success(response.data.message)
             setOtpExpiryTime(new Date(response.data.otp_expiry).getTime());

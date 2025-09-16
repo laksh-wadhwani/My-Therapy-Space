@@ -120,12 +120,16 @@ export const verifyOtp = async (request, response) => {
 
 export const ResendOTP = async (request, response) => {
     const { email } = request.params
+    const { purpose } = request.body
     const otp = GenerateOTP();
     const otp_expiry = new Date(Date.now() + 2 * 60 * 1000)
     const admin = await AdminModel.findOne({ email })
 
     if (!admin)
-        return response.status(400).json({ error: "User not found" })
+        return response.status(400).json({ error: "You are not registered. Please Signup first" })
+
+    if(purpose === "signup" && admin.isVerified === true)
+        return response.status(200).json({message: "You are already verified. Please Login"})
 
     admin.otp = otp;
     admin.otp_expiry = otp_expiry
@@ -245,28 +249,20 @@ export const RejectAdmin = async (request, response) => {
     }
 }
 
-export const ForgetPassword = async (request, response) => {
+export const ResetPassword = async (request, response) => {
     try {
-        const { email } = request.body
+        const { email } = request.params
+        const { password } = request.body
         const user = await AdminModel.findOne({ email })
 
 
         if (!user)
             return response.status(400).json({ error: "User not found" })
 
-        const tempPassword = generateTempPassword();
-        const hashPass = await encryptPassword(tempPassword)
+        const hashPass = await encryptPassword(password)
         user.password = hashPass
         await user.save();
-
-        await transporter.sendMail({
-            from: `"My Therapy Space" <no-reply@mytherapyspace.com.au>`,
-            to: email,
-            subject: "Your New Temporary Password 🔑",
-            html: forgotPasswordWithNewPasswordTemplate(user.fullname, tempPassword)
-        })
-
-        return response.status(201).json({ message: "New Password sent to your email" })
+        return response.status(201).json({ message: "Your password has been reset" })
 
     } catch (error) {
         console.log("Getting error in forgetting password: ", error)
