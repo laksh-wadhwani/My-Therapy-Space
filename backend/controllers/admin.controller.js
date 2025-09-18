@@ -12,6 +12,7 @@ import WorkshopModel from "../models/Workshop.js"
 import QueryModel from "../models/Query.js"
 import BookingModel from "../models/Bookings.js"
 import TeamModel from "../models/Team.js"
+import UserModel from '../models/User.js';
 
 export const SignUp = async (request, response) => {
     try {
@@ -37,7 +38,7 @@ export const SignUp = async (request, response) => {
                 fullname,
                 email,
                 password: hashPassword,
-                profile: profile.secure_url,
+                // profile: profile.secure_url,
                 role: "super admin",
                 isSuperAdminVerified: true,
                 otp,
@@ -338,18 +339,20 @@ export const BasicAnalytics = async(request, response) => {
     try {
         const totalBlogs = await BlogsModel.countDocuments();
         const totalWorkshops = await WorkshopModel.countDocuments();
-        const totalQueries = await QueryModel.countDocuments();
-        const totalBookings = await BookingModel.countDocuments();
+        const pendingQueries = await QueryModel.countDocuments({status: "Pending"});
+        const pendingBookings = await BookingModel.countDocuments({status: "Pending"});
         const totalTeamMembers = await TeamModel.countDocuments();
         const totalProductsBought = await PaymentModel.countDocuments();
+        const totalSignedInUsers = await UserModel.countDocuments();
 
         return response.status(200).json({
             totalBlogs,
             totalWorkshops,
-            totalQueries,
-            totalBookings,
+            pendingQueries,
+            pendingBookings,
             totalTeamMembers,
-            totalProductsBought
+            totalProductsBought,
+            totalSignedInUsers
         })
 
     } catch (error) {

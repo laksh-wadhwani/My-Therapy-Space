@@ -9,7 +9,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Modal from "react-responsive-modal";
 import CustomTextArea from "../Components/CustomTextArea";
-import { Logs, Store, FileUser, PhoneCall, UsersRound, DollarSign  } from 'lucide-react';
+import CountUp from "react-countup";
+import { Logs, Store, FileUser, PhoneCall, UsersRound, DollarSign, User } from "lucide-react";
 
 const Dashboard = ({ isSidebarHovered, user }) => {
 
@@ -86,60 +87,87 @@ const Dashboard = ({ isSidebarHovered, user }) => {
                     <p className="font-serif text-gray-500 text-base max-sm:text-sm">Here's what's happening with your site today.</p>
                 </div>
 
-                {analytics && 
-                <div className="w-full grid grid-cols-3 px-4 gap-x-16 gap-y-4 place-items-center">
-
-                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
-                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
-                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Blogs Uploaded</h5>
-                            <Logs size={32} className="stroke-white"/>
+                {analytics && (
+                    <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
+                        
+                        {/* Blogs */}
+                        <div className="bg-white rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition p-6 flex flex-col gap-2">
+                        <div className="p-3 bg-teal-100 rounded-xl w-fit">
+                            <Logs className="w-6 h-6 text-teal-600" />
                         </div>
-                        <span className="font-serif text-5xl font-semibold">{analytics.totalBlogs}</span>
-                    </div>
-
-                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
-                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
-                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Workshops</h5>
-                            <Store size={32} className="stroke-white"/>
+                        <span className="text-4xl font-bold text-gray-800">
+                            <CountUp end={analytics.totalBlogs} duration={1.5} />
+                        </span>
+                        <h5 className="text-sm text-gray-500">Total Blogs Uploaded</h5>
                         </div>
-                        <span className="font-serif text-5xl font-semibold">{analytics.totalWorkshops}</span>
-                    </div>
 
-                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
-                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
-                            <h5 className="font-serif text-lg text-white text-shadow-md">Total User Queries</h5>
-                            <FileUser size={32} className="stroke-white"/>
+                        {/* Workshops */}
+                        <div className="bg-white rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition p-6 flex flex-col gap-2">
+                        <div className="p-3 bg-teal-100 rounded-xl w-fit">
+                            <Store className="w-6 h-6 text-teal-600" />
                         </div>
-                        <span className="font-serif text-5xl font-semibold">{analytics.totalQueries}</span>
-                    </div>
-
-                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
-                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
-                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Bookings</h5>
-                            <PhoneCall size={32} className="stroke-white"/>
+                        <span className="text-4xl font-bold text-gray-800">
+                            <CountUp end={analytics.totalWorkshops} duration={1.5} />
+                        </span>
+                        <h5 className="text-sm text-gray-500">Total Workshops</h5>
                         </div>
-                        <span className="font-serif text-5xl font-semibold">{analytics.totalBookings}</span>
-                    </div>
 
-                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
-                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
-                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Team Members</h5>
-                            <UsersRound size={32} className="stroke-white"/>
+                        {/* Queries */}
+                        <div className="bg-white rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition p-6 flex flex-col gap-2">
+                        <div className="p-3 bg-teal-100 rounded-xl w-fit">
+                            <FileUser className="w-6 h-6 text-teal-600" />
                         </div>
-                        <span className="font-serif text-5xl font-semibold">{analytics.totalTeamMembers}</span>
-                    </div>
-
-                    <div className="w-full h-40 bg-white border border-gray-100 shadow-md rounded-xl flex flex-col gap-6 items-center">
-                        <div className="w-full flex justify-between items-center p-3 bg-[#14B8A6] shadow-md rounded-t-xl">
-                            <h5 className="font-serif text-lg text-white text-shadow-md">Total Products Sell</h5>
-                            <DollarSign  size={32} className="stroke-white"/>
+                        <span className="text-4xl font-bold text-gray-800">
+                            <CountUp end={analytics.pendingQueries} duration={1.5} />
+                        </span>
+                        <h5 className="text-sm text-gray-500">Pending User Queries</h5>
                         </div>
-                        <span className="font-serif text-5xl font-semibold">{analytics.totalProductsBought}</span>
+
+                        {/* Bookings */}
+                        <div className="bg-white rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition p-6 flex flex-col gap-2">
+                        <div className="p-3 bg-teal-100 rounded-xl w-fit">
+                            <PhoneCall className="w-6 h-6 text-teal-600" />
+                        </div>
+                        <span className="text-4xl font-bold text-gray-800">
+                            <CountUp end={analytics.pendingBookings} duration={1.5} />
+                        </span>
+                        <h5 className="text-sm text-gray-500">Pending Bookings</h5>
+                        </div>
+
+                        {/* Signed In USers */}
+                        <div className="bg-white rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition p-6 flex flex-col gap-2">
+                        <div className="p-3 bg-teal-100 rounded-xl w-fit">
+                            <User className="w-6 h-6 text-teal-600" />
+                        </div>
+                        <span className="text-4xl font-bold text-gray-800">
+                            <CountUp end={analytics.totalSignedInUsers} duration={1.5} />
+                        </span>
+                        <h5 className="text-sm text-gray-500">Total Signed In Users</h5>
+                        </div>
+
+                        {/* Team Members */}
+                        <div className="bg-white rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition p-6 flex flex-col gap-2">
+                        <div className="p-3 bg-teal-100 rounded-xl w-fit">
+                            <UsersRound className="w-6 h-6 text-teal-600" />
+                        </div>
+                        <span className="text-4xl font-bold text-gray-800">
+                            <CountUp end={analytics.totalTeamMembers} duration={1.5} />
+                        </span>
+                        <h5 className="text-sm text-gray-500">Total Team Members</h5>
+                        </div>
+
+                        {/* Products Sold */}
+                        <div className="bg-white rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition p-6 flex flex-col gap-2">
+                        <div className="p-3 bg-teal-100 rounded-xl w-fit">
+                            <DollarSign className="w-6 h-6 text-teal-600" />
+                        </div>
+                        <span className="text-4xl font-bold text-gray-800">
+                            <CountUp end={analytics.totalProductsBought} duration={1.5} />
+                        </span>
+                        <h5 className="text-sm text-gray-500">Total Products Sold</h5>
+                        </div>
                     </div>
-
-                </div>
-                }                
-
+                    )}
                 {(user.role === "super admin")?  (
                     <div className="w-full flex flex-col gap-4 px-4 max-sm:px-0">
                         <h3 className="font-serif text-black text-xl font-semibold capitalize">{admins.length===0? `no admin approvals`:`admin approvals`}</h3>

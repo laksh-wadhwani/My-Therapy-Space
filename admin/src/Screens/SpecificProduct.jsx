@@ -135,13 +135,13 @@ const SpecificProduct = ({ isSidebarHovered }) => {
                     </div>
 
                     {product.pictures?.length > 0 && (
-                        <div className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 max-sm:grid-cols-4 gap-4 mt-6">
+                        <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-4 justify-between items-center mt-2 px-8">
                             {product.pictures.map((pic, index) => (
                                 <img 
                                     key={index} 
                                     src={pic} 
                                     alt={`Product ${index}`} 
-                                    className={`h-32 w-full object-cover rounded-md shadow cursor-pointer transition-all duration-200 hover:scale-105 ${thumbnailImage === pic ? "ring-4 ring-[#0BAFA6]" : ""}`}
+                                    className={`size-full object-cover rounded-md shadow cursor-pointer transition-all duration-200 hover:scale-105 ${thumbnailImage === pic ? "ring-4 ring-[#0BAFA6]" : ""}`}
                                     onClick={() => setThumbnailImage(pic)}
                                 />
                             ))}
