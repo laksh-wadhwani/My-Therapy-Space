@@ -1,13 +1,19 @@
-const CustomButton = ({ children, onClick,  disabled, className = ""}) => {
-    return (
-        <button
-            onClick={onClick}
-            disabled={disabled}
-            className={`cursor-pointer flex items-center justify-center font-serif text-lg max-sm:text-sm capitalize bg-[#14B8A6] rounded-xl p-3 max-sm:p-2 text-white transition-all duration-500 ease-in-out hover:bg-transparent hover:border hover:border-[#14B8A6] hover:scale-105 hover:text-black hover:shadow-md ${className}`}
-        >
-            {children}
-        </button>
-    );
+const CustomButton = ({ children, onClick, disabled, className = "" }) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`w-full flex items-center justify-center font-serif text-base md:text-lg capitalize rounded-xl p-2 transition-all duration-500 ease-in-out
+        ${
+          disabled
+            ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
+            : "bg-[#14B8A6] text-white cursor-pointer hover:bg-transparent hover:border hover:border-[#14B8A6] hover:scale-105 hover:text-black hover:shadow-md"
+        }
+        ${className}`}
+    >
+      {children}
+    </button>
+  );
 };
 
-export default CustomButton
+export default CustomButton;

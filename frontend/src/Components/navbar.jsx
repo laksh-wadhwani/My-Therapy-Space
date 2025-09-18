@@ -206,12 +206,12 @@ const Navbar = ({ user, setLoginUser }) => {
               <Link to="/blogs" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]" onClick={ToggleDropDowns}>blogs</li></Link>
 
               <div className="flex items-center relative gap-1">
-                <Link to="/workshop" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]">workshops</li></Link>
+                <Link to="/currentworkshops" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]">workshops</li></Link>
                 <ChevronDown size={18} onClick={ToggleWorkshop} />
                 {workshopToggle &&
                   <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] fixed top-16 right-[19rem] bg-white py-4 px-6 rounded-xl">
-                    <Link to="/currentworkshops" style={{ color: "unset" }} onClick={() => setWorkshopToggle(!workshopToggle)}><li className="hover:text-[#0BAFA6]">Current Workshops</li></Link>
-                    <Link to="/alsooffer" style={{ color: "unset" }} onClick={() => setWorkshopToggle(!workshopToggle)}><li className="hover:text-[#0BAFA6]">We Also Offer</li></Link>
+                    <Link to="/workshop" style={{ color: "unset" }} onClick={() => setWorkshopToggle(!workshopToggle)}><li className="hover:text-[#0BAFA6]">We Also Offer</li></Link>
+                    {/* <Link to="/alsooffer" style={{ color: "unset" }} onClick={() => setWorkshopToggle(!workshopToggle)}><li className="hover:text-[#0BAFA6]"></li></Link> */}
                   </ul>
                 }
               </div>

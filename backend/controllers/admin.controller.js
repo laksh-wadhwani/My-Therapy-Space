@@ -18,7 +18,7 @@ export const SignUp = async (request, response) => {
     try {
         const { fullname, email, password, secretKey } = request.body
         let profile = null
-        if(request.file)
+        if (request.file)
             profile = await uploadToCloudinary(request.file?.buffer, "image")
         const secret = secretKey === process.env.SECRET_KEY
         const otp = GenerateOTP();
@@ -56,7 +56,7 @@ export const SignUp = async (request, response) => {
 
             return response.status(200).json({
                 message: "OTP Sent. Please verify to complete registration. You are going to be a Super Admin",
-                superAdmin: super_admin
+                otp_expiry
             });
         }
 
@@ -77,10 +77,10 @@ export const SignUp = async (request, response) => {
         })
 
         await newAdmin.save();
-    
+
         return response.status(200).json({
             message: "OTP Sent. Please verify to complete registration",
-            newAdmin
+            otp_expiry
         });
 
     } catch (error) {
@@ -89,56 +89,92 @@ export const SignUp = async (request, response) => {
     }
 }
 
-export const verifyOtp = async(request, response) => {
+export const verifyOtp = async (request, response) => {
     try {
-        const {email} = request.params
-        const {otp} = request.body
-        const check = await AdminModel.findOne({email})
+        const { email } = request.params
+        const { otp } = request.body
+        const otpEnterTime = new Date(Date.now())
+        const check = await AdminModel.findOne({ email })
 
-        if(!check)
-            return response.status(404).json({error: "Admin account not found"})
+        if (!check)
+            return response.status(404).json({ error: "Admin account not found" })
 
-        if(otp === check.otp){
+        if (otp === check.otp) {
+
+            if (otpEnterTime > check.otp_expiry)
+                return response.status(400).json({ error: "Your otp has been expired. Please request a new one !" })
+
             check.otp = null;
             check.otp_expiry = null
             check.isVerified = true
             await check.save()
-            return response.status(200).json({message: "Account verified successfully"})
+            return response.status(200).json({ message: "Account verified successfully" })
         }
 
-        return response.status(400).json({error: "Invalid OTP"})
-        
+        return response.status(400).json({ error: "Invalid OTP" })
+
     } catch (error) {
         console.log(error)
-        return response.status(500).json({error: "Internal Server Error"})
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
-export const Login = async(request, response) => {
+export const ResendOTP = async (request, response) => {
+    const { email } = request.params
+    const { purpose } = request.body
+    const otp = GenerateOTP();
+    const otp_expiry = new Date(Date.now() + 2 * 60 * 1000)
+    const admin = await AdminModel.findOne({ email })
+
+    if (!admin)
+        return response.status(400).json({ error: "You are not registered. Please Signup first" })
+
+    if(purpose === "signup" && admin.isVerified === true)
+        return response.status(200).json({message: "You are already verified. Please Login"})
+
+    admin.otp = otp;
+    admin.otp_expiry = otp_expiry
+    await transporter.sendMail({
+        from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
+        to: email,
+        subject: "Your OTP for My Therapy Space as a Admin",
+        html: otpEmailTemplate(admin.fullname, otp)
+    })
+    await admin.save();
+    return response.status(200).json({ 
+        message: "OTP Sent Successfully",
+        otp_expiry
+    })
+}
+
+export const Login = async (request, response) => {
     try {
-        const {email, password} = request.body
-        const userCheck = await AdminModel.findOne({email})
+        const { email, password } = request.body
+        const userCheck = await AdminModel.findOne({ email })
         const isMatch = await decryptPassword(password, userCheck.password)
 
-        if(!userCheck)
-            return response.status(404).json({error: "User not found"})
+        if (!userCheck)
+            return response.status(404).json({ error: "User not found" })
 
-        if(!isMatch)
-            return response.status(401).json({error: "Invalid Credentials"})
+        if (!isMatch)
+            return response.status(401).json({ error: "Invalid Credentials" })
 
-        if(userCheck.isSuperAdminVerified===false){
-            return response.status(401).json({error: "Please wait for Super Admin's Approval"})
+        if(!userCheck.isVerified)
+            return response.status(400).json({error: "Please verify your account first"})
+
+        if (userCheck.isSuperAdminVerified === false) {
+            return response.status(401).json({ error: "Please wait for Super Admin's Approval" })
         }
 
         const token = jwt.sign(
             {
-                id: userCheck.id, 
-                role: userCheck.role, 
-                fullname: userCheck.fullname, 
+                id: userCheck.id,
+                role: userCheck.role,
+                fullname: userCheck.fullname,
                 profile: userCheck.profile
             },
             process.env.JWT_SECRET,
-            {expiresIn: process.env.JWT_EXPIRES_IN || "1d"}
+            { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
         )
 
         return response.status(200).json({
@@ -148,30 +184,30 @@ export const Login = async(request, response) => {
 
 
     } catch (error) {
-        console.log("Getting error in logging in admin: ",error)
-        return response.status(500).json({error: "Internal Server Error"})
+        console.log("Getting error in logging in admin: ", error)
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
-export const GetAdmins = async(request, response) => {
+export const GetAdmins = async (request, response) => {
     try {
-        const admins = await AdminModel.find({role: "admin", isSuperAdminVerified: false})
-        if(!admins) 
-            return response.json({message: "No Approvals Pending"})
+        const admins = await AdminModel.find({ role: "admin", isSuperAdminVerified: false })
+        if (!admins)
+            return response.json({ message: "No Approvals Pending" })
         return response.status(200).json(admins)
     } catch (error) {
         console.log("Getting error in admins data")
-        return response.status(500).json({error: "Internal Server Error"})
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
-export const ApproveAdmin = async(request, response) => {
+export const ApproveAdmin = async (request, response) => {
     try {
         const { id } = request.params;
         const admin = await AdminModel.findById(id)
 
-        if(!admin)
-            return response.status(404).json({error: "User not found"})
+        if (!admin)
+            return response.status(404).json({ error: "User not found" })
 
         await transporter.sendMail({
             from: `"My Therapy Space" <no-reply@mytherapyspace.com.au>`,
@@ -179,23 +215,23 @@ export const ApproveAdmin = async(request, response) => {
             subject: "Your Admin Account Has Been Approved 🎉",
             html: adminApprovalEmailTemplate(admin.fullname)
         })
-        admin.isSuperAdminVerified=true
+        admin.isSuperAdminVerified = true
         await admin.save();
-        return response.status(200).json({message: "Admin has been approved"})
+        return response.status(200).json({ message: "Admin has been approved" })
     } catch (error) {
         console.log("Getting error in approving admins request", error)
-        return response.status(500).json({error: "Internal Server Error"})
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
-export const RejectAdmin = async(request, response) => {
+export const RejectAdmin = async (request, response) => {
     try {
         const { id } = request.params
         const { remarks } = request.body
         const admin = await AdminModel.findById(id)
 
-        if(!admin)
-            return response.status(400).json({error: "User Not Found"})
+        if (!admin)
+            return response.status(400).json({ error: "User Not Found" })
 
         await transporter.sendMail({
             from: `"My Therapy Space" <no-reply@mytherapyspace.com.au>`,
@@ -206,49 +242,41 @@ export const RejectAdmin = async(request, response) => {
 
         await AdminModel.findByIdAndDelete(id);
 
-        return response.status(201).json({message: "Admin has been rejected"})
+        return response.status(201).json({ message: "Admin has been rejected" })
 
     } catch (error) {
         console.log("Getting error in while rejecting the admin: ", error)
-        return response.status(500).json({error: "Internal Server Error"})
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
-export const ForgetPassword = async(request, response) => {
+export const ResetPassword = async (request, response) => {
     try {
-        const { email } = request.body
-        const user = await AdminModel.findOne({email})
-        
+        const { email } = request.params
+        const { password } = request.body
+        const user = await AdminModel.findOne({ email })
 
-        if(!user)
-            return response.status(400).json({error: "User not found"})
 
-        const tempPassword = generateTempPassword();
-        const hashPass = await encryptPassword(tempPassword)
+        if (!user)
+            return response.status(400).json({ error: "User not found" })
+
+        const hashPass = await encryptPassword(password)
         user.password = hashPass
         await user.save();
-
-        await transporter.sendMail({
-            from: `"My Therapy Space" <no-reply@mytherapyspace.com.au>`,
-            to: email,
-            subject: "Your New Temporary Password 🔑",
-            html: forgotPasswordWithNewPasswordTemplate(user.fullname, tempPassword)
-        })
-
-        return response.status(201).json({message: "New Password sent to your email"})
+        return response.status(201).json({ message: "Your password has been reset" })
 
     } catch (error) {
-        console.log("Getting error in forgetting password: ",error)
-        return response.status(500).json({error: "Internal Server Error"})
+        console.log("Getting error in forgetting password: ", error)
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
-export const Update = async(request, response) => {
+export const Update = async (request, response) => {
     try {
         const { id } = request.params
-        const {fullname, email, password, newPass} = request.body
+        const { fullname, email, password, newPass } = request.body
         let profile = null
-        if(request.file)
+        if (request.file)
             profile = await uploadToCloudinary(request.file.buffer, "image")
 
         const admin = await AdminModel.findById(id)
@@ -257,52 +285,52 @@ export const Update = async(request, response) => {
         const newHashPass = await encryptPassword(newPass)
 
 
-        if(!admin)
-            return response.status.json({error: "User not found"})
+        if (!admin)
+            return response.status.json({ error: "User not found" })
 
-        if(fullname) admin.fullname = fullname;
-        if(email) admin.email = email
-        if(profile) admin.profile = profile.secure_url
-        if(isPassMatch) admin.password = newHashPass
+        if (fullname) admin.fullname = fullname;
+        if (email) admin.email = email
+        if (profile) admin.profile = profile.secure_url
+        if (isPassMatch) admin.password = newHashPass
         await admin.save();
 
         const token = jwt.sign(
             {
-                id: admin.id, 
-                role: admin.role, 
-                fullname: admin.fullname, 
+                id: admin.id,
+                role: admin.role,
+                fullname: admin.fullname,
                 profile: admin.profile,
                 email: admin.email
             },
             process.env.JWT_SECRET,
-            {expiresIn: process.env.JWT_EXPIRES_IN || "1d"}
+            { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
         )
 
         return response.status(201).json({
             message: "Basic details have been updated",
             token
         })
-        
+
     } catch (error) {
-        console.log("Getting error in updating user: ",error)
-        return response.status(500).json({error: "Internal Server Error"})
+        console.log("Getting error in updating user: ", error)
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
-export const GetProductDetails = async(request, response) => {
+export const GetProductDetails = async (request, response) => {
     try {
         const products = await PaymentModel.find()
             .populate("productID")
             .populate("courseID")
             .populate("userId")
 
-        if(!products)
-            return response.status(400).json({error: "No products found"})
+        if (!products)
+            return response.status(400).json({ error: "No products found" })
 
         let formattedDetails = products.map(item => {
 
-            if(item.productID){
-                return{
+            if (item.productID) {
+                return {
                     orderID: item._id,
                     userName: item.userId.fullname,
                     productName: item.productID.name,
@@ -314,8 +342,8 @@ export const GetProductDetails = async(request, response) => {
                 }
             }
 
-            else if(item.courseID){
-                return{
+            else if (item.courseID) {
+                return {
                     orderID: item._id,
                     userName: item.userId.fullname,
                     productName: item.courseID.name,
@@ -330,12 +358,12 @@ export const GetProductDetails = async(request, response) => {
         return response.status(201).json(formattedDetails)
 
     } catch (error) {
-        console.log("Getting error in fetching product details: ",error)
-        return response.status(500).json({error: "Internal Server Error"})
+        console.log("Getting error in fetching product details: ", error)
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
-export const BasicAnalytics = async(request, response) => {
+export const BasicAnalytics = async (request, response) => {
     try {
         const totalBlogs = await BlogsModel.countDocuments();
         const totalWorkshops = await WorkshopModel.countDocuments();
@@ -357,6 +385,6 @@ export const BasicAnalytics = async(request, response) => {
 
     } catch (error) {
         console.log("Getting error in fetching basic analytics: ", error)
-        return response.status(500).json({error: "Internal Server Error"})
+        return response.status(500).json({ error: "Internal Server Error" })
     }
 }
