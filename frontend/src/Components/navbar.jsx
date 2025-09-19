@@ -129,13 +129,14 @@ const Navbar = ({ user, setLoginUser }) => {
       .finally(() => setLoading(false))
   }
 
-  const Verify = () => {
+  const Verify = purpose => {
     setLoading(true)
     axios.put(`${URL}/api/users/verify-otp/${email}`, { otp })
       .then(response => {
         toast.success(response.data.message)
         setIsOtpVerified(true)
-        // setTimeout(() => { navigate(0) }, 2500)
+        if(purpose === "register")
+          setTimeout(() => { navigate(0) }, 2500)
       })
       .catch(error => {
         console.error("Getting error in verifyung otp: ", error)
@@ -491,7 +492,9 @@ const Navbar = ({ user, setLoginUser }) => {
                 <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={userData.e} maxLength={1} ref={eRef} onChange={e => handleChange("e", e.target.value)} />
               </div>
 
-              <CustomButton onClick={Verify}>Verify</CustomButton>
+              <CustomButton onClick={() => Verify("register")} disabled={loading}>
+                {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Verify"}
+              </CustomButton>
 
             </>)
             :
