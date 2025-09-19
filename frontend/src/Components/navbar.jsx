@@ -9,7 +9,8 @@ import axios from "axios";
 import { BackendURL } from "../BackendContext.jsx";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
-import { Menu, ShoppingCart, ChevronDown  } from 'lucide-react';
+import { Menu, ShoppingCart, ChevronDown } from 'lucide-react';
+import { useEffect } from "react";
 
 const Navbar = ({ user, setLoginUser }) => {
 
@@ -18,7 +19,10 @@ const Navbar = ({ user, setLoginUser }) => {
   const [loginOpen, setLoginOpen] = useState(false)
   const [isForget, setIsForget] = useState(false)
   const [isVerify, setIsVerify] = useState(false)
+  const [isOtpVerified, setIsOtpVerified] = useState(false)
   const [signupOpen, setSignupOpen] = useState(false)
+  const [otpExpiryTime, setOtpExpiryTime] = useState(null)
+  const [remainingTime, setRemainingTime] = useState(0)
   const [loading, setLoading] = useState(false);
   const [aboutUsToggle, setAboutUsToggle] = useState(false)
   const [workshopToggle, setWorkshopToggle] = useState(false)
@@ -49,6 +53,18 @@ const Navbar = ({ user, setLoginUser }) => {
     nameInitials = fullname.split(" ").map(word => word[0].toUpperCase()).join("")
     firstName = fullname.split(" ")[0]
   }
+
+  useEffect(() => {
+    if (otpExpiryTime && isVerify) {
+      const interval = setInterval(() => {
+        const now = Date.now();
+        const difference = otpExpiryTime - now
+        console.log(difference)
+        setRemainingTime(Math.max(Math.floor(difference / 1000), 0))
+      }, 1000)
+      return () => clearInterval(interval)
+    }
+  }, [otpExpiryTime, isVerify])
 
 
   const handleChange = (name, value, nextRef) => {
@@ -102,6 +118,7 @@ const Navbar = ({ user, setLoginUser }) => {
     setLoading(true)
     axios.post(`${URL}/api/users/signup`, userData)
       .then(response => {
+        setOtpExpiryTime(new Date(response.data.otpExpiry).getTime())
         setIsVerify(true)
         return toast.success(response.data.message)
       })
@@ -113,15 +130,18 @@ const Navbar = ({ user, setLoginUser }) => {
   }
 
   const Verify = () => {
+    setLoading(true)
     axios.put(`${URL}/api/users/verify-otp/${email}`, { otp })
       .then(response => {
         toast.success(response.data.message)
-        setTimeout(() => { navigate(0) }, 2500)
+        setIsOtpVerified(true)
+        // setTimeout(() => { navigate(0) }, 2500)
       })
       .catch(error => {
         console.error("Getting error in verifyung otp: ", error)
         return toast.error(error.response?.data?.error)
       })
+      .finally(() => setLoading(false))
   }
 
   const Login = () => {
@@ -142,23 +162,50 @@ const Navbar = ({ user, setLoginUser }) => {
       .finally(() => setLoading(false))
   }
 
-  const ForgetPassword = () => {
-    axios.put(`${URL}/api/users/forget-password`, { email })
+  const ForgotOTP = () => {
+    setLoading(true);
+    axios
+      .put(`${URL}/api/users/resend-otp/${email}`, { purpose: "forgot" })
+      .then((response) => {
+        toast.success(response.data.message);
+        setIsVerify(true)
+        setOtpExpiryTime(new Date(response.data.otpExpiry).getTime());
+      })
+      .catch((error) => {
+        console.error("Getting error in sending otp while forgetting: ", error);
+        toast.error(error.response?.data?.error);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const ResendOTP = () => {
+    axios.put(`${URL}/api/users/resend-otp/${email}`, { purpose: "signup" })
       .then(response => {
         toast.success(response.data.message)
-        setTimeout(() => { navigate(0) }, 2500)
+        setOtpExpiryTime(new Date(response.data.otpExpiry).getTime());
       })
-      .catch(error => {
-        console.error("Getting error in forgetting password: ", error)
-        return toast.error(error.response?.data?.error)
-      })
+      .catch(error => console.error("Getting error in resending otp: ", error))
   }
+
+  const ResetPassword = () => {
+    const { email, password } = userData
+    setLoading(true);
+    axios
+      .put(`${URL}/api/users/reset-password/${email}`, { password })
+      .then((response) => {
+        toast.success(response.data.message);
+        setTimeout(() => {
+          navigate(0);
+        }, 2500);
+      })
+      .catch((error) => toast.error(error.response?.data?.error))
+      .finally(() => setLoading(false));
+  };
 
   return (
     <React.Fragment>
 
       <nav className="w-full flex flex-col items-center fixed top-4 z-50">
-
         <div className="w-[95%] flex items-center bg-white shadow-md justify-between rounded-full px-4 md:px-6 py-1 md:py-2">
 
           <Link to="/">
@@ -181,7 +228,7 @@ const Navbar = ({ user, setLoginUser }) => {
 
               <div className="flex items-center relative gap-1">
                 <Link to="/AboutUs" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]">About us</li></Link>
-                <ChevronDown size={18} onClick={ToggleAboutUs}/>
+                <ChevronDown size={18} onClick={ToggleAboutUs} />
                 {aboutUsToggle &&
                   <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] absolute top-8 left-0  bg-white py-4 px-6 rounded-xl">
                     <Link to="/Team" style={{ color: "unset" }} onClick={() => setAboutUsToggle(!aboutUsToggle)}><li className="hover:text-[#0BAFA6]">team</li></Link>
@@ -192,7 +239,7 @@ const Navbar = ({ user, setLoginUser }) => {
 
               <div className="flex items-center relative gap-1">
                 <Link to="/services" style={{ color: "unset" }}><li className="hover:text-[#0BAFA6]">Services</li></Link>
-                <ChevronDown size={18} onClick={ToggleServices}/>
+                <ChevronDown size={18} onClick={ToggleServices} />
                 {servicesToggle &&
                   <ul className="font-serif text-lg capitalize flex flex-col gap-2 cursor-pointer text-[#797979] absolute top-8 left-0  bg-white py-4 px-6 rounded-xl min-w-[230px]">
                     <HashLink to="/services#speech-pathology" style={{ color: "unset" }} onClick={() => setServicesToggle(!servicesToggle)}><li className="hover:text-[#0BAFA6]">Speech Pathology</li></HashLink>
@@ -224,16 +271,16 @@ const Navbar = ({ user, setLoginUser }) => {
             {user ?
               <div className="flex gap-4 lg:gap-2 xl:gap-4 items-center">
                 <Link to={`/user-profile/${user.id}`}>
-                <div className="hidden md:flex items-center gap-2 bg-[#0BAFA6] py-1 px-2 rounded-xl shadow-md cursor-pointer hover:scale-105">
-                  {user.profile ?
-                    <img src={user.profile} alt="User Profile" className="size-10 rounded-full object-cover" />
-                    :
-                    <div className="size-10 bg-white p-3 rounded-full flex items-center justify-center border border-gray-200 shadow-md">
-                      <span className="text-lg text-black font-bold uppercase">{nameInitials}</span>
-                    </div>
-                  }
-                  <span className="font-serif text-lg text-white lg:text-base xl:text-lg">Hello, {firstName}</span>
-                </div></Link>
+                  <div className="hidden md:flex items-center gap-2 bg-[#0BAFA6] py-1 px-2 rounded-xl shadow-md cursor-pointer hover:scale-105">
+                    {user.profile ?
+                      <img src={user.profile} alt="User Profile" className="size-10 rounded-full object-cover" />
+                      :
+                      <div className="size-10 bg-white p-3 rounded-full flex items-center justify-center border border-gray-200 shadow-md">
+                        <span className="text-lg text-black font-bold uppercase">{nameInitials}</span>
+                      </div>
+                    }
+                    <span className="font-serif text-lg text-white lg:text-base xl:text-lg">Hello, {firstName}</span>
+                  </div></Link>
                 <ShoppingCart size={24} className="stroke-[#0BAFA6] hover:scale-105 xl:size-8" onClick={() => navigate(`/cart/${user.id}`)} />
               </div>
               :
@@ -367,12 +414,8 @@ const Navbar = ({ user, setLoginUser }) => {
         <div className="flex flex-col gap-6 px-4 md:p-8">
           <h4 className="font-serif text-black font-semibold self-center text-xl md:text-2xl">{isForget ? `Forget Password` : `Member Login`}</h4>
 
-          {isForget ?
-            (<>
-              <CustomInput label="Email" placeholder="Registered Email" type="email" value={userData.email} onChange={e => handleChange("email", e.target.value)} />
-              <CustomButton onClick={ForgetPassword}>Forget</CustomButton>
-            </>) :
-            (<>
+          {!isForget &&
+            <>
               <div className="w-full flex flex-col gap-2">
                 <CustomInput label="Email" placeholder="Email" type="email" value={userData.email} onChange={e => handleChange("email", e.target.value)} />
                 <CustomInput label="Password" placeholder="Password" type="password" value={userData.password} onChange={e => handleChange("password", e.target.value)} />
@@ -385,8 +428,42 @@ const Navbar = ({ user, setLoginUser }) => {
                 </CustomButton>
                 <p className="font-serif self-center text-sm md:text-base">Don't have an account? <strong className="text-[#00C7BE] cursor-pointer" onClick={ToggleSignUp}>Create</strong></p>
               </div>
-            </>)
-          }
+
+            </>}
+
+          {isForget && !isVerify && (<>
+            <CustomInput label="Email" placeholder="Registered Email" type="email" value={userData.email} onChange={e => handleChange("email", e.target.value)} />
+            <CustomButton onClick={ForgotOTP} disabled={loading}>
+              {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Forget Password"}
+            </CustomButton>
+          </>)}
+
+          {isForget && isVerify && !isOtpVerified && (<>
+            {remainingTime === 0 ?
+              <p className="font-serif text-base text-[#14B8A6] cursor-pointer hover:scale-105 text-center" onClick={ResendOTP}>Resend OTP</p>
+              :
+              <p className="text-red-500 text-sm text-center">
+                OTP expires in {remainingTime}s
+              </p>
+            }
+            <div className="flex gap-4">
+              <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={userData.c} maxLength={1} ref={cRef} onChange={e => handleChange("c", e.target.value, oRef)} />
+              <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={userData.o} maxLength={1} ref={oRef} onChange={e => handleChange("o", e.target.value, dRef)} />
+              <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={userData.d} maxLength={1} ref={dRef} onChange={e => handleChange("d", e.target.value, eRef)} />
+              <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={userData.e} maxLength={1} ref={eRef} onChange={e => handleChange("e", e.target.value)} />
+            </div>
+
+            <CustomButton onClick={Verify} disabled={loading}>
+              {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Verify"}
+            </CustomButton>
+          </>)}
+
+          {isForget && isOtpVerified && (<>
+            <CustomInput label="Password" placeholder="New Password" type="password" showPasswordRules={true} value={userData.password} onChange={e => handleChange("password", e.target.value)} />
+            <CustomButton onClick={ResetPassword} disabled={loading}>
+              {loading ? <div className="w-5 h-5 border-2 border-t-transparent border-black rounded-full animate-spin" /> : "Reset Password"}
+            </CustomButton>
+          </>)}
 
         </div>
 
@@ -400,6 +477,13 @@ const Navbar = ({ user, setLoginUser }) => {
 
           {isVerify ?
             (<>
+              {remainingTime === 0 ?
+                <p className="font-serif text-base text-[#14B8A6] cursor-pointer hover:scale-105 text-center" onClick={ResendOTP}>Resend OTP</p>
+                :
+                <p className="text-red-500 text-sm text-center">
+                  OTP expires in {remainingTime}s
+                </p>
+              }
               <div className="flex gap-4">
                 <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={userData.c} maxLength={1} ref={cRef} onChange={e => handleChange("c", e.target.value, oRef)} />
                 <input type="text" className="p-2 border border-black rounded-xl size-14 text-center" value={userData.o} maxLength={1} ref={oRef} onChange={e => handleChange("o", e.target.value, dRef)} />

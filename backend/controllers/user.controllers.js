@@ -4,7 +4,7 @@ import BookingModel from "../models/Bookings.js";
 import PaymentModel from "../models/Payment.js";
 import UserModel from "../models/User.js";
 import { decryptPassword, encryptPassword } from "../utils/bcrypt.js";
-import { verifyAccountOtpTemplate, forgotPasswordWithNewPasswordTemplate } from "../utils/emailTemplates.js";
+import { verifyAccountOtpTemplate, forgotPasswordWithNewPasswordTemplate, otpEmailTemplate } from "../utils/emailTemplates.js";
 import GenerateOTP from "../utils/OtpGenerator.js";
 import jwt from "jsonwebtoken"
 import { generateTempPassword } from "../utils/passwordGenerator.js";
@@ -38,23 +38,58 @@ export const Signup = async (request, response) => {
         })
 
         await newUser.save();
-        return response.status(201).json({ message: "OTP Sent. Please verify to complete registration" })
+        return response.status(201).json({ 
+            message: "OTP Sent. Please verify to complete registration",
+            otpExpiry
+        })
     } catch (error) {
         console.log("Getting error in signing up: ", error)
         return response.status(500).json({ error: "Internal Server Error" })
     }
 }
 
+export const ResendOTP = async (request, response) => {
+    const { email } = request.params
+    const { purpose } = request.body
+    const otp = GenerateOTP();
+    const otpExpiry = new Date(Date.now() + 2 * 60 * 1000)
+    const user = await UserModel.findOne({ email })
+
+    if (!user)
+        return response.status(400).json({ error: "You are not registered. Please Signup first" })
+
+    if(purpose === "signup" && user.isVerified === true)
+        return response.status(200).json({message: "You are already verified. Please Login"})
+
+    user.otp = otp;
+    user.otpExpiry = otpExpiry
+    await transporter.sendMail({
+        from: `My Therapy Space <${process.env.SMTP_MAIL}>`,
+        to: email,
+        subject: "Your OTP for My Therapy Space",
+        html: otpEmailTemplate(user.fullname, otp)
+    })
+    await user.save();
+    return response.status(200).json({ 
+        message: "OTP Sent Successfully",
+        otpExpiry
+    })
+}
+
 export const verifyOtp = async (request, response) => {
     try {
         const { email } = request.params
         const { otp } = request.body
+        const otpEnterTime = new Date(Date.now())
         const user = await UserModel.findOne({ email })
 
         if (!user)
             return response.status(400).json({ error: "User not found" })
 
         if (otp === user.otp) {
+             if (otpEnterTime > user.otpExpiry)
+                return response.status(400).json({ error: "Your otp has been expired. Please request a new one !" })
+
             user.otp = null;
             user.otpExpiry = null
             user.isVerified = true
@@ -83,6 +118,9 @@ export const Login = async (request, response) => {
         if (!isMatch)
             return response.status(401).json({ error: "Invalid Credentials" })
 
+        if(!userCheck.isVerified)
+            return response.status(400).json({error: "Please verify your account first"})
+
         const token = jwt.sign(
             {
                 id: userCheck.id,
@@ -105,28 +143,20 @@ export const Login = async (request, response) => {
     }
 }
 
-export const ForgetPassword = async (request, response) => {
+export const ResetPassword = async (request, response) => {
     try {
-        const { email } = request.body
+        const { email } = request.params
+        const { password } = request.body
         const user = await UserModel.findOne({ email })
 
 
         if (!user)
             return response.status(400).json({ error: "User not found" })
 
-        const tempPassword = generateTempPassword();
-        const hashPass = await encryptPassword(tempPassword)
+        const hashPass = await encryptPassword(password)
         user.password = hashPass
         await user.save();
-
-        await transporter.sendMail({
-            from: `"My Therapy Space" <no-reply@mytherapyspace.com.au>`,
-            to: email,
-            subject: "Your New Temporary Password 🔑",
-            html: forgotPasswordWithNewPasswordTemplate(user.firstName, tempPassword)
-        })
-
-        return response.status(201).json({ message: "New Password sent to your email" })
+        return response.status(201).json({ message: "Your password has been reset" })
 
     } catch (error) {
         console.log("Getting error in forgetting password: ", error)
