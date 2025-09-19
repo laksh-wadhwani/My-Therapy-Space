@@ -73,7 +73,7 @@ const Booking = ({ isSidebarHovered }) => {
                 {(bookings.length === 0) ?
                     <p className="text-3xl font-serif font-semibold text-center italic">No Bookings have been found</p>
                     :
-                    <CustomTable title="User Queries" columns={columns} data={bookings} statusStyles={bookingStatusStyles} onView={SeeBooking} onEdit={SeeBooking} onDelete={DeleteBooking} />
+                    <CustomTable title="Bookings" columns={columns} data={bookings} statusStyles={bookingStatusStyles} onView={SeeBooking} onEdit={SeeBooking} onDelete={DeleteBooking} />
                 }
 
             </div>

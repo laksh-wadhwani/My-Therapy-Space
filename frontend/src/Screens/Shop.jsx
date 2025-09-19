@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../Components/footer";
 import ShopProducts from "../assets/shop products.png"
-import ShopVideos from "../assets/shop videos.png"
+import ShopVideos from "../assets/course.png"
 import RButton from "../Components/Reusable_Button";
 import { Link } from "react-router";
 
